@@ -319,6 +319,11 @@
   const aliases={bench_a:'bench',bench_b:'bench',wooden_bench:'bench',trash_bin:'bin',fire_bin:'bin',wheelie_bin:'bin',cones:'cone',roadwork:'barrier',roadblock:'barrier',scooter_broken:'scooter',cart_hazard:'cart',streetlamp:'lamp'};
   function draw(ctx,key,x,groundY,width,time=0) {
     key=aliases[key]||key;
+    const painted={scooter:'hazard-scooter',cart:'hazard-cart',barrier:'hazard-barrier',cone:'hazard-cones',glass:'hazard-glass',pothole:'hazard-pothole'}[key];
+    if(painted&&window.BearlyAtlas.info(painted)){
+      ctx.save();ctx.fillStyle='rgba(34,40,31,.18)';ctx.beginPath();ctx.ellipse(x,groundY+1,width*.42,Math.max(2,width*.035),0,0,Math.PI*2);ctx.fill();ctx.restore();
+      if(window.BearlyAtlas.draw(ctx,painted,x,groundY,width))return true;
+    }
     const art=sprite(key);if(!art||!Number.isFinite(groundY))return false;
     const scale=(width||art.base)/art.base;
     ctx.save();ctx.translate(x,groundY);ctx.scale(scale,scale);
@@ -326,7 +331,7 @@
   }
   function hazard(ctx,h,groundY,time=0) {
     if(!Number.isFinite(groundY))return false;
-    const widths={firebin:64,roadblock:102,roadwork:76,cart:106,scooter:105,glass:78,parcel:60,barrel:60};
+    const widths={firebin:64,roadblock:102,roadwork:76,cart:106,scooter:105,glass:78,parcel:60,barrel:60,pothole:70};
     if(!Object.prototype.hasOwnProperty.call(widths,h.type))return false;
     // Widths follow existing obstacle artwork. Physics still owns h.w separately.
     if(h.type==='firebin'){
@@ -338,9 +343,11 @@
       ctx.save();ctx.translate(0,83-bodyHeight*.91);fire(ctx,time+h.x*.0003);ctx.restore();
       ctx.restore();return true;
     }
-    if(h.type==='roadwork'){
-      draw(ctx,'cone',h.x-19,groundY,42,time);draw(ctx,'cone',h.x+22,groundY,35,time);return true;
-    }
+    const paintedKey={scooter:'hazard-scooter',cart:'hazard-cart',roadblock:'hazard-barrier',roadwork:'hazard-cones',glass:'hazard-glass',pothole:'hazard-pothole'}[h.type];
+    const limits={scooter:[94,56],cart:[80,77],roadblock:[94,50],roadwork:[69,57],glass:[78,28],pothole:[(h.w||60)+12,22]}[h.type];
+    const info=paintedKey&&window.BearlyAtlas.info(paintedKey);
+    if(info&&limits){const scale=Math.min(limits[0]/info.w,limits[1]/info.h);if(window.BearlyAtlas.draw(ctx,paintedKey,h.x+(h.type==='pothole'?(h.w||60)/2:0),groundY,info.w*scale))return true;}
+    if(h.type==='roadwork'){draw(ctx,'cone',h.x,groundY,64,time);return true;}
     return draw(ctx,h.type==='roadblock'?'barrier':h.type,h.x,groundY,widths[h.type],time);
   }
   window.BearlyStreetProps={draw,hazard,loaded:paintedBinLoaded,ready:()=>!!binCrop};

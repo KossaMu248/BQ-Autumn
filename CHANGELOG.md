@@ -1,5 +1,16 @@
 # Autumn Ride — standalone updates
 
+## Revision 5
+
+- Replaced the repeated bakery strip with 16 authored neighbourhood stops using 11 building designs: centre arcade, library, clock/community hall, corner shop, apartment/courtyard blocks, manor, greenhouse, boathouses, and one café.
+- Added eight distinct architecture sprites and a manor inspired by the project's existing castle reference. These are stylized Hässelby-inspired scenes, not measured reproductions; external local reference sites were unavailable in the environment.
+- Painted scooter, shopping cart, road barricade, cones, broken glass and wet pothole art replaces the remaining active hazard illustrations. The finish uses the new barricade too.
+- Added friendly residents: a waving shopper, stroller walker, and dog walker; pigeons scatter when the rider approaches. Café steam and shoreline ripples provide quiet motion.
+- Centre openings, low forest stone walls and open waterfront railings create distinct neighbourhood edges.
+- Decorative residents and birds have no collision or damage behavior. Reduced-motion mode suppresses their extra movement.
+- All new sprites have authored source crops and foot anchors; render textures are prepared once.
+- Added autumn-v5.html and fresh versioned scripts/styles.
+
 ## Revision 4
 
 - Rebalanced Molotov and dynamite readability after play testing: 32×18 and 29×16 world pixels, between the original large art and V3's small sprites.

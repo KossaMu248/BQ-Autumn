@@ -45,3 +45,17 @@ Revision 4 checks:
 - Landscape mobile touch pedal advances the rider and the layout has no horizontal overflow.
 - The dedicated V4 page loads all assets and starts gameplay with no uncaught JavaScript errors or failed HTTP requests.
 - Local validation only: live GitHub Pages verification remains dependent on network access to the Pages hostname.
+
+
+Revision 5 checks:
+
+- All 16 authored stops visited through the existing warp controls; each renders a scene and remains playable. 11 distinct building keys, with the café placed once.
+- All 21 atlas entries registered with source crops and terrain foot anchors. All new art loads successfully.
+- Seven hazard types render visible sprites: scooter, cart, barricade, roadwork cones, glass, pothole, burning bin. The finish barricade also uses the painted art.
+- Waving/walking residents appear; approaching the library flock triggers bird flight. Reduced-motion context records no scattering.
+- Portrait 390×844 and landscape 844×390: touch pedal advances the rider, no horizontal overflow, art ready.
+- All six projectile ground/rider cases still pass with one effect and unchanged damage; effects expire.
+- Terrain definitions, hazard definitions, collision functions and encounter simulation compared directly with V4 and remain unchanged.
+- Approximately 1.9 ms draw time observed in desktop headless Chromium at the library; this is not a guarantee of frame rate on every device.
+- No uncaught page errors, HTTP failures or missing art during the checks.
+- Validation is local. Live Pages deployment is not independently verified from this restricted environment.

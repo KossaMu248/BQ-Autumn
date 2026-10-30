@@ -46,14 +46,32 @@
   function textureStrip(c,s,top,bottom,name){strip(c,s,top,bottom,c.createPattern(tiles[name],'repeat'));}
   function fence(c,s){
     const [lo,hi]=range(s);const pitch=22;
-    for(let x=Math.floor(lo/pitch)*pitch;x<hi;x+=pitch){const y=ground(s,x),y2=ground(s,x+pitch);if(y==null||y2==null)continue;
+    for(let x=Math.floor(lo/88)*88;x<hi;x+=88){
+      const gy=ground(s,x),next=ground(s,x+88);if(gy===null||next===null)continue;
+      const zone=s.districtAt(x).style;
+      if(zone==='forest'){
+        shape(c,[[x,gy-143],[x+88,next-143],[x+88,next-103],[x,gy-103]],'#7b8470','#455444',1.4);
+        line(c,[[x,gy-142],[x+88,next-142]],'#c0b99a',3);
+        for(let j=0;j<4;j++){const xx=x+j*23,yy=ground(s,xx);if(yy!==null)line(c,[[xx,yy-139],[xx-5,yy-123]],'#4d5d4c80',1.2);}
+        line(c,[[x,gy-122],[x+88,next-122]],'#4f62504f',1.3);
+      }else if(zone==='lake'){
+        line(c,[[x,gy-157],[x+88,next-157]],'#344f45',3.4);line(c,[[x,gy-130],[x+88,next-130]],'#607c65',2.1);
+        for(let j=0;j<4;j++){const xx=x+j*22,yy=ground(s,xx);if(yy!==null)line(c,[[xx,yy-157],[xx,yy-103]],'#425f4c',j===0?3:1.7);}
+      }
+    }
+    const ends=(window.BearlyNeighbourhood?.fenceEnds()||[]).filter(x=>x>lo&&x<hi);
+    const cuts=[lo,...ends,hi].sort((a,b)=>a-b);
+    c.save();c.beginPath();for(let i=0;i<cuts.length-1;i++){const a=cuts[i],b=cuts[i+1];if(!window.BearlyNeighbourhood?.fenceGap((a+b)/2))c.rect(a,s.cameraY-1000,b-a,s.H+2000);}c.clip();
+    for(let x=Math.floor(lo/pitch)*pitch;x<hi;x+=pitch){const y=ground(s,x),y2=ground(s,x+pitch);if(y==null||y2==null||fenceGap(s,x))continue;
       const top=y-196;shape(c,[[x,top+3],[x+pitch,top+(y2-y)+3],[x+pitch,y2-104],[x,y-104]],c.createPattern(tiles.wood,'repeat'),'#414a37',1.2);
       line(c,[[x+4,top+9],[x+4,y-112]],'#a9a47870',1.3);for(let j=0;j<3;j++)line(c,[[x+9+j*3,top+14+noise(x,j)*20],[x+8+j*3,y-110-noise(x,j+4)*17]],'#333c2c35',.7);
     }
     for(const off of [-185,-121]){
-      for(let x=Math.floor(lo/90)*90;x<hi;x+=90){const a=ground(s,x),b=ground(s,x+90);if(a==null||b==null)continue;shape(c,[[x,a+off],[x+90,b+off],[x+90,b+off+8],[x,a+off+8]],'#727657','#3d4632',1.7);line(c,[[x,a+off],[x+90,b+off]],'#adab7b',2);}
+      for(let x=Math.floor(lo/90)*90;x<hi;x+=90){const a=ground(s,x),b=ground(s,x+90);if(a==null||b==null||fenceGap(s,x))continue;shape(c,[[x,a+off],[x+90,b+off],[x+90,b+off+8],[x,a+off+8]],'#727657','#3d4632',1.7);line(c,[[x,a+off],[x+90,b+off]],'#adab7b',2);}
     }
-    for(let x=Math.floor(lo/176)*176;x<hi;x+=176){const y=ground(s,x);if(y==null)continue;rect(c,x-7,y-211,15,110,'#6d7150','#3c4434',2);line(c,[[x-4,y-206],[x-4,y-105]],'#acaa7c',2);rect(c,x-9,y-214,19,6,'#969571','#414832',1);}
+    for(let x=Math.floor(lo/176)*176;x<hi;x+=176){const y=ground(s,x);if(y==null||fenceGap(s,x))continue;rect(c,x-7,y-211,15,110,'#6d7150','#3c4434',2);line(c,[[x-4,y-206],[x-4,y-105]],'#acaa7c',2);rect(c,x-9,y-214,19,6,'#969571','#414832',1);}    c.restore();
+    for(const x of ends){const y=ground(s,x);if(y===null||['forest','lake'].includes(s.districtAt(x).style))continue;rect(c,x-6,y-210,12,107,'#737854','#3c4434',2);rect(c,x-8,y-214,16,5,'#999a73','#414832',1);}
+
   }
   function shrub(c,x,y,w,seed){
     if(verge.complete&&verge.naturalWidth){
@@ -85,16 +103,11 @@
     for(let i=0;i<4;i++){line(c,[[-142+i*85,-100],[-115+i*85,-16]],'#dae8ce50',3);}c.restore();
   }
   function parkSign(c,x,y,text,small){c.save();c.translate(x,y);rect(c,-4,-114,8,114,'#7d7150',ink,1);rect(c,-62,-122,124,40,'#315949',ink,3);label(c,text,0,-104,12);if(small)label(c,small,0,-89,7,'#d7cfaa');c.restore();}
-  function frontage(s,x,pad=0){
-    const zone=s.districtAt(x).style;
-    if([7400,11325].some(center=>Math.abs(x-center)<185+pad))return true;
-    const pitch=zone==='square'?570:zone==='homes'?1420:0;
-    if(!pitch)return false;
-    const center=Math.round((x-110)/pitch)*pitch+110;
-    return center>500&&Math.abs(center-x)<155+pad;
-  }
+  function frontage(s,x,pad=0){return window.BearlyNeighbourhood?.frontage(x,pad)||false;}
+  function fenceGap(s,x){return ['forest','lake'].includes(s.districtAt(x).style)||window.BearlyNeighbourhood?.fenceGap(x);}
   function skylineFallback(c,s){const sky=c.createLinearGradient(0,0,0,640);sky.addColorStop(0,'#75acd0');sky.addColorStop(.6,'#b8d0c9');sky.addColorStop(1,'#e5ca9a');c.fillStyle=sky;c.fillRect(0,0,s.W,s.H);c.fillStyle='#7b9e92';for(let i=-1;i<18;i++){const x=i*93-(s.cameraX*.09)%93;rect(c,x,250-noise(i,4)*70,80,140,'#859c8f',null);}c.fillStyle='#699fa8';c.fillRect(0,310,s.W,330);}
   window.BearlyWorld={
+    station,cafe:(c,x,y)=>shop(c,x,y,'FIKA',0),
     sky(c,s){
       skylineFallback(c,s);
       if(!s.backdrop)return;
@@ -134,15 +147,7 @@
         if(forest){const xx=x+170,yy=ground(s,xx);if(yy!==null)paintedTree(c,xx,yy-115,340+noise(k,5)*80,k+19);}
       }
       fence(c,s);
-      for(let k=Math.floor(lo/1420)-1;k<=hi/1420;k++){
-        const x=k*1420+110,y=ground(s,x);if(y==null||x<500)continue;
-        if(s.districtAt(x).style==='homes')shop(c,x,y-106,'HÄSSELBY CAFÉ',k);
-      }
-      for(let k=Math.floor(lo/570)-1;k<=hi/570;k++){
-        const x=k*570+110,y=ground(s,x);if(y==null||s.districtAt(x).style!=='square')continue;
-        shop(c,x,y-106,['BAGERIET','GRÖNT & GOTT','LILLA PIZZERIAN'][Math.abs(k)%3],k);
-      }
-      if(s.metro)for(const x of [7400,11325]){const y=ground(s,x);if(x>lo-350&&x<hi+350&&y!=null)station(c,x,y-107);}
+      window.BearlyNeighbourhood.buildings(c,s);
       // Broken-up planted verge at the fence base, then a stone footpath.
       for(let k=Math.floor(lo/65);k<hi/65;k++){const x=k*65,y=ground(s,x);if(y==null)continue;shrub(c,x,y-106,74,k);}
       textureStrip(c,s,-99,-69,'paving');
@@ -153,6 +158,7 @@
         const type=k%3===0?'bin':'bench';window.BearlyStreetProps?.draw(c,type,x,y-84,type==='bench'?98:35,s.time);
       }
       for(let k=Math.floor(lo/2200);k<hi/2200;k++){const x=k*2200+330,y=ground(s,x);if(y==null||frontage(s,x,95))continue;const zone=s.districtAt(x).style;parkSign(c,x,y-97,zone==='lake'?'MÄLAREN':zone==='forest'?'GRIMSTA':'HÄSSELBY',zone==='lake'?'STRANDPROMENAD':'CYKELVÄG  /  CYCLE ROUTE');}
+      window.BearlyNeighbourhood.life(c,s);
     },
     road(c,s){
       textureStrip(c,s,-66,70,'road');

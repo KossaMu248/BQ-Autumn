@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V4';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V5';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -3179,24 +3179,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     // The finish is a restrained road-maintenance barricade. No cartoon post or
     // floating warning board; the feet and ballast rest on the asphalt.
     const ground=groundAt(FINISH);if(ground==null)return;
-    ctx.save();ctx.translate(FINISH,ground);
-    ctx.fillStyle='rgba(37,44,44,.28)';ctx.beginPath();ctx.ellipse(-1,4,80,9,0,0,7);ctx.fill();
-    for(const lx of [-70,68]){
-      ctx.fillStyle='#77746e';ctx.beginPath();ctx.moveTo(lx-17,0);ctx.lineTo(lx+17,0);ctx.lineTo(lx+11,-10);ctx.lineTo(lx-12,-10);ctx.closePath();ctx.fill();
-      ctx.fillStyle='#545f5e';ctx.fillRect(lx-4,-81,8,76);
-      ctx.fillStyle='#adada1';ctx.fillRect(lx-2,-80,2,65);
-    }
-    ctx.fillStyle='#c4a177';ctx.strokeStyle='#5e6660';ctx.lineWidth=3;
-    ctx.beginPath();ctx.roundRect(-81,-91,162,35,4);ctx.fill();ctx.stroke();
-    for(let j=0;j<5;j++){
-      ctx.fillStyle=j%2?'#f0e3c5':'#b96646';
-      ctx.save();ctx.beginPath();ctx.rect(-78+j*31.2,-88,31.2,29);ctx.clip();
-      ctx.translate(-75+j*31.2,-86);ctx.transform(1,0,-.32,1,0,0);
-      ctx.fillRect(-6,0,22,32);ctx.restore();
-    }
-    ctx.strokeStyle='rgba(249,233,197,.58)';ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(-76,-88);ctx.lineTo(75,-88);ctx.stroke();
-    ctx.restore();
+    window.BearlyStreetProps.draw(ctx,'barrier',FINISH,ground,162,time);
   }
 
   // 2.5D scenery: shared ground elevation, but multiple projected depth layers.
@@ -4145,7 +4128,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function illustratedState(){
     return {W,H,cameraX,cameraY,time,groundAt,segments,finish:FINISH,
-      district:districtAt(bike.x),districtAt,backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
+      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
   }
   function groundDraw(){
     const scene=illustratedState();
@@ -6293,5 +6276,5 @@ function babyFigure(expr, thrown=false, pose='idle'){
   });
   debugInit();
   reset(false);$('overlay').hidden=true;
-  Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded]).then(()=>{requestAnimationFrame(loop);});
+  Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded,window.BearlyAtlas.loaded]).then(()=>{requestAnimationFrame(loop);});
 })();

@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v4.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v5.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -34,6 +34,16 @@ Open `http://localhost:8000` in your browser and choose **LET’S RIDE**. If ano
 | Close settings | Escape |
 
 On a phone or tablet, use the touch buttons beneath the game. Landscape gives the largest play area. Sound starts after the first interaction; toggle it in the toolbar. The demo button previews the existing stunt animations. F3 opens the original developer controls, including district selection and a no-damage option.
+
+## The neighbourhood
+
+The ride now has 16 authored scenic stops using 11 building designs. The repeated bakery is gone: the café appears once. Centre arcades, a library, a community hall, residential courtyards, a manor, a greenhouse and lakeside boathouses give different sections their own identity.
+
+Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
+
+Friendly shoppers, a stroller walker, a dog walker, scattering birds, café steam and waterside ripples add quiet life behind the road. They are decorative and do not collide with the bike. Reduced-motion preferences suppress the extra animation.
+
+Scooters, carts, barricades, cones, glass and potholes now use painted art, alongside the painted burning bins. Terrain, hazard positions and collision rules remain the V4 simulation.
 
 ## What changed
 
@@ -64,6 +74,8 @@ js/illustrated-world.js    New scenery, street, texture, and parallax rendering
 js/illustrated-props.js    Cached street-prop art and animated burning bins
 js/illustrated-kids.js     Painted thrower outfits and six-pose sprite renderer
 js/illustrated-hero.js     Cached bear material treatment
+js/illustrated-atlas.js    Shared painted building/hazard/resident textures
+js/illustrated-neighbourhood.js  Authored landmarks and ambient civilian life
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -82,6 +94,8 @@ node --check js/illustrated-world.js
 node --check js/illustrated-props.js
 node --check js/illustrated-kids.js
 node --check js/illustrated-hero.js
+node --check js/illustrated-atlas.js
+node --check js/illustrated-neighbourhood.js
 ```
 
 Node is optional for playing. The new environment art was generated for this edition. Original project code and artwork retain their original ownership. Based on original commit `65313c9e708e420999cd10c209f1b6fda1d29f31`.

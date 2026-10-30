@@ -34,3 +34,14 @@ Revision 3 checks:
 - Pause/resume, F3 freeze, restart and desktop controls pass.
 - Portrait 390×844 and landscape 844×390 mobile checks pass, with no horizontal overflow and touch controls in view.
 - No uncaught page errors, failed HTTP responses, failed requests or missing new art in the integrated browser checks.
+
+
+Revision 4 checks:
+
+- All 18 streetwear poses render nonempty, distinct images, including fingers/flames extending beyond the nominal sheet grid. Every pose has a fresh foot anchor.
+- Original bear pose set executes with the new cached ink/light treatment, without changing rig geometry.
+- New projectile render sizes are 32×18 (Molotov), 29×16 (dynamite), 16×10 (stone). Molotov cloth/fire and dynamite fuse remain attached while rotating.
+- All six ground/rider collision cases create exactly one corresponding impact. Ground cases preserve health100; rider damage remains53/55/57. No second damage pulse; effects expire.
+- Landscape mobile touch pedal advances the rider and the layout has no horizontal overflow.
+- The dedicated V4 page loads all assets and starts gameplay with no uncaught JavaScript errors or failed HTTP requests.
+- Local validation only: live GitHub Pages verification remains dependent on network access to the Pages hostname.

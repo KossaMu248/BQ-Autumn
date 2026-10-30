@@ -1,5 +1,15 @@
 # Autumn Ride — standalone updates
 
+## Revision 4
+
+- Rebalanced Molotov and dynamite readability after play testing: 32×18 and 29×16 world pixels, between the original large art and V3's small sprites.
+- Slower visual spin, a clear burning rag on the green bottle, and a more visible dynamite fuse. Collision radii remain compact and match their visible cores.
+- New Swedish suburb streetwear: technical puffers/shells, matching dark tracksuits, crossbody bags and chunky running trainers. Faces, thrower identities and six-pose structure retained.
+- Source crops isolate whole figures across sheet cell boundaries, with fresh foot anchors for every pose.
+- A light cached ink/warm-light pass on the bear and legs preserves the familiar face, helmet, hockey jersey and rig.
+- Open spoke spaces, shaded rims, tyre tread and warmer blue enamel on the same bicycle geometry.
+- Added autumn-v4.html and versioned script/style URLs. Existing entry points also load V4.
+
 ## Revision 3
 
 - Painted six-pose street kids with clothing tied to their actual throwable, including mixed crews.

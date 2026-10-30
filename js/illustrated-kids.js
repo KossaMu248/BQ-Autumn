@@ -2,13 +2,13 @@
 (() => {
   'use strict';
   const cast={
-    bottle:{file:'kid-molotov.png',outfit:'Charcoal hoodie · burgundy cap · faded denim'},
-    rock:{file:'kid-rock.png',outfit:'Olive bomber · black hood · cargo trousers'},
-    firecracker:{file:'kid-dynamite.png',outfit:'Navy puffer · red cap · blue denim'}
+    bottle:{file:'kid-molotov-streetwear-v4.png',outfit:'Black puffer gilet · matching tracksuit · crossbody bag'},
+    rock:{file:'kid-rock-streetwear-v4.png',outfit:'Olive technical jacket · dark tracksuit · crossbody bag'},
+    firecracker:{file:'kid-dynamite-streetwear-v4.png',outfit:'Navy puffer · matching tracksuit · crossbody bag'}
   };
   // Per-frame source and foot anchors are authored against the generated sheets.
   // Filling this table once avoids alpha readbacks or image filters during play.
-  const layouts={"bottle":{"bodyHeight":420,"frames":[{"x":189,"y":72,"w":187,"h":420,"footX":256,"footY":491},{"x":601,"y":124,"w":293,"h":364,"footX":768,"footY":487},{"x":1100,"y":109,"w":338,"h":381,"footX":1280,"footY":489},{"x":95,"y":532,"w":356,"h":420,"footX":256,"footY":951},{"x":585,"y":573,"w":423,"h":378,"footX":768,"footY":950},{"x":1098,"y":589,"w":357,"h":362,"footX":1280,"footY":950}]},"rock":{"bodyHeight":416,"frames":[{"x":192,"y":75,"w":186,"h":416,"footX":256,"footY":490},{"x":621,"y":88,"w":274,"h":403,"footX":768,"footY":491},{"x":1109,"y":88,"w":323,"h":404,"footX":1280,"footY":491},{"x":121,"y":568,"w":317,"h":404,"footX":256,"footY":972},{"x":581,"y":578,"w":418,"h":388,"footX":768,"footY":966},{"x":1103,"y":593,"w":344,"h":374,"footX":1280,"footY":967}]},"firecracker":{"bodyHeight":387,"frames":[{"x":183,"y":82,"w":171,"h":387,"footX":256,"footY":469},{"x":637,"y":119,"w":253,"h":350,"footX":768,"footY":469},{"x":1127,"y":119,"w":296,"h":350,"footX":1280,"footY":469},{"x":129,"y":577,"w":311,"h":381,"footX":256,"footY":957},{"x":589,"y":607,"w":398,"h":346,"footX":768,"footY":953},{"x":1109,"y":618,"w":323,"h":337,"footX":1280,"footY":954}]}};
+  const layouts={"bottle":{"bodyHeight":478,"frames":[{"x":170,"y":17,"w":209,"h":481,"footX":256,"footY":495},{"x":588,"y":69,"w":342,"h":426,"footX":768,"footY":492},{"x":1087,"y":52,"w":375,"h":443,"footX":1280,"footY":492},{"x":66,"y":499,"w":412,"h":479,"footX":256,"footY":975},{"x":565,"y":552,"w":462,"h":425,"footX":768,"footY":974},{"x":1090,"y":562,"w":388,"h":414,"footX":1280,"footY":973}]},"rock":{"bodyHeight":471,"frames":[{"x":170,"y":29,"w":224,"h":474,"footX":256,"footY":500},{"x":601,"y":41,"w":315,"h":463,"footX":768,"footY":501},{"x":1074,"y":42,"w":407,"h":463,"footX":1280,"footY":502},{"x":85,"y":527,"w":383,"h":458,"footX":256,"footY":982},{"x":556,"y":537,"w":482,"h":444,"footX":768,"footY":978},{"x":1074,"y":540,"w":404,"h":441,"footX":1280,"footY":978}]},"firecracker":{"bodyHeight":496,"frames":[{"x":111,"y":6,"w":222,"h":499,"footX":256,"footY":502},{"x":610,"y":48,"w":330,"h":456,"footX":768,"footY":501},{"x":1129,"y":50,"w":372,"h":455,"footX":1280,"footY":502},{"x":59,"y":522,"w":390,"h":464,"footX":256,"footY":983},{"x":543,"y":542,"w":494,"h":439,"footX":768,"footY":978},{"x":1077,"y":550,"w":416,"h":431,"footX":1280,"footY":978}]}};
   const assets={},prepared={};
   const loaded=Promise.all(Object.entries(cast).map(([kind,info])=>new Promise(resolve=>{
     const im=new Image();assets[kind]=im;

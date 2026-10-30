@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The version-specific entry is `autumn-v3.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v4.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -41,8 +41,9 @@ On a phone or tablet, use the touch buttons beneath the game. Landscape gives th
 - New terrain-following wooden fences, pavements, kerbs, worn asphalt, and leaf litter throughout the route.
 - A newly painted, weathered green bin sprite replaces the first edition’s flat bin in both roadside decoration and burning obstacles. The flame roots align to its open rim; smoke, embers, and fire animate separately.
 - New illustrated street furniture and obstacles: benches, graffiti bins, cones, barriers, scooters, carts, glass, and animated burning bins.
-- Painted street kids with three outfits keyed to what they throw: charcoal/burgundy Molotov throwers, olive-jacket stone throwers, and navy/red dynamite throwers. Each has six grounded poses driven by the existing warning, release, and recovery states.
-- Smaller hand-sized projectiles, with shattering glass and fire splash, rock chips and dust, or a dynamite flash, smoke, and fragments at the point of impact.
+- Painted street kids with Swedish suburb streetwear keyed to what they throw: black puffer gilets and tracksuits for Molotov throwers, olive technical shells for stone throwers, navy puffer tracksuits for dynamite throwers, all with caps, trainers and crossbody bags. Each has six grounded poses driven by the existing warning, release, and recovery states.
+- Readable medium-sized projectiles (Molotov 32×18; dynamite 29×16 world pixels), with slower spin, a visible burning rag and fuse, with shattering glass and fire splash, rock chips and dust, or a dynamite flash, smoke, and fragments at the point of impact.
+- A light bear ink/warm-light treatment and a refined blue bicycle with open spoke spaces, tyre tread, warmer metal and enamel shading.
 - A closer camera presentation that scales the whole scene together, keeping the wheels, riders, shadows, and obstacles aligned.
 - A complete cream, forest, and gold interface: title screen, heart health display, compact live HUD, touch controls, pause/settings, and retry/completion screens.
 - A separate best-score storage key; this edition does not overwrite the original game's saved best score.
@@ -62,6 +63,7 @@ js/game.js                 Original simulation with standalone rendering integra
 js/illustrated-world.js    New scenery, street, texture, and parallax rendering
 js/illustrated-props.js    Cached street-prop art and animated burning bins
 js/illustrated-kids.js     Painted thrower outfits and six-pose sprite renderer
+js/illustrated-hero.js     Cached bear material treatment
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -79,6 +81,7 @@ node --check js/game.js
 node --check js/illustrated-world.js
 node --check js/illustrated-props.js
 node --check js/illustrated-kids.js
+node --check js/illustrated-hero.js
 ```
 
 Node is optional for playing. The new environment art was generated for this edition. Original project code and artwork retain their original ownership. Based on original commit `65313c9e708e420999cd10c209f1b6fda1d29f31`.

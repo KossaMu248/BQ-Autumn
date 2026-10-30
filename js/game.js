@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V3';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V4';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -698,7 +698,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function projectileDamage(kind){return kind==='firecracker'?57:kind==='rock'?55:53;} // Two unhealed enemy hits are lethal from full health.
   // Compact artwork matches the hand-sized props carried by the illustrated crews.
-  const projectileArtSpec={bottle:{w:21,h:12,r:5.3},rock:{w:16,h:10,r:6.2},firecracker:{w:19,h:9,r:4.7}};
+  const projectileArtSpec={bottle:{w:32,h:18,r:6.8},rock:{w:16,h:10,r:6.2},firecracker:{w:29,h:16,r:6.0}};
   const projectileImpactHistory=[];
   let projectileImpactSequence=0;
   function projectileGroundContact(p){
@@ -744,7 +744,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const kind=carriedPropFor(crew,memberIndex);
     projectiles.push({x,y,px:x,py:y,vx:clamp((targetX-x)/t,-2050,2050),
       vy:clamp((targetY-y-gravity*t*t*.5)/t,-820,640),g:gravity,
-      kind,owner:crew.x,angle:0,spin:kind==='rock'?4.3:kind==='firecracker'?9:6,
+      kind,owner:crew.x,angle:0,spin:kind==='rock'?4.3:kind==='firecracker'?5.5:3.5,
       r:projectileArtSpec[kind].r,life:3.3,alive:true});
     thrownCount++;
     // Audio/voice caption matches the actual object, not legacy placeholder items.
@@ -847,9 +847,22 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
         ctx.strokeStyle='#2b302b';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(-spec.w*.45,-spec.h*.4,spec.w*.9,spec.h*.8,2);ctx.fill();ctx.stroke();
       }
       if(p.kind==='bottle'||p.kind==='firecracker'){
-        const tipX=spec.w*.37,tipY=-spec.h*.24,pulse=.6+.4*Math.sin(time*31+p.owner*.002);
-        ctx.fillStyle='#ffe3a1';ctx.beginPath();ctx.arc(tipX,tipY,.85+pulse*.45,0,Math.PI*2);ctx.fill();
-        if(debugSettings.particles){ctx.strokeStyle='#ed8d3a';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(tipX,tipY);ctx.lineTo(tipX+2.2,tipY-2.4-pulse);ctx.stroke();}
+        const tipX=spec.w*.37,tipY=-spec.h*.24,pulse=.6+.4*Math.sin(time*25+p.owner*.002);
+        if(p.kind==='bottle'){
+          // A visible burning cloth silhouette identifies the Molotov at speed.
+          ctx.strokeStyle='#302c23';ctx.lineWidth=3.5;ctx.lineCap='round';
+          ctx.beginPath();ctx.moveTo(tipX-1,tipY);ctx.quadraticCurveTo(tipX+3,tipY-5,tipX+5,tipY-5);ctx.stroke();
+          ctx.strokeStyle='#e6d3a1';ctx.lineWidth=2;ctx.stroke();
+          const x=tipX+5,y=tipY-5,h=7+pulse*3;
+          ctx.fillStyle='#ef7a29';ctx.beginPath();ctx.moveTo(x-3,y+1);ctx.bezierCurveTo(x-6,y-3,x+2,y-h*.6,x+1,y-h);ctx.bezierCurveTo(x+6,y-3,x+5,y+1,x-3,y+1);ctx.fill();
+          ctx.fillStyle='#ffe997';ctx.beginPath();ctx.ellipse(x+1,y-2,1.6,3+pulse,0,0,Math.PI*2);ctx.fill();
+        }else{
+          const glow=ctx.createRadialGradient(tipX,tipY,0,tipX,tipY,5.5);
+          glow.addColorStop(0,'#fff3b3c0');glow.addColorStop(1,'#ff9b2e00');ctx.fillStyle=glow;ctx.fillRect(tipX-6,tipY-6,12,12);
+          ctx.strokeStyle='#ffdb84';ctx.lineWidth=1.2;
+          for(let k=0;k<3;k++){const a=time*6+k*2.09;ctx.beginPath();ctx.moveTo(tipX,tipY);ctx.lineTo(tipX+Math.cos(a)*(3+pulse),tipY+Math.sin(a)*(3+pulse));ctx.stroke();}
+          ctx.fillStyle='#fff3b3';ctx.beginPath();ctx.arc(tipX,tipY,1.3+pulse*.5,0,Math.PI*2);ctx.fill();
+        }
       }
       ctx.restore();
     }
@@ -4783,7 +4796,9 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const dx=b[0]-a[0],dy=b[1]-a[1],ln=Math.hypot(dx,dy)||1;
     const nx=-dy/ln,ny=dx/ln;
     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
-    for(const [w,col] of [[width+3,'#1a3442'],[width+1,'#185173'],[width,paint]]){
+    const enamel=ctx.createLinearGradient(a[0]-4,a[1]-9,b[0]+5,b[1]+10);
+    enamel.addColorStop(0,paint);enamel.addColorStop(.45,'#307b96');enamel.addColorStop(1,'#234b5e');
+    for(const [w,col] of [[width+3,'#222d29'],[width+1,'#28474d'],[width,enamel]]){
       ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke();
     }
     ctx.strokeStyle=lit;ctx.globalAlpha=.76;ctx.lineWidth=Math.max(1.2,width*.21);
@@ -4802,17 +4817,16 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     // Original wheel radius/centre unchanged: the grounding and collision rig stays intact.
     ctx.save();ctx.translate(cx,cy);
     const r=WHEEL_RADIUS;
-    ctx.fillStyle='#1c252c';ctx.strokeStyle='#0d1b23';ctx.lineWidth=2.4;
-    ctx.beginPath();ctx.arc(0,0,r+1,0,Math.PI*2);ctx.fill();ctx.stroke();
-    // Rubber sidewall + narrow metallic rim, with visible black inner void.
-    ctx.strokeStyle='#465258';ctx.lineWidth=2.0;
-    ctx.beginPath();ctx.arc(0,0,r-3,0,Math.PI*2);ctx.stroke();
-    ctx.fillStyle='#354047';ctx.beginPath();ctx.arc(0,0,r-7,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#b9c9cf';ctx.beginPath();ctx.arc(0,0,r-9,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#52636b';ctx.beginPath();ctx.arc(0,0,r-12,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#dae4e5';ctx.beginPath();ctx.arc(0,0,r-13,0,Math.PI*2);ctx.fill();
-    ctx.strokeStyle='#eff4ee';ctx.lineWidth=1.15;
-    ctx.beginPath();ctx.arc(0,0,r-9,0,Math.PI*2);ctx.stroke();
+    // Rubber annulus with true open space between spokes; no opaque grey disc.
+    const rubber=ctx.createLinearGradient(-r,-r,r,r);
+    rubber.addColorStop(0,'#414940');rubber.addColorStop(.35,'#1e2826');rubber.addColorStop(1,'#111d1c');
+    ctx.fillStyle=rubber;ctx.strokeStyle='#18221f';ctx.lineWidth=2.4;
+    ctx.beginPath();ctx.arc(0,0,r+1,0,Math.PI*2);ctx.arc(0,0,r-7,0,Math.PI*2,true);ctx.fill('evenodd');ctx.stroke();
+    const metal=ctx.createLinearGradient(-r,-r,r,r);metal.addColorStop(0,'#e7dbb8');metal.addColorStop(.35,'#9bafa8');metal.addColorStop(.66,'#536c69');metal.addColorStop(1,'#c4c6a9');
+    ctx.strokeStyle=metal;ctx.lineWidth=3.4;ctx.beginPath();ctx.arc(0,0,r-9,0,Math.PI*2);ctx.stroke();
+    ctx.strokeStyle='#324c49';ctx.lineWidth=1;ctx.beginPath();ctx.arc(0,0,r-12,0,Math.PI*2);ctx.stroke();
+    ctx.strokeStyle='#a6a58c55';ctx.lineWidth=.8;
+    for(let i=0;i<30;i++){const a=i*Math.PI*2/30+phase;ctx.beginPath();ctx.moveTo(Math.cos(a)*(r-2),Math.sin(a)*(r-2));ctx.lineTo(Math.cos(a+.025)*(r-4.5),Math.sin(a+.025)*(r-4.5));ctx.stroke();}
     // Fine spoke pattern rotates with existing wheel phase.
     ctx.save();ctx.rotate(phase);
     const spokes=16, spokeR=r-12;
@@ -5246,9 +5260,9 @@ function babyFigure(expr, thrown=false, pose='idle'){
     const safePose=pose==='hurt'?'coast':pose;
     const original=(safePose==='pedal'&&!noRightArm)?(images['bear_pedal_'+pedalIndex]||images.bear_pose_pedal):images['bear_pose_'+safePose];
     if(noRightArm && images.bear_upper_rightarm_injured?.naturalWidth){
-      ctx.drawImage(images.bear_upper_rightarm_injured,0,0);
-    }else if(original?.naturalWidth){ctx.drawImage(original,0,0);}
-    else if(images.bear_upper?.naturalWidth){ctx.drawImage(images.bear_upper,0,0);}
+      ctx.drawImage(window.BearlyHero.sprite(images.bear_upper_rightarm_injured),0,0);
+    }else if(original?.naturalWidth){ctx.drawImage(window.BearlyHero.sprite(original),0,0);}
+    else if(images.bear_upper?.naturalWidth){ctx.drawImage(window.BearlyHero.sprite(images.bear_upper),0,0);}
   }
   function drawRiderWounds(){
     const severity=clamp((100-health)/95,0,1);
@@ -5307,7 +5321,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     // Paint full fur-to-boot art so the upper leg overlaps the hip naturally.
     ctx.save();ctx.globalAlpha=far?.76:1;
     ctx.translate(x,y);ctx.rotate(0.036*Math.sin(phase));
-    ctx.drawImage(im,-47,-46);
+    ctx.drawImage(window.BearlyHero.sprite(im),-47,-46);
     ctx.restore();
   }
   function drawSpeedWheels(p){

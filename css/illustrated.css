@@ -192,3 +192,15 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 .dismount-button{min-height:36px;padding:7px 13px;border:1px solid #a5b583;border-radius:5px;background:#3d593a;color:#fff0c9;font:800 12px Trebuchet MS;cursor:pointer}.dismount-button:disabled{opacity:.6}
 .game-shell.is-expanded .ride-utilities{flex:0 0 auto}
 @media(max-height:500px) and (orientation:landscape){.ride-utilities{position:absolute;right:8px;bottom:63px;z-index:5;padding:0;background:none}}
+/* Four-way movement and distinct jump / grapple / maul controls. */
+.area-controls{display:grid;grid-template-columns:146px minmax(0,1fr);gap:10px;align-items:stretch}
+.area-dpad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,38px);gap:4px}
+.area-dpad button{padding:4px!important;min-width:0!important;min-height:0!important;font-size:20px!important}
+.area-dpad [data-depth="-1"]{grid-column:2;grid-row:1}.area-dpad [data-direction="-1"]{grid-column:1;grid-row:2}.area-dpad [data-depth="1"]{grid-column:2;grid-row:2}.area-dpad [data-direction="1"]{grid-column:3;grid-row:2}
+.area-moves{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,38px);gap:5px}.area-moves button{min-width:0!important;min-height:0!important;font-size:12px!important;padding:6px!important}
+.area-moves .area-action{grid-column:1/-1}.area-moves .area-maul{background:#803f35}.area-moves .area-grab{background:#586d42}
+.brawl-status{display:flex;align-items:center;gap:9px;margin-top:8px;font-size:11px;color:#e9dfb8}.brawl-status strong{min-width:50px;text-align:right;font-size:10px}.primal-track{flex:1;height:9px;border:1px solid #aab17b;border-radius:5px;background:#132d24;overflow:hidden}.primal-track i{display:block;height:100%;background:#b7bd6c;width:0}.brawl-status[data-phase="primal"] .primal-track i{background:#efa04e}.brawl-status[data-phase="rolling"] .primal-track i{background:#df6847}.brawl-status[hidden]{display:none}
+@media(max-width:600px){.area-controls{grid-template-columns:120px minmax(0,1fr);gap:6px}.area-moves button{font-size:10px!important}.brawl-status{font-size:10px;gap:5px}.brawl-status strong{font-size:9px;max-width:160px}}
+@media(max-height:500px) and (orientation:landscape){.autumn-exploring .canvas-wrap{height:calc(100dvh - 230px)!important}.area-dpad,.area-moves{grid-template-rows:repeat(2,33px)}.brawl-status{margin-top:4px}}
+.area-controls[data-mode="water"] .area-moves button:not(.area-action){display:none}.area-controls[data-mode="water"] .area-action{grid-row:1/3}
+@media(max-height:500px) and (orientation:landscape){.autumn-exploring .canvas-wrap{height:calc(100dvh - 250px)!important}}

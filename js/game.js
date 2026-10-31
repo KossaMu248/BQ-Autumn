@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V8';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V9';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -4129,7 +4129,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function illustratedState(){
     return {W,H,cameraX,cameraY,time,groundAt,segments,finish:FINISH,
-      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,bikeGroundY:bike.y+riderY(WHEEL_Y)*Math.cos(bike.a)+TIRE_R,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
+      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,bikeGroundY:bike.y+riderY(WHEEL_Y)*Math.cos(bike.a)+TIRE_R,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),footActive:window.BearlyVisits?.footActive(),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
   }
   function groundDraw(){
     const scene=illustratedState();
@@ -5907,6 +5907,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     if(debugSettings.foreground)window.BearlyWorld.foreground(ctx,illustratedState());
     if(debugSettings.hitboxes)debugDrawHitboxes();
     ctx.restore();
+    window.BearlyVisits?.overlay(ctx,W,H,{cameraX,cameraY,groundAt});
     const underpass=smooth(3550,3850,bike.x)*(1-smooth(4520,4850,bike.x));
     if(underpass>0){ctx.fillStyle=`rgba(18,31,43,${(underpass*.16).toFixed(3)})`;ctx.fillRect(0,0,W,H);}
     if(debugSettings.particles)drawEncounterAtmosphere();
@@ -5961,6 +5962,8 @@ function babyFigure(expr, thrown=false, pose='idle'){
 AREA        ${area?.mode||'cycling'}${area?.place?' · '+area.place:''}
 TRANSITION  ${area?.transition||'none'}${area?.phase!=null?' '+Math.round(area.phase*100)+'%':''}
 LOCAL X   ${area?.mode?Math.round(area.x):'—'}
+DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
+PRIMAL      ${area?.combat?.phase||'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
 GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}
 SCREEN      ${window.BearlyFullscreen?.state()||'window'}
@@ -5987,6 +5990,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     for(const b of document.querySelectorAll('[data-dbg-place]'))b.addEventListener('click',()=>{const scene=window.BearlyNeighbourhood.scenes.find(s=>s.key===b.dataset.dbgPlace);if(scene){debugWarpTo(scene.x/WORLD_STRETCH);debugRefresh(true);}});
     $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(15700/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
     $('debugBoatBtn').addEventListener('click',()=>{for(const action of ['lunch','deliver','kit','repair'])window.BearlyQuests.game.act(action);debugRefresh(true);});
+    $('debugBrawlBtn').addEventListener('click',()=>{debugOpenMenu(false);window.BearlyVisits.practice();});
     $('debugFullscreenBtn').addEventListener('click',()=>window.BearlyFullscreen.toggle());
     $('debugWarpBtn').addEventListener('click',()=>debugWarpTo($('debugWarpMeters').value));
     $('debugWarpMeters').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();debugWarpTo(e.currentTarget.value);}});
@@ -6001,7 +6005,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,road:{groundAt,finish:FINISH},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,road:{groundAt,finish:FINISH},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

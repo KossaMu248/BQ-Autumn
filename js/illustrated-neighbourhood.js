@@ -130,7 +130,7 @@
       if(s.bikeX<previousX-1000){birds.clear();stats.scattered=0;}previousX=s.bikeX;
       for(let i=0;i<scenes.length;i++){
         const b=scenes[i];if(b.x+650<s.cameraX-200||b.x-650>s.cameraX+s.W+200)continue;
-        if(!['castle','water'].includes(b.role))civilian(c,s,b,i%3);
+        if(!s.footActive&&!['castle','water'].includes(b.role))civilian(c,s,b,i%3);
         if(['shop','pizza','workshop','square','library','park','cafe'].includes(b.role)){
           const bx=b.x+b.w*.48,gy=s.groundAt(bx);if(gy===null)continue;
           if(!s.reducedMotion&&s.playing&&Math.abs(s.bikeX-bx)<210&&!birds.has(i)){birds.set(i,s.time);stats.scattered++;}

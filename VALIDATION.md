@@ -107,3 +107,15 @@ Revision 8 checks:
 - These remain headless Chromium and phone emulation checks. Physical iPhone/Safari playtesting and subjective animation review on the target phone remain useful.
 
 - A real-time rendered walking clip (both headings) is saved as screenshots/revision8/walking-preview.mp4. Frame-sequence inspection shows alternating support/swing, with the upper body and front carrier remaining stable.
+
+
+Revision 9 checks (2026-10-31):
+
+- `node tests/building-visits.cjs` checks terrain-supported placement, inventory/quests and the longer continuous two-leg gait, including alternating swing/support, planted soles and consistent joint lengths.
+- `node tests/brawler.cjs` checks lane/jump reach restrictions, grabs, screen throws, maul cooldown, adult NPC recovery, Primal buildup, eight-second invulnerability, its expiry, return to cute and baby/carrier recovery.
+- `python3 tests/browser_brawler.py` exercises the actual keyboard and touch controls for depth movement, jumping/landing, maul/grab/throw, protected baby placement, the complete Primal transformation and return. It checks HP stays unchanged during the rolling burst and immunity ends afterward.
+- `python3 tests/browser_v9.py` passes the full shop, boat and garden quest flows, save persistence, cycling freeze/resume, eight HTML entry points, and 390×844 / 844×390 layouts. V6–V8 browser scripts remain compatibility wrappers.
+- `python3 tests/browser_movement.py` and `python3 tests/browser_polish.py` retain coverage for free dismount/remount, terrain walking and camera following, on-foot doors, same-bike return, boat boarding/both headings, fullscreen, debug contrast, transfer pausing and phone fallback.
+- V9 screenshots show jumping, mauling, grappling, foreground throws, bowling, the cute recovery, quests, boat placement, settings and both phone layouts. No uncaught browser errors or failed HTTP responses occurred in these runs.
+- Original cycling update and terrain definitions compare unchanged with deployed V8. The brawler model and on-foot health remain separate from cycling; adult NPCs recover and the boat has no combat controls.
+- Tests use headless Chromium and phone touch emulation. Physical iPhone/Safari performance and animation feel still need device playtesting. New combat effects are comic scratches, flecks and knockdowns rather than detailed injuries.

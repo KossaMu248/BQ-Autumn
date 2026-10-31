@@ -55,26 +55,6 @@
     c.fillStyle='#788785';c.strokeStyle='#34473e';c.lineWidth=.9;c.beginPath();c.ellipse(0,0,5.5,3.7,-.15,0,Math.PI*2);c.fill();c.stroke();c.fillStyle='#546d6d';c.beginPath();c.arc(4,-3,2.6,0,Math.PI*2);c.fill();c.fillStyle='#d4b776';c.beginPath();c.moveTo(6,-4);c.lineTo(9,-3);c.lineTo(6,-2);c.fill();c.fillStyle='#1f3129';c.fillRect(4,-4,1,1);if(!fly){c.strokeStyle='#b58d6e';c.beginPath();c.moveTo(-2,2);c.lineTo(-2,6);c.moveTo(2,2);c.lineTo(2,6);c.stroke();}c.restore();
   }
   function pathBase(s,x){return s.groundAt(x);}
-  function civilian(c,s,b,index){
-    const t=s.reducedMotion?0:civilianTime,walk=index%3;
-    let start=Math.max(100,b.x-280-index*35),end=Math.min(s.finish-150,b.x+290+index*35);
-    // Keep each route on one side of a crew, rather than making walkers disappear into it.
-    for(const cx of s.crewXs||[]){
-      if(cx<b.x&&cx+270>start)start=cx+270;
-      if(cx>=b.x&&cx-270<end)end=cx-270;
-    }
-    if(end-start<100)return;
-    const route=s.reducedMotion?{x:(start+end)/2,paused:true,flip:false}:walkingAt(t,start,end,22+index*3,3+index*1.5,index*7);
-    const x=route.x,gy=pathBase(s,x);if(gy===null)return;
-    const close=Math.abs(s.bikeX-x)<380;
-    const frame=walk===0?(close&&route.paused?1:0):walk===1?(2+(route.paused?0:Math.floor(t*2.8)%2)):(4+(route.paused?0:Math.floor(t*2.6)%2));
-    residentAudit.set(b.key,{x,start,end,paused:route.paused,flip:route.flip,role:walk,foot:gy-91});
-    const key='resident-'+frame,info=A().info(key);if(!info)return;
-    // Fixed stature per pair, even if a wave reaches above the head.
-    const base=A().info('resident-'+(walk===0?0:walk===1?2:4));const h=walk===0?65:70;
-    const width=h*info.w/(base.footY-base.y);
-    A().draw(c,key,x,gy-91,width,{flip:route.flip});stats.residents++;
-  }
   function steam(c,x,y,t,alpha=.24){
     c.save();c.lineCap='round';c.lineWidth=1.7;c.strokeStyle='#f3e5c7';
     for(let i=0;i<3;i++){const age=(t*.25+i*.33)%1;c.globalAlpha=alpha*(1-age);const yy=y-age*30;c.beginPath();c.moveTo(x+i*5,yy);c.bezierCurveTo(x-6+i*5,yy-7,x+6+i*5,yy-12,x+i*5,yy-18);c.stroke();}c.restore();
@@ -126,11 +106,11 @@
     buildings(c,s){stats.scenes=0;for(const b of scenes){if(b.x+b.w*.7<s.cameraX-250||b.x-b.w*.7>s.cameraX+s.W+250)continue;building(c,s,b);stats.scenes++;}},
     life(c,s){
       stats.residents=0;stats.birds=0;residentAudit.clear();
-      if(lastLifeTime!==null&&s.playing)civilianTime+=Math.max(0,Math.min(.1,s.time-lastLifeTime));lastLifeTime=s.time;
+      for(const n of window.BearlyVisits?.residents?.()||[]){if(n.kind==='gangster'||Math.abs(n.x-s.cameraX-s.W/2)>s.W)continue;stats.residents++;residentAudit.set(n.id,{x:n.x,start:n.home-285,end:n.home+285,paused:!n.moving,flip:n.face<0,role:n.variant,foot:(s.groundAt(n.x)||0)+n.depth});}
+      const lifeTime=s.lifeTime??s.time;if(lastLifeTime!==null&&s.playing)civilianTime+=Math.max(0,Math.min(.1,lifeTime-lastLifeTime));lastLifeTime=lifeTime;
       if(s.bikeX<previousX-1000){birds.clear();stats.scattered=0;}previousX=s.bikeX;
       for(let i=0;i<scenes.length;i++){
         const b=scenes[i];if(b.x+650<s.cameraX-200||b.x-650>s.cameraX+s.W+200)continue;
-        if(!s.footActive&&!['castle','water'].includes(b.role))civilian(c,s,b,i%3);
         if(['shop','pizza','workshop','square','library','park','cafe'].includes(b.role)){
           const bx=b.x+b.w*.48,gy=s.groundAt(bx);if(gy===null)continue;
           if(!s.reducedMotion&&s.playing&&Math.abs(s.bikeX-bx)<210&&!birds.has(i)){birds.set(i,s.time);stats.scattered++;}

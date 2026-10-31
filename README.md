@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v9-1.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v10.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -65,13 +65,13 @@ The greenhouse gardener also asks you to find three seed packets along the garde
 
 ### On-foot brawling
 
-Move into the same lane as an adult NPC. **G** grabs; press **G** again to fling them toward the screen. **J** mauls with a claw-swipe pose, scratch trails, dark red flecks, dust, hit-stop and stagger reactions. Adult NPCs recover after being knocked down, keeping quest areas usable. The baby rests in a protected seat during the action and returns to the front carrier when things settle.
+Move into the same lane as an adult NPC. **G** grabs; press **G** again to fling them toward the screen. **J** mauls with a claw-swipe pose, scratch trails, dark red flecks, dust, hit-stop and stagger reactions. Adult NPCs have hit recoil, collapse, defeated and recovery animations. Repeated hits deplete their health; defeated characters recover after twelve seconds so quest areas remain usable. The baby stays attached to the bear: front carrier while exploring, back carrier for grabbing, throwing and mauling, then front again when things settle.
 
-Successful grabs, throws and mauls fill **Apex Primal**. At 35 points the bear enters the Apex Primal state; a full meter triggers **eight seconds as the invulnerable Madness Mauling Bear**. The bear stays upright, moves under your control and automatically mauls nearby adult NPCs, with faster manual claw attacks too. It then returns to the cute bear and resets the meter. Outside that burst, provoked NPCs can counterattack. If on-foot health runs out, the bear recovers by the entrance or parked bike. Cycling health and physics stay separate. Use **F3 → On-foot brawler practice** for three nearby practice NPCs; the debug readout shows depth, jump, Apex Primal and on-foot HP.
+Successful grabs, throws and mauls fill **Apex Primal**. At 35 points the bear enters the Apex Primal state; a full meter triggers **eight seconds as the invulnerable Madness Mauling Bear**. The bear stays upright, moves under your control and automatically mauls nearby adult NPCs, with faster manual claw attacks too. It then returns to the cute bear and resets the meter. Outside that burst, provoked NPCs can counterattack. On-foot health uses five hearts. If it runs out, the bear plays a collapse and defeated animation before recovering by the entrance or parked bike. Cycling health and physics stay separate. Use **F3 → On-foot brawler practice** for three nearby practice NPCs; the debug readout shows depth, jump, Apex Primal and on-foot HP.
 
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
-Friendly shoppers, a stroller walker and a dog walker follow longer routes, pausing for 3–6 seconds at each end. Routes shorten near enemy crews. Scattering birds, bakery steam and waterside ripples add quiet life behind the road. They are decorative and do not collide with the bike. Reduced-motion preferences suppress the extra animation.
+A shared adult population stays visible while cycling, dismounting and walking. Residents follow longer routes with pauses at each end. Attacking a resident makes that person aggressive and alerts nearby witnesses; distant residents remain calm. Positions, health and reactions persist when returning to the street. Suburb crews stay hostile, with the original attacks while cycling and aimed thrown items while on foot. Defeated crew members stop attacking until they recover. Scattering birds, bakery steam and waterside ripples add quiet life behind the road.
 
 Scooters, carts, barricades, cones, glass and potholes now use painted art, alongside the painted burning bins. Terrain, hazard positions and collision rules remain the V4 simulation.
 
@@ -137,9 +137,9 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v9.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision9-1/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v10.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision10/`. See VALIDATION.md for results and limits.
 
-Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V9.1 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V10 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
 
 Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.
 
@@ -147,6 +147,8 @@ The boat uses a dedicated bench-seated pose with lowered legs. Rear hull and ben
 
 A short real-time walking preview is available at `screenshots/revision8/walking-preview.mp4`.
 
-Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V9.1 screenshots are under `screenshots/revision9-1/`.
+Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V10 screenshots are under `screenshots/revision10/`.
 
-Gameplay dialogue, location, quest and combat text now use a minimal white HUD inside the scene. Touch controls sit in the lower corners instead of in a panel below the canvas. On phones, on-foot play fills the viewport; portrait follows the player within an undistorted cropped view, while landscape shows the full world frame. Dialogue fades after reading time. Fullscreen and the readable debug menu remain available.
+Dialogue and information use minimal white text inside the scene. Health keeps illustrated hearts; portraits and game symbols keep their artwork. HUD backgrounds and message boxes are transparent so they leave the scene visible. Touch controls sit in the lower corners instead of in a panel below the canvas. On phones, on-foot play fills the viewport; portrait follows the player within an undistorted cropped view, while landscape shows the full world frame. Dialogue fades after reading time. Fullscreen and the readable debug menu remain available.
+
+Screen throws have a staged flight, frontal face-and-palms screen impact, a squash/hold with brief glass cracks, and a slide away. Run `python3 tests/browser_npcs.py` for population continuity, witness reactions, gang aggression, carrier alignment, screen impacts and damage/defeat checks on desktop and both phone orientations.

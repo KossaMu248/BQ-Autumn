@@ -4,11 +4,11 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision9-1';errors=[];failures=[]
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision10';errors=[];failures=[]
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v9-1.html'
+base=f'http://127.0.0.1:{server.server_port}/autumn-v10.html'
 def luminance(rgb):
     values=[float(n)/255 for n in rgb.removeprefix('rgb(').removesuffix(')').split(',')]
     vals=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in values]
@@ -24,7 +24,7 @@ try:
             colors=p.locator(selector).first.evaluate('(e)=>{const s=getComputedStyle(e);return [s.color,s.backgroundColor]}')
             if colors[1]=='rgba(0, 0, 0, 0)':colors[1]='rgb(245, 235, 207)'
             a,c=sorted(map(luminance,colors));assert (c+.05)/(a+.05)>=4.5,(selector,colors)
-        assert 'V9.1' in p.locator('#debugPanel h2').inner_text()
+        assert 'V10' in p.locator('#debugPanel h2').inner_text()
         assert p.locator('[data-dbg-place]').count()==5
         p.screenshot(path=str(SHOTS/'debug-fullscreen.png'))
         p.keyboard.press('Escape');assert not p.locator('#debugPanel').is_visible()

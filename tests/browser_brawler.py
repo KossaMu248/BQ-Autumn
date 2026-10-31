@@ -4,11 +4,11 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision9';SHOTS.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision9-1';SHOTS.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v9.html';errors=[];failures=[]
+base=f'http://127.0.0.1:{server.server_port}/autumn-v9-1.html';errors=[];failures=[]
 def read(p):return p.evaluate('BearlyVisits.audit()')
 def ready(p):
  p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
@@ -24,6 +24,7 @@ def approach(p,target):
 try:
  with sync_playwright() as pw:
   b=pw.chromium.launch(headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1440,'height':1150});ready(p)
+  assert p.locator('.canvas-wrap > .area-panel').count()==1 and p.locator('.canvas-wrap > .area-controls').count()==1
   original=read(p)['x'];axis(p,'ArrowUp',280);assert read(p)['depth']<-15 and abs(read(p)['x']-original)<2
   axis(p,'ArrowDown',280);p.keyboard.press('Space');p.clock.run_for(180);assert read(p)['jump']>30
   p.screenshot(path=str(SHOTS/'jump-depth.png'));p.clock.run_for(750);assert read(p)['jump']==0
@@ -32,18 +33,23 @@ try:
   p.keyboard.press('j');p.clock.run_for(80);assert read(p)['combat']['stats']['mauls']==1
   p.screenshot(path=str(SHOTS/'maul.png'));p.keyboard.press('g');p.clock.run_for(100);assert read(p)['combat']['held']
   assert read(p)['baby']=='safe-seat';p.screenshot(path=str(SHOTS/'grapple.png'))
-  p.keyboard.press('g');p.clock.run_for(320);assert read(p)['combat']['phase']=='primal';p.screenshot(path=str(SHOTS/'throw-at-screen.png'))
+  p.keyboard.press('g');p.clock.run_for(320);assert read(p)['combat']['phase']=='apex';assert 'APEX PRIMAL' in p.locator('.brawl-status').inner_text();p.screenshot(path=str(SHOTS/'throw-at-screen.png'))
   target=next(n for n in read(p)['combat']['npcs'] if n['id']=='practice-b');approach(p,target)
   p.keyboard.press('j');p.clock.run_for(100);p.keyboard.press('g');p.clock.run_for(80);assert read(p)['combat']['held']
-  p.keyboard.press('g');p.clock.run_for(50);assert read(p)['combat']['phase']=='rolling' and read(p)['combat']['invulnerable']
+  p.keyboard.press('g');p.clock.run_for(50);assert read(p)['combat']['phase']=='madness' and read(p)['combat']['invulnerable']
+  assert 'MADNESS MAULING BEAR' in p.locator('.brawl-status').inner_text()
   hp=read(p)['combat']['hp'];axis(p,'ArrowUp',450);assert read(p)['combat']['hp']==hp
-  p.clock.run_for(500) # Let the foreground throw clear so the rolling silhouette is visible.
-  p.screenshot(path=str(SHOTS/'madness-bowling.png'));p.clock.run_for(8200)
+  assert abs(read(p)['x']-target['x']+65)<35, 'frenzy does not auto-roll away'
+  p.clock.run_for(500) # Let the foreground throw clear so the upright frenzy pose is visible.
+  p.screenshot(path=str(SHOTS/'madness-mauling.png'));p.clock.run_for(8200)
   assert read(p)['combat']['phase']=='cute' and not read(p)['combat']['invulnerable']
   p.clock.run_for(5300);assert read(p)['baby']=='front-carrier';p.screenshot(path=str(SHOTS/'cute-again.png'))
   p.close()
   for w,h in [(390,844),(844,390)]:
    ctx=b.new_context(viewport={'width':w,'height':h},is_mobile=True,has_touch=True);p=ctx.new_page();ready(p)
+   assert p.locator('.canvas-wrap').bounding_box()['height']>=h-2, 'HUD must not shrink phone scene'
+   for selector in ['.area-jump','.area-grab','.area-maul','[data-depth="1"]','.area-exit']:
+    box=p.locator(selector).bounding_box();assert 0<=box['y'] and box['y']+box['height']<=h and box['x']+box['width']<=w,(selector,box)
    p.locator('.area-jump').tap();p.clock.run_for(150);assert read(p)['jump']>20;p.clock.run_for(700)
    button=p.locator('[data-depth="1"]').bounding_box();cdp=ctx.new_cdp_session(p)
    cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':button['x']+button['width']/2,'y':button['y']+button['height']/2}]});p.clock.run_for(300);cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});p.clock.run_for(200)
@@ -55,5 +61,5 @@ try:
   b.close()
  assert not errors,errors
  assert not failures,failures
- print('Browser brawler checks passed: depth, jump/landing, maul/grab/screen throw, protected baby seat, primal, temporary rolling immunity, cute recovery, and phone touch controls.')
+ print('Browser brawler checks passed: depth, jump/landing, maul/grab/screen throw, protected baby seat, primal, temporary mauling immunity, cute recovery, and phone touch controls.')
 finally:server.shutdown()

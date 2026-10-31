@@ -1,5 +1,12 @@
 # Autumn Ride — standalone updates
 
+## Revision 9.1 — corrected states and an in-game HUD
+
+- Corrected the names to **Apex Primal** and **Madness Mauling Bear**. Replaced the rolling ball with an upright, player-controlled mauling frenzy, faster claws and automatic nearby mauls. Its eight-second invulnerability and return to cute remain.
+- Moved location, dialogue, quests, HP, state meter and touch actions inside the scene. Minimal white Arial text, thin meters and light corner controls replace the large panel under the game.
+- On-foot phone play fills the viewport. Portrait follows the player through an undistorted cropped view; landscape keeps the full scene visible. Dialogue fades after reading time, and cycling dismount/entry prompts remain inside the frame.
+- Preserved fullscreen, readable debug controls, quests, boat seating and the original cycling simulation. Added autumn-v9-1.html with refreshed cache keys.
+
 ## Revision 9 — ground-depth movement and Primal brawling
 
 - Separated the walking hips, knees and boots, narrowed the leg silhouettes and lengthened the alternating stride to reduce crowded legs. Both movement axes advance the gait, and jump shadows remain on the ground.

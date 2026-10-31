@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V9';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V9_1';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5963,7 +5963,7 @@ AREA        ${area?.mode||'cycling'}${area?.place?' · '+area.place:''}
 TRANSITION  ${area?.transition||'none'}${area?.phase!=null?' '+Math.round(area.phase*100)+'%':''}
 LOCAL X   ${area?.mode?Math.round(area.x):'—'}
 DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
-PRIMAL      ${area?.combat?.phase||'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
+APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.combat?.phase==='apex'?'Apex Primal':'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
 GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}
 SCREEN      ${window.BearlyFullscreen?.state()||'window'}
@@ -6005,7 +6005,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,road:{groundAt,finish:FINISH},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

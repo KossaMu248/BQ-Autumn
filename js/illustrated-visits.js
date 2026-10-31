@@ -1,11 +1,11 @@
 /* Playable side areas: compact rooms, walking docks/gardens and a boat level. */
 (() => {
   'use strict';
-  const host=document.querySelector('.canvas-wrap'),shell=document.querySelector('.game-shell');
+  const host=document.querySelector('.canvas-wrap');
   const quests=window.BearlyQuests.game,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const rideTools=document.createElement('div');rideTools.className='ride-utilities';rideTools.hidden=true;
   rideTools.innerHTML='<button type="button" class="dismount-button">DISMOUNT · Q</button>';
-  shell.insertBefore(rideTools,document.querySelector('.touch-controls'));
+  host.append(rideTools);
   const dismountButton=rideTools.querySelector('button');
   const prompt=document.createElement('button');prompt.className='visit-prompt';prompt.type='button';prompt.hidden=true;host.append(prompt);
   const panel=document.createElement('section');panel.className='area-panel';panel.hidden=true;
@@ -13,10 +13,10 @@
   panel.innerHTML='<div class="area-heading"><strong class="area-name"></strong><button type="button" class="area-fullscreen" aria-label="Fullscreen">⛶</button><button type="button" class="area-settings" aria-label="Settings">⚙</button><button type="button" class="area-exit">BACK TO BIKE ↗</button></div><p class="area-message" aria-live="polite"></p><p class="area-quest"></p>';
   const controls=document.createElement('div');controls.className='area-controls';controls.hidden=true;
   controls.innerHTML='<div class="area-dpad"><button type="button" data-depth="-1" aria-label="Move up the ground plane">↑</button><button type="button" data-direction="-1" aria-label="Move left">←</button><button type="button" data-depth="1" aria-label="Move down the ground plane">↓</button><button type="button" data-direction="1" aria-label="Move right">→</button></div><div class="area-moves"><button type="button" class="area-jump">JUMP · SPACE</button><button type="button" class="area-grab">GRAB · G</button><button type="button" class="area-maul">MAUL · J</button><button type="button" class="area-action">TALK · E</button></div>';
-  const status=document.createElement('div');status.className='brawl-status';status.innerHTML='<span class="brawl-hp">HP 100</span><div class="primal-track" role="progressbar" aria-label="Primal meter" aria-valuemin="0" aria-valuemax="100"><i></i></div><strong>CUTE</strong>';
+  const status=document.createElement('div');status.className='brawl-status';status.innerHTML='<span class="brawl-hp">HP 100</span><div class="primal-track" role="progressbar" aria-label="Apex Primal meter" aria-valuemin="0" aria-valuemax="100"><i></i></div><strong>CUTE</strong>';
   panel.append(status);
 
-  shell.append(panel,controls);
+  host.append(panel,controls);
   const nameEl=panel.querySelector('.area-name'),messageEl=panel.querySelector('.area-message'),questEl=panel.querySelector('.area-quest'),actionButton=controls.querySelector('.area-action');
   const journal=document.createElement('div');journal.className='adventure-journal';journal.hidden=true;host.append(journal);
   const art={};
@@ -27,7 +27,9 @@
   let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
   const combat=window.BearlyBrawler.create();let combatState=combat.snapshot();
   let depth=0,depthVelocity=0,jumpZ=0,jumpVelocity=0,streetReturnDepth=0,externalShadow=false,viewOffset=0,practiceQueue=false;
-  let transition=null,pendingEntry=false;
+  let transition=null,pendingEntry=false,messageRemaining=0;
+  let viewport={width:1160,height:640};
+  new ResizeObserver(([entry])=>{viewport={width:entry.contentRect.width,height:entry.contentRect.height};}).observe(host);
   const land=()=>!!mode&&mode!=='water';
   const player=()=>({x,depth,z:jumpZ,face,godMode:!!context?.godMode});
   const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,7 +40,13 @@
   const lawn=document.createElement('canvas');lawn.width=lawn.height=128;const lg=lawn.getContext('2d');lg.fillStyle='#66754b';lg.fillRect(0,0,128,128);
   for(let i=0;i<1500;i++){const h=n=>{const v=Math.sin(n*127.1)*43758.5453;return v-Math.floor(v);};lg.fillStyle=['#b6ac5c40','#364c392a','#d5b87033'][i%3];lg.fillRect(h(i)*128,h(i+501)*128,1+h(i+135)*2,1);}
 
-  function setMessage(text){if(text!==lastMessage){messageEl.textContent=text;lastMessage=text;}}
+  function setMessage(text){if(text!==lastMessage){messageEl.textContent=text;lastMessage=text;}messageRemaining=Math.max(5,Math.min(14,text.length/24));messageEl.hidden=false;}
+  function syncViewport(){
+    const visible=viewport.width/Math.max(viewport.width/1160,viewport.height/640),span=1160-visible;
+    const road=mode==='street'||!mode||transition?.kind?.startsWith('door');
+    const screenX=road?1160*.32+1.35*((mode==='street'?x:context.x)-(context.road.cameraX||0)-1160*.32):mode==='room'?x:x-viewOffset;
+    host.style.setProperty('--portrait-pan',`${span>1?clamp((screenX-visible*.42)/span,0,1)*100:50}%`);
+  }
   function clear(){held.clear();contacts.clear();for(const b of controls.querySelectorAll('[data-direction],[data-depth]'))b.classList.remove('held');}
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
   function choose(next,start){
@@ -66,7 +74,7 @@
   }
   function maul(){
     if(!land()||paused||transition||!window.BearlyBrawlArt.ready())return;
-    if(combat.maul(player())){combatState=combat.snapshot();setMessage(combatState.phase==='rolling'?'MADNESS BOWLING · Eight seconds of invulnerability. Steer through the crowd!':combatState.phase==='primal'?'PRIMAL · The cute bear is losing its composure…':'CLAWS OUT · Successful attacks build Primal.');}
+    if(combat.maul(player())){combatState=combat.snapshot();setMessage(combatState.phase==='madness'?'MADNESS MAULING BEAR · Eight seconds of invulnerability.':combatState.phase==='apex'?'APEX PRIMAL · The cute bear is losing its composure…':'CLAWS OUT · Successful attacks build Apex Primal.');}
   }
   function enter(){
     if(mode==='street'){enterFromStreet();return;}
@@ -181,15 +189,16 @@
     controls.querySelector('.area-grab').textContent=combatState.held?'THROW · G':'GRAB · G';
     for(const cls of ['.area-grab','.area-maul','.area-jump'])controls.querySelector(cls).disabled=mode==='water'||paused;
     status.querySelector('.brawl-hp').textContent='HP '+combatState.hp;
-    const meter=status.querySelector('.primal-track'),value=combatState.phase==='rolling'?combatState.frenzy/8*100:combatState.heat;
+    const meter=status.querySelector('.primal-track'),value=combatState.phase==='madness'?combatState.frenzy/8*100:combatState.heat;
     meter.setAttribute('aria-valuenow',String(Math.round(value)));meter.querySelector('i').style.width=value+'%';
-    status.dataset.phase=combatState.phase;status.querySelector('strong').textContent=combatState.phase==='rolling'?`MADNESS · ${combatState.frenzy.toFixed(1)}s · INVULNERABLE`:combatState.phase==='primal'?'PRIMAL':combatState.baby?'BABY IN SAFE SEAT · COOLING DOWN':'CUTE';
+    status.dataset.phase=combatState.phase;status.querySelector('strong').textContent=combatState.phase==='madness'?`MADNESS MAULING BEAR · ${combatState.frenzy.toFixed(1)}s`:combatState.phase==='apex'?'APEX PRIMAL':combatState.baby?'BABY IN SAFE SEAT · COOLING DOWN':'CUTE';
     status.hidden=mode==='water';
-    questEl.textContent=place.role==='park'?`GARDENER’S FAVOUR · Seeds ${q.seeds.length}/3${q.garden?' · Returned ✓':''}`:q.voyage?'LAKE TRAIL COMPLETE · The boat is yours to borrow.':q.started?`BOATKEEPER’S FAVOUR · Lunch ${q.delivered?'delivered ✓':q.lunch?'in satchel':'needed'} · Dinghy ${q.repaired?'patched ✓':q.kit?'kit in satchel':'needs patch kit'} · Buoys ${q.buoys.length}/3`: 'Arrows / WASD move · Space jump · E interact · G grab/throw · J maul';
+    questEl.textContent=place.role==='park'?`Seeds ${q.seeds.length}/3${q.garden?' · Returned ✓':''}`:q.voyage?'Lake trail complete':q.started?`Lunch ${q.delivered?'delivered ✓':q.lunch?'packed':'needed'} · Dinghy ${q.repaired?'patched ✓':q.kit?'kit packed':'needs patch'} · Buoys ${q.buoys.length}/3`:'';
     if(initial)setMessage(mode==='dock'?'Walk along the dock to meet the boatkeeper. The dinghy is moored at the far end.':mode==='garden'?'A path beyond the building. Walk further to explore; talk to the gardener along the way.':'You leave the bicycle outside. Walk over to the counter to talk. The baby rides safely in a front carrier.');
   }
   function update(s){
     context=s;
+    if(mode||transition)syncViewport();
     rideTools.hidden=!!mode||!!transition||!s.playing;
     if(s.debugOpen){clear();return;}
     if(transition){if(!paused)stepTransition(Math.min(.05,Math.max(0,s.dt||0)));refresh(false);return;}
@@ -200,6 +209,7 @@
       if(pendingStepOff&&s.playing&&ready&&s.brakeToStop?.()){startStreet();return;}
       if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
     const dt=Math.min(.05,Math.max(0,s.dt||0));if(paused)return;
+    messageRemaining=Math.max(0,messageRemaining-dt);messageEl.hidden=messageRemaining===0;
     if(held.has('maul'))maul();
     const moveDt=combatState.hitStop>0?0:dt;
     clock+=dt;fade=Math.max(0,fade-dt);
@@ -215,8 +225,8 @@
       velocity+=(dir*260-velocity)*Math.min(1,dt*3);x=clamp(x+velocity*dt,110,4550);stride+=Math.abs(velocity)*dt;
       buoys.forEach((bx,i)=>{if(Math.abs(x-bx)<85&&!quests.snapshot().buoys.includes(i)){quests.act('buoy',i);setMessage(`BUOY ${i+1} CHECKED · ${quests.snapshot().buoys.length===3?'All three! Return left to the dock.':'Keep exploring the lake.'}`);}});
     }else {
-      const rolling=combatState.phase==='rolling',speed=rolling?410:combatState.phase==='primal'?235:200;
-      const horizontal=rolling?(dir||face):dir,diagonal=horizontal&&vertical?Math.SQRT1_2:1;
+      const speed=combatState.phase==='madness'?300:combatState.phase==='apex'?235:200;
+      const horizontal=dir,diagonal=horizontal&&vertical?Math.SQRT1_2:1;
       const target=fade>0?0:horizontal*speed*diagonal,rate=horizontal?1200:1600;
       velocity+=clamp(target-velocity,-rate*dt,rate*dt);
       const next=x+velocity*moveDt;
@@ -273,7 +283,7 @@
   document.getElementById('mobilePauseBtn').addEventListener('click',e=>{if(mode||transition){e.stopImmediatePropagation();paused=!paused;clear();refresh(false);}},true);
   function image(c,im,dx,dy,dw,dh){if(im?.naturalWidth)c.drawImage(im,dx,dy,dw,dh);}
   function rect(c,x,y,w,h,color){c.fillStyle=color;c.fillRect(x,y,w,h);}
-  function text(c,str,x,y,size=18,color='#f5e4ba'){c.fillStyle=color;c.font=`bold ${size}px Trebuchet MS`;c.fillText(str,x,y);}
+  function text(c,str,x,y,size=18,color='#fff'){c.save();c.fillStyle=color;c.font=`500 ${size}px Arial, sans-serif`;c.shadowColor='#0009';c.shadowBlur=3;c.shadowOffsetY=1;c.fillText(str,x,y);c.restore();}
   function rounded(c,x,y,w,h,color,r=6){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();}
   let legTextures=null;
   function prepareLegs(){
@@ -345,7 +355,7 @@
         const gy=ground(x,depth);if(gy==null)continue;
         c.save();c.fillStyle='#163b3045';c.beginPath();c.ellipse(x,gy,height*.18*(1-jumpZ/300),height*.032,0,0,Math.PI*2);c.fill();c.restore();
         externalShadow=true;
-        if(!window.BearlyBrawlArt.player(c,x,gy-jumpZ,height,face,combatState))actor(c,x,gy-jumpZ,height);
+        if(!window.BearlyBrawlArt.player(c,x,gy-jumpZ,combatState.phase==='madness'?height*1.08:height,face,combatState))actor(c,x,gy-jumpZ,combatState.phase==='madness'?height*1.08:height);
         externalShadow=false;
       }
     }
@@ -363,8 +373,8 @@
       return {x:(nx-(mode==='room'?0:viewOffset))*W/1160,y:(floor+nd)*H/640,height:195*H/640};
     };
     window.BearlyBrawlArt.overlay(c,combatState,W,H,project,reduced());
-    if(combatState.phase==='rolling'){
-      c.save();c.strokeStyle='#e6ab4a90';c.lineWidth=6;c.strokeRect(4,4,W-8,H-8);c.restore();
+    if(combatState.phase==='madness'){
+      c.save();c.strokeStyle='#ffffff60';c.lineWidth=6;c.strokeRect(4,4,W-8,H-8);c.restore();
     }
   }
   function drawRoom(c){
@@ -388,7 +398,6 @@
     // Walkable foreground floor: actors stand in front of the room furnishings.
     const shade=c.createLinearGradient(0,465,0,640);shade.addColorStop(0,'#7e654400');shade.addColorStop(1,'#3b372c95');rect(c,0,465,1160,175,shade);
     hotspot(c,115,floor);hotspot(c,790,floor);landActors(c,(xx,dd)=>floor+dd,225);
-    text(c,'EXIT',82,595,17);text(c,place.role==='pizza'?'COOK':place.role==='workshop'?'MECHANIC':place.role==='library'?'LIBRARIAN':'NEIGHBOUR',760,595,17);
   }
   // All points use the painted boat's source coordinates. The front gunwale
   // covers feet, while the rear rim and the midship bench remain behind the passenger.
@@ -438,7 +447,7 @@
         c.save();c.globalAlpha*=sit;actor(c,x,hipY,height,true);c.restore();
         hull(c,2075,579,true);
         x=oldX;velocity=oldV;stride=oldStride;
-      }else landActors(c,(xx,dd)=>floor+dd,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
+      }else landActors(c,(xx,dd)=>floor+dd,215);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
     }else{
       rect(c,0,400,2500,240,c.createPattern(lawn,'repeat'));rect(c,0,500,2500,88,'#b3a17d');
       for(let i=0;i<60;i++){rect(c,i*45,515,35,2,'#d2c09a80');}
@@ -446,7 +455,7 @@
       for(let i=0;i<4;i++){window.BearlyStreetProps.draw(c,'bench',950+i*430,505,100,clock);if(art.verge.naturalWidth)c.drawImage(art.verge,12,38,2152,651,1100+i*430,455,150,45);}
       hotspot(c,590,floor);hotspot(c,115,floor);
       if(place.role==='park')seeds.forEach((sx,i)=>{if(!quests.snapshot().seeds.includes(i)){rounded(c,sx-12,502,24,31,'#efd391');text(c,'✿',sx-7,524,17,'#577747');hotspot(c,sx,floor);}});
-      landActors(c,(xx,dd)=>floor+dd,215);text(c,'GARDEN ENTRANCE',50,595,18);
+      landActors(c,(xx,dd)=>floor+dd,215);
     }
     c.restore();
   }

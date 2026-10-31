@@ -119,3 +119,12 @@ Revision 9 checks (2026-10-31):
 - V9 screenshots show jumping, mauling, grappling, foreground throws, bowling, the cute recovery, quests, boat placement, settings and both phone layouts. No uncaught browser errors or failed HTTP responses occurred in these runs.
 - Original cycling update and terrain definitions compare unchanged with deployed V8. The brawler model and on-foot health remain separate from cycling; adult NPCs recover and the boat has no combat controls.
 - Tests use headless Chromium and phone touch emulation. Physical iPhone/Safari performance and animation feel still need device playtesting. New combat effects are comic scratches, flecks and knockdowns rather than detailed injuries.
+
+
+Revision 9.1 checks (2026-10-31):
+
+- Both Node suites and all JavaScript syntax checks pass. Brawler checks now cover Apex Primal, the eight-second Madness Mauling Bear, automatic mauls, immunity expiry, NPC recovery and the return to cute.
+- Browser brawler checks verify the corrected labels, player-controlled upright frenzy, keyboard/touch combat, and that all phone controls remain inside the viewport while the scene uses its full height. Screenshots in screenshots/revision9-1/ show desktop and both phone orientations.
+- Full adventure, movement/boat and fullscreen/debug regression scripts target V9.1. The fullscreen transition test pauses its virtual clock before timed assertions, keeping screenshot time from advancing a transfer.
+- The HUD and controls are absolute overlays inside the canvas wrapper and consume no layout height. Portrait artwork keeps its aspect ratio and follows the character; dialogue is white, remains accessible in the DOM and fades after reading time. Debug contrast retains its existing palette.
+- Cycling update and terrain definitions compare unchanged with deployed V9. Physical iPhone/Safari playtesting remains outside these Chromium touch-emulation checks.

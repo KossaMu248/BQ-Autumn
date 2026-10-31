@@ -13,17 +13,13 @@
     c.drawImage(images.bear,sx,sy,sw,sh,(sx-fx)*sc,(sy-fy)*sc,sw*sc,sh*sc);c.restore();
   }
   function torso(c,height,bob,state){
-    const i=state.phase==='primal'?3:0,[sx,sy,sw,sh,fx,fy]=poses[i],h=fy-110-sy,sc=height/480;
+    const i=['apex','madness'].includes(state.phase)?3:0,[sx,sy,sw,sh,fx,fy]=poses[i],h=fy-110-sy,sc=height/480;
     c.drawImage(images.bear,sx,sy,sw,h,(sx-fx)*sc,(sy-fy)*sc+bob,sw*sc,h*sc);
   }
   function player(c,x,y,h,face,state){
     if(!images.bear.naturalWidth)return false;
-    if(state.phase==='rolling'){
-      const f=state.frenzy>7.7?4:5,[sx,sy,sw,sh]=poses[f],size=h*.88;
-      c.save();c.translate(x,y-size*.48);c.rotate(state.time*11*face);c.drawImage(images.bear,sx,sy,sw,sh,-size/2,-size/2,size,size);c.restore();return true;
-    }
     if(!state.attack&&!state.held)return false;
-    c.save();c.translate(x,y);if(face<0)c.scale(-1,1);bearCel(c,state.attack?2:1,h);c.restore();return true;
+    c.save();c.translate(x,y);if(face<0)c.scale(-1,1);if(state.phase==='madness')c.rotate(Math.sin(state.time*28)*.045);bearCel(c,state.attack?2:1,h);c.restore();return true;
   }
   function adult(c,n,x,y,h=130,scale=1){
     if(!images.adults.naturalWidth)return;

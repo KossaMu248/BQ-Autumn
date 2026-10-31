@@ -4,11 +4,11 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision9-1';SHOTS.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision10';SHOTS.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v9-1.html';errors=[];failures=[]
+base=f'http://127.0.0.1:{server.server_port}/autumn-v10.html';errors=[];failures=[]
 def read(p):return p.evaluate('BearlyVisits.audit()')
 def ready(p):
  p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
@@ -32,7 +32,7 @@ try:
   target=read(p)['combat']['npcs'][0];approach(p,target)
   p.keyboard.press('j');p.clock.run_for(80);assert read(p)['combat']['stats']['mauls']==1
   p.screenshot(path=str(SHOTS/'maul.png'));p.keyboard.press('g');p.clock.run_for(100);assert read(p)['combat']['held']
-  assert read(p)['baby']=='safe-seat';p.screenshot(path=str(SHOTS/'grapple.png'))
+  assert read(p)['baby']=='back-carrier';p.screenshot(path=str(SHOTS/'grapple.png'))
   p.keyboard.press('g');p.clock.run_for(320);assert read(p)['combat']['phase']=='apex';assert 'APEX PRIMAL' in p.locator('.brawl-status').inner_text();p.screenshot(path=str(SHOTS/'throw-at-screen.png'))
   target=next(n for n in read(p)['combat']['npcs'] if n['id']=='practice-b');approach(p,target)
   p.keyboard.press('j');p.clock.run_for(100);p.keyboard.press('g');p.clock.run_for(80);assert read(p)['combat']['held']
@@ -61,5 +61,5 @@ try:
   b.close()
  assert not errors,errors
  assert not failures,failures
- print('Browser brawler checks passed: depth, jump/landing, maul/grab/screen throw, protected baby seat, primal, temporary mauling immunity, cute recovery, and phone touch controls.')
+ print('Browser brawler checks passed: depth, jump/landing, maul/grab/screen throw, attached back carrier, primal, temporary mauling immunity, cute recovery, and phone touch controls.')
 finally:server.shutdown()

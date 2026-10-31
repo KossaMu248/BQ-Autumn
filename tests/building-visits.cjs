@@ -32,7 +32,7 @@ const copy=q.snapshot();copy.buoys.length=0;assert.equal(q.snapshot().buoys.leng
 const blocked=window.BearlyQuests.create({getItem(){throw Error('storage denied')},setItem(){throw Error('storage denied')}});assert.equal(blocked.act('lunch').lunch,true);
 console.log('Placement and quest checks passed: access, terrain, walking, inventory requirements, boat unlock, buoy/seed objectives, persistence and unavailable storage.');
 
-const gait=window.BearlyLocomotion,cycle=225*.28/.62;
+const gait=window.BearlyLocomotion,cycle=225*.20/.62;
 const a=gait.pose(0),b=gait.pose(cycle*.5);
 assert.ok(a.near.x>a.far.x&&b.far.x>b.near.x,'leading legs alternate');
 assert.equal(gait.pose(cycle*.25).near.y,0);assert.ok(gait.pose(cycle*.25).far.y<0,'far leg swings while near leg plants');

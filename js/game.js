@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V9_1';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V10';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -776,7 +776,8 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       // Scale enemy warning range with actual bike movement, leaving time to dodge.
       const canAttack=d>-260&&d<Math.max(500,Math.min(940,Math.max(0,bike.vx)*1.25+150));
       for(let i=0;i<crew.count;i++){
-        const m=c.members[i];
+        const m=c.members[i],resident=window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+i);
+        if(resident&&['held','screen','stagger','down','fall','dead','rise'].includes(resident.state)){m.phase='idle';m.nextReadyAt=time+.7;continue;}
         if(m.phase==='idle'&&canAttack&&time>=m.nextReadyAt){
           m.phase='warn';m.since=time;
           m.patrolOrigin=patrolMotion(crew,i).x;
@@ -3034,6 +3035,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     ctx.restore();
   }
   function drawGangCrews(){
+    if(window.BearlyVisits?.footActive())return;
     const casts={
       hoodie:['hoodie_night','hoodie_olive','filmmaker_ink'],
       video:['filmmaker_charcoal','hoodie_night','fireworks_dark'],
@@ -3056,6 +3058,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       const roster=casts[crew.kind]||casts.hoodie;
       const count=crew.count;
       for(let i=0;i<count;i++){
+        const resident=window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+i);if(resident&&['held','screen','stagger','down','fall','dead','rise'].includes(resident.state))continue;
         const prop=carriedPropFor(crew,i);
         const px=crewMemberLocalX(crew,i);
         const acted=memberPosePhase(crew,c,i);
@@ -4129,7 +4132,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function illustratedState(){
     return {W,H,cameraX,cameraY,time,groundAt,segments,finish:FINISH,
-      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,bikeGroundY:bike.y+riderY(WHEEL_Y)*Math.cos(bike.a)+TIRE_R,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),footActive:window.BearlyVisits?.footActive(),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
+      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,bikeGroundY:bike.y+riderY(WHEEL_Y)*Math.cos(bike.a)+TIRE_R,playing:state==='playing',lifeTime:window.BearlyVisits?.lifeTime(),crewXs:gangCrews.map(c=>c.x),footActive:window.BearlyVisits?.footActive(),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
   }
   function groundDraw(){
     const scene=illustratedState();
@@ -6005,7 +6008,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,gangs:gangCrews.flatMap(crew=>Array.from({length:crew.count},(_,i)=>({id:'gang-'+crew.x+'-'+i,x:crew.x+crewMemberLocalX(crew,i),depth:-102,variant:i%3,kind:'gangster',hostile:true,item:carriedPropFor(crew,i)}))),hurtRider:(amount)=>injure(amount,'provoked resident'),road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

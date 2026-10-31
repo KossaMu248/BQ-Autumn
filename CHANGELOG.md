@@ -1,5 +1,16 @@
 # Autumn Ride — standalone updates
 
+## Revision 10 — persistent NPCs and character animation
+
+- Restored on-foot heart health and retained the cycling heart/portrait artwork. Dialogue/info remains white; HUD panels, message backgrounds, the full-screen frenzy frame and opaque result boxes no longer hide the scene.
+- Matched the walking torso, hip anchors, thigh/calf widths, boots and stride to one bear model, keeping both legs articulated at a consistent scale.
+- Kept the original baby likeness attached to the bear, using a front carrier normally and authored back anchors for mauling, grappling, throws and defeat poses. Removed the ground seat.
+- Added a shared street population visible on the bike, during transfers and on foot. Residents retain positions, health and aggression across visits; nearby witnesses react to attacks. Long patrols have endpoint pauses.
+- Kept suburb crews hostile, including aimed on-foot projectiles. Original cycling encounters remain in charge while mounted; defeated members stop throwing until recovery.
+- Added painted resident and gang hit/defeat/face-impact art and bear recoil/collapse/KO cels. NPC health drives stagger, fall, dead and recovery states; bear defeat animates before the return to the parked bike/entrance.
+- Reworked screen throws into flight, frontal face/palms impact, squash and hold, short cracks and a slide off the screen, including portrait framing.
+- Added autumn-v10.html, refreshed entry URLs and expanded model/browser regressions. Original BQ remains untouched.
+
 ## Revision 9.1 — corrected states and an in-game HUD
 
 - Corrected the names to **Apex Primal** and **Madness Mauling Bear**. Replaced the rolling ball with an upright, player-controlled mauling frenzy, faster claws and automatic nearby mauls. Its eight-second invulnerability and return to cute remain.

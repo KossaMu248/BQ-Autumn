@@ -128,3 +128,13 @@ Revision 9.1 checks (2026-10-31):
 - Full adventure, movement/boat and fullscreen/debug regression scripts target V9.1. The fullscreen transition test pauses its virtual clock before timed assertions, keeping screenshot time from advancing a transfer.
 - The HUD and controls are absolute overlays inside the canvas wrapper and consume no layout height. Portrait artwork keeps its aspect ratio and follows the character; dialogue is white, remains accessible in the DOM and fades after reading time. Debug contrast retains its existing palette.
 - Cycling update and terrain definitions compare unchanged with deployed V9. Physical iPhone/Safari playtesting remains outside these Chromium touch-emulation checks.
+
+
+Revision 10 checks (2026-10-31):
+
+- Model checks cover persistent arena residents, nearby witness aggression with calm distant NPCs, hostile projectile attacks without provocation, original cycling attack ownership, staged screen impacts, NPC damage/fall/dead/recovery, bear KO duration, attached back carrier, and the timed Apex/Madness loop.
+- Browser NPC checks use actual controls and unprovoked gang projectiles to exercise bike-to-foot population continuity, back-carrier mauling, face-first screen impacts, resident defeats, bear damage/collapse/KO/respawn, five-heart health, transparent HUD and 390×844 / 844×390 layouts.
+- The existing adventure, continuous movement/boat and fullscreen/debug regression scripts target V10. Placement/quest/gait checks and all JavaScript syntax checks pass. The shortened gait still alternates planted and swinging legs and keeps fixed stance-foot world positions.
+- Three generated transparent sheets have authored crops for resident reactions, gang face/KO reactions and bear damage/defeat. Screenshot review includes both walking phases, carrier alignment, foreground face impact and damage/defeat frames under screenshots/revision10/.
+- Terrain and the cycling update remain unchanged from V9.1. The cycling encounter has a targeted guard for members defeated on foot; active crews retain their original timing, projectile damage and collision behavior. NPCs recover after temporary defeat, retaining access to quests.
+- Checks use headless Chromium and touch emulation. Physical iPhone/Safari performance and subjective animation feel still need device playtesting.

@@ -1,5 +1,16 @@
 # Autumn Ride — standalone updates
 
+## Revision 7 — playable side areas
+
+- Replaced picture dialogs with controllable canvas scenes: compact shop rooms, a scrolling boathouse dock, gardens, and a separate lake trail.
+- Added an eight-pose front-carrier bear/baby sprite sheet: idle, walking, carrier-rest, talking and seated poses. Authored crops and foot anchors keep the talk gesture separate from the seated frame. The cycling rig and its original assets remain unchanged.
+- Added painted workshop and walkable pizza-shop room backgrounds and a painted wooden dinghy.
+- Added keyboard/touch walking, proximity-based interaction, pause/resume, and safe exits back to the parked bicycle. Side areas have their own simulation while the cycling world is frozen.
+- Added a boatkeeper quest: collect/deliver lunch, borrow/use a patch kit, unlock the dinghy, check three lake buoys and return. The library offers an optional chart.
+- Added a greenhouse seed-packet quest and a separate local adventure save, plus a compact quest reminder during cycling.
+- Existing entry URLs load V7; autumn-v7.html is the new versioned entry.
+- First playable pass: horizontal room movement and a calm boat trail, with scene fades rather than full dismount/boarding cutscenes. No combat, swimming or new cycling physics.
+
 ## Revision 6
 
 - Corrected tree-root, planting and bakery anchors to exclude transparent sprite padding. Rear terrain coverage supports scenery, and terrain fill extends below the transformed viewport throughout the descent.

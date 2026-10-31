@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V6';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V7';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5892,6 +5892,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     }else drawBike();
   }
   function render(){
+    if(window.BearlyVisits?.render(ctx,W,H))return;
     ctx.clearRect(0,0,W,H);window.BearlyWorld.sky(ctx,illustratedState());
     ctx.save();ctx.translate(W*.32,H*.22);ctx.scale(1.35,1.35);ctx.translate(-W*.32,-H*.22);ctx.translate(-cameraX+(cameraShake?(Math.random()-.5)*cameraShake:0),-cameraY+(cameraShake?(Math.random()-.5)*cameraShake*.6:0));
     groundDraw();if($('introOverlay').hidden)drawGroundedBikeShadow();if(debugSettings.particles){drawPukeSplashes();drawEffects();drawBabyPee();}autumnBikePresentation();if(debugSettings.particles)drawPukeFlow();drawVictoryCelebration();drawThrownItems();if(debugSettings.particles){drawImpactCues();drawProjectileImpactFX();}
@@ -5978,7 +5979,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

@@ -135,11 +135,29 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 .visit-prompt{position:absolute;z-index:12;bottom:18px;left:50%;transform:translateX(-50%);max-width:90%;padding:12px 20px;border:2px solid #e8d29b;border-radius:8px;background:#294e3e;color:#fff0ca;font:800 13px system-ui;box-shadow:0 4px 16px #172d3560;cursor:pointer}
 .visit-prompt:disabled{background:#514d40;color:#f4e3c0;cursor:default}
 .visit-prompt[hidden]{display:none}
-.visit-room{width:min(700px,90vw);max-height:90dvh;overflow:auto;padding:24px;border:2px solid #b6a57e;border-radius:14px;background:#f3e8ce;color:#294536;text-align:center;box-shadow:0 20px 80px #14251d70}
-.visit-room::backdrop{background:#152c24c9}
-.visit-room h2{margin:8px 0;font:900 clamp(20px,4vw,32px) Georgia,serif}
 .visit-description{max-width:480px;margin:12px auto;line-height:1.5}
 .visit-art{overflow:hidden;border-radius:8px;border:1px solid #b5a785}.visit-art svg,.visit-art img{display:block;width:100%;height:auto}
-.visit-note{font-size:13px}.visit-room button{padding:13px 20px;border:0;border-radius:6px;background:#294e3e;color:#fff0ca;font-weight:800;cursor:pointer}.visit-room small{display:block;margin-top:10px}
-.visit-room button:focus-visible,.visit-prompt:focus-visible{outline:3px solid #cb883e;outline-offset:4px}
-@media(max-height:500px){.visit-room{padding:14px}.visit-art{max-height:30vh}.visit-art svg,.visit-art img{height:30vh;object-fit:cover}.visit-description{margin:7px auto}.visit-note{margin:7px}}
+
+/* Real side areas use the game canvas and their own walking/boating controls. */
+.area-panel{padding:12px 18px;background:#263d30;border-top:2px solid #718160;color:#f6e8c5}
+.area-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;letter-spacing:.5px}
+.area-exit,.area-controls button{border:1px solid #899571;background:#3d573d;color:#fff0c9;border-radius:5px;padding:10px 13px;font-weight:800;cursor:pointer;touch-action:none}
+.area-message{margin:9px 0 7px;line-height:1.4;font-size:14px;min-height:2.8em}
+.area-quest{margin:0;color:#e7cd85;font-size:12px;line-height:1.4}
+.area-controls{display:flex;gap:9px;padding:10px 18px;background:#1d3027}
+.area-controls button{min-height:48px;min-width:74px;user-select:none;-webkit-user-select:none}
+.area-controls button small{display:block;font-size:9px;margin-top:3px}
+.area-controls .area-action{flex:1;background:#98703d;font-size:13px}
+.area-controls button.held{background:#78874b}.area-controls button:disabled{opacity:.6;cursor:default}
+.area-panel[hidden],.area-controls[hidden]{display:none}
+.autumn-exploring .game-hud,.autumn-exploring .dialogue,.autumn-exploring .toast,.autumn-exploring .stunt-hud,.autumn-exploring .touch-controls,.autumn-exploring .portrait-hint{display:none!important}
+.autumn-exploring .top-actions button:not(#soundBtn){pointer-events:none;opacity:.4}
+@media(max-width:600px){.area-panel{padding:10px}.area-heading{font-size:11px}.area-exit{font-size:10px;padding:9px}.area-message{font-size:13px}.area-quest{font-size:11px}.area-controls{padding:8px;gap:6px}.area-controls button{min-width:54px}.area-controls .area-action{font-size:11px}}
+@media(max-height:500px) and (orientation:landscape){.autumn-exploring .masthead,.autumn-exploring .bottom-bar{display:none!important}.autumn-exploring .canvas-wrap{height:calc(100dvh - 169px)!important;aspect-ratio:auto!important}.area-panel{padding:6px 12px}.area-message{font-size:12px;min-height:0;margin:5px 0}.area-quest{font-size:10px}.area-controls{padding:5px 12px}.area-controls button{min-height:38px;padding:5px 12px}.area-heading{font-size:12px}.area-exit{padding:5px 10px;font-size:10px}}
+.adventure-journal{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;z-index:4;max-width:90%;padding:8px 12px;background:#203e31ed;border:1px solid #aab486;border-radius:5px;font-size:11px;color:#f7e5b7;text-align:center;pointer-events:none}
+.adventure-journal[hidden]{display:none}.autumn-exploring .adventure-journal{display:none}
+@media(max-width:600px){.adventure-journal{font-size:9px;padding:5px 7px;bottom:9px}}
+.autumn-exploring #game{object-fit:contain;background:#1b3329}
+.adventure-journal{bottom:66px}
+@media(max-width:600px){.adventure-journal{bottom:55px}}
+.visit-prompt:focus-visible{outline:3px solid #cb883e;outline-offset:4px}

@@ -94,3 +94,16 @@ V7 release polish checks:
 - Six transfer crops avoid neighbouring-sheet bleed. The dedicated eight-frame walk cycle uses a fixed drawing scale and foot anchors; transition walking scales with scene depth toward the actual doorway.
 - The complete quest/browser suite passes with the longer entry/exit and boarding sequences. Cycling terrain/update definitions remain unchanged.
 - Native fullscreen and the fallback were tested in desktop Chromium and phone emulation. Actual iPhone/Safari behaviour and the subjective smoothness of animations still need device playtesting.
+
+
+Revision 8 checks:
+
+- Unit checks in `node tests/building-visits.cjs` cover the continuous gait: leading legs exchange every half cycle, each leg has a swing phase while the other plants, stance-foot world x stays fixed, and the two-bone joint lengths remain consistent. Placement and inventory/quest checks still pass.
+- `python3 tests/browser_movement.py` exercises Q away from buildings and while riding at speed, gradual stopping, two alternating legs, terrain walking, camera following, returning to the same parked bicycle, entering/leaving a shop on foot, boarding, both sailing headings, and touch dismount/walking/return in 390×844 and 844×390 layouts. No page errors or failed HTTP responses.
+- `python3 tests/browser_v8.py` covers the full boat and garden quests and versioned entry URLs after the movement changes. `tests/browser_v7.py` and `tests/browser_v6.py` remain compatibility wrappers for current checks.
+- `python3 tests/browser_polish.py` covers fullscreen, readable settings and transfer holds with the current release.
+- Screenshots under screenshots/revision8/ include alternating walking poses, on-foot shop entry, boarding, both boat headings, and phone layouts. The seated pose is anchored by the hip to the painted bench, with the near hull masking lower legs rather than repainting the entire boat in front of the rider.
+- Terrain and the complete cycling update function compare unchanged with V7. Dismount requests apply braking through an explicit control callback; on-foot traversal is separate from the cycling simulation.
+- These remain headless Chromium and phone emulation checks. Physical iPhone/Safari playtesting and subjective animation review on the target phone remain useful.
+
+- A real-time rendered walking clip (both headings) is saved as screenshots/revision8/walking-preview.mp4. Frame-sequence inspection shows alternating support/swing, with the upper body and front carrier remaining stable.

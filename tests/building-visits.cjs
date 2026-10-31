@@ -3,7 +3,7 @@ const vm=require('node:vm');
 const fs=require('node:fs');
 const window={};
 const context=vm.createContext({window});
-for(const file of ['illustrated-neighbourhood','autumn-quests'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
+for(const file of ['illustrated-neighbourhood','autumn-quests','locomotion'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
 const world=window.BearlyNeighbourhood;
 assert.equal(world.nearestEntrance(17700).key,'library');
 assert.equal(world.nearestEntrance(1500),null);
@@ -31,3 +31,14 @@ assert.deepEqual(JSON.parse(JSON.stringify(window.BearlyQuests.create(storage).s
 const copy=q.snapshot();copy.buoys.length=0;assert.equal(q.snapshot().buoys.length,3);
 const blocked=window.BearlyQuests.create({getItem(){throw Error('storage denied')},setItem(){throw Error('storage denied')}});assert.equal(blocked.act('lunch').lunch,true);
 console.log('Placement and quest checks passed: access, terrain, walking, inventory requirements, boat unlock, buoy/seed objectives, persistence and unavailable storage.');
+
+const gait=window.BearlyLocomotion,cycle=225*.23/.62;
+const a=gait.pose(0),b=gait.pose(cycle*.5);
+assert.ok(a.near.x>a.far.x&&b.far.x>b.near.x,'leading legs alternate');
+assert.equal(gait.pose(cycle*.25).near.y,0);assert.ok(gait.pose(cycle*.25).far.y<0,'far leg swings while near leg plants');
+assert.equal(gait.pose(cycle*.75).far.y,0);assert.ok(gait.pose(cycle*.75).near.y<0,'near leg swings while far leg plants');
+for(const d of [4,9,15,25])assert.ok(Math.abs(d+gait.pose(d).near.x-a.near.x)<1e-8,'stance foot stays fixed in the world');
+const hip={x:0,y:-56},ankle={x:20,y:-15},k=gait.knee(hip,ankle,29,28);
+assert.ok(Math.abs(Math.hypot(k.x-hip.x,k.y-hip.y)-29)<1e-8);
+assert.ok(Math.abs(Math.hypot(k.x-ankle.x,k.y-ankle.y)-28)<1e-8);
+console.log('Locomotion checks passed: opposing legs, alternating planted/swing feet, stable stance and continuous two-bone joints.');

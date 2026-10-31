@@ -188,3 +188,7 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 @media(max-width:700px){.fullscreen-label{display:none}#fullscreenBtn{padding:8px!important;font-size:17px!important}.fullscreen-tools button{padding:8px;font-size:10px}}
 
 .area-name{flex:1;min-width:0}.area-heading{gap:7px}.area-fullscreen,.area-settings{flex:none;min-width:36px;min-height:36px;padding:6px;border:1px solid #9ead7c;border-radius:5px;background:#38543d;color:#fff0c9;font-size:17px;cursor:pointer}
+.ride-utilities{display:flex;justify-content:flex-end;padding:4px 10px;background:#243a2b}.ride-utilities[hidden],.autumn-exploring .ride-utilities{display:none!important}
+.dismount-button{min-height:36px;padding:7px 13px;border:1px solid #a5b583;border-radius:5px;background:#3d593a;color:#fff0c9;font:800 12px Trebuchet MS;cursor:pointer}.dismount-button:disabled{opacity:.6}
+.game-shell.is-expanded .ride-utilities{flex:0 0 auto}
+@media(max-height:500px) and (orientation:landscape){.ride-utilities{position:absolute;right:8px;bottom:63px;z-index:5;padding:0;background:none}}

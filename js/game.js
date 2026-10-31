@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V7';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V8';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5884,7 +5884,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
   }
   function drawParkedBike(){
     ctx.save();ctx.translate(bike.x,bike.y);ctx.rotate(bike.a);ctx.scale(ART_SCALE,ART_SCALE);ctx.translate(-ART_ORIGIN_X,-ART_ORIGIN_Y);
-    wheel(REAR_X,WHEEL_Y,bike.cycle);wheel(FRONT_X,WHEEL_Y,bike.cycle);frame();bicycleDrive(bike.cycle*.44,0);if(window.BearlyVisits?.hideRoadBaby())childSeat();else {const a=mountedBabyAnim();mountedBabyFrame(a.pose,a.expr);}
+    wheel(REAR_X,WHEEL_Y,bike.cycle);wheel(FRONT_X,WHEEL_Y,bike.cycle);frame();bicycleDrive(bike.cycle*.44,0);childSeat();const babyAlpha=window.BearlyVisits?.roadBabyAlpha()??1;if(babyAlpha>0){ctx.save();ctx.globalAlpha*=babyAlpha;const a=mountedBabyAnim();mountedBabyFrame(a.pose,a.expr);ctx.restore();}
     inkLine([[164,267],[149,305]],'#53675e',3,1);ctx.restore();
   }
   function autumnBikePresentation(){
@@ -6001,7 +6001,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,road:{groundAt,finish:FINISH},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

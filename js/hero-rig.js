@@ -5,6 +5,26 @@
   for(const [key,file] of Object.entries({front:'front-carrier-v7.png',back:'back-carrier-v11.png',reactions:'carrier-reactions-v11.png',parts:'matched-legs-v11.png'})){
     const im=new Image();im.src='assets/art/'+file;images[key]=im;
   }
+  // Use the original character's face pixels, rather than reinterpreting his
+  // identity in each carrier painting. These are head-only original textures.
+  for(const [key,file] of Object.entries({smile:'face_smile.webp',excited:'face_happy.webp'})){
+    const im=new Image();im.src='assets/'+file;images[key]=im;
+  }
+  const heads={
+    front:{box:[183,173,83,85],neck:[232,255],angle:0},
+    back:{box:[270,79,84,78],neck:[320,154],angle:-.08},
+    grab:{box:[940,70,84,82],neck:[990,149],angle:-.06},
+    maul:{box:[360,544,82,80],neck:[399,620],angle:.06},
+    backHurt:{box:[955,541,83,78],neck:[1003,616],angle:-.08},
+    frontHurt:{box:[358,204,111,109],neck:[421,309],angle:-.06},
+    collapse:{box:[966,108,128,116],neck:[1053,221],angle:-.14},
+    defeated:{box:[1814,178,115,111],neck:[1880,286],angle:-.06},
+    boat:{box:[471,464,199,198],neck:[592,658],angle:0},
+    transfer2:{box:[1332,140,92,85],neck:[1366,222],angle:0,flip:-1},
+    transfer3:{box:[366,628,90,82],neck:[405,705],angle:0,flip:-1},
+    transfer4:{box:[772,678,87,82],neck:[824,757],angle:0},
+    transfer5:{box:[1267,678,88,85],neck:[1320,760],angle:0}
+  };
   // All landmarks are measured in the SAME source coordinates as the carrier torso.
   // Image-left is the near leg in these right-facing three-quarter paintings.
   const profiles={
@@ -22,7 +42,38 @@
     defeated:{image:'reactions',rect:[1528,173,592,530],origin:[1835,701],stature:696}
   };
   let parts=null,lastAudit={};
+  const faceTextures={};
   function ready(){return Object.values(images).every(im=>im.naturalWidth>0);}
+  function originalFace(key){
+    if(faceTextures[key])return faceTextures[key];
+    const im=images[key],tile=document.createElement('canvas');tile.width=im.naturalWidth;tile.height=im.naturalHeight;
+    tile.dataset.sourceAsset=im.src.split('/').pop();
+    const g=tile.getContext('2d');g.drawImage(im,0,0);
+    // Only soften the cropped bottom of the jaw into the shirt collar. Eyes,
+    // nose and smile remain the original pixels at a uniform scale.
+    const fade=g.createLinearGradient(0,tile.height-13,0,tile.height);fade.addColorStop(0,'#fff');fade.addColorStop(1,'#fff0');
+    g.globalCompositeOperation='destination-in';g.fillStyle=fade;g.fillRect(0,0,tile.width,tile.height);
+    return faceTextures[key]=tile;
+  }
+  function drawCarrier(c,image,rect,origin,s,headName,bob=0){
+    const [sx,sy,sw,sh]=rect,[ox,oy]=origin,head=heads[headName],[hx,hy,hw,hh]=head.box;
+    const X=x=>(x-ox)*s,Y=y=>(y-oy)*s+bob;
+    const H=x=>X(head.flip<0?hx+hw-(x-hx):x),rear=head.flip<0?hx-2:hx+1;
+    // Remove the generated head silhouette before placing the real one. A
+    // head-shaped hole retains the adjacent harness, fur and supporting arms.
+    c.save();c.beginPath();c.rect(X(sx),Y(sy),sw*s,sh*s);
+    c.moveTo(H(hx+hw*.35),Y(head.flip<0?hy+hh+1:hy+hh*.88));
+    c.bezierCurveTo(H(hx+hw*.03),Y(hy+hh*(head.flip<0?.94:.85)),H(rear),Y(hy+hh*.67),H(rear),Y(hy+hh*.43));
+    c.bezierCurveTo(H(rear),Y(hy+hh*.12),H(hx+hw*.2),Y(hy-2),H(hx+hw*.5),Y(hy-1));
+    c.bezierCurveTo(H(hx+hw*.9),Y(hy-2),H(hx+hw+2),Y(hy+hh*.28),H(hx+hw*.96),Y(hy+hh*.5));
+    c.bezierCurveTo(H(hx+hw+3),Y(hy+hh*.66),H(hx+hw),Y(hy+hh*.85),H(hx+hw*.7),Y(hy+hh*.88));
+    c.closePath();c.clip('evenodd');c.drawImage(image,sx,sy,sw,sh,X(sx),Y(sy),sw*s,sh*s);c.restore();
+    const key=['maul','grab'].includes(headName)?'excited':'smile',face=originalFace(key);
+    const headHeight=Math.max(hh,hw*face.height/face.width),scale=headHeight/face.height;
+    c.save();c.translate(X(head.neck[0]),Y(head.neck[1]));c.rotate(head.angle);if(head.flip)c.scale(head.flip,1);
+    c.drawImage(face,-face.width*.575*scale*s,-(face.height-6)*scale*s,face.width*scale*s,face.height*scale*s);c.restore();
+    return {source:'assets/'+face.dataset.sourceAsset,headOnly:true,uniformScale:scale*s,pose:headName};
+  }
   function prepareParts(){
     if(parts)return parts;
     function tile(rect){const [x,y,w,h]=rect,c=document.createElement('canvas');c.width=w;c.height=h;c.dataset.sourceAsset='matched-legs-v11.png';c.getContext('2d').drawImage(images.parts,x,y,w,h,0,0,w,h);return c;}
@@ -35,7 +86,7 @@
       name==='backHurt'?[[944,503],[1412,503],[1412,1013],[933,1013],[933,516],[944,516]]:null;
     c.save();
     if(outline){c.beginPath();for(const [i,[x,y]] of outline.entries())i?c.lineTo((x-f.origin[0])*s,(y-f.origin[1])*s):c.moveTo((x-f.origin[0])*s,(y-f.origin[1])*s);c.closePath();c.clip();}
-    c.drawImage(images[f.image],sx,sy,sw,sh,(sx-f.origin[0])*s,(sy-f.origin[1])*s,sw*s,sh*s);c.restore();
+    const likeness=drawCarrier(c,images[f.image],f.rect,f.origin,s,name==='backIdle'?'back':name);c.restore();return likeness;
   }
   function draw(c,px,py,h,face,options={}){
     if(!ready())return false;
@@ -43,12 +94,13 @@
     const gait=window.BearlyLocomotion.pose(options.distance||0,h,options.weight||0),jump=options.jump||0;
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
     let pose=state.hp===0?(state.defeatAge<.55?'collapse':'defeated'):state.hurt?(back?'backHurt':'frontHurt'):state.attack?'maul':state.held?'grab':null;
-    if(pose){fullPose(c,pose,h);lastAudit={pose,carrier:pose==='frontHurt'?'front':'back',integratedCarrier:true,height:h,source:actions[pose].image};c.restore();return true;}
+    if(pose){const babyFace=fullPose(c,pose,h);lastAudit={pose,carrier:pose==='frontHurt'?'front':'back',integratedCarrier:true,babyFace,height:h,source:actions[pose].image};c.restore();return true;}
     const texture=prepareParts(),weight=clamp(options.weight||0,0,1),blend=clamp(weight/.4,0,1),ox=profile.origin[0],oy=profile.origin[1],landmarks={};
     // The standing painting has one boot permanently ahead. Ease both feet onto
     // a shared walking track so either leg can lead by the same useful distance.
     const track=(profile.near.sole[0]+profile.far.sole[0])*.5;
-    if(blend<1){c.save();c.globalAlpha*=1-blend;const [sx,sy,sw,sh]=profile.torso,fullH=profile.image==='front'?489:516;c.drawImage(images[profile.image],sx,sy,sw,fullH,(sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,fullH*s);c.restore();}
+    const headName=back?'back':'front';let babyFace;
+    if(blend<1){c.save();c.globalAlpha*=1-blend;const [sx,sy,sw,sh]=profile.torso,fullH=profile.image==='front'?489:516;babyFace=drawCarrier(c,images[profile.image],[sx,sy,sw,fullH],profile.origin,s,headName,gait.bob);c.restore();}
     c.save();c.globalAlpha*=blend;
     for(const name of ['far','near']){
       const leg=profile[name],f=gait[name],hip={x:(leg.hip[0]-ox)*s,y:(profile.pelvisY-oy)*s+gait.bob};
@@ -74,8 +126,13 @@
     }
     const [sx,sy,sw,sh]=profile.torso;c.save();c.beginPath();c.rect((sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,(profile.waist-sy)*s);
     if(!back){for(const [i,[x,y]] of [[242,322],[285,322],[292,352],[270,363],[242,348]].entries())i?c.lineTo((x-ox)*s,(y-oy)*s+gait.bob):c.moveTo((x-ox)*s,(y-oy)*s+gait.bob);c.closePath();}
-    c.clip();c.drawImage(images[profile.image],sx,sy,sw,sh,(sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,sh*s);c.restore();c.restore();
-    lastAudit={pose:'walking',carrier:back?'back':'front',integratedCarrier:true,height:h,source:profile.image,stature:profile.stature,landmarks,gait};c.restore();return true;
+    c.clip();babyFace=drawCarrier(c,images[profile.image],profile.torso,profile.origin,s,headName,gait.bob);c.restore();c.restore();
+    lastAudit={pose:'walking',carrier:back?'back':'front',integratedCarrier:true,babyFace,height:h,source:profile.image,stature:profile.stature,landmarks,gait};c.restore();return true;
   }
-  window.BearlyHeroRig={ready,draw,audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
+  function drawAuthored(c,image,rect,origin,scale,pose){
+    if(!ready()||!heads[pose])return false;
+    const babyFace=drawCarrier(c,image,rect,origin,scale,pose);
+    lastAudit={pose,carrier:'front',integratedCarrier:true,babyFace};return true;
+  }
+  window.BearlyHeroRig={ready,draw,drawAuthored,audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
 })();

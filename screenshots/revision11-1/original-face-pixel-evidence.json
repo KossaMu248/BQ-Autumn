@@ -1,0 +1,1658 @@
+{
+  "renderer": [
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": false,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": true,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": false,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": true,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": false,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.112099478390462,
+        "mirrored": true,
+        "compared": 451,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10511363636363637,
+        "mirrored": false,
+        "compared": 405,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10511363636363637,
+        "mirrored": true,
+        "compared": 405,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": false,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": true,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": false,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": true,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": false,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10919849381387843,
+        "mirrored": true,
+        "compared": 432,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.1078985117446656,
+        "mirrored": false,
+        "compared": 420,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.1078985117446656,
+        "mirrored": true,
+        "compared": 420,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.11122068814376507,
+        "mirrored": false,
+        "compared": 421,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.11122068814376507,
+        "mirrored": true,
+        "compared": 421,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.10857257652129446,
+        "mirrored": false,
+        "compared": 413,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.10857257652129446,
+        "mirrored": true,
+        "compared": 413,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12121212121212123,
+        "mirrored": false,
+        "compared": 538,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12121212121212123,
+        "mirrored": true,
+        "compared": 538,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10890151515151517,
+        "mirrored": false,
+        "compared": 436,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.10890151515151517,
+        "mirrored": true,
+        "compared": 436,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": false,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": true,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": false,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": true,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": false,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06957898658718331,
+        "mirrored": true,
+        "compared": 172,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06524294670846395,
+        "mirrored": false,
+        "compared": 153,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06524294670846395,
+        "mirrored": true,
+        "compared": 153,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": false,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": true,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": false,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": true,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": false,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06777837547068316,
+        "mirrored": true,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06697149004841312,
+        "mirrored": false,
+        "compared": 165,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06697149004841312,
+        "mirrored": true,
+        "compared": 165,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.06903353057199212,
+        "mirrored": false,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.06903353057199212,
+        "mirrored": true,
+        "compared": 166,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.06738987508218276,
+        "mirrored": false,
+        "compared": 156,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.06738987508218276,
+        "mirrored": true,
+        "compared": 156,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07523510971786834,
+        "mirrored": false,
+        "compared": 207,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07523510971786834,
+        "mirrored": true,
+        "compared": 207,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06759404388714733,
+        "mirrored": false,
+        "compared": 168,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.06759404388714733,
+        "mirrored": true,
+        "compared": 168,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    }
+  ],
+  "authoredRenderer": [
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.09615769128232472,
+        "mirrored": false,
+        "compared": 337,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.09615769128232472,
+        "mirrored": true,
+        "compared": 337,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12425484351713861,
+        "mirrored": true,
+        "compared": 554,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12425484351713861,
+        "mirrored": false,
+        "compared": 554,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12155365126676602,
+        "mirrored": true,
+        "compared": 534,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.12155365126676602,
+        "mirrored": false,
+        "compared": 534,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.11750186289120716,
+        "mirrored": false,
+        "compared": 513,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.11750186289120716,
+        "mirrored": true,
+        "compared": 513,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.11885245901639342,
+        "mirrored": false,
+        "compared": 516,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.11885245901639342,
+        "mirrored": true,
+        "compared": 516,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.05968408424420154,
+        "mirrored": false,
+        "compared": 133,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.05968408424420154,
+        "mirrored": true,
+        "compared": 133,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.077123695976155,
+        "mirrored": true,
+        "compared": 216,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.077123695976155,
+        "mirrored": false,
+        "compared": 216,
+        "mismatches": 0,
+        "maxError": 0
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07544709388971685,
+        "mirrored": true,
+        "compared": 215,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07544709388971685,
+        "mirrored": false,
+        "compared": 215,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.0729321907600596,
+        "mirrored": false,
+        "compared": 190,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.0729321907600596,
+        "mirrored": true,
+        "compared": 190,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07377049180327867,
+        "mirrored": false,
+        "compared": 194,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.07377049180327867,
+        "mirrored": true,
+        "compared": 194,
+        "mismatches": 0,
+        "maxError": 1
+      }
+    }
+  ],
+  "1440": [
+    {
+      "screenshot": "original-baby-front-1440.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 848,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-1440.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 833,
+        "mismatches": 0,
+        "maxError": 6
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-1440.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": true,
+        "compared": 825,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-1440.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.14657298089231946,
+        "mirrored": true,
+        "compared": 736,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-1440.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.15014793164579068,
+        "mirrored": true,
+        "compared": 771,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-back-1440.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.14741796925223086,
+        "mirrored": true,
+        "compared": 791,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    }
+  ],
+  "390": [
+    {
+      "screenshot": "original-baby-front-390.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 849,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-390.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 844,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-390.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": true,
+        "compared": 828,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-390.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.14657298089231946,
+        "mirrored": true,
+        "compared": 737,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-390.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.15014793164579068,
+        "mirrored": true,
+        "compared": 771,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-back-390.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.14741796925223086,
+        "mirrored": true,
+        "compared": 791,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    }
+  ],
+  "844": [
+    {
+      "screenshot": "original-baby-front-844.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 849,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-844.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": false,
+        "compared": 844,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-844.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.15133429849978355,
+        "mirrored": true,
+        "compared": 828,
+        "mismatches": 0,
+        "maxError": 5
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-844.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.14657298089231946,
+        "mirrored": true,
+        "compared": 737,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-844.png",
+      "pixels": {
+        "source": "face_happy.webp",
+        "sourceSize": [
+          216,
+          242
+        ],
+        "uniformScale": 0.15014793164579068,
+        "mirrored": true,
+        "compared": 771,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    },
+    {
+      "screenshot": "original-baby-back-844.png",
+      "pixels": {
+        "source": "face_smile.webp",
+        "sourceSize": [
+          220,
+          242
+        ],
+        "uniformScale": 0.14741796925223086,
+        "mirrored": true,
+        "compared": 791,
+        "mismatches": 0,
+        "maxError": 2
+      }
+    }
+  ]
+}

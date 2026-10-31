@@ -1,0 +1,12 @@
+# Full regression capture sets stay local; retain the reviewable release gallery.
+*
+!.gitignore
+!baby-likeness-poses.png
+!original-baby-front-390.png
+!original-baby-maul-390.png
+!original-baby-authored-board-normal.png
+!original-face-pixel-evidence.json
+!boat-right.png
+!full-body-contact.png
+!full-body-damage-1440.png
+!screen-throw-preview.mp4

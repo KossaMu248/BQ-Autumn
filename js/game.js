@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V5';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V6';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -500,6 +500,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function slopeAt(x){const r=groundAt(x-40),f=groundAt(x+40);return r===null||f===null?0:Math.atan2(f-r,80);}
   function reset(startPlaying=true){
+    window.BearlyVisits?.close();
     demo.active=false;demo.stageIndex=-1;demo.crashed=false;
     const cue=$('demoCue');if(cue)cue.classList.remove('visible');
     const btn=$('demoBtn');if(btn)btn.textContent='▶ STUNT DEMO';
@@ -5975,8 +5976,9 @@ function babyFigure(expr, thrown=false, pose='idle'){
   function loop(now){
     let dt=Math.min(.04,(now-last)/1000||0);last=now;
     let iter=0;
-    if(!debugOpen){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
+    if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
+    window.BearlyVisits?.update({x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;
@@ -6131,7 +6133,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     keys.add(e.code);
   });
   window.addEventListener('keyup',e=>keys.delete(e.code));
-  window.addEventListener('blur',()=>{keys.clear();if(state==='playing')state='paused';});
+  window.addEventListener('blur',()=>{keys.clear();if(state==='playing'&&!window.BearlyVisits?.active())state='paused';});
   // v10.53 — multiple real touches, independent holds and reliable release.
   // Never make a button depend on setPointerCapture succeeding (it can fail on
   // iOS webviews or synthetic/replayed pointer events).

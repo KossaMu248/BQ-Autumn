@@ -59,3 +59,15 @@ Revision 5 checks:
 - Approximately 1.9 ms draw time observed in desktop headless Chromium at the library; this is not a guarantee of frame rate on every device.
 - No uncaught page errors, HTTP failures or missing art during the checks.
 - Validation is local. Live Pages deployment is not independently verified from this restricted environment.
+
+
+Revision 6 checks (2026-10-31):
+
+- All JavaScript syntax checks pass. `node tests/building-visits.cjs` checks public/private access, stop and grounded restrictions, entrance proximity, entry/exit input clearing, single landmark counts, unique building designs, slope foundations, absent terrain and walking endpoint pauses/direction changes.
+- `python3 tests/browser_v6.py` passes in headless Chromium. All twelve authored stops and all five HTML entry points load. No uncaught page errors or failed HTTP responses occur during the checks.
+- Pizza shop entry by E and touch opens its painted interior. Ride position, velocity and NPC clock stay unchanged indoors; R does not leak through to restart. Escape and the exit button close the room, and pedaling advances the rider afterwards. Keyboard hop and restart still work.
+- Portrait 390×844 and landscape 844×390: entrance and exit buttons work, real touch pedal events advance the rider, and there is no horizontal overflow. These are Chromium mobile emulations, not physical iPhone/Safari testing.
+- Reduced-motion mode keeps residents stationary and birds do not scatter.
+- Terrain definitions and the complete cycling update function were compared with V5 and are unchanged. Bear/baby source assets, hero renderer and animation registry are unchanged.
+- Screenshots in screenshots/revision6/ cover buildings, restaurant interior and both mobile orientations. Visual checks include slope foundations, root anchoring, and the continuing waterfront backdrop.
+- This is browser smoke validation, not a full manual playthrough or a performance guarantee on every device.

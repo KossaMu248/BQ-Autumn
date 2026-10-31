@@ -2,26 +2,47 @@
 (() => {
   'use strict';
   const A=()=>window.BearlyAtlas;
-  const hash=(n,k=0)=>{const v=Math.sin(n*127.1+k*311.7)*43758.5453;return v-Math.floor(v);};
   // Placed scenes, not a repeating bakery strip. x uses the existing 42,000-unit route.
   const scenes=[
     {x:1500,key:'apartment',w:370,label:'BACKSTUGEVÄGEN',role:'home'},
     {x:3600,key:'courtyard',w:350,label:'GÅRDEN',role:'home'},
-    {x:5600,key:'corner-shop',w:330,label:'KVARTERSBUTIKEN',role:'shop'},
+    {x:5600,key:'workshop',w:355,label:'CYKELVERKSTAD',role:'workshop',door:0},
     {x:7700,key:'arcade',w:510,label:'HÄSSELBY CENTRUM',role:'shop'},
-    {x:9450,key:'apartment',w:330,label:'CENTRUMHUSEN',role:'home'},
     {x:11325,key:'metro',w:400,label:'HÄSSELBY GÅRD',role:'metro'},
     {x:13750,key:'civic-hall',w:370,label:'PÅ TORGET',role:'square'},
-    {x:15700,key:'corner-shop',w:350,label:'TORGHÖRNAN',role:'shop'},
+    {x:15700,key:'pizzeria',w:375,label:'PIZZA & KEBAB',role:'pizza',door:.14},
     {x:17700,key:'library',w:470,label:'BIBLIOTEKET',role:'library'},
-    {x:19600,key:'arcade',w:430,label:'TORGETS BUTIKER',role:'shop'},
     {x:21400,key:'castle',w:360,label:'SLOTTSVÄGEN',role:'castle'},
     {x:24400,key:'greenhouse',w:290,label:'GRIMSTA TRÄDGÅRD',role:'park'},
-    {x:29100,key:'courtyard',w:340,label:'STRANDKVARTERET',role:'home'},
     {x:31750,key:'boathouse',w:360,label:'MÄLARENS BÅTHUS',role:'water'},
-    {x:35200,key:'cafe',w:295,label:'FIKA VID VATTNET',role:'cafe'},
-    {x:38700,key:'boathouse',w:280,label:'STRANDPROMENADEN',role:'water'}
+    {x:35200,key:'cafe',w:295,label:'BAGERI VID VATTNET',role:'cafe',door:.17},
   ];
+  const publicRoles=new Set(['shop','workshop','pizza','library','cafe','square','park','castle','water']);
+  function entrance(b){return {x:b.x+(b.door||0)*b.w,halfWidth:48};}
+  function placement(b,groundAt){
+    const left=b.x-b.w*.5,right=b.x+b.w*.5,samples=[];
+    for(let i=0;i<=12;i++){const x=left+(right-left)*i/12,y=groundAt(x);if(!Number.isFinite(y))return null;samples.push({x,y:y-99});}
+    // A level foundation above the highest part of the slope, with stone down to the lawn.
+    return {left,right,foot:Math.min(...samples.map(p=>p.y))-9,samples};
+  }
+  function foundation(c,p){
+    c.save();c.fillStyle='#8d8b72';c.strokeStyle='#5b6652';c.lineWidth=1.3;c.beginPath();
+    c.moveTo(p.left,p.foot);c.lineTo(p.right,p.foot);for(const q of [...p.samples].reverse())c.lineTo(q.x,q.y);c.closePath();c.fill();c.stroke();
+    c.save();c.clip();c.strokeStyle='#c3b99a';
+    for(let y=p.foot+8;y<Math.max(...p.samples.map(q=>q.y));y+=10){c.beginPath();c.moveTo(p.left,y);c.lineTo(p.right,y);c.stroke();}
+    for(let x=p.left+20;x<p.right;x+=29){c.beginPath();c.moveTo(x,p.foot);c.lineTo(x,Math.max(...p.samples.map(q=>q.y)));c.stroke();}
+    c.restore();c.restore();
+  }
+  function walkingAt(t,start,end,speed=25,pause=4,phase=0){
+    const duration=(end-start)/speed,cycle=duration*2+pause*2;
+    let a=((t+phase)%cycle+cycle)%cycle;
+    if(a<pause)return {x:start,paused:true,flip:false};a-=pause;
+    if(a<duration)return {x:start+a*speed,paused:false,flip:false};a-=duration;
+    if(a<pause)return {x:end,paused:true,flip:true};a-=pause;
+    return {x:end-a*speed,paused:false,flip:true};
+  }
+  let civilianTime=0,lastLifeTime=null;
+  const residentAudit=new Map();
   function nearScene(x,pad=0){return scenes.some(b=>Math.abs(b.x-x)<b.w*.5+pad);}
   const birds=new Map();let previousX=0;
   const stats={scenes:0,residents:0,birds:0,scattered:0};
@@ -35,34 +56,37 @@
   }
   function pathBase(s,x){return s.groundAt(x);}
   function civilian(c,s,b,index){
-    const t=s.reducedMotion?0:s.time;
-    const walk=index%3,span=b.role==='home'?80:100;
-    const moving=walk!==0;
-    const phase=(t*.10+index*.29)%2;
-    const dx=moving?(phase<1?phase:2-phase)*span-span*.5:0;
-    const x=b.x-b.w*.23+index*55+dx;
-    if(s.crewXs?.some(cx=>Math.abs(cx-x)<235))return;
-    const gy=pathBase(s,x);if(gy===null)return;
+    const t=s.reducedMotion?0:civilianTime,walk=index%3;
+    let start=Math.max(100,b.x-280-index*35),end=Math.min(s.finish-150,b.x+290+index*35);
+    // Keep each route on one side of a crew, rather than making walkers disappear into it.
+    for(const cx of s.crewXs||[]){
+      if(cx<b.x&&cx+270>start)start=cx+270;
+      if(cx>=b.x&&cx-270<end)end=cx-270;
+    }
+    if(end-start<100)return;
+    const route=s.reducedMotion?{x:(start+end)/2,paused:true,flip:false}:walkingAt(t,start,end,22+index*3,3+index*1.5,index*7);
+    const x=route.x,gy=pathBase(s,x);if(gy===null)return;
     const close=Math.abs(s.bikeX-x)<380;
-    const frame=walk===0?(close?1:0):walk===1?(2+(s.reducedMotion?0:Math.floor(t*2.8)%2)):(4+(s.reducedMotion?0:Math.floor(t*2.6)%2));
+    const frame=walk===0?(close&&route.paused?1:0):walk===1?(2+(route.paused?0:Math.floor(t*2.8)%2)):(4+(route.paused?0:Math.floor(t*2.6)%2));
+    residentAudit.set(b.key,{x,start,end,paused:route.paused,flip:route.flip,role:walk,foot:gy-91});
     const key='resident-'+frame,info=A().info(key);if(!info)return;
     // Fixed stature per pair, even if a wave reaches above the head.
     const base=A().info('resident-'+(walk===0?0:walk===1?2:4));const h=walk===0?65:70;
     const width=h*info.w/(base.footY-base.y);
-    A().draw(c,key,x,gy-91,width,{flip:moving&&phase>=1});stats.residents++;
+    A().draw(c,key,x,gy-91,width,{flip:route.flip});stats.residents++;
   }
   function steam(c,x,y,t,alpha=.24){
     c.save();c.lineCap='round';c.lineWidth=1.7;c.strokeStyle='#f3e5c7';
     for(let i=0;i<3;i++){const age=(t*.25+i*.33)%1;c.globalAlpha=alpha*(1-age);const yy=y-age*30;c.beginPath();c.moveTo(x+i*5,yy);c.bezierCurveTo(x-6+i*5,yy-7,x+6+i*5,yy-12,x+i*5,yy-18);c.stroke();}c.restore();
   }
   function building(c,s,b){
-    const y=s.groundAt(b.x);if(y===null)return;
-    const foot=y-106;
+    const p=placement(b,s.groundAt);if(!p)return;
+    const foot=p.foot;foundation(c,p);
     if(b.key==='metro'){if(s.metro)window.BearlyWorld.station(c,b.x,foot);}
     else if(b.key==='cafe')window.BearlyWorld.cafe(c,b.x,foot);
     else A().draw(c,b.key,b.x,foot,b.w);
     // Warm open-window/cafe glow stays very restrained and belongs to the facade.
-    if(['cafe','shop','library'].includes(b.role)){
+    if(['cafe','shop','pizza','workshop','library'].includes(b.role)){
       const shimmer=s.reducedMotion?1:.92+.08*Math.sin(s.time*1.1+b.x);
       c.save();c.globalAlpha=.035*shimmer;c.fillStyle='#ffd47b';c.beginPath();c.ellipse(b.x,foot-42,b.w*.25,27,0,0,Math.PI*2);c.fill();c.restore();
     }
@@ -81,24 +105,40 @@
   }
   window.BearlyNeighbourhood={
     scenes,
+    entrance,placement,walkingAt,
+    canVisit:b=>publicRoles.has(b.role),
+    nearestEntrance(x){return scenes.filter(b=>publicRoles.has(b.role)&&Math.abs(entrance(b).x-x)<=110).sort((a,b)=>Math.abs(entrance(a).x-x)-Math.abs(entrance(b).x-x))[0]||null;},
+    entrances(c,s){
+      for(const b of scenes){
+        if(!publicRoles.has(b.role)||Math.abs(b.x-s.cameraX-s.W/2)>s.W)continue;
+        const p=placement(b,s.groundAt),x=entrance(b).x,y=s.groundAt(x);if(!p||y===null)continue;
+        c.save();c.fillStyle='#c5b89b';c.strokeStyle='#7b7860';c.lineWidth=2;
+        c.beginPath();c.moveTo(x-19,p.foot);c.lineTo(x+19,p.foot);c.lineTo(x+36,y-70);c.lineTo(x-36,y-70);c.closePath();c.fill();c.stroke();
+        // Level stair treads join the real door to the sloped pedestrian pavement.
+        c.strokeStyle='#e0d3b5';for(let yy=p.foot+9;yy<y-75;yy+=9){c.beginPath();c.moveTo(x-22,yy);c.lineTo(x+22,yy);c.stroke();}
+        c.fillStyle='#304f3f';c.fillRect(x+43,y-128,5,48);c.fillStyle='#f5df9d';c.fillRect(x+32,y-132,28,20);
+        c.fillStyle='#304f3f';c.font='bold 15px sans-serif';c.textAlign='center';c.fillText('↳',x+46,y-117);c.restore();
+      }
+    },
     frontage:nearScene,
-    fenceEnds:()=>scenes.filter(b=>['shop','square','library','metro'].includes(b.role)).flatMap(b=>[b.x-b.w*.65-35,b.x+b.w*.65+35]),
-    fenceGap:x=>scenes.some(b=>['shop','square','library','metro'].includes(b.role)&&Math.abs(b.x-x)<b.w*.65+35),
+    fenceEnds:()=>scenes.filter(b=>['shop','workshop','pizza','cafe','square','library','metro','park','castle','water'].includes(b.role)).flatMap(b=>[b.x-b.w*.65-35,b.x+b.w*.65+35]),
+    fenceGap:x=>scenes.some(b=>['shop','workshop','pizza','cafe','square','library','metro','park','castle','water'].includes(b.role)&&Math.abs(b.x-x)<b.w*.65+35),
     buildings(c,s){stats.scenes=0;for(const b of scenes){if(b.x+b.w*.7<s.cameraX-250||b.x-b.w*.7>s.cameraX+s.W+250)continue;building(c,s,b);stats.scenes++;}},
     life(c,s){
-      stats.residents=0;stats.birds=0;
+      stats.residents=0;stats.birds=0;residentAudit.clear();
+      if(lastLifeTime!==null&&s.playing)civilianTime+=Math.max(0,Math.min(.1,s.time-lastLifeTime));lastLifeTime=s.time;
       if(s.bikeX<previousX-1000){birds.clear();stats.scattered=0;}previousX=s.bikeX;
       for(let i=0;i<scenes.length;i++){
-        const b=scenes[i];if(b.x+b.w<s.cameraX-200||b.x-b.w>s.cameraX+s.W+200)continue;
+        const b=scenes[i];if(b.x+650<s.cameraX-200||b.x-650>s.cameraX+s.W+200)continue;
         if(!['castle','water'].includes(b.role))civilian(c,s,b,i%3);
-        if(['shop','square','library','park','cafe'].includes(b.role)){
+        if(['shop','pizza','workshop','square','library','park','cafe'].includes(b.role)){
           const bx=b.x+b.w*.48,gy=s.groundAt(bx);if(gy===null)continue;
           if(!s.reducedMotion&&s.playing&&Math.abs(s.bikeX-bx)<210&&!birds.has(i)){birds.set(i,s.time);stats.scattered++;}
           const age=birds.has(i)?s.time-birds.get(i):-1,fly=age>=0&&age<6;
-          for(let j=0;j<3;j++){const x=bx+(j-1)*15+(fly?age*(20+j*7):0),y=gy-89+(fly?-Math.sin(Math.min(age/6,1)*Math.PI)*70-age*7:0);bird(c,x,y,s.time,fly,i+j);stats.birds++;}
+          for(let j=0;j<3;j++){const x=bx+(j-1)*15+(fly?age*(20+j*7):0),y=(s.groundAt(x)??gy)-89+(fly?-Math.sin(Math.min(age/6,1)*Math.PI)*70-age*7:0);bird(c,x,y,s.time,fly,i+j);stats.birds++;}
         }
       }
     },
-    audit:()=>({...stats,sceneCount:scenes.length,uniqueBuildingKeys:new Set(scenes.map(s=>s.key)).size,placements:scenes.map(b=>({x:b.x,key:b.key,label:b.label}))})
+    audit:()=>({...stats,residentTime:civilianTime,residentsOnRoute:[...residentAudit.values()],sceneCount:scenes.length,uniqueBuildingKeys:new Set(scenes.map(s=>s.key)).size,placements:scenes.map(b=>({x:b.x,key:b.key,label:b.label}))})
   };
 })();

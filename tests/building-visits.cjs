@@ -1,0 +1,40 @@
+const assert=require('node:assert/strict');
+const vm=require('node:vm');
+const fs=require('node:fs');
+const listeners={};
+function element(){return {open:false,hidden:false,isConnected:true,children:{},dataset:{},setAttribute(){},append(){},replaceChildren(){},addEventListener(k,f){this[k]=f},querySelector(k){return this.children[k]??=element()},focus(){this.focused=true},showModal(){this.open=true},close(){this.open=false}};}
+const host=element(),created=[];
+const document={activeElement:element(),querySelector:()=>host,createElement(){const e=element();created.push(e);return e}};
+const window={addEventListener(k,f){listeners[k]=f}};
+const context=vm.createContext({window,document,console});
+for(const file of ['illustrated-neighbourhood','illustrated-visits'])vm.runInContext(fs.readFileSync(`js/${file}.js`,'utf8'),context);
+const world=window.BearlyNeighbourhood,visits=window.BearlyVisits;
+assert.equal(world.nearestEntrance(17700).key,'library');
+assert.equal(world.nearestEntrance(1500),null,'homes stay private');
+assert.equal(world.nearestEntrance(18000),null,'distant entrances cannot be used');
+for(const b of world.scenes.filter(world.canVisit)){
+ assert.ok(Math.abs(world.entrance(b).x-b.x)<b.w/2);
+ assert.equal(world.nearestEntrance(b.x).label,b.label);
+}
+let cleared=0;
+const state={x:17700,speed:0,grounded:true,playing:true,clearInput(){cleared++}};
+const [prompt,room]=created;
+visits.update({...state,speed:200});assert.equal(prompt.disabled,true);prompt.click();assert.equal(visits.active(),false);
+visits.update({...state,grounded:false});prompt.click();assert.equal(visits.active(),false);
+visits.update(state);assert.equal(prompt.disabled,false);prompt.click();assert.equal(visits.active(),true);assert.equal(cleared,1);
+assert.equal(room.querySelector('h2').textContent,'BIBLIOTEKET');
+let stopped=false;
+listeners.keydown({code:'KeyR',preventDefault(){},stopImmediatePropagation(){stopped=true}});assert.equal(stopped,true);assert.equal(visits.active(),true);
+listeners.keydown({code:'Escape',preventDefault(){},stopImmediatePropagation(){}});assert.equal(visits.active(),false);assert.equal(cleared,2);
+visits.update({...state,playing:false});assert.equal(prompt.hidden,true);
+visits.update(state);listeners.keydown({code:'KeyE',repeat:false,preventDefault(){},stopImmediatePropagation(){}});assert.equal(visits.active(),true);visits.close();
+const game=fs.readFileSync('js/game.js','utf8');assert.ok(game.includes('if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;'),'visits freeze physics before accumulation');
+for(const role of ['metro','library','cafe'])assert.equal(world.scenes.filter(b=>b.role===role).length,1);
+assert.equal(new Set(world.scenes.map(b=>b.key)).size,world.scenes.length,'no repeated building designs');
+const p=world.placement(world.scenes[0],x=>400+x*.2);
+assert.ok(p.samples.every(q=>q.y>p.foot),'foundation covers full downhill footprint');
+assert.equal(world.placement(world.scenes[0],x=>x<1500?400:null),null,'missing terrain cannot support a house');
+const walk=(t)=>world.walkingAt(t,0,600,25,4);
+assert.equal(walk(0).paused,true);assert.equal(walk(2).x,0);
+assert.equal(walk(16).x,300);assert.equal(walk(28).x,600);assert.equal(walk(30).paused,true);assert.equal(walk(44).x,300);assert.equal(walk(44).flip,true);
+console.log('Building visit checks passed: proximity, public access, speed, grounded state, keyboard entry/exit, input clearing, pause integration.');

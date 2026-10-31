@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v10.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v10-1.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -137,7 +137,7 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v10.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision10/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v10.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision10-1/`. See VALIDATION.md for results and limits.
 
 Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V10 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
 
@@ -147,8 +147,10 @@ The boat uses a dedicated bench-seated pose with lowered legs. Rear hull and ben
 
 A short real-time walking preview is available at `screenshots/revision8/walking-preview.mp4`.
 
-Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V10 screenshots are under `screenshots/revision10/`.
+Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V10 screenshots are under `screenshots/revision10-1/`.
 
 Dialogue and information use minimal white text inside the scene. Health keeps illustrated hearts; portraits and game symbols keep their artwork. HUD backgrounds and message boxes are transparent so they leave the scene visible. Touch controls sit in the lower corners instead of in a panel below the canvas. On phones, on-foot play fills the viewport; portrait follows the player within an undistorted cropped view, while landscape shows the full world frame. Dialogue fades after reading time. Fullscreen and the readable debug menu remain available.
 
-Screen throws have a staged flight, frontal face-and-palms screen impact, a squash/hold with brief glass cracks, and a slide away. Run `python3 tests/browser_npcs.py` for population continuity, witness reactions, gang aggression, carrier alignment, screen impacts and damage/defeat checks on desktop and both phone orientations.
+Screen throws keep the entire NPC visible from head to shoes during flight and screen contact. The full-body impact pose changes to a bruised, scratched and scuffed pose, with a damage number matching the health actually lost, then slides away. Camera framing fits the whole figure in desktop and phone views. Run `python3 tests/browser_npcs.py` for population continuity, witness reactions, gang aggression, carrier alignment, screen impacts and damage/defeat checks on desktop and both phone orientations.
+
+Run `python3 tests/browser_full_body.py` for all six NPC designs across desktop/portrait crops and motion preferences, and `python3 tests/browser_impact.py` for real keyboard/touch throw timing, damage and screenshots.

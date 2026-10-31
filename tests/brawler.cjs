@@ -5,8 +5,9 @@ function step(c,seconds,player=p){for(let t=0;t<seconds;t+=.02)c.update(.02,play
 const range=make();range.enter('a',[{id:'far-depth',x:40,depth:55}]);assert.equal(range.grab(p),false);assert.equal(range.maul(p),false);
 range.enter('b',[{id:'near',x:50,depth:0}]);assert.equal(range.grab({...p,z:30}),false);assert.equal(range.maul({...p,z:40}),false);
 assert.ok(range.grab(p));assert.equal(range.snapshot().baby.position,'back','baby remains attached in a back carrier');assert.ok(range.throwAtScreen(p));
-step(range,.8);assert.equal(range.snapshot().npcs[0].state,'screen');assert.equal(range.snapshot().stats.screenImpacts,1,'throw reaches a held face-first impact');
+assert.equal(range.snapshot().npcs[0].lastDamage,32);step(range,.8);assert.equal(range.snapshot().npcs[0].state,'screen');assert.equal(range.snapshot().stats.screenImpacts,1,'throw reaches a held face-first impact');
 step(range,.9);assert.equal(range.snapshot().npcs[0].state,'down');step(range,3.4);assert.equal(range.snapshot().npcs[0].state,'idle');
+const weak=make();weak.enter('weak',[{id:'weak',x:50,depth:0,hp:6}]);assert.ok(weak.grab(p));assert.ok(weak.throwAtScreen(p));assert.equal(weak.snapshot().npcs[0].lastDamage,6,'damage text reports actual remaining health lost');
 const social=make();social.enter('route',[{id:'victim',x:60,depth:0},{id:'witness',x:230,depth:0},{id:'distant',x:900,depth:0}]);
 assert.ok(social.maul(p));let ns=social.snapshot().npcs;assert.equal(ns[0].mood,'aggressive');assert.equal(ns[1].mood,'aggressive');assert.equal(ns[2].mood,'calm');assert.equal(social.snapshot().stats.witnesses,1);
 social.cancel();social.enter('room',[]);social.enter('route',[{id:'replacement',x:0}]);assert.equal(social.snapshot().npcs[0].hp,38,'returning to the street retains the same damaged actor');assert.equal(social.snapshot().npcs[1].mood,'aggressive','remounting does not erase witness aggression');

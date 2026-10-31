@@ -5,14 +5,14 @@
 <meta name="bq-edition" content="AUTUMN_RIDE_ART_V5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>Bearly Qualified — Autumn Ride V5</title>
-<link rel="stylesheet" href="css/game.css?edition=autumn-v6"/>
-<link rel="stylesheet" href="css/illustrated.css?edition=autumn-v6"/>
+<link rel="stylesheet" href="css/game.css?edition=autumn-v7-polish"/>
+<link rel="stylesheet" href="css/illustrated.css?edition=autumn-v7-polish"/>
 </head>
 <body>
 <div class="app">
   <header class="masthead">
     <div class="wordmark"><span class="paw" aria-hidden="true">BQ</span><div><h1>BEARLY <b>QUALIFIED</b></h1><span class="eyebrow">ONE BEAR. ONE BABY. VERY BAD IDEAS.</span></div></div>
-    <div class="top-actions"><div class="level-chip">AUTUMN RIDE <span>·</span> HÄSSELBY</div><button id="debugOpenBtn" title="Open developer debug menu (F3)" aria-controls="debugPanel" aria-expanded="false">⚙ <span class="debug-label">SETTINGS</span> <span class="debug-shortcut">F3</span></button><button id="demoBtn" title="Show all major moves">▶ DEMO</button><button id="soundBtn" aria-label="Toggle sound">♪ ON</button><button id="restartBtn" aria-label="Restart">↻ <span class="restart-label">RESTART</span></button></div>
+    <div class="top-actions"><div class="level-chip">AUTUMN RIDE <span>·</span> HÄSSELBY</div><button id="debugOpenBtn" title="Open developer debug menu (F3)" aria-controls="debugPanel" aria-expanded="false">⚙ <span class="debug-label">SETTINGS</span> <span class="debug-shortcut">F3</span></button><button id="fullscreenBtn" type="button" aria-label="Enter fullscreen" aria-pressed="false" title="Fullscreen (F)">⛶ <span class="fullscreen-label">FULLSCREEN</span></button><button id="demoBtn" title="Show all major moves">▶ DEMO</button><button id="soundBtn" aria-label="Toggle sound">♪ ON</button><button id="restartBtn" aria-label="Restart">↻ <span class="restart-label">RESTART</span></button></div>
   </header>
   <main class="game-shell">
     <div class="canvas-wrap">
@@ -35,7 +35,7 @@
       <button type="button" id="mobilePauseBtn" aria-label="Pause game">Ⅱ PAUSE</button>
       <canvas id="game" width="1160" height="640" aria-label="Side-scrolling cycling game. Use arrow keys or W A S D, space to hop, R to restart."></canvas>
       <aside id="debugPanel" role="dialog" aria-label="Bearly Qualified debug menu" aria-modal="false" hidden>
-        <div class="dbg-header"><h2>⚙ DEBUG LAB · v10.63</h2><button id="debugCloseBtn" class="dbg-x" aria-label="Close debug menu">✕</button></div>
+        <div class="dbg-header"><h2>⚙ AUTUMN RIDE · V7 LAB</h2><button id="debugCloseBtn" class="dbg-x" aria-label="Close debug menu">✕</button></div>
         <div class="dbg-content">
           <div class="dbg-metrics"><div class="dbg-metric"><strong id="debugFps">--</strong><span>FPS</span></div><div class="dbg-metric"><strong id="debugMs">--</strong><span>Draw ms</span></div><div class="dbg-metric"><strong id="debugSim">--</strong><span>Physics steps</span></div></div>
           <div class="dbg-readout" id="debugReadout">Loading world state…</div>
@@ -50,7 +50,12 @@
             <label><input data-dbg-setting="godMode" type="checkbox"/>No damage</label>
             <label><input data-dbg-setting="hideHud" type="checkbox"/>Hide game HUD</label>
           </div>
-          <h3>Jump to level area</h3>
+          <h3>V7 buildings &amp; adventures</h3>
+          <div class="dbg-buttons">
+            <button data-dbg-place="workshop">Bike workshop</button><button data-dbg-place="pizzeria">Pizza &amp; Kebab</button><button data-dbg-place="library">Library</button><button data-dbg-place="boathouse">Boathouse</button><button data-dbg-place="greenhouse">Garden</button>
+          </div>
+          <div class="dbg-actions"><button id="debugEntryBtn">Preview dismount → shop</button><button id="debugBoatBtn">Prepare dinghy quest (test)</button><button id="debugFullscreenBtn">⛶ Toggle fullscreen</button></div>
+          <h3>Cycling route</h3>
           <div class="dbg-buttons">
             <button data-dbg-warp="210">Start</button>
             <button data-dbg-warp="7550">Metro</button>
@@ -61,7 +66,7 @@
           </div>
           <div class="dbg-warp"><input id="debugWarpMeters" type="number" min="0" max="28000" step="100" value="7550" aria-label="World x coordinate before stretch"/><button id="debugWarpBtn">Go to X</button></div>
           <div class="dbg-actions"><button id="debugHealBtn">♥ Heal + calm</button><button id="debugSpeedBtn">➤ Give speed</button><button id="debugCrashBtn">🧸 Test baby crash</button><button id="debugRestartBtn">↻ Restart level</button><button id="debugResumeBtn" class="dbg-resume">▶ Resume</button></div>
-          <div class="dbg-help">F3 opens/closes · Esc closes. Opening this menu freezes simulation without changing the original gameplay settings. X is the original map coordinate (0–28000); toggles affect rendering only, except No damage.</div>
+          <div class="dbg-help">F3 or Settings opens/closes · Esc closes · F fullscreen. The menu holds cycling, walking and transitions. Building buttons place the bike outside an entrance. The dinghy test button completes its lunch/repair requirements in your local quest save. X is the original map coordinate (0–28000).</div>
         </div>
       </aside>
       <div id="debugMini" hidden aria-live="off"></div>
@@ -95,16 +100,18 @@
     </div>
     <p class="portrait-hint"><span aria-hidden="true">↻</span> A little more room to ride — turn your phone sideways.</p>
   </main>
-  <footer class="bottom-bar"><div class="status"><span class="live-dot"></span><span class="edition-note">AUTUMN RIDE · VERSION 6</span> <span id="statusLine">v10.9 · PLACEMENT SANITY + OPTION C</span></div><div class="foot-info"><span>🍕 PIZZA <b id="starsCount">0 / 20</b></span><span>SCORE <b id="scoreCount">0</b></span><span id="checkpointLabel">NO CHECKPOINT</span><span>↑ PEDAL · ↓ BRAKE · SPACE HOP · C RETRY</span></div></footer>
+  <footer class="bottom-bar"><div class="status"><span class="live-dot"></span><span class="edition-note">AUTUMN RIDE · VERSION 7</span> <span id="statusLine">v10.9 · PLACEMENT SANITY + OPTION C</span></div><div class="foot-info"><span>🍕 PIZZA <b id="starsCount">0 / 20</b></span><span>SCORE <b id="scoreCount">0</b></span><span id="checkpointLabel">NO CHECKPOINT</span><span>↑ PEDAL · ↓ BRAKE · SPACE HOP · C RETRY</span></div></footer>
 </div>
-<script src="js/assets.js?edition=autumn-v6"></script>
-<script src="js/illustrated-atlas.js?edition=autumn-v6"></script>
-<script src="js/illustrated-props.js?edition=autumn-v6"></script>
-<script src="js/illustrated-world.js?edition=autumn-v6"></script>
-<script src="js/illustrated-neighbourhood.js?edition=autumn-v6"></script>
-<script src="js/illustrated-kids.js?edition=autumn-v6"></script>
-<script src="js/illustrated-hero.js?edition=autumn-v6"></script>
-<script src="js/illustrated-visits.js?edition=autumn-v6"></script>
-<script src="js/game.js?edition=autumn-v6"></script>
+<script src="js/assets.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-atlas.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-props.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-world.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-neighbourhood.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-kids.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-hero.js?edition=autumn-v7-polish"></script>
+<script src="js/fullscreen.js?edition=autumn-v7-polish"></script>
+<script src="js/autumn-quests.js?edition=autumn-v7-polish"></script>
+<script src="js/illustrated-visits.js?edition=autumn-v7-polish"></script>
+<script src="js/game.js?edition=autumn-v7-polish"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v6.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v7.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -29,7 +29,8 @@ Open `http://localhost:8000` in your browser and choose **LET’S RIDE**. If ano
 | Lean | Left / Right, A / D |
 | Hop | Space |
 | Enter a nearby public building (stop first) | E or the on-screen Enter button |
-| Leave a building | Escape or Back to the ride |
+| Leave a building | Escape or Back to bike |
+| Fullscreen | F or the ⛶ button |
 | Restart | R |
 | Retry checkpoint | C |
 | Settings and district selection | F3 |
@@ -43,7 +44,19 @@ The ride has twelve authored stops with twelve distinct building designs. There 
 
 Buildings stand on level stone foundations that follow the terrain across their full width. Trees and plantings use their visible root anchors, and fallen leaves follow the terrain at each leaf's position.
 
-Stop beside a public entrance and press **E** or tap **Enter**. Pizza & Kebab has a cozy painted interior with warm lamps, wooden tables, a pizza oven and a kebab counter. Visits freeze the ride; **Escape** or **Back to the ride** returns you outside. Other public stops have simple illustrated rooms; homes and the metro are scenery. Visits do not buy items, heal the rider or change scores.
+Stop beside a public entrance and press **E** or tap **Enter**. This now changes to a playable area, rather than an image dialog. The bear leaves the bicycle outside, walks on foot and carries the baby in a blue front carrier. Arrow keys or **A/D** walk, and **E**, **Space** or the on-screen action button interact. **P** pauses; **Escape** or **Back to bike** leaves. The original cycling simulation is held at the exact entry position while you explore.
+
+Small shops are single-screen interaction rooms. Pizza & Kebab and the bike workshop have painted rooms with clear walking floors and counters. The boathouse leads to a scrolling dock; the greenhouse and manor lead to larger gardens.
+
+### The boatkeeper’s favour
+
+- Collect the boatkeeper’s lunch from the cook at Pizza & Kebab.
+- Borrow a patch kit from the mechanic in the bicycle workshop.
+- Deliver lunch to the boatkeeper on the dock and use the patch kit beside the dinghy at the far end.
+- Board the repaired boat, steer with **A/D** or the left/right touch buttons, pass the three golden buoys and return left to the dock. The library has an optional route chart.
+
+The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming, and rooms use a horizontal walking strip. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses a dedicated eight-frame, distance-driven cycle with authored boot anchors.
+
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
 Friendly shoppers, a stroller walker and a dog walker follow longer routes, pausing for 3–6 seconds at each end. Routes shorten near enemy crews. Scattering birds, bakery steam and waterside ripples add quiet life behind the road. They are decorative and do not collide with the bike. Reduced-motion preferences suppress the extra animation.
@@ -81,7 +94,8 @@ js/illustrated-kids.js     Painted thrower outfits and six-pose sprite renderer
 js/illustrated-hero.js     Cached bear material treatment
 js/illustrated-atlas.js    Shared painted building/hazard/resident textures
 js/illustrated-neighbourhood.js  Terrain-supported landmarks and resident routes
-js/illustrated-visits.js    Public entrance prompts and indoor visits
+js/illustrated-visits.js    Walking rooms, docks/gardens and boating
+js/autumn-quests.js         Separate adventure inventory and quest save
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -108,4 +122,8 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v6.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision6/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v7.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision7/`. See VALIDATION.md for results and limits.
+
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V7 location/quest/transition readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+
+Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.

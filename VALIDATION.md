@@ -71,3 +71,26 @@ Revision 6 checks (2026-10-31):
 - Terrain definitions and the complete cycling update function were compared with V5 and are unchanged. Bear/baby source assets, hero renderer and animation registry are unchanged.
 - Screenshots in screenshots/revision6/ cover buildings, restaurant interior and both mobile orientations. Visual checks include slope foundations, root anchoring, and the continuing waterfront backdrop.
 - This is browser smoke validation, not a full manual playthrough or a performance guarantee on every device.
+
+
+Revision 7 checks (2026-10-31):
+
+- `node tests/building-visits.cjs` passes placement and adventure model checks: private/public access, foundations, route pauses, required inventory before boat unlock, one-time consumption, buoy and seed counts, returning to complete the voyage, local persistence, and denied-storage fallback.
+- `python3 tests/browser_v7.py` exercises playable canvas scenes using real keyboard events and Chromium touch events with a controlled animation clock. It checks on-foot movement and changing walk frames, proximity actions, front-carrier mode, pause, blocked cycling shortcuts indoors, and the frozen bicycle position.
+- Full quest sequence passes through controls: collect lunch, deliver it, verify the unrepaired boat stays locked, borrow the patch kit, read the optional library chart, repair/board, pass all three buoys, physically steer back and moor. Completion requires returning.
+- Greenhouse sequence passes: collect three distinct seed packets and return them to the gardener. Adventure state reloads independently of cycling state.
+- All six entry URLs load V7. Portrait 390×844 and landscape 844×390 checks exercise walking, the shop interaction button and exit with touch; there is no horizontal overflow. These are Chromium emulations, not physical iPhone/Safari checks.
+- No uncaught page errors or failed HTTP responses during the sequence. JavaScript syntax checks pass.
+- Screenshots in screenshots/revision7/ cover the playable pizza room, workshop, dock, garden, lake and both phone orientations. The new sheet has eight authored crops/foot anchors; the boat uses its visible hull crop and a seated passenger pose.
+- Cycling terrain, update function, collision/encounter definitions and original mounted bear/baby assets remain unchanged. Side-area controls and simulation are separate.
+- Limits: this is a first playable pass with horizontal walking strips and a calm boat objective trail. Initial scene-fade-only entry was superseded by the release polish below. Shopkeepers currently reuse existing resident art; they do not yet have dedicated profession animations. No combat, swimming, platforming or performance guarantee on every device is included.
+
+
+V7 release polish checks:
+
+- `python3 tests/browser_polish.py` checks native fullscreen, visible exit/settings controls, settings inside fullscreen and phone viewport fallback when the native API is absent. It tests returning to windowed play without horizontal overflow.
+- Calculated text/background contrast is at least 4.5:1 for debug section headings, toggle labels, readout, buttons and help text. Phone and fullscreen menu screenshots are included.
+- Real dismount/remount phases are exercised, including settings pausing a transfer midway and preserving the exact cycling position. The original mounted baby stays in the rear seat until the transfer cels contain the baby; the seat is empty thereafter.
+- Six transfer crops avoid neighbouring-sheet bleed. The dedicated eight-frame walk cycle uses a fixed drawing scale and foot anchors; transition walking scales with scene depth toward the actual doorway.
+- The complete quest/browser suite passes with the longer entry/exit and boarding sequences. Cycling terrain/update definitions remain unchanged.
+- Native fullscreen and the fallback were tested in desktop Chromium and phone emulation. Actual iPhone/Safari behaviour and the subjective smoothness of animations still need device playtesting.

@@ -129,3 +129,17 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
  .touch-controls .retry-control{min-width:42px!important}
 }
 .intro-overlay:not([hidden])~#mobilePauseBtn{visibility:hidden!important}
+
+
+/* Public building entrances and quiet indoor visits. */
+.visit-prompt{position:absolute;z-index:12;bottom:18px;left:50%;transform:translateX(-50%);max-width:90%;padding:12px 20px;border:2px solid #e8d29b;border-radius:8px;background:#294e3e;color:#fff0ca;font:800 13px system-ui;box-shadow:0 4px 16px #172d3560;cursor:pointer}
+.visit-prompt:disabled{background:#514d40;color:#f4e3c0;cursor:default}
+.visit-prompt[hidden]{display:none}
+.visit-room{width:min(700px,90vw);max-height:90dvh;overflow:auto;padding:24px;border:2px solid #b6a57e;border-radius:14px;background:#f3e8ce;color:#294536;text-align:center;box-shadow:0 20px 80px #14251d70}
+.visit-room::backdrop{background:#152c24c9}
+.visit-room h2{margin:8px 0;font:900 clamp(20px,4vw,32px) Georgia,serif}
+.visit-description{max-width:480px;margin:12px auto;line-height:1.5}
+.visit-art{overflow:hidden;border-radius:8px;border:1px solid #b5a785}.visit-art svg,.visit-art img{display:block;width:100%;height:auto}
+.visit-note{font-size:13px}.visit-room button{padding:13px 20px;border:0;border-radius:6px;background:#294e3e;color:#fff0ca;font-weight:800;cursor:pointer}.visit-room small{display:block;margin-top:10px}
+.visit-room button:focus-visible,.visit-prompt:focus-visible{outline:3px solid #cb883e;outline-offset:4px}
+@media(max-height:500px){.visit-room{padding:14px}.visit-art{max-height:30vh}.visit-art svg,.visit-art img{height:30vh;object-fit:cover}.visit-description{margin:7px auto}.visit-note{margin:7px}}

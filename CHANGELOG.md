@@ -1,5 +1,17 @@
 # Autumn Ride — standalone updates
 
+## Revision 6
+
+- Corrected tree-root, planting and bakery anchors to exclude transparent sprite padding. Rear terrain coverage supports scenery, and terrain fill extends below the transformed viewport throughout the descent.
+- Added level stone foundations sampled across each full building footprint and door paths that connect to the sloping pavement. Ground leaves and birds use the terrain height at their individual x positions.
+- Reduced sixteen stops to twelve distinct building designs: exactly one metro, one library and one bakery, with open green stretches between them.
+- Added a painted bicycle workshop and Pizza & Kebab exterior, matching the existing autumn palette and materials.
+- Stop at a public entrance, press E or use the touch-friendly Enter button, and visit. The pizzeria has a dedicated cozy painted interior. Other public stops have simple illustrated rooms; homes and metro remain scenery.
+- Visits freeze simulation and clear held controls; Escape or Back to the ride returns to the same position.
+- Residents walk routes of roughly 570–710 world units where space permits, shortened near enemy crews, with 3–6 second endpoint pauses and direction changes. Reduced-motion mode keeps them stationary.
+- Original bear/baby assets and likeness, terrain definitions, cycling simulation, encounters, damage and finish behavior are retained.
+- Added autumn-v6.html, updated cache versions and kept older entry URLs usable.
+
 ## Revision 5
 
 - Replaced the repeated bakery strip with 16 authored neighbourhood stops using 11 building designs: centre arcade, library, clock/community hall, corner shop, apartment/courtyard blocks, manor, greenhouse, boathouses, and one café.

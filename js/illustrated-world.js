@@ -31,7 +31,9 @@
       // Cache color variants once; no per-frame image filters.
       const variant=Math.abs(seed)%3;let art=treeCache.get(variant);
       if(!art){art=document.createElement('canvas');const scale=Math.min(1,700/tree.naturalHeight);art.width=tree.naturalWidth*scale;art.height=tree.naturalHeight*scale;const g=art.getContext('2d');g.filter=variant===1?'saturate(.84) hue-rotate(-12deg)':variant===2?'saturate(1.1) hue-rotate(7deg)':'none';g.drawImage(tree,0,0,art.width,art.height);treeCache.set(variant,art);}
-      const width=height*art.width/art.height;c.drawImage(art,x-width*.5,foot-height,width,height);return;
+      // Source root anchor excludes transparent padding below the actual roots.
+      const scale=height/1400,ratio=art.width/tree.naturalWidth;
+      c.drawImage(art,20*ratio,69*ratio,990*ratio,1400*ratio,x+(20-540)*scale,foot+(69-1462)*scale,990*scale,1400*scale);return;
     }
     // Readable fallback while local art loads.
     c.save();c.translate(x,foot);shape(c,[[-12,0],[-9,-170],[-50,-235],[-42,-240],[0,-190],[30,-247],[36,-240],[12,-167],[17,0]],'#6b5136');
@@ -41,7 +43,11 @@
   function ground(s,x){return s.groundAt(x);}
   function strip(c,s,top,bottom,fill,stroke=null){
     const [lo,hi]=range(s,260);
-    for(const seg of s.segments){if(seg[1]<lo||seg[0]>hi)continue;const a=Math.max(lo,seg[0]),b=Math.min(hi,seg[1]),ya=ground(s,a),yb=ground(s,b);shape(c,[[a,ya+top],[b,yb+top],[b,yb+bottom],[a,ya+bottom]],fill,stroke,2);}
+    for(const seg of s.segments){if(seg[1]<lo||seg[0]>hi)continue;const a=Math.max(lo,seg[0]),b=Math.min(hi,seg[1]);
+      // Use the segment itself at shared edges; never coerce missing ground to zero.
+      const at=x=>seg[2]+(seg[3]-seg[2])*(x-seg[0])/(seg[1]-seg[0]);
+      const ya=at(a),yb=at(b),floor=s.cameraY+s.H+500;
+      shape(c,[[a,ya+top],[b,yb+top],[b,bottom>=1000?Math.max(yb+bottom,floor):yb+bottom],[a,bottom>=1000?Math.max(ya+bottom,floor):ya+bottom]],fill,stroke,2);}
   }
   function textureStrip(c,s,top,bottom,name){strip(c,s,top,bottom,c.createPattern(tiles[name],'repeat'));}
   function fence(c,s){
@@ -75,14 +81,14 @@
   }
   function shrub(c,x,y,w,seed){
     if(verge.complete&&verge.naturalWidth){
-      const width=w*1.3,height=width*verge.naturalHeight/verge.naturalWidth;
-      c.drawImage(verge,x-width*.5,y-height+4,width,height);return;
+      const width=w*1.3,scale=width/2152;
+      c.drawImage(verge,12,38,2152,651,x-width*.5,y-650*scale,width,651*scale);return;
     }
     for(let i=0;i<14;i++){const xx=x+(noise(seed+i,8)-.5)*w;const yy=y-noise(seed+i,9)*15;ellipse(c,xx,yy,5+noise(i,6)*5,5,['#68783c','#9c9b42','#b5a547','#4a663a'][i%4]);}
   }
   function lamp(c,x,y){c.save();c.translate(x,y);ellipse(c,5,2,22,3,'#27312433');rect(c,-4,-220,8,220,'#38483d',ink,2);line(c,[[0,-214],[15,-235],[42,-235]],ink,7);line(c,[[0,-215],[16,-233],[41,-233]],'#7d8770',3);shape(c,[[27,-236],[51,-236],[47,-220],[32,-220]],'#e8c875');rect(c,29,-240,22,5,'#38483d',ink,2);ellipse(c,39,-224,5,2,'#fff1b2');c.restore();}
   function shop(c,x,y,name,seed){
-    if(cafe.complete&&cafe.naturalWidth){const w=310,h=w*cafe.naturalHeight/cafe.naturalWidth;c.drawImage(cafe,x-w/2,y-h+h*.035,w,h);return;}
+    if(cafe.complete&&cafe.naturalWidth){const w=310,scale=w/1319;c.drawImage(cafe,63,8,1319,1040,x-w/2,y-1039*scale,w,1040*scale);return;}
     c.save();c.translate(x,y);const width=260;const wall=['#c28e63','#b9a177','#ba8062'][Math.abs(seed)%3];
     ellipse(c,0,4,150,10,'#2d352d30');rect(c,-width/2,-250,width,250,wall,ink,2);
     shape(c,[[-144,-247],[0,-296],[144,-247]],'#64584a');line(c,[[-140,-245],[140,-245]],'#d2b389',5);
@@ -135,22 +141,26 @@
     backstreet(c,s){
       const [lo,hi]=range(s,400);
       // Terrain beneath the street, including true gaps in the original track.
-      strip(c,s,-117,1800,c.createPattern(tiles.grass,'repeat'));
+      // A continuous rear terrain bank supports roots and entire building footprints.
+      // The lower edge covers the transformed viewport even late in the descent.
+      strip(c,s,-180,1800,c.createPattern(tiles.grass,'repeat'));
+      strip(c,s,-125,-99,'#7a805345');
       const style=s.district.style;
       // Trees sit behind the fence, never on the rideable collision surface.
       const step=420;
       for(let k=Math.floor(lo/step)-1;k<hi/step+1;k++){
-        const x=k*step+70+noise(k,19)*85,y=ground(s,x);if(y==null)continue;
+        const x=k*step+70+noise(k,19)*85,y=ground(s,x);if(y==null||frontage(s,x,75))continue;
         const forest=s.districtAt(x).style==='forest';
         const h=(forest?390:340)+noise(k,20)*95;
         paintedTree(c,x,y-110,h,k+13);
-        if(forest){const xx=x+170,yy=ground(s,xx);if(yy!==null)paintedTree(c,xx,yy-115,340+noise(k,5)*80,k+19);}
+        if(forest){const xx=x+170,yy=ground(s,xx);if(yy!==null&&!frontage(s,xx,75))paintedTree(c,xx,yy-115,340+noise(k,5)*80,k+19);}
       }
       fence(c,s);
       window.BearlyNeighbourhood.buildings(c,s);
       // Broken-up planted verge at the fence base, then a stone footpath.
-      for(let k=Math.floor(lo/65);k<hi/65;k++){const x=k*65,y=ground(s,x);if(y==null)continue;shrub(c,x,y-106,74,k);}
+      for(let k=Math.floor(lo/65);k<hi/65;k++){const x=k*65,y=ground(s,x);if(y==null)continue;if(!frontage(s,x,30))shrub(c,x,y-106,74,k);}
       textureStrip(c,s,-99,-69,'paving');
+      window.BearlyNeighbourhood.entrances(c,s);
       for(let x=Math.floor(lo/62)*62;x<hi;x+=62){const y=ground(s,x);if(y==null)continue;line(c,[[x,y-98],[x-7,y-70]],'#5b5c4a60',1);}
       for(let k=Math.floor(lo/1050);k<hi/1050;k++){const x=k*1050+780,y=ground(s,x);if(y==null||frontage(s,x,30))continue;lamp(c,x,y-91);}
       for(let k=Math.floor(lo/670);k<hi/670;k++){
@@ -187,7 +197,7 @@
       for(let k=Math.floor(lo/115);k<hi/115;k++){
         const x=k*115+noise(k,20)*58,y=ground(s,x);if(y==null)continue;
         shrub(c,x,y+130,90,k+55);
-        for(let j=0;j<6;j++)leaf(c,x+(j-3)*14,y+114+noise(k+j,18)*18,4,k+j);
+        for(let j=0;j<6;j++){const lx=x+(j-3)*14,ly=ground(s,lx);if(ly!==null)leaf(c,lx,ly+114+noise(k+j,18)*18,4,k+j);}
       }
       // Falling leaves are atmospheric, rather than a full-screen effect.
       if(!s.reducedMotion){for(let k=Math.floor(lo/330);k<hi/330;k++){const x=k*330+120+Math.sin(s.time*.5+k)*27,y=ground(s,x);if(y==null)continue;const drift=(s.time*15+k*81)%240;leaf(c,x,y-340+drift,3.4,k);}}

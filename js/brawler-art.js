@@ -60,7 +60,7 @@
     if(!images.adults.naturalWidth)return;
     if(n.kind==='gangster')h*=.46;
     c.save();c.translate(x,y);c.scale(scale,scale);
-    const flip=(n.face||1)*(n.variant===0?-1:1)<0;if(flip)c.scale(-1,1);
+    const sourceFace=n.kind==='gangster'?1:n.variant===0?-1:1,flip=(n.face||1)*sourceFace<0;if(flip)c.scale(-1,1);
     if(n.kind==='gangster'){gang(c,n,h);c.restore();return;}
     const reactionState=['stagger','fall','dead','down','rise'].includes(n.state);
     if(reactionState&&images.reactions.naturalWidth){

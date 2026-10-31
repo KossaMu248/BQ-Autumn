@@ -29,7 +29,8 @@ Open `http://localhost:8000` in your browser and choose **LET’S RIDE**. If ano
 | Lean | Left / Right, A / D |
 | Hop | Space |
 | Enter a nearby public building (stop first) | E or the on-screen Enter button |
-| Leave a building | Escape or Back to the ride |
+| Leave a building | Escape or Back to bike |
+| Fullscreen | F or the ⛶ button |
 | Restart | R |
 | Retry checkpoint | C |
 | Settings and district selection | F3 |
@@ -54,7 +55,7 @@ Small shops are single-screen interaction rooms. Pizza & Kebab and the bike work
 - Deliver lunch to the boatkeeper on the dock and use the patch kit beside the dinghy at the far end.
 - Board the repaired boat, steer with **A/D** or the left/right touch buttons, pass the three golden buoys and return left to the dock. The library has an optional route chart.
 
-The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming, and rooms use a horizontal walking strip. There is no elaborate bicycle dismount or boarding cutscene yet; scene changes use a short fade.
+The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming, and rooms use a horizontal walking strip. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses a dedicated eight-frame, distance-driven cycle with authored boot anchors.
 
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
@@ -122,3 +123,7 @@ Node is optional for playing. The new environment art was generated for this edi
 ## Validation
 
 Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v7.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision7/`. See VALIDATION.md for results and limits.
+
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V7 location/quest/transition readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+
+Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.

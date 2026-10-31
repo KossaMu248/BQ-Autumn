@@ -83,4 +83,14 @@ Revision 7 checks (2026-10-31):
 - No uncaught page errors or failed HTTP responses during the sequence. JavaScript syntax checks pass.
 - Screenshots in screenshots/revision7/ cover the playable pizza room, workshop, dock, garden, lake and both phone orientations. The new sheet has eight authored crops/foot anchors; the boat uses its visible hull crop and a seated passenger pose.
 - Cycling terrain, update function, collision/encounter definitions and original mounted bear/baby assets remain unchanged. Side-area controls and simulation are separate.
-- Limits: this is a first playable pass with horizontal walking strips and a calm boat objective trail. Entry/boarding use scene fades rather than full transition cutscenes. Shopkeepers currently reuse existing resident art; they do not yet have dedicated profession animations. No combat, swimming, platforming or performance guarantee on every device is included.
+- Limits: this is a first playable pass with horizontal walking strips and a calm boat objective trail. Initial scene-fade-only entry was superseded by the release polish below. Shopkeepers currently reuse existing resident art; they do not yet have dedicated profession animations. No combat, swimming, platforming or performance guarantee on every device is included.
+
+
+V7 release polish checks:
+
+- `python3 tests/browser_polish.py` checks native fullscreen, visible exit/settings controls, settings inside fullscreen and phone viewport fallback when the native API is absent. It tests returning to windowed play without horizontal overflow.
+- Calculated text/background contrast is at least 4.5:1 for debug section headings, toggle labels, readout, buttons and help text. Phone and fullscreen menu screenshots are included.
+- Real dismount/remount phases are exercised, including settings pausing a transfer midway and preserving the exact cycling position. The original mounted baby stays in the rear seat until the transfer cels contain the baby; the seat is empty thereafter.
+- Six transfer crops avoid neighbouring-sheet bleed. The dedicated eight-frame walk cycle uses a fixed drawing scale and foot anchors; transition walking scales with scene depth toward the actual doorway.
+- The complete quest/browser suite passes with the longer entry/exit and boarding sequences. Cycling terrain/update definitions remain unchanged.
+- Native fullscreen and the fallback were tested in desktop Chromium and phone emulation. Actual iPhone/Safari behaviour and the subjective smoothness of animations still need device playtesting.

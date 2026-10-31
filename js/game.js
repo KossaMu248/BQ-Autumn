@@ -4129,7 +4129,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function illustratedState(){
     return {W,H,cameraX,cameraY,time,groundAt,segments,finish:FINISH,
-      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
+      district:districtAt(bike.x),districtAt,bikeX:bike.x,bikeSpeed:bike.vx,bikeGroundY:bike.y+riderY(WHEEL_Y)*Math.cos(bike.a)+TIRE_R,playing:state==='playing',crewXs:gangCrews.map(c=>c.x),backdrop:debugSettings.backdrop,metro:debugSettings.metro,reducedMotion:window.matchMedia('(prefers-reduced-motion: reduce)').matches};
   }
   function groundDraw(){
     const scene=illustratedState();
@@ -5882,7 +5882,13 @@ function babyFigure(expr, thrown=false, pose='idle'){
     if(age>2.3){ctx.globalAlpha=Math.min(1,(age-2.3)*2);ctx.font='bold 14px system-ui,sans-serif';ctx.lineWidth=3;ctx.strokeText('MÄLAREN CLEARED · PARTY TIME',0,24);ctx.fillStyle='#fff4de';ctx.fillText('MÄLAREN CLEARED · PARTY TIME',0,24);}
     ctx.restore();
   }
+  function drawParkedBike(){
+    ctx.save();ctx.translate(bike.x,bike.y);ctx.rotate(bike.a);ctx.scale(ART_SCALE,ART_SCALE);ctx.translate(-ART_ORIGIN_X,-ART_ORIGIN_Y);
+    wheel(REAR_X,WHEEL_Y,bike.cycle);wheel(FRONT_X,WHEEL_Y,bike.cycle);frame();bicycleDrive(bike.cycle*.44,0);if(window.BearlyVisits?.hideRoadBaby())childSeat();else {const a=mountedBabyAnim();mountedBabyFrame(a.pose,a.expr);}
+    inkLine([[164,267],[149,305]],'#53675e',3,1);ctx.restore();
+  }
   function autumnBikePresentation(){
+    if(window.BearlyVisits?.roadPresentation(ctx,illustratedState(),bike,drawBike,drawParkedBike))return;
     if(!$('introOverlay').hidden){
       // Title composition is visual only: place our original duo beside the title.
       const shift=490;
@@ -5897,7 +5903,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     ctx.save();ctx.translate(W*.32,H*.22);ctx.scale(1.35,1.35);ctx.translate(-W*.32,-H*.22);ctx.translate(-cameraX+(cameraShake?(Math.random()-.5)*cameraShake:0),-cameraY+(cameraShake?(Math.random()-.5)*cameraShake*.6:0));
     groundDraw();if($('introOverlay').hidden)drawGroundedBikeShadow();if(debugSettings.particles){drawPukeSplashes();drawEffects();drawBabyPee();}autumnBikePresentation();if(debugSettings.particles)drawPukeFlow();drawVictoryCelebration();drawThrownItems();if(debugSettings.particles){drawImpactCues();drawProjectileImpactFX();}
     const compositeSheet=demo.active && !!selectedSheetPose();
-    if(!compositeSheet){drawBearThrown();drawSeatThrown();drawBaby();drawFragments();}
+    if(!compositeSheet){drawBearThrown();drawSeatThrown();if(!window.BearlyVisits?.hideRoadBaby())drawBaby();drawFragments();}
     if(debugSettings.foreground)window.BearlyWorld.foreground(ctx,illustratedState());
     if(debugSettings.hitboxes)debugDrawHitboxes();
     ctx.restore();
@@ -5918,6 +5924,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     ctx.restore();
   }
   function debugWarpTo(x){
+    window.BearlyVisits?.close();
     const position=clamp(Math.round(Number(x)||0),0,28000);
     if(state!=='playing' && state!=='paused')reset(true);
     const target=clamp(stretchX(position),210,FINISH-80),gy=groundAt(target)??fallReference(target);
@@ -5931,12 +5938,15 @@ function babyFigure(expr, thrown=false, pose='idle'){
     $('debugWarpMeters').value=String(position);
     updateHud();debugRefresh(true);return position;
   }
+  let debugReturnFocus=null;
   function debugOpenMenu(next){
+    if(next&&!debugOpen)debugReturnFocus=document.activeElement;
     debugOpen=!!next;keys.clear();
+    clearMobileControls();
     $('debugPanel').hidden=!debugOpen;
     $('debugOpenBtn').setAttribute('aria-expanded',String(debugOpen));
     if(debugOpen){debugRefresh(true);$('debugCloseBtn').focus();}
-    else {$('debugOpenBtn').focus();last=performance.now();acc=0;}
+    else {if(debugReturnFocus?.isConnected)debugReturnFocus.focus();last=performance.now();acc=0;}
   }
   function debugRefresh(force=false){
     if(!debugOpen&&!debugSettings.miniStats)return;
@@ -5946,7 +5956,15 @@ function babyFigure(expr, thrown=false, pose='idle'){
       $('debugFps').textContent=debugPerf.fps?String(debugPerf.fps):'--';
       $('debugMs').textContent=debugPerf.drawMs?debugPerf.drawMs.toFixed(1):'--';
       $('debugSim').textContent=String(debugPerf.steps);
-      $('debugReadout').textContent=`STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bike.x).name}\nMAP X       ${x} / 28000\nCAMERA      ${Math.round(cameraX)}, ${cy}\nBIKE        ${Math.round(bike.x)}, ${Math.round(bike.y)}\nSPEED       ${Math.round(bike.vx*KMH_PER_SPEED)} km/h\nHEALTH      ${Math.round(health)}%    PANIC ${Math.round(panic)}%\nGROUND Y    ${ground==null?'none':Math.round(ground)}\nENEMIES     ${gangCrews.length} crews  ·  ${hazards.length} hazards`;
+      const area=window.BearlyVisits?.audit(),q=area?.quest;
+      $('debugReadout').textContent=`BUILD       ${window.BEARLY_BUILD_ID}
+AREA        ${area?.mode||'cycling'}${area?.place?' · '+area.place:''}
+TRANSITION  ${area?.transition||'none'}${area?.phase!=null?' '+Math.round(area.phase*100)+'%':''}
+LOCAL X   ${area?.mode?Math.round(area.x):'—'}
+BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
+GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}
+SCREEN      ${window.BearlyFullscreen?.state()||'window'}
+STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bike.x).name}\nMAP X       ${x} / 28000\nCAMERA      ${Math.round(cameraX)}, ${cy}\nBIKE        ${Math.round(bike.x)}, ${Math.round(bike.y)}\nSPEED       ${Math.round(bike.vx*KMH_PER_SPEED)} km/h\nHEALTH      ${Math.round(health)}%    PANIC ${Math.round(panic)}%\nGROUND Y    ${ground==null?'none':Math.round(ground)}\nENEMIES     ${gangCrews.length} crews  ·  ${hazards.length} hazards`;
     }
     $('debugMini').hidden=!debugSettings.miniStats;
     if(debugSettings.miniStats)$('debugMini').textContent=`${debugPerf.fps||'--'} FPS · ${debugPerf.drawMs.toFixed(1)} ms\nX ${x} · ${Math.round(bike.vx*KMH_PER_SPEED)} km/h · HP ${Math.round(health)}`;
@@ -5966,6 +5984,10 @@ function babyFigure(expr, thrown=false, pose='idle'){
       });
     }
     for(const btn of document.querySelectorAll('[data-dbg-warp]'))btn.addEventListener('click',()=>debugWarpTo(btn.dataset.dbgWarp));
+    for(const b of document.querySelectorAll('[data-dbg-place]'))b.addEventListener('click',()=>{const scene=window.BearlyNeighbourhood.scenes.find(s=>s.key===b.dataset.dbgPlace);if(scene){debugWarpTo(scene.x/WORLD_STRETCH);debugRefresh(true);}});
+    $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(15700/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
+    $('debugBoatBtn').addEventListener('click',()=>{for(const action of ['lunch','deliver','kit','repair'])window.BearlyQuests.game.act(action);debugRefresh(true);});
+    $('debugFullscreenBtn').addEventListener('click',()=>window.BearlyFullscreen.toggle());
     $('debugWarpBtn').addEventListener('click',()=>debugWarpTo($('debugWarpMeters').value));
     $('debugWarpMeters').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();debugWarpTo(e.currentTarget.value);}});
     $('debugHealBtn').addEventListener('click',()=>{health=100;panic=0;damageCooldown=time+3;updateHud();debugRefresh(true);});
@@ -5979,7 +6001,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;
@@ -6112,7 +6134,14 @@ function babyFigure(expr, thrown=false, pose='idle'){
   $('soundBtn').addEventListener('click',()=>{muted=!muted;$('soundBtn').textContent=muted?'♪ OFF':'♪ ON';});
   window.addEventListener('keydown',e=>{
     if(e.code==='F3'||(debugOpen&&e.code==='Escape')){e.preventDefault();debugOpenMenu(!debugOpen);return;}
-    if(debugOpen || e.target?.closest?.('#debugPanel'))return;
+    if(debugOpen || e.target?.closest?.('#debugPanel')){
+      if(debugOpen&&e.code==='Tab'){
+        const nodes=[...$('debugPanel').querySelectorAll('button:not(:disabled),input:not(:disabled)')],first=nodes[0],lastNode=nodes[nodes.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();lastNode.focus();}
+        else if(!e.shiftKey&&document.activeElement===lastNode){e.preventDefault();first.focus();}
+      }
+      return;
+    }
     if(!introOverlay.hidden){
       if(e.code==='Enter' || e.code==='Space'){e.preventDefault();window.BEARLY_ENTER_GAME();}
       return;

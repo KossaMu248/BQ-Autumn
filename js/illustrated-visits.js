@@ -6,18 +6,22 @@
   const prompt=document.createElement('button');prompt.className='visit-prompt';prompt.type='button';prompt.hidden=true;host.append(prompt);
   const panel=document.createElement('section');panel.className='area-panel';panel.hidden=true;
   panel.setAttribute('aria-label','Location and quests');
-  panel.innerHTML='<div class="area-heading"><strong class="area-name"></strong><button type="button" class="area-exit">BACK TO BIKE ↗</button></div><p class="area-message" aria-live="polite"></p><p class="area-quest"></p>';
+  panel.innerHTML='<div class="area-heading"><strong class="area-name"></strong><button type="button" class="area-fullscreen" aria-label="Fullscreen">⛶</button><button type="button" class="area-settings" aria-label="Settings">⚙</button><button type="button" class="area-exit">BACK TO BIKE ↗</button></div><p class="area-message" aria-live="polite"></p><p class="area-quest"></p>';
   const controls=document.createElement('div');controls.className='area-controls';controls.hidden=true;
   controls.innerHTML='<button type="button" data-direction="-1" aria-label="Walk or steer left">← <small>WALK</small></button><button type="button" data-direction="1" aria-label="Walk or steer right">→ <small>WALK</small></button><button type="button" class="area-action">TALK · E</button>';
   shell.append(panel,controls);
   const nameEl=panel.querySelector('.area-name'),messageEl=panel.querySelector('.area-message'),questEl=panel.querySelector('.area-quest'),actionButton=controls.querySelector('.area-action');
   const journal=document.createElement('div');journal.className='adventure-journal';journal.hidden=true;host.append(journal);
   const art={};
-  for(const [key,file] of Object.entries({workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'})){
+  for(const [key,file] of Object.entries({transfer:'bike-transfer-v7.png',walk:'carrier-walk-v7.png',workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'})){
     const im=new Image();im.src='assets/art/'+file;art[key]=im;
   }
   let candidate=null,context=null,place=null,mode=null,x=160,velocity=0,face=1,clock=0,stride=0,fade=0,focused=null,paused=false,lastMessage='';
+  let transition=null,pendingEntry=false;
+  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const held=new Set(),contacts=new Map(),buoys=[1150,2450,3900],seeds=[1050,1540,2110];
+  const walkFrames=[[26,14,313,482,180,495],[420,14,273,483,567,496],[811,15,264,481,950,495],[1192,13,315,484,1345,496],[19,519,341,479,184,997],[423,520,282,479,570,998],[806,519,308,477,949,995],[1198,519,317,482,1345,1000]];
+  const transferFrames=[[57,13,490,484,307,495],[607,9,341,493,780,500],[1121,8,304,494,1258,500],[110,516,347,493,258,1007],[604,515,340,495,772,1008],[1112,517,287,495,1259,1010]];
   const floor=535;
   const lawn=document.createElement('canvas');lawn.width=lawn.height=128;const lg=lawn.getContext('2d');lg.fillStyle='#66754b';lg.fillRect(0,0,128,128);
   for(let i=0;i<1500;i++){const h=n=>{const v=Math.sin(n*127.1)*43758.5453;return v-Math.floor(v);};lg.fillStyle=['#b6ac5c40','#364c392a','#d5b87033'][i%3];lg.fillRect(h(i)*128,h(i+501)*128,1+h(i+135)*2,1);}
@@ -27,19 +31,33 @@
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
   function choose(next,start){mode=next;x=start;velocity=0;fade=.45;paused=false;clear();refresh();}
   function enter(){
-    if(!candidate||!eligible(context)||!art.people.naturalWidth)return;
-    place=candidate;focused=document.activeElement;context.clearInput();clock=0;stride=0;face=1;
-    choose(place.role==='water'?'dock':['park','castle'].includes(place.role)?'garden':'room',160);
-    if(mode==='dock')quests.act('start');
+    if(transition||!candidate||!eligible(context)||!art.people.naturalWidth||!art.transfer.naturalWidth||!art.walk.naturalWidth)return;
+    place=candidate;focused=document.activeElement;context.clearInput();clock=0;stride=0;face=1;paused=false;
+    transition={kind:'dismount',elapsed:0,duration:3};
+    if(place.role==='water')quests.act('start');
     document.body.classList.add('autumn-exploring');prompt.hidden=true;panel.hidden=false;controls.hidden=false;
-    panel.querySelector('.area-exit').focus();refresh();
+    panel.querySelector('.area-exit').focus();setMessage('Stopping, parking the bike, and settling the baby into the front carrier…');refresh(false);
   }
   function close(){
-    if(!mode)return;
-    context?.clearInput();clear();document.getElementById('mobilePauseBtn').textContent='Ⅱ PAUSE';mode=null;place=null;panel.hidden=true;controls.hidden=true;
+    if(!mode&&!transition)return;
+    context?.clearInput();clear();transition=null;pendingEntry=false;document.getElementById('mobilePauseBtn').textContent='Ⅱ PAUSE';mode=null;place=null;panel.hidden=true;controls.hidden=true;
     document.body.classList.remove('autumn-exploring');focused?.focus();
   }
-  function leave(){if(mode==='water'){quests.act('return');choose('dock',1980);}else close();}
+  function leave(){
+    if(transition)return;
+    paused=false;
+    if(mode==='water'){quests.act('return');choose('dock',1980);transition={kind:'land',elapsed:0,duration:1.2};setMessage('Bringing the dinghy alongside and stepping back onto the dock…');}
+    else {context?.clearInput();clear();mode=null;transition={kind:'mount',elapsed:0,duration:3};setMessage('Returning to the bicycle, settling the baby in the rear seat, and getting ready to ride…');refresh(false);}
+  }
+  function stepTransition(dt){
+    transition.elapsed+=dt;
+    if(transition.elapsed<transition.duration)return;
+    const kind=transition.kind;transition=null;
+    if(kind==='dismount'){choose(place.role==='water'?'dock':['park','castle'].includes(place.role)?'garden':'room',160);fade=.25;}
+    else if(kind==='mount'){transition={kind:'done'};close();}
+    else if(kind==='board'){choose('water',180);setMessage('MÄLAREN · Steer with ← → or A/D. Pass the three golden buoys, then return to the dock.');}
+    else {x=1980;refresh(false);}
+  }
   function targets(){
     if(!mode||!place)return [];
     const q=quests.snapshot();
@@ -52,11 +70,11 @@
   }
   function nearby(){return targets().find(t=>Math.abs(t.x-x)<105)||null;}
   function act(){
-    if(paused||fade>0)return;
+    if(paused||transition||fade>0)return;
     const t=nearby(),q=quests.snapshot();if(!t)return;
     switch(t.kind){
-      case 'exit':close();return;
-      case 'moor':quests.act('return');choose('dock',1980);return;
+      case 'exit':leave();return;
+      case 'moor':leave();return;
       case 'lunch':quests.act('lunch');setMessage(q.delivered?'COOK · Thanks for taking lunch to the boatkeeper. Enjoy the lake!':q.lunch?'COOK · It’s wrapped up warm. The boatkeeper is at Mälaren’s boathouse.':'COOK · Could you take this warm lunch to the boatkeeper? There’s room in your satchel.');break;
       case 'kit':quests.act('kit');setMessage(q.repaired?'MECHANIC · That little boat should hold water now. Happy sailing!':'MECHANIC · Here’s a patch kit for the leaky dinghy. Use it beside the boat at the boathouse.');break;
       case 'chart':quests.act('chart');setMessage('LIBRARIAN · Three golden buoys mark our lake trail. I’ve marked their distances on your chart. Bring the boat back when you’ve found them.');break;
@@ -66,7 +84,7 @@
       case 'boat':
         if(!q.repaired){if(q.kit){quests.act('repair');setMessage(q.delivered?'BEAR · Patch pressed, leak fixed. The boatkeeper has lunch. Ready for the lake!':'BEAR · Patch pressed, leak fixed. Now bring the boatkeeper lunch before borrowing it.');}else setMessage('The dinghy has a small leak. Borrow a patch kit from the bike workshop.');}
         else if(!q.boatReady)setMessage('The dinghy is patched. Bring the boatkeeper lunch from Pizza & Kebab before borrowing it.');
-        else {choose('water',180);setMessage('MÄLAREN · Steer with ← → or A/D. Pass the three golden buoys, then return to the dock. Lifejackets on!');}
+        else {clear();transition={kind:'board',elapsed:0,duration:1.2};setMessage('Stepping aboard and sitting down with the baby safely in the front carrier…');}
         break;
       case 'seed':quests.act('seed',t.id);setMessage('A lost seed packet, safe in your satchel. Find all three and bring them to the gardener.');break;
       case 'gardener':
@@ -79,8 +97,10 @@
     stride=0;refresh(false);
   }
   function refresh(initial=true){
-    if(!mode)return;
+    if(!mode&&!transition)return;
     const q=quests.snapshot(),t=nearby();
+    if(transition){document.getElementById('mobilePauseBtn').textContent=paused?'▶ RESUME':'Ⅱ PAUSE';nameEl.textContent=paused?'PAUSED':transition.kind==='dismount'?'PARKING THE BICYCLE':transition.kind==='mount'?'BACK TO THE BICYCLE':transition.kind==='board'?'BOARDING THE DINGHY':'STEPPING ASHORE';actionButton.disabled=true;actionButton.textContent='ONE MOMENT…';panel.querySelector('.area-exit').disabled=true;return;}
+    panel.querySelector('.area-exit').disabled=false;
     const pauseButton=document.getElementById('mobilePauseBtn');pauseButton.textContent=paused?'▶ RESUME':'Ⅱ PAUSE';pauseButton.setAttribute('aria-label',paused?'Resume exploration':'Pause exploration');
     nameEl.textContent=paused?'PAUSED':mode==='water'?'MÄLAREN · BUOY TRAIL':mode==='dock'?'MÄLARENS BÅTHUS · DOCK':mode==='garden'?place.label+' · GARDEN':place.label;
     panel.querySelector('.area-exit').textContent=mode==='water'?'BACK TO DOCK ↗':'BACK TO BIKE ↗';
@@ -91,10 +111,12 @@
   }
   function update(s){
     context=s;
+    if(s.debugOpen){clear();return;}
+    if(transition){if(!paused)stepTransition(Math.min(.05,Math.max(0,s.dt||0)));refresh(false);return;}
     const q=quests.snapshot();journal.hidden=!!mode||!s.playing||!q.started;
     journal.textContent=q.voyage?'LAKE TRAIL COMPLETE ✓':q.delivered&&q.repaired?`MÄLAREN · Buoys ${q.buoys.length}/3 · Return to the boatkeeper`:`BOATKEEPER · Lunch ${q.delivered?'✓':q.lunch?'packed':'at Pizza & Kebab'} · Patch ${q.repaired?'✓':q.kit?'kit packed':'at workshop'}`;
-    if(!mode){candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0;
-      if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}return;}
+    if(!mode){candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&art.walk.naturalWidth>0;
+      if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
     const dt=Math.min(.05,Math.max(0,s.dt||0));if(paused)return;
     clock+=dt;fade=Math.max(0,fade-dt);
     const dir=(held.has('right')||[...contacts.values()].includes(1)?1:0)-(held.has('left')||[...contacts.values()].includes(-1)?1:0);
@@ -110,8 +132,11 @@
     for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,e=>{contacts.delete(e.pointerId);button.classList.remove('held');});
   }
   for(const b of controls.querySelectorAll('[data-direction]'))bindHold(b,Number(b.dataset.direction));
+  panel.querySelector('.area-fullscreen').addEventListener('click',()=>window.BearlyFullscreen.toggle());panel.querySelector('.area-settings').addEventListener('click',()=>window.BEARLY_DEBUG_MENU.toggle(true));
   prompt.addEventListener('click',enter);actionButton.addEventListener('click',act);panel.querySelector('.area-exit').addEventListener('click',leave);
   window.addEventListener('keydown',e=>{
+    if(e.code==='F3'||window.BEARLY_DEBUG_MENU?.isOpen())return;
+    if(transition){if(e.code==='KeyP'&&!e.repeat){paused=!paused;refresh(false);}e.preventDefault();e.stopImmediatePropagation();return;}
     if(!mode){if(e.code==='KeyE'&&!e.repeat&&candidate&&eligible(context)){e.preventDefault();e.stopImmediatePropagation();enter();}return;}
     if(e.code==='Tab')return;
     e.preventDefault();e.stopImmediatePropagation();
@@ -122,20 +147,22 @@
     if(e.code==='KeyP'){paused=!paused;clear();refresh(false);}
   },true);
   window.addEventListener('keyup',e=>{if(['ArrowLeft','KeyA'].includes(e.code))held.delete('left');if(['ArrowRight','KeyD'].includes(e.code))held.delete('right');},true);
-  window.addEventListener('blur',()=>{clear();if(mode){paused=true;refresh(false);}});
-  document.addEventListener('visibilitychange',()=>{if(document.hidden){clear();if(mode){paused=true;refresh(false);}}});
+  window.addEventListener('blur',()=>{clear();if(mode||transition){paused=true;refresh(false);}});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){clear();if(mode||transition){paused=true;refresh(false);}}});
   // The pause button remains useful on a phone while exploring.
-  document.getElementById('mobilePauseBtn').addEventListener('click',e=>{if(mode){e.stopImmediatePropagation();paused=!paused;clear();refresh(false);}},true);
+  document.getElementById('mobilePauseBtn').addEventListener('click',e=>{if(mode||transition){e.stopImmediatePropagation();paused=!paused;clear();refresh(false);}},true);
   function image(c,im,dx,dy,dw,dh){if(im?.naturalWidth)c.drawImage(im,dx,dy,dw,dh);}
   function rect(c,x,y,w,h,color){c.fillStyle=color;c.fillRect(x,y,w,h);}
   function text(c,str,x,y,size=18,color='#f5e4ba'){c.fillStyle=color;c.font=`bold ${size}px Trebuchet MS`;c.fillText(str,x,y);}
   function rounded(c,x,y,w,h,color,r=6){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();}
   function actor(c,px,py,height=190,seated=false){
-    const im=art.people;if(!im.naturalWidth)return;
+    let im=art.people;if(!im.naturalWidth)return;
     const moving=Math.abs(velocity)>1&&!paused,frame=seated?7:moving?[1,2,3,4][Math.floor(stride/23)%4]:nearby()&&clock%7>5?6:Math.floor(clock/2)%2?5:0;
     // Authored source crops include the talking hand without bleeding into the seated frame.
     const frames=[[51,13,256,488,179,498],[415,12,289,487,557,498],[815,16,290,484,954,498],[1196,13,322,485,1345,498],[27,520,328,483,183,1001],[448,522,256,483,570,1003],[812,523,360,480,941,1001],[1200,584,317,409,1350,990]];
-    const [sx,sy,sw,sh,fx,fy]=frames[frame],scale=height/488;
+    let crop=frames[frame];
+    if(moving&&!seated&&walkFrames.length){im=art.walk;crop=walkFrames[Math.floor(stride/15)%8];}
+    const [sx,sy,sw,sh,fx,fy]=crop,scale=height/(im===art.walk?480:488);
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
     if(!seated){c.fillStyle='#162e2945';c.beginPath();c.ellipse(0,1,41,8,0,0,Math.PI*2);c.fill();}
     c.drawImage(im,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);
@@ -201,7 +228,13 @@
       for(const px of [40,360,680,1000,1320,1640,2210]){rect(c,px,425,14,190,'#5c6047');rounded(c,px-4,415,22,14,'#bdb18a');}
       window.BearlyAtlas.draw(c,'boathouse',440,454,420);npc(c,730,floor);hotspot(c,730,floor);hotspot(c,2050,floor);hotspot(c,115,floor);
       if(art.boat.naturalWidth)c.drawImage(art.boat,52,275,1682,497,1920,544,310,92);
-      actor(c,x,floor,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
+      if(transition&&['board','land'].includes(transition.kind)){
+        const progress=smooth(transition.elapsed/transition.duration),t=transition.kind==='board'?progress:1-progress;
+        const oldX=x,oldV=velocity,oldStride=stride;x=1980+70*t;velocity=t<.65?90:0;stride=transition.elapsed*180;
+        actor(c,x,floor+42*t,215-50*t,t>.65);
+        if(t>.65&&art.boat.naturalWidth)c.drawImage(art.boat,52,275,1682,497,1920,544,310,92);
+        x=oldX;velocity=oldV;stride=oldStride;
+      }else actor(c,x,floor,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
     }else{
       rect(c,0,400,2500,240,c.createPattern(lawn,'repeat'));rect(c,0,500,2500,88,'#b3a17d');
       for(let i=0;i<60;i++){rect(c,i*45,515,35,2,'#d2c09a80');}
@@ -221,5 +254,28 @@
     if(paused){rect(c,0,0,1160,640,'#17392bb0');text(c,'PAUSED · P OR PAUSE TO RESUME',285,320,26);}
     c.restore();return true;
   }
-  window.BearlyVisits={active:()=>!!mode,close,update,render,audit:()=>({mode,place:place?.key,x,velocity,frame:Math.floor(stride/23)%4,baby:'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),artReady:!!art.people.naturalWidth&&!!art.boat.naturalWidth}),quests};
+  function roadPresentation(c,s,bike,ride,park){
+    if(!transition||!['dismount','mount'].includes(transition.kind))return false;
+    const raw=clamp(transition.elapsed/transition.duration,0,1),t=transition.kind==='mount'?1-raw:raw;
+    if(t<.04){ride();return true;}
+    park();
+    const gy=s.bikeGroundY??s.groundAt(bike.x);if(gy===null)return true;
+    const walking=clamp((t-.7)/.3,0,1),door=window.BearlyNeighbourhood.entrance(place).x;
+    const support=window.BearlyNeighbourhood.placement(place,s.groundAt);
+    const px=bike.x+22+(door-bike.x-22)*smooth(walking),py=gy+((support?.foot??gy-106)-gy)*smooth(walking),height=145-65*walking;
+    if(walking>0){
+      const oldFace=face,oldV=velocity,oldStride=stride;const direction=Math.sign(door-bike.x-22)||1;face=transition.kind==='mount'?-direction:direction;velocity=100;stride=(transition.kind==='mount'?1-walking:walking)*160;
+      c.save();c.globalAlpha*=clamp((1-walking)/.12,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
+    }else if(transferFrames.length){
+      const frame=Math.min(5,Math.floor(t/.7*6)),[sx,sy,sw,sh,fx,fy]=transferFrames[frame],scale=height/488;
+      c.save();c.translate(px,py);c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();
+    }
+    return true;
+  }
+  function hideRoadBaby(){
+    if(!transition||!['dismount','mount'].includes(transition.kind))return false;
+    const p=transition.elapsed/transition.duration,t=transition.kind==='mount'?1-p:p;
+    return t>=.7*2/6;
+  }
+  window.BearlyVisits={active:()=>!!mode||!!transition,close,update,render,roadPresentation,hideRoadBaby,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),artReady:!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!art.walk.naturalWidth}),quests};
 })();

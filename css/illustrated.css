@@ -151,7 +151,7 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 .area-controls button.held{background:#78874b}.area-controls button:disabled{opacity:.6;cursor:default}
 .area-panel[hidden],.area-controls[hidden]{display:none}
 .autumn-exploring .game-hud,.autumn-exploring .dialogue,.autumn-exploring .toast,.autumn-exploring .stunt-hud,.autumn-exploring .touch-controls,.autumn-exploring .portrait-hint{display:none!important}
-.autumn-exploring .top-actions button:not(#soundBtn){pointer-events:none;opacity:.4}
+.autumn-exploring .top-actions button:not(#soundBtn):not(#debugOpenBtn):not(#fullscreenBtn){pointer-events:none;opacity:.4}
 @media(max-width:600px){.area-panel{padding:10px}.area-heading{font-size:11px}.area-exit{font-size:10px;padding:9px}.area-message{font-size:13px}.area-quest{font-size:11px}.area-controls{padding:8px;gap:6px}.area-controls button{min-width:54px}.area-controls .area-action{font-size:11px}}
 @media(max-height:500px) and (orientation:landscape){.autumn-exploring .masthead,.autumn-exploring .bottom-bar{display:none!important}.autumn-exploring .canvas-wrap{height:calc(100dvh - 169px)!important;aspect-ratio:auto!important}.area-panel{padding:6px 12px}.area-message{font-size:12px;min-height:0;margin:5px 0}.area-quest{font-size:10px}.area-controls{padding:5px 12px}.area-controls button{min-height:38px;padding:5px 12px}.area-heading{font-size:12px}.area-exit{padding:5px 10px;font-size:10px}}
 .adventure-journal{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;z-index:4;max-width:90%;padding:8px 12px;background:#203e31ed;border:1px solid #aab486;border-radius:5px;font-size:11px;color:#f7e5b7;text-align:center;pointer-events:none}
@@ -161,3 +161,30 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 .adventure-journal{bottom:66px}
 @media(max-width:600px){.adventure-journal{bottom:55px}}
 .visit-prompt:focus-visible{outline:3px solid #cb883e;outline-offset:4px}
+/* A single high-contrast palette for every debug control and readout. */
+#debugPanel{position:fixed!important;top:12px!important;right:12px!important;width:min(450px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - 24px)!important;z-index:60!important;background:#f5ebcf!important;color:#233a2b!important;border:2px solid #334e38!important;box-shadow:0 12px 50px #0a1c24b0!important}
+#debugPanel h2{color:#fff0ca!important;font-size:14px}#debugPanel h3{color:#344b2e!important;font-size:12px!important}
+#debugPanel .dbg-header{background:#2d4633!important;border-color:#6d805e!important}
+#debugPanel .dbg-content{padding:12px!important}
+#debugPanel .dbg-metric,#debugPanel .dbg-toggles label{background:#e0dfbf!important;border:1px solid #9ba785!important;color:#253c2c!important}
+#debugPanel .dbg-metric strong{color:#223f2e!important}#debugPanel .dbg-metric span{color:#40543c!important}
+#debugPanel .dbg-readout{background:#213b30!important;color:#fff0cd!important;font-size:12px!important;line-height:1.55!important}
+#debugPanel .dbg-content button{background:#d8dbb7!important;color:#223b2b!important;border:1px solid #7c9068!important;min-height:40px!important;font-weight:800!important}
+#debugPanel .dbg-content button:hover,#debugPanel .dbg-content button:focus-visible{background:#c4ce9d!important;color:#172b1d!important}
+#debugPanel .dbg-help{color:#40543c!important;font-size:11px!important}
+#debugPanel .dbg-warp input{background:#fff9e8!important;color:#203829!important;border-color:#7c9068!important}
+#debugPanel .dbg-actions .dbg-resume{background:#315e40!important;color:#fff4d1!important}
+#debugPanel input[type=checkbox]{accent-color:#355e3c!important;width:18px!important;height:18px!important}
+#debugPanel .dbg-x{min-width:40px;min-height:36px;color:#fff6df!important;background:#3a5842!important}
+.autumn-exploring .top-actions #debugOpenBtn,.autumn-exploring .top-actions #fullscreenBtn{pointer-events:auto;opacity:1}
+.fullscreen-tools{position:absolute;right:8px;top:8px;z-index:30;display:flex;gap:8px}.fullscreen-tools[hidden]{display:none}
+.fullscreen-tools button{background:#243f31;color:#fff0c9;border:1px solid #a2b07e;border-radius:5px;padding:9px 12px;font:800 11px Trebuchet MS;cursor:pointer}
+.viewport-fullscreen{overflow:hidden!important}
+.game-shell.is-expanded{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;z-index:1000!important;display:flex!important;flex-direction:column!important;border:0!important;border-radius:0!important;background:#172c23!important}
+.game-shell.is-expanded .canvas-wrap{flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;aspect-ratio:auto!important}
+.game-shell.is-expanded #game{object-fit:contain!important;background:#172c23!important}
+.game-shell.is-expanded .touch-controls,.game-shell.is-expanded .area-panel,.game-shell.is-expanded .area-controls{flex:0 0 auto!important}
+.game-shell.is-expanded .portrait-hint{display:none!important}.game-shell.is-expanded .game-hud{padding-top:55px!important}
+@media(max-width:700px){.fullscreen-label{display:none}#fullscreenBtn{padding:8px!important;font-size:17px!important}.fullscreen-tools button{padding:8px;font-size:10px}}
+
+.area-name{flex:1;min-width:0}.area-heading{gap:7px}.area-fullscreen,.area-settings{flex:none;min-width:36px;min-height:36px;padding:6px;border:1px solid #9ead7c;border-radius:5px;background:#38543d;color:#fff0c9;font-size:17px;cursor:pointer}

@@ -24,7 +24,7 @@ def ready(p,entry='autumn-v7.html'):
 def audit(p):return p.evaluate('BearlyVisits.audit()')
 def enter(p,x,mode):
     p.evaluate('(x)=>BEARLY_DEBUG_MENU.warp(x/1.5)',x);p.clock.run_for(100)
-    p.locator('.visit-prompt').click();p.clock.run_for(600)
+    p.locator('.visit-prompt').click();p.clock.run_for(3400)
     assert audit(p)['mode']==mode
 
 def move(p,target):
@@ -47,23 +47,23 @@ try:
         p.keyboard.press('r');p.clock.run_for(50);assert audit(p)['mode']=='room'
         assert p.evaluate('BEARLY_TOUCH_STATUS().x')==ride['x'],'Cycling remains frozen while walking'
         p.keyboard.press('p');before=audit(p)['x'];p.keyboard.down('ArrowLeft');p.clock.run_for(400);assert audit(p)['x']==before;p.keyboard.up('ArrowLeft');p.keyboard.press('p')
-        p.keyboard.press('Escape');p.clock.run_for(20);assert audit(p)['mode'] is None
+        p.keyboard.press('Escape');p.clock.run_for(3200);assert audit(p)['mode'] is None
         assert abs(p.evaluate('BEARLY_TOUCH_STATUS().x')-ride['x'])<2
         # The dinghy stays locked without the repair, even after lunch is delivered.
         enter(p,31750,'dock');move(p,640);action(p);assert audit(p)['quest']['delivered']
         p.screenshot(path=str(SHOTS/'dock.png'));move(p,1980);action(p);assert audit(p)['mode']=='dock' and not audit(p)['quest']['boatReady']
-        p.keyboard.press('Escape');enter(p,5600,'room');move(p,700);action(p);assert audit(p)['quest']['kit'];p.screenshot(path=str(SHOTS/'workshop.png'));p.keyboard.press('Escape')
-        enter(p,17700,'room');move(p,700);action(p);assert audit(p)['quest']['chart'];p.keyboard.press('Escape')
-        enter(p,31750,'dock');move(p,1980);action(p);assert audit(p)['quest']['boatReady'];action(p);assert audit(p)['mode']=='water';p.clock.run_for(600)
+        p.keyboard.press('Escape');p.clock.run_for(3200);enter(p,5600,'room');move(p,700);action(p);assert audit(p)['quest']['kit'];p.screenshot(path=str(SHOTS/'workshop.png'));p.keyboard.press('Escape');p.clock.run_for(3200)
+        enter(p,17700,'room');move(p,700);action(p);assert audit(p)['quest']['chart'];p.keyboard.press('Escape');p.clock.run_for(3200)
+        enter(p,31750,'dock');move(p,1980);action(p);assert audit(p)['quest']['boatReady'];action(p);p.clock.run_for(1600);assert audit(p)['mode']=='water';p.clock.run_for(600)
         p.keyboard.down('ArrowRight');p.clock.run_for(6500);p.keyboard.up('ArrowRight');p.clock.run_for(50);p.screenshot(path=str(SHOTS/'lake.png'))
         p.keyboard.down('ArrowRight');p.clock.run_for(11000);p.keyboard.up('ArrowRight');p.clock.run_for(50)
         assert len(audit(p)['quest']['buoys'])==3 and not audit(p)['quest']['voyage']
-        p.keyboard.down('ArrowLeft');p.clock.run_for(18500);p.keyboard.up('ArrowLeft');p.clock.run_for(800);action(p)
-        assert audit(p)['mode']=='dock' and audit(p)['quest']['voyage'];p.keyboard.press('Escape')
+        p.keyboard.down('ArrowLeft');p.clock.run_for(18500);p.keyboard.up('ArrowLeft');p.clock.run_for(800);action(p);p.clock.run_for(1400)
+        assert audit(p)['mode']=='dock' and audit(p)['quest']['voyage'];p.keyboard.press('Escape');p.clock.run_for(3200)
         # A second area has a different walking quest.
         enter(p,24400,'garden');move(p,520);action(p)
         for sx in [1050,1540,2110]:move(p,sx);action(p)
-        move(p,650);action(p);assert audit(p)['quest']['garden'];p.screenshot(path=str(SHOTS/'garden.png'));p.keyboard.press('Escape')
+        move(p,650);action(p);assert audit(p)['quest']['garden'];p.screenshot(path=str(SHOTS/'garden.png'));p.keyboard.press('Escape');p.clock.run_for(3200)
         # Adventure progress survives a reload, separate from cycling scores.
         ready(p);assert audit(p)['quest']['voyage'] and audit(p)['quest']['garden']
         for entry in ['index.html','autumn-v3.html','autumn-v4.html','autumn-v5.html','autumn-v6.html']:
@@ -71,14 +71,14 @@ try:
         p.close()
         for width,height in [(390,844),(844,390)]:
             context=browser.new_context(viewport={'width':width,'height':height},is_mobile=True,has_touch=True,device_scale_factor=1)
-            p=context.new_page();p.clock.install();watch(p);ready(p);p.evaluate('BEARLY_DEBUG_MENU.warp(15700/1.5)');p.clock.run_for(100);p.locator('.visit-prompt').tap();p.clock.run_for(600)
+            p=context.new_page();p.clock.install();watch(p);ready(p);p.evaluate('BEARLY_DEBUG_MENU.warp(15700/1.5)');p.clock.run_for(100);p.locator('.visit-prompt').tap();p.clock.run_for(3400)
             button=p.locator('[data-direction="1"]').bounding_box();cdp=context.new_cdp_session(p);start=audit(p)['x']
             cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':button['x']+button['width']/2,'y':button['y']+button['height']/2}]})
             p.clock.run_for(2700);cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});p.clock.run_for(40)
             assert audit(p)['x']>start+450
             p.locator('.area-action').tap();assert audit(p)['quest']['lunch'];p.screenshot(path=str(SHOTS/f'phone-{width}.png'))
             assert p.evaluate('document.documentElement.scrollWidth<=innerWidth')
-            p.locator('.area-exit').tap();p.clock.run_for(50);assert audit(p)['mode'] is None
+            p.locator('.area-exit').tap();p.clock.run_for(3200);assert audit(p)['mode'] is None
             context.close()
         browser.close()
     assert not errors,errors

@@ -138,3 +138,12 @@ Revision 10 checks (2026-10-31):
 - Three generated transparent sheets have authored crops for resident reactions, gang face/KO reactions and bear damage/defeat. Screenshot review includes both walking phases, carrier alignment, foreground face impact and damage/defeat frames under screenshots/revision10/.
 - Terrain and the cycling update remain unchanged from V9.1. The cycling encounter has a targeted guard for members defeated on foot; active crews retain their original timing, projectile damage and collision behavior. NPCs recover after temporary defeat, retaining access to quests.
 - Checks use headless Chromium and touch emulation. Physical iPhone/Safari performance and subjective animation feel still need device playtesting.
+
+
+Revision 10.1 checks:
+
+- `python3 tests/browser_full_body.py` independently observes real canvas drawImage transforms for 1,008 cases: six actors, normal/reduced motion, desktop and narrow portrait crops, edge/center launches, flight and held impact. Whole destination figures fit the visible view and source crops retain at least 99% of each character’s opaque pixels. Damaged cels and exact damage text are checked without changing game state.
+- `python3 tests/browser_impact.py` uses keyboard and actual phone taps to grab/throw a healthy NPC, verifies 32 health lost, captures the flight/contact/damaged full body, and confirms impact timing and recovery in 1440×1000, 390×844 and 844×390 layouts. No page errors or HTTP failures.
+- Both Node suites pass. Combat model checks now include a low-health throw reporting only the six remaining health points lost. JavaScript syntax and whitespace checks pass.
+- Fresh browser screenshots under screenshots/revision10-1/ also show the shop/front carrier, boat seating with hearts, jumping with a grounded shadow, bear damage/lost hearts, and NPC defeat with witnesses. They are actual game captures; generated full-body art is used by the renderer.
+- Scope is the screen-impact presentation, damage feedback, one reaction-cel crop and release cache keys. Terrain, cycling physics, quests, controls, NPC aggression, carrier and defeat timing remain unchanged from V10. Physical iPhone/Safari remains untested.

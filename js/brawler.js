@@ -44,7 +44,7 @@
     }
     function throwAtScreen(p){
       if(!held||hp<=0||phase==='madness')return false;
-      const n=held;held=null;provoke(n);n.hp=Math.max(0,n.hp-32);n.state='screen';n.age=0;n.startX=n.x;n.startDepth=n.depth;n.impacted=false;
+      const n=held;held=null;provoke(n);const before=n.hp;n.hp=Math.max(0,n.hp-32);n.lastDamage=before-n.hp;n.state='screen';n.age=0;n.startX=n.x;n.startDepth=n.depth;n.impacted=false;
       stats.throws++;effect('throw',n.x,n.depth);gain(24);hitStop=.045;lastAction=time;return true;
     }
     function maul(p){

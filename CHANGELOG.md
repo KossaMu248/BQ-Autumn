@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 10.1 — full-body screen impacts
+
+- Replaced the cropped face portraits with full-length screen-impact cels for all three residents and all three gang outfits. The torso, trouser legs, palms and both shoes stay visible through flight and contact.
+- Added bruised cheeks, scratches, lip marks, frayed sleeves and knee scuffs after collision, plus the actual health lost as a damage number. Knockout throws display KO.
+- Fit the rotated/squashed whole sprite to the visible phone or desktop camera crop, retaining the later slide away. Authored source rectangles include complete caps, hands and boot soles.
+- Removed a neighboring-cell fragment from the prone resident cel, refreshed cache keys and added autumn-v10-1.html.
+- Added fresh screenshots of the impact, cozy shop, seated boat/hearts, jumping/shadow, bear damage and NPC defeat/witness reactions.
+
 ## Revision 10 — persistent NPCs and character animation
 
 - Restored on-foot heart health and retained the cycling heart/portrait artwork. Dialogue/info remains white; HUD panels, message backgrounds, the full-screen frenzy frame and opaque result boxes no longer hide the scene.

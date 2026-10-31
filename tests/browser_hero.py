@@ -14,8 +14,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v11-1.html"
-SHOTS = ROOT / "screenshots" / "revision11-1"
+ENTRY = "autumn-v11-2.html"
+SHOTS = ROOT / "screenshots" / "revision11-2"
 
 CHAIR_DRAW_AUDIT = r"""(() => {
   window.__heroLooseChairDraws=[];

@@ -2,12 +2,12 @@
 (() => {
   'use strict';
   const images={},clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  for(const [key,file] of Object.entries({front:'front-carrier-v7.png',back:'back-carrier-v11.png',reactions:'carrier-reactions-v11.png',parts:'matched-legs-v11.png'})){
+  for(const [key,file] of Object.entries({front:'front-carrier-v7.png',back:'back-carrier-v11.png',reactions:'carrier-reactions-v11.png',parts:'matched-legs-v11.png',frontBackground:'front-background-v11-2.png',backBackground:'back-background-v11-2.png',reactionBackground:'reaction-background-v11-2.png',boatBackground:'boat-background-v11-2.png',transferBackground:'transfer-background-v11-2.png'})){
     const im=new Image();im.src='assets/art/'+file;images[key]=im;
   }
   // Use the original character's face pixels, rather than reinterpreting his
   // identity in each carrier painting. These are head-only original textures.
-  for(const [key,file] of Object.entries({smile:'face_smile.webp',excited:'face_happy.webp'})){
+  for(const [key,file] of Object.entries({portrait:'baby_pose_idle.webp'})){
     const im=new Image();im.src='assets/'+file;images[key]=im;
   }
   const heads={
@@ -25,6 +25,7 @@
     transfer4:{box:[772,678,87,82],neck:[824,757],angle:0},
     transfer5:{box:[1267,678,88,85],neck:[1320,760],angle:0}
   };
+  const backgrounds={front:'frontBackground',back:'backBackground',grab:'backBackground',maul:'backBackground',backHurt:'backBackground',frontHurt:'reactionBackground',collapse:'reactionBackground',defeated:'reactionBackground',boat:'boatBackground',transfer2:'transferBackground',transfer3:'transferBackground',transfer4:'transferBackground',transfer5:'transferBackground'};
   // All landmarks are measured in the SAME source coordinates as the carrier torso.
   // Image-left is the near leg in these right-facing three-quarter paintings.
   const profiles={
@@ -46,33 +47,61 @@
   function ready(){return Object.values(images).every(im=>im.naturalWidth>0);}
   function originalFace(key){
     if(faceTextures[key])return faceTextures[key];
-    const im=images[key],tile=document.createElement('canvas');tile.width=im.naturalWidth;tile.height=im.naturalHeight;
+    const im=images[key],tile=document.createElement('canvas');tile.width=82;tile.height=82;
     tile.dataset.sourceAsset=im.src.split('/').pop();
-    const g=tile.getContext('2d');g.drawImage(im,0,0);
-    // Only soften the cropped bottom of the jaw into the shirt collar. Eyes,
-    // nose and smile remain the original pixels at a uniform scale.
-    const fade=g.createLinearGradient(0,tile.height-13,0,tile.height);fade.addColorStop(0,'#fff');fade.addColorStop(1,'#fff0');
-    g.globalCompositeOperation='destination-in';g.fillStyle=fade;g.fillRect(0,0,tile.width,tile.height);
+    tile.dataset.sourceRect='0,0,82,82';
+    const g=tile.getContext('2d');
+    // The original in-game head already has its complete smile, jaw and neck.
+    // Extract that natural silhouette, excluding every bicycle-seat pixel.
+    g.beginPath();g.moveTo(48,73);
+    g.bezierCurveTo(40,73,29,67,25,60);g.bezierCurveTo(21,57,17,51,15,46);
+    g.bezierCurveTo(12,43,12,39,15,35);g.bezierCurveTo(13,27,20,16,30,12);
+    g.bezierCurveTo(45,5,61,9,66,22);g.bezierCurveTo(71,29,71,35,72,39);
+    g.bezierCurveTo(74,43,73,48,69,50);g.bezierCurveTo(70,57,69,63,67,66);
+    g.bezierCurveTo(64,70,58,73,53,73);
+    g.closePath();g.clip();g.drawImage(im,0,0);
+    // At the short neck, the old sprite includes blue/white shirt pixels.
+    // Remove cloth only; retain the source jaw's own skin alpha all the way to its tip.
+    const pixels=g.getImageData(0,0,tile.width,tile.height);
+    for(let y=64;y<tile.height;y++)for(let x=0;x<tile.width;x++){
+      const i=(y*tile.width+x)*4,r=pixels.data[i],green=pixels.data[i+1],b=pixels.data[i+2];
+      if(r<=green*1.04||r<=b*1.06)pixels.data[i+3]=0;
+    }
+    g.putImageData(pixels,0,0);
     return faceTextures[key]=tile;
   }
   function drawCarrier(c,image,rect,origin,s,headName,bob=0){
     const [sx,sy,sw,sh]=rect,[ox,oy]=origin,head=heads[headName],[hx,hy,hw,hh]=head.box;
     const X=x=>(x-ox)*s,Y=y=>(y-oy)*s+bob;
-    const H=x=>X(head.flip<0?hx+hw-(x-hx):x),rear=head.flip<0?hx-2:hx+1;
-    // Remove the generated head silhouette before placing the real one. A
-    // head-shaped hole retains the adjacent harness, fur and supporting arms.
-    c.save();c.beginPath();c.rect(X(sx),Y(sy),sw*s,sh*s);
-    c.moveTo(H(hx+hw*.35),Y(head.flip<0?hy+hh+1:hy+hh*.88));
-    c.bezierCurveTo(H(hx+hw*.03),Y(hy+hh*(head.flip<0?.94:.85)),H(rear),Y(hy+hh*.67),H(rear),Y(hy+hh*.43));
-    c.bezierCurveTo(H(rear),Y(hy+hh*.12),H(hx+hw*.2),Y(hy-2),H(hx+hw*.5),Y(hy-1));
-    c.bezierCurveTo(H(hx+hw*.9),Y(hy-2),H(hx+hw+2),Y(hy+hh*.28),H(hx+hw*.96),Y(hy+hh*.5));
-    c.bezierCurveTo(H(hx+hw+3),Y(hy+hh*.66),H(hx+hw),Y(hy+hh*.85),H(hx+hw*.7),Y(hy+hh*.88));
-    c.closePath();c.clip('evenodd');c.drawImage(image,sx,sy,sw,sh,X(sx),Y(sy),sw*s,sh*s);c.restore();
-    const key=['maul','grab'].includes(headName)?'excited':'smile',face=originalFace(key);
-    const headHeight=Math.max(hh,hw*face.height/face.width),scale=headHeight/face.height;
+    const plate=images[backgrounds[headName]],nx=head.neck[0],ny=head.neck[1];
+    const H=x=>X(head.flip<0?hx+hw-(x-hx):x);
+    // Replace just the old head footprint with repaired clothing/background.
+    // This keeps the narrower complete head from exposing a cut hole or an old ear.
+    const hole=new Path2D();hole.moveTo(H(hx+hw*.3),Y(hy+hh+2));
+    hole.bezierCurveTo(H(hx-hw*.04),Y(hy+hh*.96),H(hx-3),Y(hy+hh*.7),H(hx-3),Y(hy+hh*.43));
+    hole.bezierCurveTo(H(hx-3),Y(hy+hh*.12),H(hx+hw*.2),Y(hy-3),H(hx+hw*.5),Y(hy-3));
+    hole.bezierCurveTo(H(hx+hw*.91),Y(hy-3),H(hx+hw+3),Y(hy+hh*.25),H(hx+hw+3),Y(hy+hh*.5));
+    hole.bezierCurveTo(H(hx+hw+5),Y(hy+hh*.68),H(hx+hw+1),Y(hy+hh*.97),H(hx+hw*.7),Y(hy+hh+2));hole.closePath();
+    const body=new Path2D();body.rect(X(sx),Y(sy),sw*s,sh*s);body.addPath(hole);
+    c.save();c.clip(body,'evenodd');c.drawImage(image,sx,sy,sw,sh,X(sx),Y(sy),sw*s,sh*s);c.restore();
+    c.save();c.clip(hole);c.drawImage(plate,sx,sy,sw,sh,X(sx),Y(sy),sw*s,sh*s);c.restore();
+    const face=originalFace('portrait'),scale=hh/61,u=hh/85,neckLength=2*u;
     c.save();c.translate(X(head.neck[0]),Y(head.neck[1]));c.rotate(head.angle);if(head.flip)c.scale(head.flip,1);
-    c.drawImage(face,-face.width*.575*scale*s,-(face.height-6)*scale*s,face.width*scale*s,face.height*scale*s);c.restore();
-    return {source:'assets/'+face.dataset.sourceAsset,headOnly:true,uniformScale:scale*s,pose:headName};
+    // A short shaded neck sits behind the full jaw. Its lower end tucks into
+    // the real shirt collar, which is drawn over the neck after the portrait.
+    c.scale(s,s);const skin=c.createLinearGradient(0,-9*u,0,5*u);skin.addColorStop(0,'#8f7564');skin.addColorStop(1,'#c38b72');
+    c.fillStyle=skin;c.beginPath();c.moveTo(-8*u,5*u);c.bezierCurveTo(-11*u,0,-8*u,-8*u,-2*u,-10*u);c.bezierCurveTo(6*u,-10*u,11*u,-u,9*u,5*u);c.closePath();c.fill();
+    c.drawImage(face,-51*scale,-69*scale-neckLength,face.width*scale,face.height*scale);c.restore();
+    const collarTop=Math.max(ny+3*u,hy+hh),collarBottom=hy+hh+14;
+    c.drawImage(image,hx-4,collarTop,hw+8,collarBottom-collarTop,X(hx-4),Y(collarTop),(hw+8)*s,(collarBottom-collarTop)*s);
+    // A curved front neckline covers the neck base, while the full chin stays
+    // above it. The backing and original shirt remain behind this front fold.
+    c.save();c.translate(X(nx),Y(ny));c.rotate(head.angle);if(head.flip)c.scale(head.flip,1);c.scale(s*u,s*u);
+    const collar=new Path2D();collar.moveTo(-16,0);collar.bezierCurveTo(-9,4,7,6,16,1);collar.lineTo(17,9);collar.bezierCurveTo(7,13,-10,12,-18,7);collar.closePath();
+    const cloth=c.createLinearGradient(0,0,0,13);cloth.addColorStop(0,'#5ca8bf');cloth.addColorStop(.45,'#2d7eaa');cloth.addColorStop(1,'#245a7f');
+    c.fillStyle=cloth;c.fill(collar);c.strokeStyle='#244b68';c.lineWidth=.8;c.stroke(collar);
+    c.strokeStyle='#e5e8dc';c.lineWidth=1.6;c.lineCap='round';c.beginPath();c.moveTo(-16,0);c.bezierCurveTo(-9,4,7,6,16,1);c.stroke();c.restore();
+    return {source:'assets/'+face.dataset.sourceAsset,headOnly:true,completeChin:true,sourceRect:[0,0,82,82],uniformScale:scale*s,pose:headName};
   }
   function prepareParts(){
     if(parts)return parts;

@@ -1,5 +1,12 @@
 # Autumn Ride — standalone updates
 
+## Revision 11.2 — complete chin and a joined collar
+
+- Replaced the cropped smile/happy portraits with the complete original in-game head from baby_pose_idle.webp. The earlier portraits ended through the lower jaw; the extra alpha fade made that cutoff more visible.
+- Preserve the original eyes, nose, smile, rounded lower jaw and natural chin alpha. Extract the head and short neck without bicycle-seat or source-shirt pixels; no chin fade is applied.
+- Added painted backing plates beneath the old head footprint and a curved, shaded front collar to cover the neck base. The original carrier bodies and baby clothing remain in place, while the complete jaw sits above the neckline in front/back, boat and transfer poses.
+- Added strict source-feature and final-layer chin checks, including negative controls for cropped/covered jaws, plus fresh actual-game and close-up screenshots. Original BQ, cycling physics, quests, NPCs, health and gameplay controls are unchanged.
+
 ## Revision 11.1 — restore the original baby likeness
 
 - Restored the original facial artwork directly in front/back carriers, walking, grabbing, mauling, recoil, collapse and defeat. The new paintings had changed the distinctive eyes, nose, jaw and smile into a generic infant face.

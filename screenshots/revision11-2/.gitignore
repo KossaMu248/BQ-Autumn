@@ -1,0 +1,12 @@
+# Retain a reviewable release gallery; browser regression capture sets stay local.
+*
+!.gitignore
+!complete-head-poses.png
+!complete-face-render-front-closeup.png
+!complete-face-render-back-closeup.png
+!complete-face-front-phone.png
+!complete-face-back-phone.png
+!complete-face-shop.png
+!complete-face-boat.png
+!original-baby-complete-chin-board-normal.png
+!original-face-pixel-evidence.json

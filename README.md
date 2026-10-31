@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v11-2.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v12.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -61,7 +61,9 @@ Small shops are single-screen interaction rooms. Pizza & Kebab and the bike work
 - Deliver lunch to the boatkeeper on the dock and use the patch kit beside the dinghy at the far end.
 - Board the repaired boat, steer with **A/D** or the left/right touch buttons, pass the three golden buoys and return left to the dock. The library has an optional route chart.
 
-The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming on the water. Land areas now allow ground-depth movement and jumping. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses source-measured pelvis, shorts, cuffs and boot dimensions for the front- and back-carrier bear. The shorts swing with the thighs; the two boots alternate their lead on a shared walking track. Fur and boots are sized separately to retain the short legs and broad feet of the painted model. Starts and stops ease between the intact standing pose and articulated walking pose. The pouch, straps, supporting arms and bear torso are painted together, including grab, maul, recoil and defeat poses. The baby uses the complete original in-game head, including its lower jaw, chin and short neck. Head extraction excludes the old bicycle chair and source shirt pixels. Painted backing repairs fill the former head footprint; a curved front collar covers the neck base while leaving the chin visible. Per-pose anchors keep the original likeness consistent while walking, fighting, dismounting and sitting in the boat.
+The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming on the water. Land areas now allow ground-depth movement and jumping. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses source-measured pelvis, shorts, cuffs and boot dimensions for the front- and back-carrier bear. The shorts swing with the thighs; the two boots alternate their lead on a shared walking track. Fur and boots are sized separately to retain the short legs and broad feet of the painted model. Starts and stops ease between the intact standing pose and articulated walking pose. The pouch, straps, supporting arms and bear torso are painted together, including grab, maul, recoil and defeat poses.
+
+The baby now uses the original bicycle artwork as one continuous head, chin, neck, collar and upper torso. The lower clothing edge sits inside the carrier pouch, so the join is below the original shirt instead of under the chin. All expressions share the bicycle renderer’s common native scale. The baby laughs while walking, looks startled during jumps, attacks and screen throws, braces during grabs and transfers, points during shop conversations and looks excited while the boat moves. The same source artwork is used in front/back carriers, action poses, transfers and the boat; the bicycle chair is excluded on foot.
 
 ### On-foot brawling
 
@@ -71,7 +73,7 @@ Successful grabs, throws and mauls fill **Apex Primal**. At 35 points the bear e
 
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
-A shared adult population stays visible while cycling, dismounting and walking. Residents follow longer routes with pauses at each end. Attacking a resident makes that person aggressive and alerts nearby witnesses; distant residents remain calm. Positions, health and reactions persist when returning to the street. Suburb crews stay hostile, with the original attacks while cycling and aimed thrown items while on foot. Defeated crew members stop attacking until they recover. Scattering birds, bakery steam and waterside ripples add quiet life behind the road.
+A shared adult population stays visible while cycling, dismounting and walking. Reactive adults wear Stockholm suburb streetwear: black puffers and dark track pants, navy tracksuits, or olive vests and cargo trousers, with beanies/caps, crossbody bags and trainers. Their outfits stay consistent through walking, aggression, damage, defeat and full-body screen throws. Residents follow longer routes with pauses at each end. Attacking a resident makes that person aggressive and alerts nearby witnesses; distant residents remain calm. Positions, health and reactions persist when returning to the street. Suburb crews stay hostile, with the original attacks while cycling and aimed thrown items while on foot. Defeated crew members stop attacking until they recover. Scattering birds, bakery steam and waterside ripples add quiet life behind the road.
 
 Scooters, carts, barricades, cones, glass and potholes now use painted art, alongside the painted burning bins. Terrain, hazard positions and collision rules remain the V4 simulation.
 
@@ -110,6 +112,7 @@ js/illustrated-visits.js    Walking rooms, docks/gardens and boating
 js/autumn-quests.js         Separate adventure inventory and quest save
 js/locomotion.js            Continuous two-leg gait and joint positions
 js/brawler.js               Adult NPC reactions, Apex Primal and timed mauling frenzy
+js/baby-passenger.js        Original continuous baby artwork and contextual expressions
 js/hero-rig.js              Source-matched legs and integrated baby-carrier poses
 js/brawler-art.js           Painted NPC reactions and screen-space throws
 assets/                    Independent copies of the existing animation assets

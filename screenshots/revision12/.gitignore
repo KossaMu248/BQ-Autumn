@@ -1,0 +1,23 @@
+# Keep the final release gallery; intermediate regression captures stay local.
+*
+!.gitignore
+!README.md
+!original-bike-and-continuous-passenger-moods.png
+!continuous-collar-and-pouch-board-normal.png
+!continuous-authored-collar-and-pouch-normal.png
+!npc-streetwear-review.png
+!passenger-front-game.png
+!passenger-walking-game.png
+!passenger-jump-game.png
+!passenger-back-game.png
+!passenger-throw-game.png
+!passenger-shop-talk.png
+!passenger-boat-game.png
+!passenger-phone-game.png
+!streetwear-game.png
+!streetwear-impact-game.png
+!passenger-gameplay.mp4
+!original-face-pixel-evidence.json
+!original-passenger-source-evidence.json
+!v12-capture-evidence.json
+!v12-video-evidence.json

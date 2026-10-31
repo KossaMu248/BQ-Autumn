@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v10-1.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v11.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -61,7 +61,7 @@ Small shops are single-screen interaction rooms. Pizza & Kebab and the bike work
 - Deliver lunch to the boatkeeper on the dock and use the patch kit beside the dinghy at the far end.
 - Board the repaired boat, steer with **A/D** or the left/right touch buttons, pass the three golden buoys and return left to the dock. The library has an optional route chart.
 
-The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming on the water. Land areas now allow ground-depth movement and jumping. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses two independently articulated legs, separated hips/boots, longer opposing strides, planted soles, eased starts/stops and a stable upper body/carrier. Painted fur and boot components preserve the illustrated style.
+The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming on the water. Land areas now allow ground-depth movement and jumping. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses source-measured pelvis, shorts, cuffs and boot dimensions for the front- and back-carrier bear. The shorts swing with the thighs; the two boots alternate their lead on a shared walking track. Fur and boots are sized separately to retain the short legs and broad feet of the painted model. Starts and stops ease between the intact standing pose and articulated walking pose. The baby, pouch, straps, supporting arms and bear torso are painted together, including grab, maul, recoil and defeat poses.
 
 ### On-foot brawling
 
@@ -110,7 +110,8 @@ js/illustrated-visits.js    Walking rooms, docks/gardens and boating
 js/autumn-quests.js         Separate adventure inventory and quest save
 js/locomotion.js            Continuous two-leg gait and joint positions
 js/brawler.js               Adult NPC reactions, Apex Primal and timed mauling frenzy
-js/brawler-art.js           Painted brawler poses and screen-space throws
+js/hero-rig.js              Source-matched legs and integrated baby-carrier poses
+js/brawler-art.js           Painted NPC reactions and screen-space throws
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -137,20 +138,22 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v10.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision10-1/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v10.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision11/`. See VALIDATION.md for results and limits.
 
-Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V10 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V11 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
 
 Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.
 
 The boat uses a dedicated bench-seated pose with lowered legs. Rear hull and bench draw behind the passengers; the clipped near gunwale draws in front. Boarding uses the same hip anchor as sailing in either direction. Run `python3 tests/browser_movement.py` for free dismounting, on-foot doors, return-to-bike and boat composition checks.
 
-A short real-time walking preview is available at `screenshots/revision8/walking-preview.mp4`.
+A current real-time front/back-carrier walking preview is available at `screenshots/revision11/walking-carriers.mp4`; the rendered pose comparison is `screenshots/revision11/hero-rig-review.png`.
 
-Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V10 screenshots are under `screenshots/revision10-1/`.
+Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V11 screenshots are under `screenshots/revision11/`.
 
 Dialogue and information use minimal white text inside the scene. Health keeps illustrated hearts; portraits and game symbols keep their artwork. HUD backgrounds and message boxes are transparent so they leave the scene visible. Touch controls sit in the lower corners instead of in a panel below the canvas. On phones, on-foot play fills the viewport; portrait follows the player within an undistorted cropped view, while landscape shows the full world frame. Dialogue fades after reading time. Fullscreen and the readable debug menu remain available.
 
 Screen throws keep the entire NPC visible from head to shoes during flight and screen contact. The full-body impact pose changes to a bruised, scratched and scuffed pose, with a damage number matching the health actually lost, then slides away. Camera framing fits the whole figure in desktop and phone views. Run `python3 tests/browser_npcs.py` for population continuity, witness reactions, gang aggression, carrier alignment, screen impacts and damage/defeat checks on desktop and both phone orientations.
 
 Run `python3 tests/browser_full_body.py` for all six NPC designs across desktop/portrait crops and motion preferences, and `python3 tests/browser_impact.py` for real keyboard/touch throw timing, damage and screenshots.
+
+Run `python3 tests/browser_hero.py` to capture front/back carriers, both walking phases and headings, jumping, shop interaction, real hostile damage, defeat/recovery and phone touch controls. The test also checks that the rendered feet exchange their lead and that no loose bicycle-seat cutout is drawn on foot. Visual anatomy still needs screenshot review and device playtesting.

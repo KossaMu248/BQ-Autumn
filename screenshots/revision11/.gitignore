@@ -1,0 +1,11 @@
+# Browser regressions regenerate their full capture sets locally.
+# Keep a small release gallery and the actual walking recording in Git.
+*
+!.gitignore
+!hero-rig-review.png
+!hero-front-shop-idle.png
+!hero-walk-right-a.png
+!hero-walk-right-b.png
+!hero-phone-front-390.png
+!hero-phone-back-maul-390.png
+!walking-carriers.mp4

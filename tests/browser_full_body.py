@@ -14,7 +14,7 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v10-1.html"
+ENTRY = "autumn-v11.html"
 ASSETS = ("npc-screen-full-v10-1.png", "gang-screen-full-v10-1.png")
 
 

@@ -1,47 +1,9 @@
-/* Painted cast, attached baby carriers and staged foreground screen impacts. */
+/* Painted NPC cast, reactions and staged full-body foreground screen impacts. */
 (() => {
   'use strict';
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),images={};
-  for(const [id,path] of Object.entries({bear:'assets/art/brawler-bear-v9.png',adults:'assets/art/adult-npcs-v9.png',baby:'assets/baby_pose_idle.webp',reactions:'assets/art/npc-reactions-v10.png',gangReactions:'assets/art/gang-reactions-v10.png',bearDamage:'assets/art/bear-damage-v10.png',screenFull:'assets/art/npc-screen-full-v10-1.png',gangScreenFull:'assets/art/gang-screen-full-v10-1.png',bottle:'assets/v162_projectile_bottle.png',rock:'assets/v162_projectile_rock.png',firecracker:'assets/v162_projectile_firecracker.png'})){const im=new Image();im.src=path;images[id]=im;}
-  const poses=[[67,12,323,482,240,493],[500,17,494,473,695,488],[987,85,546,383,1240,466],[30,509,466,489,255,996]];
+  for(const [id,path] of Object.entries({adults:'assets/art/adult-npcs-v9.png',reactions:'assets/art/npc-reactions-v10.png',gangReactions:'assets/art/gang-reactions-v10.png',screenFull:'assets/art/npc-screen-full-v10-1.png',gangScreenFull:'assets/art/gang-screen-full-v10-1.png',bottle:'assets/v162_projectile_bottle.png',rock:'assets/v162_projectile_rock.png',firecracker:'assets/v162_projectile_firecracker.png'})){const im=new Image();im.src=path;images[id]=im;}
   const people=[[58,20,566,785],[725,54,487,753],[1305,10,516,795]];
-  function bearCel(c,index,height){
-    const [sx,sy,sw,sh,fx,fy]=poses[index],sc=height/480;
-    c.save();
-    if(index===1){c.beginPath();for(const [i,[xx,yy]] of [[500,17],[995,17],[995,310],[930,310],[930,493],[500,493]].entries())i?c.lineTo((xx-fx)*sc,(yy-fy)*sc):c.moveTo((xx-fx)*sc,(yy-fy)*sc);c.closePath();c.clip();}
-    if(index===2){c.beginPath();c.moveTo((1020-fx)*sc,(85-fy)*sc);c.lineTo((1536-fx)*sc,(85-fy)*sc);c.lineTo((1536-fx)*sc,(470-fy)*sc);c.lineTo((980-fx)*sc,(470-fy)*sc);c.lineTo((980-fx)*sc,(315-fy)*sc);c.lineTo((1020-fx)*sc,(315-fy)*sc);c.closePath();c.clip();}
-    c.drawImage(images.bear,sx,sy,sw,sh,(sx-fx)*sc,(sy-fy)*sc,sw*sc,sh*sc);c.restore();
-  }
-  function carrier(c,h,bob=0,position='front',pose=0){
-    const back=position==='back',x=back?(pose===2?-.28:-.30)*h:.12*h,y=(back?(pose===4?-.52:pose===3?-.70:pose===2?-.88:-.83):-.64)*h+bob,hh=h*.34,ww=hh*images.baby.naturalWidth/images.baby.naturalHeight;
-    c.save();c.strokeStyle='#497894';c.lineWidth=h*.024;c.lineCap='round';c.beginPath();
-    c.moveTo(back?-h*.19:h*.04,-h*.67+bob);c.quadraticCurveTo(back?-h*.34:h*.25,-h*.55+bob,x+ww*.12,y+hh*.72);c.stroke();
-    c.drawImage(images.baby,x-ww*.5,y,ww,hh);c.restore();
-  }
-  function torso(c,h,bob){
-    // The walking rig and the torso now share the same bear, stature and hem anchor.
-    const [sx,sy,sw,,fx,fy]=poses[0],cut=fy-105,sc=h/480;
-    c.drawImage(images.bear,sx,sy,sw,cut-sy,(sx-fx)*sc,(sy-fy)*sc+bob,sw*sc,(cut-sy)*sc);
-  }
-  function damageBear(c,h,state){
-    const im=images.bearDamage;if(!im.naturalWidth)return false;
-    const col=state.hp===0?(state.defeatAge<.55?1:2):0;
-    const [sx,sy,sw,sh,fx,fy]=[[39,44,510,620,292,662],[669,168,692,488,1015,655],[1423,353,735,290,1785,643]][col],sc=h/614;
-    if(state.baby)carrier(c,h,0,'back',state.hp===0?(col===2?4:3):0);
-    c.drawImage(im,sx,sy,sw,sh,(sx-fx)*sc,(sy-fy)*sc,sw*sc,sh*sc);
-    if(!state.baby)carrier(c,h,0,'front');return true;
-  }
-  function player(c,x,y,h,face,state){
-    if(!images.bear.naturalWidth)return false;
-    if(!state.attack&&!state.held&&!state.hurt&&state.hp>0)return false;
-    c.save();c.translate(x,y);if(face<0)c.scale(-1,1);
-    if(state.hp===0||state.hurt){damageBear(c,h,state);c.restore();return true;}
-    const pose=state.attack?2:1;
-    if(state.phase==='madness')c.rotate(Math.sin(state.time*28)*.035);
-    if(state.baby)carrier(c,h,0,'back',pose);
-    bearCel(c,pose,h);
-    if(!state.baby)carrier(c,h,0,'front');c.restore();return true;
-  }
   function reaction(c,n,col,h){
     const im=images.reactions,cw=im.naturalWidth/4,ch=im.naturalHeight/3,row=n.variant%3,sc=h/ch;
     c.save();
@@ -141,5 +103,5 @@
       c.restore();
     }
   }
-  window.BearlyBrawlArt={ready:()=>Object.values(images).every(im=>im.naturalWidth>0),torso,player,adult,carrier,projectile,impact,overlay};
+  window.BearlyBrawlArt={ready:()=>Object.values(images).every(im=>im.naturalWidth>0)&&window.BearlyHeroRig.ready(),adult,projectile,impact,overlay};
 })();

@@ -1,5 +1,14 @@
 # Autumn Ride — standalone updates
 
+## Revision 8 — locomotion and seating fixes
+
+- Replaced the repeated-leading-leg sprite cycle with a continuous two-leg rig. Opposing phases alternate support and swing; stance soles stay grounded, with knee articulation, subtle body motion and eased acceleration/deceleration. New painted fur/boot parts preserve the cozy materials and the existing upper body/baby likeness.
+- Added Q and a touch Dismount button throughout the cycling route. The bicycle coasts to a stop (and lands first if needed), then stays parked while the player walks along the original terrain. The camera follows the walker; Back to bike returns to that same bicycle.
+- On-foot entry/exit now preserves the parked bike and returns outside on foot. The bicycle is not teleported to each building.
+- Shortened transfer timings and added aligned pose/ride blends, baby-seat blending and a final carrier-to-walking-rig settle. Direction and terrain height remain continuous at scene boundaries.
+- Added a proper bench-seated boat pose with lowered legs. Draw order is rear hull/bench, passenger, clipped near hull. Boarding/landing share the same seat hip anchor; sailing works in both headings.
+- Kept the V7 fullscreen/settings improvements and the original cycling update/terrain. Added autumn-v8.html and refreshed cache keys.
+
 ## Revision 7 — playable side areas
 
 Release polish:

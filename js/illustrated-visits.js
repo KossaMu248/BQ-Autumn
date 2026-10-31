@@ -3,6 +3,10 @@
   'use strict';
   const host=document.querySelector('.canvas-wrap'),shell=document.querySelector('.game-shell');
   const quests=window.BearlyQuests.game,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const rideTools=document.createElement('div');rideTools.className='ride-utilities';rideTools.hidden=true;
+  rideTools.innerHTML='<button type="button" class="dismount-button">DISMOUNT · Q</button>';
+  shell.insertBefore(rideTools,document.querySelector('.touch-controls'));
+  const dismountButton=rideTools.querySelector('button');
   const prompt=document.createElement('button');prompt.className='visit-prompt';prompt.type='button';prompt.hidden=true;host.append(prompt);
   const panel=document.createElement('section');panel.className='area-panel';panel.hidden=true;
   panel.setAttribute('aria-label','Location and quests');
@@ -13,14 +17,14 @@
   const nameEl=panel.querySelector('.area-name'),messageEl=panel.querySelector('.area-message'),questEl=panel.querySelector('.area-quest'),actionButton=controls.querySelector('.area-action');
   const journal=document.createElement('div');journal.className='adventure-journal';journal.hidden=true;host.append(journal);
   const art={};
-  for(const [key,file] of Object.entries({transfer:'bike-transfer-v7.png',walk:'carrier-walk-v7.png',workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'})){
+  for(const [key,file] of Object.entries({transfer:'bike-transfer-v7.png',workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',passengers:'boat-passengers-v8.png',parts:'walking-leg-parts-v8.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'})){
     const im=new Image();im.src='assets/art/'+file;art[key]=im;
   }
   let candidate=null,context=null,place=null,mode=null,x=160,velocity=0,face=1,clock=0,stride=0,fade=0,focused=null,paused=false,lastMessage='';
+  let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
   let transition=null,pendingEntry=false;
   const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const held=new Set(),contacts=new Map(),buoys=[1150,2450,3900],seeds=[1050,1540,2110];
-  const walkFrames=[[26,14,313,482,180,495],[420,14,273,483,567,496],[811,15,264,481,950,495],[1192,13,315,484,1345,496],[19,519,341,479,184,997],[423,520,282,479,570,998],[806,519,308,477,949,995],[1198,519,317,482,1345,1000]];
   const transferFrames=[[57,13,490,484,307,495],[607,9,341,493,780,500],[1121,8,304,494,1258,500],[110,516,347,493,258,1007],[604,515,340,495,772,1008],[1112,517,287,495,1259,1010]];
   const floor=535;
   const lawn=document.createElement('canvas');lawn.width=lawn.height=128;const lg=lawn.getContext('2d');lg.fillStyle='#66754b';lg.fillRect(0,0,128,128);
@@ -31,15 +35,35 @@
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
   function choose(next,start){mode=next;x=start;velocity=0;fade=.45;paused=false;clear();refresh();}
   function enter(){
-    if(transition||!candidate||!eligible(context)||!art.people.naturalWidth||!art.transfer.naturalWidth||!art.walk.naturalWidth)return;
+    if(mode==='street'){enterFromStreet();return;}
+    if(transition||!candidate||!eligible(context)||!art.people.naturalWidth||!art.transfer.naturalWidth||!art.parts.naturalWidth)return;
     place=candidate;focused=document.activeElement;context.clearInput();clock=0;stride=0;face=1;paused=false;
-    transition={kind:'dismount',elapsed:0,duration:3};
+    streetEntry=false;transition={kind:'dismount',elapsed:0,duration:2.4,goal:'entry'};
     if(place.role==='water')quests.act('start');
     document.body.classList.add('autumn-exploring');prompt.hidden=true;panel.hidden=false;controls.hidden=false;
     panel.querySelector('.area-exit').focus();setMessage('Stopping, parking the bike, and settling the baby into the front carrier…');refresh(false);
   }
+  function stepOff(){
+    if(mode||transition||!context?.playing)return;
+    pendingStepOff=!pendingStepOff;
+  }
+  function startStreet(){
+    pendingStepOff=false;streetEntry=false;returning=false;walkWeight=0;
+    focused=document.activeElement;context.clearInput();clock=0;stride=0;face=1;paused=false;
+    place={key:'road',label:'HÄSSELBY · ON FOOT',role:'street'};
+    transition={kind:'dismount',elapsed:0,duration:2.1,goal:'street'};
+    document.body.classList.add('autumn-exploring');prompt.hidden=true;panel.hidden=false;controls.hidden=false;
+    setMessage('Parking here and settling the baby into the front carrier…');refresh(false);
+  }
+  function enterFromStreet(){
+    const b=window.BearlyNeighbourhood.nearestEntrance(x);if(!b)return;
+    place=b;if(b.role==='water')quests.act('start');streetEntry=true;streetReturn=x;clear();velocity=0;
+    transition={kind:'door-enter',elapsed:0,duration:.65,goal:'entry'};
+    setMessage('Walking inside…');refresh(false);
+  }
   function close(){
-    if(!mode&&!transition)return;
+    if(!mode&&!transition){pendingStepOff=false;return;}
+    pendingStepOff=false;returning=false;
     context?.clearInput();clear();transition=null;pendingEntry=false;document.getElementById('mobilePauseBtn').textContent='Ⅱ PAUSE';mode=null;place=null;panel.hidden=true;controls.hidden=true;
     document.body.classList.remove('autumn-exploring');focused?.focus();
   }
@@ -47,13 +71,21 @@
     if(transition)return;
     paused=false;
     if(mode==='water'){quests.act('return');choose('dock',1980);transition={kind:'land',elapsed:0,duration:1.2};setMessage('Bringing the dinghy alongside and stepping back onto the dock…');}
-    else {context?.clearInput();clear();mode=null;transition={kind:'mount',elapsed:0,duration:3};setMessage('Returning to the bicycle, settling the baby in the rear seat, and getting ready to ride…');refresh(false);}
+    else if(mode==='street'){
+      if(Math.abs(x-context.x-28)>55){clear();returning=true;setMessage('Walking back to the parked bicycle. Use a direction button to cancel.');return;}
+      context.clearInput();clear();transition={kind:'mount',elapsed:0,duration:2.1,goal:'street'};mode=null;
+      setMessage('Securing the baby in the rear seat and getting back on the bicycle…');refresh(false);
+    }
+    else if(streetEntry){clear();mode=null;x=streetReturn;transition={kind:'door-exit',elapsed:0,duration:.65};setMessage('Stepping outside. Your bicycle is still where you parked it.');refresh(false);}
+    else {context?.clearInput();clear();mode=null;transition={kind:'mount',elapsed:0,duration:2.4,goal:'entry'};setMessage('Returning to the bicycle, settling the baby in the rear seat, and getting ready to ride…');refresh(false);}
   }
   function stepTransition(dt){
     transition.elapsed+=dt;
     if(transition.elapsed<transition.duration)return;
-    const kind=transition.kind;transition=null;
-    if(kind==='dismount'){choose(place.role==='water'?'dock':['park','castle'].includes(place.role)?'garden':'room',160);fade=.25;}
+    const {kind,goal}=transition;transition=null;
+    if(kind==='dismount'&&goal==='street'){choose('street',context.x+28);fade=0;setMessage('On foot · Walk with ← → / A D. E enters a nearby building; Q or Back to bike returns to your parked bicycle.');}
+    else if(kind==='door-exit'){choose('street',streetReturn);fade=0;}
+    else if(kind==='dismount'||kind==='door-enter'){choose(place.role==='water'?'dock':['park','castle'].includes(place.role)?'garden':'room',160);fade=.25;}
     else if(kind==='mount'){transition={kind:'done'};close();}
     else if(kind==='board'){choose('water',180);setMessage('MÄLAREN · Steer with ← → or A/D. Pass the three golden buoys, then return to the dock.');}
     else {x=1980;refresh(false);}
@@ -61,6 +93,10 @@
   function targets(){
     if(!mode||!place)return [];
     const q=quests.snapshot();
+    if(mode==='street'){
+      const b=window.BearlyNeighbourhood.nearestEntrance(x);
+      return [...(b?[{x:window.BearlyNeighbourhood.entrance(b).x,label:'ENTER '+b.label,kind:'enter'}]:[]),{x:context.x+28,label:'MOUNT BICYCLE',kind:'remount'}];
+    }
     if(mode==='water')return [{x:180,label:'MOOR AT THE DOCK',kind:'moor'}];
     if(mode==='dock')return [{x:115,label:'BACK TO BIKE',kind:'exit'},{x:730,label:q.lunch?'DELIVER LUNCH':'TALK TO BOATKEEPER',kind:'keeper'},{x:2050,label:!q.repaired?'PATCH THE DINGHY':q.boatReady?'BOARD BOAT':'CHECK THE BOAT',kind:'boat'}];
     if(mode==='garden')return [{x:115,label:'BACK TO BIKE',kind:'exit'},{x:590,label:place.role==='park'?'TALK TO GARDENER':'READ GARDEN SIGN',kind:'gardener'},...seeds.filter((_,i)=>place.role==='park'&&!q.seeds.includes(i)).map(v=>({x:v,label:'PICK UP SEED PACKET',kind:'seed',id:seeds.indexOf(v)}))];
@@ -71,9 +107,10 @@
   function nearby(){return targets().find(t=>Math.abs(t.x-x)<105)||null;}
   function act(){
     if(paused||transition||fade>0)return;
-    const t=nearby(),q=quests.snapshot();if(!t)return;
+    const t=nearby(),q=quests.snapshot();if(!t){if(mode==='street')leave();return;}
     switch(t.kind){
-      case 'exit':leave();return;
+      case 'exit':case 'remount':leave();return;
+      case 'enter':enterFromStreet();return;
       case 'moor':leave();return;
       case 'lunch':quests.act('lunch');setMessage(q.delivered?'COOK · Thanks for taking lunch to the boatkeeper. Enjoy the lake!':q.lunch?'COOK · It’s wrapped up warm. The boatkeeper is at Mälaren’s boathouse.':'COOK · Could you take this warm lunch to the boatkeeper? There’s room in your satchel.');break;
       case 'kit':quests.act('kit');setMessage(q.repaired?'MECHANIC · That little boat should hold water now. Happy sailing!':'MECHANIC · Here’s a patch kit for the leaky dinghy. Use it beside the boat at the boathouse.');break;
@@ -94,37 +131,54 @@
         break;
       default:setMessage(place.role==='cafe'?'BAKER · The boatkeeper likes a warm lunch. Try Pizza & Kebab on the market street.':'NEIGHBOUR · Welcome in. There’s a lovely walk at the greenhouse and a boat down by the boathouse.');
     }
-    stride=0;refresh(false);
+    refresh(false);
   }
   function refresh(initial=true){
     if(!mode&&!transition)return;
     const q=quests.snapshot(),t=nearby();
-    if(transition){document.getElementById('mobilePauseBtn').textContent=paused?'▶ RESUME':'Ⅱ PAUSE';nameEl.textContent=paused?'PAUSED':transition.kind==='dismount'?'PARKING THE BICYCLE':transition.kind==='mount'?'BACK TO THE BICYCLE':transition.kind==='board'?'BOARDING THE DINGHY':'STEPPING ASHORE';actionButton.disabled=true;actionButton.textContent='ONE MOMENT…';panel.querySelector('.area-exit').disabled=true;return;}
+    if(transition){document.getElementById('mobilePauseBtn').textContent=paused?'▶ RESUME':'Ⅱ PAUSE';nameEl.textContent=paused?'PAUSED':transition.kind==='dismount'?'PARKING THE BICYCLE':transition.kind==='mount'?'BACK TO THE BICYCLE':transition.kind==='board'?'BOARDING THE DINGHY':transition.kind.startsWith('door')?'AT THE DOORWAY':'STEPPING ASHORE';actionButton.disabled=true;actionButton.textContent='ONE MOMENT…';panel.querySelector('.area-exit').disabled=true;return;}
     panel.querySelector('.area-exit').disabled=false;
     const pauseButton=document.getElementById('mobilePauseBtn');pauseButton.textContent=paused?'▶ RESUME':'Ⅱ PAUSE';pauseButton.setAttribute('aria-label',paused?'Resume exploration':'Pause exploration');
-    nameEl.textContent=paused?'PAUSED':mode==='water'?'MÄLAREN · BUOY TRAIL':mode==='dock'?'MÄLARENS BÅTHUS · DOCK':mode==='garden'?place.label+' · GARDEN':place.label;
-    panel.querySelector('.area-exit').textContent=mode==='water'?'BACK TO DOCK ↗':'BACK TO BIKE ↗';
-    actionButton.disabled=!t||paused;actionButton.textContent=t?t.label+' · E':'WALK CLOSER';
+    nameEl.textContent=paused?'PAUSED':mode==='water'?'MÄLAREN · BUOY TRAIL':mode==='dock'?'MÄLARENS BÅTHUS · DOCK':mode==='garden'?place.label+' · GARDEN':mode==='street'?'HÄSSELBY · ON FOOT':place.label;
+    panel.querySelector('.area-exit').textContent=mode==='water'?'BACK TO DOCK ↗':streetEntry&&mode!=='street'?'BACK OUTSIDE ↗':'BACK TO BIKE ↗';
+    actionButton.disabled=(!t&&mode!=='street')||paused;actionButton.textContent=t?t.label+' · E':mode==='street'?'WALK BACK TO BIKE · Q':'WALK CLOSER';
     for(const b of controls.querySelectorAll('[data-direction]'))b.querySelector('small').textContent=mode==='water'?'STEER':'WALK';
     questEl.textContent=place.role==='park'?`GARDENER’S FAVOUR · Seeds ${q.seeds.length}/3${q.garden?' · Returned ✓':''}`:q.voyage?'LAKE TRAIL COMPLETE · The boat is yours to borrow.':q.started?`BOATKEEPER’S FAVOUR · Lunch ${q.delivered?'delivered ✓':q.lunch?'in satchel':'needed'} · Dinghy ${q.repaired?'patched ✓':q.kit?'kit in satchel':'needs patch kit'} · Buoys ${q.buoys.length}/3`: '← → / A D walk · E / Space interact · Escape leave';
     if(initial)setMessage(mode==='dock'?'Walk along the dock to meet the boatkeeper. The dinghy is moored at the far end.':mode==='garden'?'A path beyond the building. Walk further to explore; talk to the gardener along the way.':'You leave the bicycle outside. Walk over to the counter to talk. The baby rides safely in a front carrier.');
   }
   function update(s){
     context=s;
+    rideTools.hidden=!!mode||!!transition||!s.playing;
     if(s.debugOpen){clear();return;}
     if(transition){if(!paused)stepTransition(Math.min(.05,Math.max(0,s.dt||0)));refresh(false);return;}
     const q=quests.snapshot();journal.hidden=!!mode||!s.playing||!q.started;
     journal.textContent=q.voyage?'LAKE TRAIL COMPLETE ✓':q.delivered&&q.repaired?`MÄLAREN · Buoys ${q.buoys.length}/3 · Return to the boatkeeper`:`BOATKEEPER · Lunch ${q.delivered?'✓':q.lunch?'packed':'at Pizza & Kebab'} · Patch ${q.repaired?'✓':q.kit?'kit packed':'at workshop'}`;
-    if(!mode){candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&art.walk.naturalWidth>0;
+    if(!mode){if(!s.playing)pendingStepOff=false;candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&art.parts.naturalWidth>0&&art.passengers.naturalWidth>0;
+      dismountButton.disabled=!ready;dismountButton.textContent=pendingStepOff?'SLOWING TO DISMOUNT…':'DISMOUNT · Q';
+      if(pendingStepOff&&s.playing&&ready&&s.brakeToStop?.()){startStreet();return;}
       if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
     const dt=Math.min(.05,Math.max(0,s.dt||0));if(paused)return;
     clock+=dt;fade=Math.max(0,fade-dt);
-    const dir=(held.has('right')||[...contacts.values()].includes(1)?1:0)-(held.has('left')||[...contacts.values()].includes(-1)?1:0);
+    let dir=(held.has('right')||[...contacts.values()].includes(1)?1:0)-(held.has('left')||[...contacts.values()].includes(-1)?1:0);
+    if(mode==='street'&&returning){
+      if(dir)returning=false;
+      else if(Math.abs(x-context.x-28)<24){returning=false;x=context.x+28;velocity=0;leave();return;}
+      else dir=Math.sign(context.x+28-x);
+    }
     if(dir)face=dir;
     if(mode==='water'){
       velocity+=(dir*260-velocity)*Math.min(1,dt*3);x=clamp(x+velocity*dt,110,4550);stride+=Math.abs(velocity)*dt;
       buoys.forEach((bx,i)=>{if(Math.abs(x-bx)<85&&!quests.snapshot().buoys.includes(i)){quests.act('buoy',i);setMessage(`BUOY ${i+1} CHECKED · ${quests.snapshot().buoys.length===3?'All three! Return left to the dock.':'Keep exploring the lake.'}`);}});
-    }else {velocity=fade>0?0:dir*200;x=clamp(x+velocity*dt,80,mode==='room'?1040:mode==='dock'?2250:2320);stride+=Math.abs(velocity)*dt;}
+    }else {
+      const target=fade>0?0:dir*200,rate=dir?1200:1600;
+      velocity+=clamp(target-velocity,-rate*dt,rate*dt);
+      const next=x+velocity*dt;
+      if(mode!=='street'||s.road?.groundAt(next)!=null)x=clamp(next,mode==='street'?60:80,mode==='street'?s.road.finish-60:mode==='room'?1040:mode==='dock'?2250:2320);
+      else velocity=0;
+      stride+=Math.abs(velocity)*dt;
+      if(mode==='street')s.followFoot?.(x);
+    }
+    walkWeight+=(Math.min(1,Math.abs(velocity)/120)-walkWeight)*(1-Math.exp(-dt*16));
     refresh(false);
   }
   function bindHold(button,direction){
@@ -133,17 +187,18 @@
   }
   for(const b of controls.querySelectorAll('[data-direction]'))bindHold(b,Number(b.dataset.direction));
   panel.querySelector('.area-fullscreen').addEventListener('click',()=>window.BearlyFullscreen.toggle());panel.querySelector('.area-settings').addEventListener('click',()=>window.BEARLY_DEBUG_MENU.toggle(true));
+  dismountButton.addEventListener('click',stepOff);
   prompt.addEventListener('click',enter);actionButton.addEventListener('click',act);panel.querySelector('.area-exit').addEventListener('click',leave);
   window.addEventListener('keydown',e=>{
     if(e.code==='F3'||window.BEARLY_DEBUG_MENU?.isOpen())return;
     if(transition){if(e.code==='KeyP'&&!e.repeat){paused=!paused;refresh(false);}e.preventDefault();e.stopImmediatePropagation();return;}
-    if(!mode){if(e.code==='KeyE'&&!e.repeat&&candidate&&eligible(context)){e.preventDefault();e.stopImmediatePropagation();enter();}return;}
+    if(!mode){if(e.code==='KeyQ'&&!e.repeat&&context?.playing){e.preventDefault();e.stopImmediatePropagation();stepOff();return;}if(e.code==='KeyE'&&!e.repeat&&candidate&&eligible(context)){e.preventDefault();e.stopImmediatePropagation();enter();}return;}
     if(e.code==='Tab')return;
     e.preventDefault();e.stopImmediatePropagation();
     if(['ArrowLeft','KeyA'].includes(e.code))held.add('left');
     if(['ArrowRight','KeyD'].includes(e.code))held.add('right');
     if(!e.repeat&&['KeyE','Space','Enter'].includes(e.code))act();
-    if(e.code==='Escape')leave();
+    if(e.code==='Escape'||e.code==='KeyQ')leave();
     if(e.code==='KeyP'){paused=!paused;clear();refresh(false);}
   },true);
   window.addEventListener('keyup',e=>{if(['ArrowLeft','KeyA'].includes(e.code))held.delete('left');if(['ArrowRight','KeyD'].includes(e.code))held.delete('right');},true);
@@ -155,21 +210,54 @@
   function rect(c,x,y,w,h,color){c.fillStyle=color;c.fillRect(x,y,w,h);}
   function text(c,str,x,y,size=18,color='#f5e4ba'){c.fillStyle=color;c.font=`bold ${size}px Trebuchet MS`;c.fillText(str,x,y);}
   function rounded(c,x,y,w,h,color,r=6){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();}
-  function actor(c,px,py,height=190,seated=false){
-    let im=art.people;if(!im.naturalWidth)return;
-    const moving=Math.abs(velocity)>1&&!paused,frame=seated?7:moving?[1,2,3,4][Math.floor(stride/23)%4]:nearby()&&clock%7>5?6:Math.floor(clock/2)%2?5:0;
-    // Authored source crops include the talking hand without bleeding into the seated frame.
-    const frames=[[51,13,256,488,179,498],[415,12,289,487,557,498],[815,16,290,484,954,498],[1196,13,322,485,1345,498],[27,520,328,483,183,1001],[448,522,256,483,570,1003],[812,523,360,480,941,1001],[1200,584,317,409,1350,990]];
-    let crop=frames[frame];
-    if(moving&&!seated&&walkFrames.length){im=art.walk;crop=walkFrames[Math.floor(stride/15)%8];}
-    const [sx,sy,sw,sh,fx,fy]=crop,scale=height/(im===art.walk?480:488);
+  let legTextures=null;
+  function prepareLegs(){
+    if(legTextures)return legTextures;
+    legTextures=[[153,28,507,660],[879,28,378,661],[1422,266,605,424]].map(part=>[false,true].map(far=>{
+      const tile=document.createElement('canvas');tile.width=Math.ceil(part[2]*.25);tile.height=Math.ceil(part[3]*.25);
+      const g=tile.getContext('2d');if(far)g.filter='brightness(.8)';g.drawImage(art.parts,...part,0,0,tile.width,tile.height);return tile;
+    }));return legTextures;
+  }
+  function walkingActor(c,px,py,height=190){
+    const textures=prepareLegs();
+    const gait=window.BearlyLocomotion.pose(stride,height,Math.max(walkWeight,Math.min(1,Math.abs(velocity)/120)));
+    const scale=height/488;
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    if(!seated){c.fillStyle='#162e2945';c.beginPath();c.ellipse(0,1,41,8,0,0,Math.PI*2);c.fill();}
-    c.drawImage(im,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);
-    if(seated){ // Visible safety vest over the front carrier for the lake outing.
-      c.strokeStyle='#f4ae42';c.lineWidth=4;c.beginPath();c.moveTo(-2,-height*.28);c.lineTo(1,-height*.18);c.moveTo(13,-height*.28);c.lineTo(16,-height*.18);c.stroke();
+    c.fillStyle='#162e2945';c.beginPath();c.ellipse(0,1,height*.18,height*.032,0,0,Math.PI*2);c.fill();
+    function limb(a,b,width,far,lower=false){
+      const dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy);
+      c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(dy,dx)-Math.PI/2);
+      // Authored fur components overlap at the knee and tuck under the shorts.
+      c.drawImage(textures[lower?1:0][far?1:0],-width/2,-width*.25,width,length+width*.5);
+      c.restore();
     }
+    function leg(f,far){
+      const hip={x:(far?-12:12)*height/225,y:-height*.285+gait.bob};
+      const sole={x:f.x+(far?-8:8)*height/225,y:f.y};
+      let roadAngle=0;
+      if(mode==='street'&&!transition&&context?.road){
+        const wx=px+face*sole.x,base=context.road.groundAt(px),at=context.road.groundAt(wx);
+        if(base!=null&&at!=null)sole.y+=at-base;
+        const left=context.road.groundAt(wx-4),right=context.road.groundAt(wx+4);
+        if(f.stance&&left!=null&&right!=null)roadAngle=Math.atan2(right-left,8)*face;
+      }
+      const ankle={x:sole.x-2*height/225,y:sole.y-height*.115};
+      const joint=window.BearlyLocomotion.knee(hip,ankle,height*.105,height*.10);
+      limb(hip,joint,height*.14,far);limb(joint,ankle,height*.125,far,true);
+      c.save();c.translate(sole.x,sole.y);c.rotate(f.angle+roadAngle);
+      c.drawImage(textures[2][far?1:0],-height*.075,-height*.14,height*.20,height*.14);c.restore();
+    }
+    leg(gait.far,true);leg(gait.near,false);
+    // One stable painted torso and carrier; both articulated legs tuck under the shorts.
+    c.drawImage(art.people,51,13,256,370,(51-179)*scale,(13-498)*scale+gait.bob,256*scale,370*scale);
     c.restore();
+  }
+  function actor(c,px,py,height=190,seated=false){
+    if(!art.people.naturalWidth)return;
+    if(!seated&&art.parts.naturalWidth){walkingActor(c,px,py,height);return;}
+    const [sx,sy,sw,sh,fx,fy]=[108,64,872,1364,350,1000],scale=height/1364;
+    c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
+    c.drawImage(art.passengers,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();
   }
   function npc(c,px,py,key='resident-0'){
     window.BearlyAtlas.draw(c,key,px,py,80);
@@ -200,11 +288,22 @@
     actor(c,x,floor,225);
     text(c,'EXIT',82,595,17);text(c,place.role==='pizza'?'COOK':place.role==='workshop'?'MECHANIC':place.role==='library'?'LIBRARIAN':'NEIGHBOUR',760,595,17);
   }
+  // All points use the painted boat's source coordinates. The front gunwale
+  // covers feet, while the rear rim and the midship bench remain behind the passenger.
+  const hullFront=[[180,477],[290,525],[600,552],[920,541],[1190,502],[1480,444],[1690,380],[1745,790],[170,790]];
+  const boatSeat={x:-50,y:5,height:170};
+  function hull(c,px,py,front=false){
+    if(!art.boat.naturalWidth)return;
+    c.save();c.translate(px-155,py-35);c.scale(310/1682,92/497);c.translate(-52,-275);
+    if(front){c.beginPath();hullFront.forEach(([xx,yy],i)=>i?c.lineTo(xx,yy):c.moveTo(xx,yy));c.closePath();c.clip();}
+    c.drawImage(art.boat,0,0);c.restore();
+  }
   function drawBoat(c,px,py){
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    // Passenger sits behind the near side of the hull, never on the bicycle.
-    const oldFace=face;face=1;actor(c,0,24,165,true);face=oldFace;
-    if(art.boat.naturalWidth)c.drawImage(art.boat,52,275,1682,497,-155,-35,310,92);c.restore();
+    hull(c,0,0); // Far side and bench.
+    const oldFace=face;face=1;actor(c,boatSeat.x,boatSeat.y,boatSeat.height,true);face=oldFace;
+    hull(c,0,0,true); // Only the near wall goes in front of the passenger.
+    c.restore();
   }
   function drawOpen(c){
     const areaWidth=mode==='water'?4700:mode==='dock'?2450:2500,cam=clamp(x-420,0,areaWidth-1160);
@@ -227,12 +326,15 @@
       for(let i=0;i<60;i++){rect(c,i*40,452,2,140,'#4c5942');rect(c,i*40,457,38,3,'#c0a377');}
       for(const px of [40,360,680,1000,1320,1640,2210]){rect(c,px,425,14,190,'#5c6047');rounded(c,px-4,415,22,14,'#bdb18a');}
       window.BearlyAtlas.draw(c,'boathouse',440,454,420);npc(c,730,floor);hotspot(c,730,floor);hotspot(c,2050,floor);hotspot(c,115,floor);
-      if(art.boat.naturalWidth)c.drawImage(art.boat,52,275,1682,497,1920,544,310,92);
+      hull(c,2075,579);
       if(transition&&['board','land'].includes(transition.kind)){
         const progress=smooth(transition.elapsed/transition.duration),t=transition.kind==='board'?progress:1-progress;
-        const oldX=x,oldV=velocity,oldStride=stride;x=1980+70*t;velocity=t<.65?90:0;stride=transition.elapsed*180;
-        actor(c,x,floor+42*t,215-50*t,t>.65);
-        if(t>.65&&art.boat.naturalWidth)c.drawImage(art.boat,52,275,1682,497,1920,544,310,92);
+        const oldX=x,oldV=velocity,oldStride=stride;
+        x=1980+(2075+boatSeat.x-1980)*t;velocity=t<.8?70:0;stride=transition.elapsed*140;
+        const height=215+(boatSeat.height-215)*t,hipY=floor-215*.285+(579+boatSeat.y-(floor-215*.285))*t,sit=smooth((t-.45)/.45);
+        c.save();c.globalAlpha*=1-sit;actor(c,x,hipY+height*.285,height);c.restore();
+        c.save();c.globalAlpha*=sit;actor(c,x,hipY,height,true);c.restore();
+        hull(c,2075,579,true);
         x=oldX;velocity=oldV;stride=oldStride;
       }else actor(c,x,floor,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
     }else{
@@ -247,7 +349,7 @@
     c.restore();
   }
   function render(c,W,H){
-    if(!mode)return false;
+    if(!mode||mode==='street')return false;
     c.save();c.scale(W/1160,H/640);c.clearRect(0,0,1160,640);
     if(mode==='room')drawRoom(c);else drawOpen(c);
     if(fade>0){c.fillStyle=`rgba(24,37,29,${fade/.45})`;c.fillRect(0,0,1160,640);}
@@ -255,27 +357,50 @@
     c.restore();return true;
   }
   function roadPresentation(c,s,bike,ride,park){
-    if(!transition||!['dismount','mount'].includes(transition.kind))return false;
+    const roadTransfer=transition&&['dismount','mount'].includes(transition.kind);
+    const doorway=transition?.kind?.startsWith('door');
+    if(!roadTransfer&&mode!=='street'&&!doorway)return false;
+    if(!roadTransfer){
+      park();let px=x,py=s.groundAt(x),height=145;if(py===null)return true;
+      if(doorway){
+        const f=smooth(transition.elapsed/transition.duration),t=transition.kind==='door-enter'?f:1-f;
+        const door=window.BearlyNeighbourhood.entrance(place).x,base=window.BearlyNeighbourhood.placement(place,s.groundAt)?.foot??py-100;
+        px=streetReturn+(door-streetReturn)*t;py=py+(base-py)*t;height=145-65*t;
+      }
+      if(doorway){const oldV=velocity,oldStride=stride,oldFace=face;velocity=100;stride=transition.elapsed*110;face=(Math.sign(window.BearlyNeighbourhood.entrance(place).x-streetReturn)||1)*(transition.kind==='door-exit'?-1:1);actor(c,px,py,height);velocity=oldV;stride=oldStride;face=oldFace;}
+      else actor(c,px,py,height);return true;
+    }
     const raw=clamp(transition.elapsed/transition.duration,0,1),t=transition.kind==='mount'?1-raw:raw;
-    if(t<.04){ride();return true;}
-    park();
+    if(t<=0){ride();return true;}
+    park();const mountedBlend=1-smooth(t/.12);if(mountedBlend>0){c.save();c.globalAlpha*=mountedBlend;ride();c.restore();}
     const gy=s.bikeGroundY??s.groundAt(bike.x);if(gy===null)return true;
-    const walking=clamp((t-.7)/.3,0,1),door=window.BearlyNeighbourhood.entrance(place).x;
-    const support=window.BearlyNeighbourhood.placement(place,s.groundAt);
-    const px=bike.x+22+(door-bike.x-22)*smooth(walking),py=gy+((support?.foot??gy-106)-gy)*smooth(walking),height=145-65*walking;
+    const walking=transition.goal==='entry'?smooth(clamp((t-.72)/.28,0,1)):0;
+    const door=transition.goal==='entry'?window.BearlyNeighbourhood.entrance(place).x:bike.x+28;
+    const base=transition.goal==='entry'?window.BearlyNeighbourhood.placement(place,s.groundAt)?.foot??gy-106:s.groundAt(bike.x+28)??gy;
+    const standingX=bike.x+6+22*smooth(t/.18),px=standingX+(door-standingX)*walking,py=gy+(base-gy)*(transition.goal==='street'?smooth((t-.72)/.28):walking),height=145-65*walking;
     if(walking>0){
-      const oldFace=face,oldV=velocity,oldStride=stride;const direction=Math.sign(door-bike.x-22)||1;face=transition.kind==='mount'?-direction:direction;velocity=100;stride=(transition.kind==='mount'?1-walking:walking)*160;
-      c.save();c.globalAlpha*=clamp((1-walking)/.12,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
-    }else if(transferFrames.length){
-      const frame=Math.min(5,Math.floor(t/.7*6)),[sx,sy,sw,sh,fx,fy]=transferFrames[frame],scale=height/488;
-      c.save();c.translate(px,py);c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();
+      const oldFace=face,oldV=velocity,oldStride=stride;face=(Math.sign(door-bike.x-28)||1)*(transition.kind==='mount'?-1:1);velocity=100;stride=(transition.kind==='mount'?1-walking:walking)*130;
+      c.save();c.globalAlpha*=clamp((1-walking)/.15,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
+    }else{
+      const frameTime=clamp((t-.03)/.69,0,1)*5,idx=Math.floor(frameTime),blend=smooth((frameTime-idx-.65)/.35);
+      function cel(n,alpha){const [sx,sy,sw,sh,fx,fy]=transferFrames[Math.min(5,n)],scale=height/488;c.save();c.globalAlpha*=alpha;c.translate(px,py);c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();}
+      const settle=transition.goal==='street'?smooth((t-.82)/.18):0;
+      c.save();c.globalAlpha*=(1-settle)*(1-mountedBlend);cel(idx,1-blend);if(blend>0)cel(idx+1,blend);c.restore();
+      if(settle>0){const oldV=velocity;velocity=0;c.save();c.globalAlpha*=settle;actor(c,px,py,height);c.restore();velocity=oldV;}
     }
     return true;
   }
+  function roadBabyAlpha(){
+    if(mode==='street'||transition?.kind?.startsWith('door'))return 0;
+    if(!transition||!['dismount','mount'].includes(transition.kind))return 1;
+    const p=clamp(transition.elapsed/transition.duration,0,1),t=transition.kind==='mount'?1-p:p;
+    return 1-smooth((t-(.03+.69*1.65/5))/(.69*.35/5));
+  }
   function hideRoadBaby(){
+    if(mode==='street'||transition?.kind?.startsWith('door'))return true;
     if(!transition||!['dismount','mount'].includes(transition.kind))return false;
     const p=transition.elapsed/transition.duration,t=transition.kind==='mount'?1-p:p;
-    return t>=.7*2/6;
+    return t>=.03+.69*2/5;
   }
-  window.BearlyVisits={active:()=>!!mode||!!transition,close,update,render,roadPresentation,hideRoadBaby,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),artReady:!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!art.walk.naturalWidth}),quests};
+  window.BearlyVisits={active:()=>!!mode||!!transition,close,update,render,roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,artReady:!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!art.parts.naturalWidth&&!!art.passengers.naturalWidth}),quests};
 })();

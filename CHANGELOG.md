@@ -1,5 +1,12 @@
 # Autumn Ride — standalone updates
 
+## Revision 11.1 — restore the original baby likeness
+
+- Restored the original facial artwork directly in front/back carriers, walking, grabbing, mauling, recoil, collapse and defeat. The new paintings had changed the distinctive eyes, nose, jaw and smile into a generic infant face.
+- Reuse the original head textures at a uniform scale with pose-specific collar anchors and a small jaw-to-collar alpha blend. Replace the painted head silhouette while retaining the carrier, supporting arms, neck and clothing.
+- Applied the same head-only treatment to the baby transfer frames and seated boat passenger. Mirrored head direction follows the baby looking toward the bear during transfer. Riding artwork, legs, carrier bodies and boat seat geometry remain unchanged.
+- Added a BABY FACE debug readout, V11.1 cache/entry keys, original facial pixel regressions and new game screenshots/throw footage.
+
 ## Revision 11 — on-foot anatomy and baby carriers
 
 - Replaced the mixed torso/leg assembly with separate front- and back-carrier profiles measured from their own source artwork. Shorts, exposed fur, cuffs and boots use matching proportions; the pants panels move with the thighs.

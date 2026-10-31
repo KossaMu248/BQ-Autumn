@@ -295,7 +295,7 @@
     if(!seated&&window.BearlyHeroRig.ready()){walkingActor(c,px,py,height);return;}
     const [sx,sy,sw,sh,fx,fy]=[108,64,872,1364,350,1000],scale=height/1364;
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    c.drawImage(art.passengers,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();
+    window.BearlyHeroRig.drawAuthored(c,art.passengers,[sx,sy,sw,sh],[fx,fy],scale,'boat');c.restore();
   }
   function npc(c,px,py,key='resident-0'){
     window.BearlyAtlas.draw(c,key,px,py,80);
@@ -463,7 +463,7 @@
       c.save();c.globalAlpha*=clamp((1-walking)/.15,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
     }else{
       const frameTime=clamp((t-.03)/.69,0,1)*5,idx=Math.floor(frameTime),blend=smooth((frameTime-idx-.65)/.35);
-      function cel(n,alpha){const [sx,sy,sw,sh,fx,fy]=transferFrames[Math.min(5,n)],scale=height/488;c.save();c.globalAlpha*=alpha;c.translate(px,py);c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);c.restore();}
+      function cel(n,alpha){const index=Math.min(5,n),[sx,sy,sw,sh,fx,fy]=transferFrames[index],scale=height/488;c.save();c.globalAlpha*=alpha;c.translate(px,py);if(index<2)c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);else window.BearlyHeroRig.drawAuthored(c,art.transfer,[sx,sy,sw,sh],[fx,fy],scale,'transfer'+index);c.restore();}
       const settle=transition.goal==='street'?smooth((t-.82)/.18):0;
       c.save();c.globalAlpha*=(1-settle)*(1-mountedBlend);cel(idx,1-blend);if(blend>0)cel(idx+1,blend);c.restore();
       if(settle>0){const oldV=velocity;velocity=0;c.save();c.globalAlpha*=settle;actor(c,px,py,height);c.restore();velocity=oldV;}

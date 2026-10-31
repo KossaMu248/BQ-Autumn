@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 11 — on-foot anatomy and baby carriers
+
+- Replaced the mixed torso/leg assembly with separate front- and back-carrier profiles measured from their own source artwork. Shorts, exposed fur, cuffs and boots use matching proportions; the pants panels move with the thighs.
+- Eased the painted standing stance into a centered walking track so both feet take a visible turn leading, while the hips keep their authored positions.
+- Replaced the pasted bicycle-seat baby layer with complete painted carriers. The baby, pouch, shoulder straps, waist belt, supporting arms and torso stay together in idle/walking, grab, maul, recoil, collapse and defeated poses.
+- Preserved the original cycling rider and boat passenger art, NPC combat behavior, full-body screen impacts, terrain, quests, heart HUD and fullscreen controls.
+- Added the V11 entry/cache keys, a hero/carrier readout in settings and dedicated real-control character regression captures.
+
 ## Revision 10.1 — full-body screen impacts
 
 - Replaced the cropped face portraits with full-length screen-impact cels for all three residents and all three gang outfits. The torso, trouser legs, palms and both shoes stay visible through flight and contact.

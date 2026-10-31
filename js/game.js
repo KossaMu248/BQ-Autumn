@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V10_1';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V11';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5966,6 +5966,7 @@ AREA        ${area?.mode||'cycling'}${area?.place?' · '+area.place:''}
 TRANSITION  ${area?.transition||'none'}${area?.phase!=null?' '+Math.round(area.phase*100)+'%':''}
 LOCAL X   ${area?.mode?Math.round(area.x):'—'}
 DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
+HERO        ${area?.mode&&area.mode!=='water'?(area.hero?.pose||'ready')+' · '+(area.hero?.carrier||'front')+' carrier':'—'}
 APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.combat?.phase==='apex'?'Apex Primal':'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
 GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}

@@ -1,0 +1,3366 @@
+{
+  "renderer": [
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": false,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": true
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": true,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": false,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": true,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": false,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": true,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3722677506872865,
+        "mirrored": false,
+        "compared": 85,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1069,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3722677506872865,
+        "mirrored": true,
+        "compared": 85,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1069,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": false,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": true,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": false,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": true,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": false,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": true,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": false,
+        "compared": 78,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.36569986675606403,
+        "mirrored": true,
+        "compared": 78,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1029,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3844537060768878,
+        "mirrored": false,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1133,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3844537060768878,
+        "mirrored": true,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1133,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3750767864164759,
+        "mirrored": false,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1086,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3750767864164759,
+        "mirrored": true,
+        "compared": 79,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1086,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3961748539424332,
+        "mirrored": false,
+        "compared": 90,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1206,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3961748539424332,
+        "mirrored": true,
+        "compared": 90,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1206,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3790983516173285,
+        "mirrored": false,
+        "compared": 80,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1107,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3790983516173285,
+        "mirrored": true,
+        "compared": 80,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1107,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": false,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": true,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": false,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": true,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": false,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": true,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2310627381332585,
+        "mirrored": false,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 413,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2310627381332585,
+        "mirrored": true,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 413,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": false,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": true,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": false,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": true,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": false,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": true,
+        "compared": 28,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": false,
+        "compared": 32,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.22698612682154926,
+        "mirrored": true,
+        "compared": 32,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 396,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23862644101752611,
+        "mirrored": false,
+        "compared": 37,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 439,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23862644101752611,
+        "mirrored": true,
+        "compared": 37,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 439,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23280628391953767,
+        "mirrored": false,
+        "compared": 35,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 419,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23280628391953767,
+        "mirrored": true,
+        "compared": 35,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 419,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.24590162957300898,
+        "mirrored": false,
+        "compared": 36,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 469,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.24590162957300898,
+        "mirrored": true,
+        "compared": 36,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 469,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23530242140175867,
+        "mirrored": false,
+        "compared": 34,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 430,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.23530242140175867,
+        "mirrored": true,
+        "compared": 34,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 430,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    }
+  ],
+  "authoredRenderer": [
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3450555356799579,
+        "mirrored": false,
+        "compared": 78,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 910,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.3450555356799579,
+        "mirrored": true,
+        "compared": 78,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 910,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": true,
+        "compared": 122,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": false,
+        "compared": 122,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.39942220293107583,
+        "mirrored": true,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1220,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.39942220293107583,
+        "mirrored": false,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1220,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.39942220293107583,
+        "mirrored": false,
+        "compared": 100,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1220,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.39942220293107583,
+        "mirrored": true,
+        "compared": 100,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1220,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": false,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.4140352103553835,
+        "mirrored": true,
+        "compared": 99,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 1334,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.21417238477800712,
+        "mirrored": false,
+        "compared": 27,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 363,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.21417238477800712,
+        "mirrored": true,
+        "compared": 27,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 363,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": true,
+        "compared": 43,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": false,
+        "compared": 43,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2479172314776749,
+        "mirrored": true,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 472,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2479172314776749,
+        "mirrored": false,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 472,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2479172314776749,
+        "mirrored": false,
+        "compared": 32,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 472,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2479172314776749,
+        "mirrored": true,
+        "compared": 32,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 472,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": false,
+        "compared": 43,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.2569873740927118,
+        "mirrored": true,
+        "compared": 43,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "compared": 498,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        },
+        "negativeControls": false
+      }
+    }
+  ],
+  "1440": [
+    {
+      "screenshot": "original-baby-front-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 191,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 202,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": true,
+        "compared": 196,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5063536706047699,
+        "mirrored": true,
+        "compared": 153,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5190125123698892,
+        "mirrored": true,
+        "compared": 151,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-back-1440.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.49369482883965066,
+        "mirrored": true,
+        "compared": 146,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    }
+  ],
+  "390": [
+    {
+      "screenshot": "original-baby-front-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 191,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 198,
+        "mismatches": 0,
+        "maxError": 6,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": true,
+        "compared": 192,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5063536706047699,
+        "mirrored": true,
+        "compared": 152,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5190125123698892,
+        "mirrored": true,
+        "compared": 151,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-back-390.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.49369482883965066,
+        "mirrored": true,
+        "compared": 146,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    }
+  ],
+  "844": [
+    {
+      "screenshot": "original-baby-front-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 190,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-right-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": false,
+        "compared": 202,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-walk-left-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5589475438511362,
+        "mirrored": true,
+        "compared": 196,
+        "mismatches": 0,
+        "maxError": 5,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-maul-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5063536706047699,
+        "mirrored": true,
+        "compared": 153,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-grab-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.5190125123698892,
+        "mirrored": true,
+        "compared": 151,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    },
+    {
+      "screenshot": "original-baby-back-844.png",
+      "pixels": {
+        "source": "baby_pose_idle.webp",
+        "sourceSize": [
+          82,
+          82
+        ],
+        "uniformScale": 0.49369482883965066,
+        "mirrored": true,
+        "compared": 146,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "compared": 739,
+          "chinCompared": 120,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "chairSamplesCleared": 4,
+          "backgroundFringeSamplesCleared": 1
+        }
+      }
+    }
+  ]
+}

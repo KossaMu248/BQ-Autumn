@@ -12,7 +12,10 @@
   panel.setAttribute('aria-label','Location and quests');
   panel.innerHTML='<div class="area-heading"><strong class="area-name"></strong><button type="button" class="area-fullscreen" aria-label="Fullscreen">⛶</button><button type="button" class="area-settings" aria-label="Settings">⚙</button><button type="button" class="area-exit">BACK TO BIKE ↗</button></div><p class="area-message" aria-live="polite"></p><p class="area-quest"></p>';
   const controls=document.createElement('div');controls.className='area-controls';controls.hidden=true;
-  controls.innerHTML='<button type="button" data-direction="-1" aria-label="Walk or steer left">← <small>WALK</small></button><button type="button" data-direction="1" aria-label="Walk or steer right">→ <small>WALK</small></button><button type="button" class="area-action">TALK · E</button>';
+  controls.innerHTML='<div class="area-dpad"><button type="button" data-depth="-1" aria-label="Move up the ground plane">↑</button><button type="button" data-direction="-1" aria-label="Move left">←</button><button type="button" data-depth="1" aria-label="Move down the ground plane">↓</button><button type="button" data-direction="1" aria-label="Move right">→</button></div><div class="area-moves"><button type="button" class="area-jump">JUMP · SPACE</button><button type="button" class="area-grab">GRAB · G</button><button type="button" class="area-maul">MAUL · J</button><button type="button" class="area-action">TALK · E</button></div>';
+  const status=document.createElement('div');status.className='brawl-status';status.innerHTML='<span class="brawl-hp">HP 100</span><div class="primal-track" role="progressbar" aria-label="Primal meter" aria-valuemin="0" aria-valuemax="100"><i></i></div><strong>CUTE</strong>';
+  panel.append(status);
+
   shell.append(panel,controls);
   const nameEl=panel.querySelector('.area-name'),messageEl=panel.querySelector('.area-message'),questEl=panel.querySelector('.area-quest'),actionButton=controls.querySelector('.area-action');
   const journal=document.createElement('div');journal.className='adventure-journal';journal.hidden=true;host.append(journal);
@@ -22,7 +25,12 @@
   }
   let candidate=null,context=null,place=null,mode=null,x=160,velocity=0,face=1,clock=0,stride=0,fade=0,focused=null,paused=false,lastMessage='';
   let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
+  const combat=window.BearlyBrawler.create();let combatState=combat.snapshot();
+  let depth=0,depthVelocity=0,jumpZ=0,jumpVelocity=0,streetReturnDepth=0,externalShadow=false,viewOffset=0,practiceQueue=false;
   let transition=null,pendingEntry=false;
+  const land=()=>!!mode&&mode!=='water';
+  const player=()=>({x,depth,z:jumpZ,face,godMode:!!context?.godMode});
+  const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const held=new Set(),contacts=new Map(),buoys=[1150,2450,3900],seeds=[1050,1540,2110];
   const transferFrames=[[57,13,490,484,307,495],[607,9,341,493,780,500],[1121,8,304,494,1258,500],[110,516,347,493,258,1007],[604,515,340,495,772,1008],[1112,517,287,495,1259,1010]];
@@ -31,9 +39,35 @@
   for(let i=0;i<1500;i++){const h=n=>{const v=Math.sin(n*127.1)*43758.5453;return v-Math.floor(v);};lg.fillStyle=['#b6ac5c40','#364c392a','#d5b87033'][i%3];lg.fillRect(h(i)*128,h(i+501)*128,1+h(i+135)*2,1);}
 
   function setMessage(text){if(text!==lastMessage){messageEl.textContent=text;lastMessage=text;}}
-  function clear(){held.clear();contacts.clear();for(const b of controls.querySelectorAll('[data-direction]'))b.classList.remove('held');}
+  function clear(){held.clear();contacts.clear();for(const b of controls.querySelectorAll('[data-direction],[data-depth]'))b.classList.remove('held');}
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
-  function choose(next,start){mode=next;x=start;velocity=0;fade=.45;paused=false;clear();refresh();}
+  function choose(next,start){
+    mode=next;x=start;velocity=0;depth=0;depthVelocity=0;jumpZ=0;jumpVelocity=0;fade=.45;paused=false;clear();setupCombat();refresh();
+  }
+  function setupCombat(){
+    combat.cancel();
+    const npcs=mode==='street'?[
+      {id:'near-a',x:x+155,depth:0,variant:0,patrol:true},
+      {id:'near-b',x:x+330,depth:35,variant:1,patrol:true},
+      {id:'near-c',x:x-190,depth:-35,variant:2,patrol:true},
+      ...window.BearlyNeighbourhood.scenes.map((b,i)=>({id:'place-'+b.key,x:b.x+b.w*.5,depth:-60,variant:i%3,patrol:true}))
+    ]:mode==='room'?[{id:'host',x:870,depth:-35,variant:place.role==='workshop'?0:place.role==='pizza'?2:1}]:mode==='dock'?[{id:'keeper',x:730,depth:0,variant:0}]:mode==='garden'?[{id:'gardener',x:590,depth:0,variant:1}]:[];
+    combat.enter(mode+':'+(mode==='street'?'route':place.key),npcs);combatState=combat.snapshot();
+    if(practiceQueue&&mode==='street'){combat.enter('practice-'+clock,[{id:'practice-a',x:x+65,depth:0,variant:0},{id:'practice-b',x:x+165,depth:25,variant:1},{id:'practice-c',x:x+270,depth:-25,variant:2}]);practiceQueue=false;combatState=combat.snapshot();}
+  }
+  function jump(){
+    if(!land()||paused||transition||jumpZ>1)return;
+    jumpVelocity=mode==='street'?355:455;returning=false;
+  }
+  function grab(){
+    if(!land()||paused||transition||!window.BearlyBrawlArt.ready())return;
+    if(combat.grab(player())){combatState=combat.snapshot();setMessage(combatState.held?'GRABBED · Press G / Grab again to throw toward the screen.':'THROWN · Right at the screen!');}
+    else setMessage('Move close to an adult NPC in the same lane to grab.');
+  }
+  function maul(){
+    if(!land()||paused||transition||!window.BearlyBrawlArt.ready())return;
+    if(combat.maul(player())){combatState=combat.snapshot();setMessage(combatState.phase==='rolling'?'MADNESS BOWLING · Eight seconds of invulnerability. Steer through the crowd!':combatState.phase==='primal'?'PRIMAL · The cute bear is losing its composure…':'CLAWS OUT · Successful attacks build Primal.');}
+  }
   function enter(){
     if(mode==='street'){enterFromStreet();return;}
     if(transition||!candidate||!eligible(context)||!art.people.naturalWidth||!art.transfer.naturalWidth||!art.parts.naturalWidth)return;
@@ -57,22 +91,23 @@
   }
   function enterFromStreet(){
     const b=window.BearlyNeighbourhood.nearestEntrance(x);if(!b)return;
-    place=b;if(b.role==='water')quests.act('start');streetEntry=true;streetReturn=x;clear();velocity=0;
+    if(jumpZ>3)return;place=b;streetReturnDepth=depth;if(b.role==='water')quests.act('start');streetEntry=true;streetReturn=x;clear();velocity=0;
     transition={kind:'door-enter',elapsed:0,duration:.65,goal:'entry'};
     setMessage('Walking inside…');refresh(false);
   }
   function close(){
     if(!mode&&!transition){pendingStepOff=false;return;}
-    pendingStepOff=false;returning=false;
+    pendingStepOff=false;returning=false;combat.cancel();combatState=combat.snapshot();jumpZ=0;jumpVelocity=0;depth=0;
     context?.clearInput();clear();transition=null;pendingEntry=false;document.getElementById('mobilePauseBtn').textContent='Ⅱ PAUSE';mode=null;place=null;panel.hidden=true;controls.hidden=true;
     document.body.classList.remove('autumn-exploring');focused?.focus();
   }
   function leave(){
     if(transition)return;
-    paused=false;
+    if(jumpZ>3)return;
+    paused=false;combat.cancel();combatState=combat.snapshot();
     if(mode==='water'){quests.act('return');choose('dock',1980);transition={kind:'land',elapsed:0,duration:1.2};setMessage('Bringing the dinghy alongside and stepping back onto the dock…');}
     else if(mode==='street'){
-      if(Math.abs(x-context.x-28)>55){clear();returning=true;setMessage('Walking back to the parked bicycle. Use a direction button to cancel.');return;}
+      if(Math.abs(x-context.x-28)>55||Math.abs(depth)>15){clear();returning=true;setMessage('Walking back to the parked bicycle. Use a direction button to cancel.');return;}
       context.clearInput();clear();transition={kind:'mount',elapsed:0,duration:2.1,goal:'street'};mode=null;
       setMessage('Securing the baby in the rear seat and getting back on the bicycle…');refresh(false);
     }
@@ -83,8 +118,8 @@
     transition.elapsed+=dt;
     if(transition.elapsed<transition.duration)return;
     const {kind,goal}=transition;transition=null;
-    if(kind==='dismount'&&goal==='street'){choose('street',context.x+28);fade=0;setMessage('On foot · Walk with ← → / A D. E enters a nearby building; Q or Back to bike returns to your parked bicycle.');}
-    else if(kind==='door-exit'){choose('street',streetReturn);fade=0;}
+    if(kind==='dismount'&&goal==='street'){choose('street',context.x+28);fade=0;setMessage('On foot · Arrows / WASD move. Space jumps; G grabs or throws; J mauls. E enters buildings; Q returns to your bicycle.');}
+    else if(kind==='door-exit'){choose('street',streetReturn);depth=streetReturnDepth;fade=0;}
     else if(kind==='dismount'||kind==='door-enter'){choose(place.role==='water'?'dock':['park','castle'].includes(place.role)?'garden':'room',160);fade=.25;}
     else if(kind==='mount'){transition={kind:'done'};close();}
     else if(kind==='board'){choose('water',180);setMessage('MÄLAREN · Steer with ← → or A/D. Pass the three golden buoys, then return to the dock.');}
@@ -106,7 +141,7 @@
   }
   function nearby(){return targets().find(t=>Math.abs(t.x-x)<105)||null;}
   function act(){
-    if(paused||transition||fade>0)return;
+    if(paused||transition||fade>0||jumpZ>3)return;
     const t=nearby(),q=quests.snapshot();if(!t){if(mode==='street')leave();return;}
     switch(t.kind){
       case 'exit':case 'remount':leave();return;
@@ -142,8 +177,15 @@
     nameEl.textContent=paused?'PAUSED':mode==='water'?'MÄLAREN · BUOY TRAIL':mode==='dock'?'MÄLARENS BÅTHUS · DOCK':mode==='garden'?place.label+' · GARDEN':mode==='street'?'HÄSSELBY · ON FOOT':place.label;
     panel.querySelector('.area-exit').textContent=mode==='water'?'BACK TO DOCK ↗':streetEntry&&mode!=='street'?'BACK OUTSIDE ↗':'BACK TO BIKE ↗';
     actionButton.disabled=(!t&&mode!=='street')||paused;actionButton.textContent=t?t.label+' · E':mode==='street'?'WALK BACK TO BIKE · Q':'WALK CLOSER';
-    for(const b of controls.querySelectorAll('[data-direction]'))b.querySelector('small').textContent=mode==='water'?'STEER':'WALK';
-    questEl.textContent=place.role==='park'?`GARDENER’S FAVOUR · Seeds ${q.seeds.length}/3${q.garden?' · Returned ✓':''}`:q.voyage?'LAKE TRAIL COMPLETE · The boat is yours to borrow.':q.started?`BOATKEEPER’S FAVOUR · Lunch ${q.delivered?'delivered ✓':q.lunch?'in satchel':'needed'} · Dinghy ${q.repaired?'patched ✓':q.kit?'kit in satchel':'needs patch kit'} · Buoys ${q.buoys.length}/3`: '← → / A D walk · E / Space interact · Escape leave';
+    controls.dataset.mode=mode;
+    controls.querySelector('.area-grab').textContent=combatState.held?'THROW · G':'GRAB · G';
+    for(const cls of ['.area-grab','.area-maul','.area-jump'])controls.querySelector(cls).disabled=mode==='water'||paused;
+    status.querySelector('.brawl-hp').textContent='HP '+combatState.hp;
+    const meter=status.querySelector('.primal-track'),value=combatState.phase==='rolling'?combatState.frenzy/8*100:combatState.heat;
+    meter.setAttribute('aria-valuenow',String(Math.round(value)));meter.querySelector('i').style.width=value+'%';
+    status.dataset.phase=combatState.phase;status.querySelector('strong').textContent=combatState.phase==='rolling'?`MADNESS · ${combatState.frenzy.toFixed(1)}s · INVULNERABLE`:combatState.phase==='primal'?'PRIMAL':combatState.baby?'BABY IN SAFE SEAT · COOLING DOWN':'CUTE';
+    status.hidden=mode==='water';
+    questEl.textContent=place.role==='park'?`GARDENER’S FAVOUR · Seeds ${q.seeds.length}/3${q.garden?' · Returned ✓':''}`:q.voyage?'LAKE TRAIL COMPLETE · The boat is yours to borrow.':q.started?`BOATKEEPER’S FAVOUR · Lunch ${q.delivered?'delivered ✓':q.lunch?'in satchel':'needed'} · Dinghy ${q.repaired?'patched ✓':q.kit?'kit in satchel':'needs patch kit'} · Buoys ${q.buoys.length}/3`: 'Arrows / WASD move · Space jump · E interact · G grab/throw · J maul';
     if(initial)setMessage(mode==='dock'?'Walk along the dock to meet the boatkeeper. The dinghy is moored at the far end.':mode==='garden'?'A path beyond the building. Walk further to explore; talk to the gardener along the way.':'You leave the bicycle outside. Walk over to the counter to talk. The baby rides safely in a front carrier.');
   }
   function update(s){
@@ -158,27 +200,40 @@
       if(pendingStepOff&&s.playing&&ready&&s.brakeToStop?.()){startStreet();return;}
       if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
     const dt=Math.min(.05,Math.max(0,s.dt||0));if(paused)return;
+    if(held.has('maul'))maul();
+    const moveDt=combatState.hitStop>0?0:dt;
     clock+=dt;fade=Math.max(0,fade-dt);
     let dir=(held.has('right')||[...contacts.values()].includes(1)?1:0)-(held.has('left')||[...contacts.values()].includes(-1)?1:0);
+    let vertical=(held.has('down')||[...contacts.values()].includes('down')?1:0)-(held.has('up')||[...contacts.values()].includes('up')?1:0);
     if(mode==='street'&&returning){
-      if(dir)returning=false;
-      else if(Math.abs(x-context.x-28)<24){returning=false;x=context.x+28;velocity=0;leave();return;}
-      else dir=Math.sign(context.x+28-x);
+      if(dir||vertical)returning=false;
+      else if(Math.abs(x-context.x-28)<7&&Math.abs(depth)<7){returning=false;x=context.x+28;depth=0;velocity=0;leave();return;}
+      else {dir=Math.abs(x-context.x-28)>4?Math.sign(context.x+28-x):0;vertical=Math.abs(depth)>4?-Math.sign(depth):0;}
     }
     if(dir)face=dir;
     if(mode==='water'){
       velocity+=(dir*260-velocity)*Math.min(1,dt*3);x=clamp(x+velocity*dt,110,4550);stride+=Math.abs(velocity)*dt;
       buoys.forEach((bx,i)=>{if(Math.abs(x-bx)<85&&!quests.snapshot().buoys.includes(i)){quests.act('buoy',i);setMessage(`BUOY ${i+1} CHECKED · ${quests.snapshot().buoys.length===3?'All three! Return left to the dock.':'Keep exploring the lake.'}`);}});
     }else {
-      const target=fade>0?0:dir*200,rate=dir?1200:1600;
+      const rolling=combatState.phase==='rolling',speed=rolling?410:combatState.phase==='primal'?235:200;
+      const horizontal=rolling?(dir||face):dir,diagonal=horizontal&&vertical?Math.SQRT1_2:1;
+      const target=fade>0?0:horizontal*speed*diagonal,rate=horizontal?1200:1600;
       velocity+=clamp(target-velocity,-rate*dt,rate*dt);
-      const next=x+velocity*dt;
+      const next=x+velocity*moveDt;
       if(mode!=='street'||s.road?.groundAt(next)!=null)x=clamp(next,mode==='street'?60:80,mode==='street'?s.road.finish-60:mode==='room'?1040:mode==='dock'?2250:2320);
       else velocity=0;
-      stride+=Math.abs(velocity)*dt;
+
       if(mode==='street')s.followFoot?.(x);
     }
-    walkWeight+=(Math.min(1,Math.abs(velocity)/120)-walkWeight)*(1-Math.exp(-dt*16));
+    const depthTarget=vertical*(mode==='water'?95:140)*(dir?Math.SQRT1_2:1);
+    depthVelocity+=clamp(depthTarget-depthVelocity,-1000*dt,1000*dt);
+    const bounds=mode==='street'?[-90,65]:mode==='room'?[-36,60]:mode==='water'?[-35,40]:[-35,40];
+    depth=clamp(depth+depthVelocity*moveDt,...bounds);
+    if(mode!=='water')stride+=Math.hypot(velocity,depthVelocity)*moveDt;
+    if(jumpZ>0||jumpVelocity>0){jumpZ+=jumpVelocity*moveDt;jumpVelocity-=1050*moveDt;if(jumpZ<=0){jumpZ=0;jumpVelocity=0;}}
+    combat.update(dt,player());combatState=combat.snapshot();
+    if(combatState.hp===0){combat.cancel();combat.recover();combatState=combat.snapshot();x=mode==='street'?context.x+28:160;depth=0;jumpZ=0;setMessage('The bear shakes it off back by the entrance.');}
+    walkWeight+=(Math.min(1,Math.hypot(velocity,depthVelocity)/120)-walkWeight)*(1-Math.exp(-dt*16));
     refresh(false);
   }
   function bindHold(button,direction){
@@ -186,6 +241,11 @@
     for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,e=>{contacts.delete(e.pointerId);button.classList.remove('held');});
   }
   for(const b of controls.querySelectorAll('[data-direction]'))bindHold(b,Number(b.dataset.direction));
+  for(const b of controls.querySelectorAll('[data-depth]'))bindHold(b,Number(b.dataset.depth)<0?'up':'down');
+  controls.querySelector('.area-jump').addEventListener('click',jump);
+  controls.querySelector('.area-grab').addEventListener('click',grab);
+  const maulButton=controls.querySelector('.area-maul');maulButton.addEventListener('pointerdown',e=>{e.preventDefault();held.add('maul');maul();try{maulButton.setPointerCapture(e.pointerId);}catch(_){}});
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])maulButton.addEventListener(event,()=>held.delete('maul'));
   panel.querySelector('.area-fullscreen').addEventListener('click',()=>window.BearlyFullscreen.toggle());panel.querySelector('.area-settings').addEventListener('click',()=>window.BEARLY_DEBUG_MENU.toggle(true));
   dismountButton.addEventListener('click',stepOff);
   prompt.addEventListener('click',enter);actionButton.addEventListener('click',act);panel.querySelector('.area-exit').addEventListener('click',leave);
@@ -197,11 +257,16 @@
     e.preventDefault();e.stopImmediatePropagation();
     if(['ArrowLeft','KeyA'].includes(e.code))held.add('left');
     if(['ArrowRight','KeyD'].includes(e.code))held.add('right');
-    if(!e.repeat&&['KeyE','Space','Enter'].includes(e.code))act();
+    if(['ArrowUp','KeyW'].includes(e.code))held.add('up');
+    if(['ArrowDown','KeyS'].includes(e.code))held.add('down');
+    if(e.code==='KeyJ'){held.add('maul');if(!e.repeat)maul();}
+    if(!e.repeat&&e.code==='KeyG')grab();
+    if(!e.repeat&&e.code==='Space')jump();
+    if(!e.repeat&&['KeyE','Enter'].includes(e.code))act();
     if(e.code==='Escape'||e.code==='KeyQ')leave();
     if(e.code==='KeyP'){paused=!paused;clear();refresh(false);}
   },true);
-  window.addEventListener('keyup',e=>{if(['ArrowLeft','KeyA'].includes(e.code))held.delete('left');if(['ArrowRight','KeyD'].includes(e.code))held.delete('right');},true);
+  window.addEventListener('keyup',e=>{if(['ArrowLeft','KeyA'].includes(e.code))held.delete('left');if(['ArrowRight','KeyD'].includes(e.code))held.delete('right');if(['ArrowUp','KeyW'].includes(e.code))held.delete('up');if(['ArrowDown','KeyS'].includes(e.code))held.delete('down');if(e.code==='KeyJ')held.delete('maul');},true);
   window.addEventListener('blur',()=>{clear();if(mode||transition){paused=true;refresh(false);}});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){clear();if(mode||transition){paused=true;refresh(false);}}});
   // The pause button remains useful on a phone while exploring.
@@ -223,7 +288,7 @@
     const gait=window.BearlyLocomotion.pose(stride,height,Math.max(walkWeight,Math.min(1,Math.abs(velocity)/120)));
     const scale=height/488;
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    c.fillStyle='#162e2945';c.beginPath();c.ellipse(0,1,height*.18,height*.032,0,0,Math.PI*2);c.fill();
+    if(!externalShadow){c.fillStyle='#162e2945';c.beginPath();c.ellipse(0,1,height*.18,height*.032,0,0,Math.PI*2);c.fill();}
     function limb(a,b,width,far,lower=false){
       const dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy);
       c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(dy,dx)-Math.PI/2);
@@ -232,8 +297,8 @@
       c.restore();
     }
     function leg(f,far){
-      const hip={x:(far?-12:12)*height/225,y:-height*.285+gait.bob};
-      const sole={x:f.x+(far?-8:8)*height/225,y:f.y};
+      const hip={x:(far?-20:14)*height/225,y:-height*.285+gait.bob};
+      const sole={x:f.x+(far?-18:16)*height/225,y:f.y+(far?-height*.045:height*.008)-(jumpZ>0?height*.055*Math.min(1,jumpZ/35):0)};
       let roadAngle=0;
       if(mode==='street'&&!transition&&context?.road){
         const wx=px+face*sole.x,base=context.road.groundAt(px),at=context.road.groundAt(wx);
@@ -242,14 +307,14 @@
         if(f.stance&&left!=null&&right!=null)roadAngle=Math.atan2(right-left,8)*face;
       }
       const ankle={x:sole.x-2*height/225,y:sole.y-height*.115};
-      const joint=window.BearlyLocomotion.knee(hip,ankle,height*.105,height*.10);
-      limb(hip,joint,height*.14,far);limb(joint,ankle,height*.125,far,true);
+      const joint=window.BearlyLocomotion.knee(hip,ankle,height*.12,height*.115);
+      limb(hip,joint,height*.12,far);limb(joint,ankle,height*.105,far,true);
       c.save();c.translate(sole.x,sole.y);c.rotate(f.angle+roadAngle);
-      c.drawImage(textures[2][far?1:0],-height*.075,-height*.14,height*.20,height*.14);c.restore();
+      c.drawImage(textures[2][far?1:0],-height*.07,-height*.13,height*.185,height*.13);c.restore();
     }
     leg(gait.far,true);leg(gait.near,false);
     // One stable painted torso and carrier; both articulated legs tuck under the shorts.
-    c.drawImage(art.people,51,13,256,370,(51-179)*scale,(13-498)*scale+gait.bob,256*scale,370*scale);
+    if(combatState.baby)window.BearlyBrawlArt.torso(c,height,gait.bob,combatState);else c.drawImage(art.people,51,13,256,370,(51-179)*scale,(13-498)*scale+gait.bob,256*scale,370*scale);
     c.restore();
   }
   function actor(c,px,py,height=190,seated=false){
@@ -264,6 +329,44 @@
     c.save();rounded(c,px-17,py-190,34,26,'#f1db9c');text(c,'…',px-8,py-173,18,'#365141');c.restore();
   }
   function hotspot(c,px,py){c.save();c.strokeStyle='#ffdc83';c.lineWidth=2;c.beginPath();c.ellipse(px,py,28,7,0,0,Math.PI*2);c.stroke();c.restore();}
+  function landActors(c,ground,height){
+    const draws=combatState.npcs.filter(n=>n.state!=='screen').map(n=>({kind:'npc',depth:n.depth+(n.state==='held'?1:0),n}));
+    draws.push({kind:'player',depth});
+    if(combatState.baby)draws.push({kind:'baby',depth:combatState.baby.depth});
+    draws.sort((a,b)=>a.depth-b.depth);
+    for(const d of draws){
+      if(d.kind==='npc'){
+        const n=d.n,gy=ground(n.x,n.depth);if(gy==null)continue;
+        c.save();c.fillStyle='#1c3f3340';c.beginPath();c.ellipse(n.x,gy,20,5,0,0,Math.PI*2);c.fill();c.restore();
+        window.BearlyBrawlArt.adult(c,n,n.x,gy-(n.state==='held'?(n.z||25):0),height*.88);
+      }else if(d.kind==='baby'){
+        const b=combatState.baby,gy=ground(b.x,b.depth);if(gy!=null)window.BearlyBrawlArt.shelter(c,b.x,gy,height*.36);
+      }else{
+        const gy=ground(x,depth);if(gy==null)continue;
+        c.save();c.fillStyle='#163b3045';c.beginPath();c.ellipse(x,gy,height*.18*(1-jumpZ/300),height*.032,0,0,Math.PI*2);c.fill();c.restore();
+        externalShadow=true;
+        if(!window.BearlyBrawlArt.player(c,x,gy-jumpZ,height,face,combatState))actor(c,x,gy-jumpZ,height);
+        externalShadow=false;
+      }
+    }
+    for(const e of combatState.effects){
+      const follow=['transform','hurt','faint'].includes(e.kind),ex=follow?x:e.x,ed=follow?depth:e.depth,gy=ground(ex,ed);if(gy!=null)window.BearlyBrawlArt.impact(c,e,ex,gy,height,reduced());
+    }
+  }
+  function overlay(c,W,H,road=null){
+    if(!land()||transition)return;
+    const project=(nx,nd)=>{
+      if(mode==='street'&&road){
+        const gy=road.groundAt(nx)??road.groundAt(x)??0;
+        return {x:W*.32+1.35*(nx-road.cameraX-W*.32),y:H*.22+1.35*(gy+nd-road.cameraY-H*.22),height:145*.88*1.35};
+      }
+      return {x:(nx-(mode==='room'?0:viewOffset))*W/1160,y:(floor+nd)*H/640,height:195*H/640};
+    };
+    window.BearlyBrawlArt.overlay(c,combatState,W,H,project,reduced());
+    if(combatState.phase==='rolling'){
+      c.save();c.strokeStyle='#e6ab4a90';c.lineWidth=6;c.strokeRect(4,4,W-8,H-8);c.restore();
+    }
+  }
   function drawRoom(c){
     if(place.role==='pizza')image(c,art.room,0,0,1160,640);
     else if(place.role==='workshop'&&art.workshop.naturalWidth)image(c,art.workshop,0,0,1160,640);
@@ -284,8 +387,7 @@
     }
     // Walkable foreground floor: actors stand in front of the room furnishings.
     const shade=c.createLinearGradient(0,465,0,640);shade.addColorStop(0,'#7e654400');shade.addColorStop(1,'#3b372c95');rect(c,0,465,1160,175,shade);
-    hotspot(c,115,floor);hotspot(c,790,floor);npc(c,870,500);
-    actor(c,x,floor,225);
+    hotspot(c,115,floor);hotspot(c,790,floor);landActors(c,(xx,dd)=>floor+dd,225);
     text(c,'EXIT',82,595,17);text(c,place.role==='pizza'?'COOK':place.role==='workshop'?'MECHANIC':place.role==='library'?'LIBRARIAN':'NEIGHBOUR',760,595,17);
   }
   // All points use the painted boat's source coordinates. The front gunwale
@@ -306,7 +408,7 @@
     c.restore();
   }
   function drawOpen(c){
-    const areaWidth=mode==='water'?4700:mode==='dock'?2450:2500,cam=clamp(x-420,0,areaWidth-1160);
+    const areaWidth=mode==='water'?4700:mode==='dock'?2450:2500,cam=clamp(x-420,0,areaWidth-1160);viewOffset=cam;
     const bg=mode==='garden'?art.forest:art.water;
     image(c,bg,0,0,1160,640);
     c.save();c.translate(-cam,0);
@@ -319,13 +421,13 @@
         rounded(c,bx-17,by,34,26,col);rect(c,bx-2,by-65,4,67,'#e1d0a0');c.fillStyle=col;c.beginPath();c.moveTo(bx+2,by-65);c.lineTo(bx+38,by-53);c.lineTo(bx+2,by-42);c.fill();text(c,String(i+1),bx-7,by+20,17,'#294a42');
         if(quests.snapshot().chart)text(c,`${Math.round(bx/10)} m`,bx-22,by-80,14);
       }
-      drawBoat(c,x,505+Math.sin(clock*1.6)*3);text(c,'DOCK',115,385,19);
+      drawBoat(c,x,505+depth+Math.sin(clock*1.6)*3);text(c,'DOCK',115,385,19);
     }else if(mode==='dock'){
       rect(c,0,400,2450,240,'#5b8f91c9');
       rect(c,0,452,1830,140,'#9b7b52');rect(c,1760,452,490,140,'#9b7b52');
       for(let i=0;i<60;i++){rect(c,i*40,452,2,140,'#4c5942');rect(c,i*40,457,38,3,'#c0a377');}
       for(const px of [40,360,680,1000,1320,1640,2210]){rect(c,px,425,14,190,'#5c6047');rounded(c,px-4,415,22,14,'#bdb18a');}
-      window.BearlyAtlas.draw(c,'boathouse',440,454,420);npc(c,730,floor);hotspot(c,730,floor);hotspot(c,2050,floor);hotspot(c,115,floor);
+      window.BearlyAtlas.draw(c,'boathouse',440,454,420);hotspot(c,730,floor);hotspot(c,2050,floor);hotspot(c,115,floor);
       hull(c,2075,579);
       if(transition&&['board','land'].includes(transition.kind)){
         const progress=smooth(transition.elapsed/transition.duration),t=transition.kind==='board'?progress:1-progress;
@@ -336,15 +438,15 @@
         c.save();c.globalAlpha*=sit;actor(c,x,hipY,height,true);c.restore();
         hull(c,2075,579,true);
         x=oldX;velocity=oldV;stride=oldStride;
-      }else actor(c,x,floor,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
+      }else landActors(c,(xx,dd)=>floor+dd,215);text(c,'BOATKEEPER',650,595,19);text(c,quests.snapshot().boatReady?'DINGHY · READY':'DINGHY · NEEDS A FAVOUR',1840,425,19);
     }else{
       rect(c,0,400,2500,240,c.createPattern(lawn,'repeat'));rect(c,0,500,2500,88,'#b3a17d');
       for(let i=0;i<60;i++){rect(c,i*45,515,35,2,'#d2c09a80');}
       window.BearlyAtlas.draw(c,place.role==='park'?'greenhouse':'castle',350,495,470);
       for(let i=0;i<4;i++){window.BearlyStreetProps.draw(c,'bench',950+i*430,505,100,clock);if(art.verge.naturalWidth)c.drawImage(art.verge,12,38,2152,651,1100+i*430,455,150,45);}
-      npc(c,590,floor);hotspot(c,590,floor);hotspot(c,115,floor);
+      hotspot(c,590,floor);hotspot(c,115,floor);
       if(place.role==='park')seeds.forEach((sx,i)=>{if(!quests.snapshot().seeds.includes(i)){rounded(c,sx-12,502,24,31,'#efd391');text(c,'✿',sx-7,524,17,'#577747');hotspot(c,sx,floor);}});
-      actor(c,x,floor,215);text(c,'GARDEN ENTRANCE',50,595,18);
+      landActors(c,(xx,dd)=>floor+dd,215);text(c,'GARDEN ENTRANCE',50,595,18);
     }
     c.restore();
   }
@@ -354,7 +456,7 @@
     if(mode==='room')drawRoom(c);else drawOpen(c);
     if(fade>0){c.fillStyle=`rgba(24,37,29,${fade/.45})`;c.fillRect(0,0,1160,640);}
     if(paused){rect(c,0,0,1160,640,'#17392bb0');text(c,'PAUSED · P OR PAUSE TO RESUME',285,320,26);}
-    c.restore();return true;
+    c.restore();overlay(c,W,H);return true;
   }
   function roadPresentation(c,s,bike,ride,park){
     const roadTransfer=transition&&['dismount','mount'].includes(transition.kind);
@@ -368,7 +470,7 @@
         px=streetReturn+(door-streetReturn)*t;py=py+(base-py)*t;height=145-65*t;
       }
       if(doorway){const oldV=velocity,oldStride=stride,oldFace=face;velocity=100;stride=transition.elapsed*110;face=(Math.sign(window.BearlyNeighbourhood.entrance(place).x-streetReturn)||1)*(transition.kind==='door-exit'?-1:1);actor(c,px,py,height);velocity=oldV;stride=oldStride;face=oldFace;}
-      else actor(c,px,py,height);return true;
+      else landActors(c,(xx,dd)=>{const g=s.groundAt(xx);return g==null?null:g+dd;},height);return true;
     }
     const raw=clamp(transition.elapsed/transition.duration,0,1),t=transition.kind==='mount'?1-raw:raw;
     if(t<=0){ride();return true;}
@@ -402,5 +504,5 @@
     const p=transition.elapsed/transition.duration,t=transition.kind==='mount'?1-p:p;
     return t>=.03+.69*2/5;
   }
-  window.BearlyVisits={active:()=>!!mode||!!transition,close,update,render,roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,artReady:!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!art.parts.naturalWidth&&!!art.passengers.naturalWidth}),quests};
+  window.BearlyVisits={active:()=>!!mode||!!transition,close,update,render,overlay,footActive:()=>!!mode&&mode!=='water',practice:()=>{practiceQueue=true;if(land())setupCombat();else pendingStepOff=true;},roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:combatState.baby?'safe-seat':'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,depth,jump:jumpZ,combat:combatState,artReady:window.BearlyBrawlArt.ready()&&!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!art.parts.naturalWidth&&!!art.passengers.naturalWidth}),quests};
 })();

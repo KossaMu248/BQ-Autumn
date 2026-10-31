@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v8.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v9.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -29,6 +29,11 @@ Open `http://localhost:8000` in your browser and choose **LET’S RIDE**. If ano
 | Lean | Left / Right, A / D |
 | Hop | Space |
 | Enter a nearby public building (stop first) | E or the on-screen Enter button |
+| Walk on foot (left/right and ground depth) | Arrows / WASD |
+| Jump on foot | Space |
+| Grab an adult NPC / throw toward the screen | G / G again |
+| Maul nearby adult NPCs (hold to repeat) | J |
+| Interact on foot | E / Enter |
 | Leave a building | Escape or Back to bike |
 | Fullscreen | F or the ⛶ button |
 | Dismount anywhere / return to the bike | Q or Dismount / Back to bike |
@@ -45,7 +50,7 @@ The ride has twelve authored stops with twelve distinct building designs. There 
 
 Buildings stand on level stone foundations that follow the terrain across their full width. Trees and plantings use their visible root anchors, and fallen leaves follow the terrain at each leaf's position.
 
-Stop beside a public entrance and press **E** or tap **Enter**. This now changes to a playable area, rather than an image dialog. The bear leaves the bicycle outside, walks on foot and carries the baby in a blue front carrier. Arrow keys or **A/D** walk, and **E**, **Space** or the on-screen action button interact. **P** pauses; **Escape** or **Back to bike** leaves. The original cycling simulation is held while you explore. You can also press **Q** or tap **Dismount** anywhere along the route: the bike slows to a stop before you step off. Walk along the terrain and into nearby public buildings with **E**. Walking out leaves you on foot, with the bike still at its parking spot. **Q** or **Back to bike** walks you back and remounts; direction input cancels the automatic return.
+Stop beside a public entrance and press **E** or tap **Enter**. This now changes to a playable area, rather than an image dialog. The bear leaves the bicycle outside, walks on foot and carries the baby in a blue front carrier. Arrow keys or **WASD** move left/right and up/down the ground plane. **Space** jumps, and **E**, **Enter** or the on-screen action button interact. **P** pauses; **Escape** or **Back to bike** leaves. The original cycling simulation is held while you explore. You can also press **Q** or tap **Dismount** anywhere along the route: the bike slows to a stop before you step off. Walk along the terrain and into nearby public buildings with **E**. Walking out leaves you on foot, with the bike still at its parking spot. **Q** or **Back to bike** walks you back and remounts; direction input cancels the automatic return.
 
 Small shops are single-screen interaction rooms. Pizza & Kebab and the bike workshop have painted rooms with clear walking floors and counters. The boathouse leads to a scrolling dock; the greenhouse and manor lead to larger gardens.
 
@@ -56,7 +61,13 @@ Small shops are single-screen interaction rooms. Pizza & Kebab and the bike work
 - Deliver lunch to the boatkeeper on the dock and use the patch kit beside the dinghy at the far end.
 - Board the repaired boat, steer with **A/D** or the left/right touch buttons, pass the three golden buoys and return left to the dock. The library has an optional route chart.
 
-The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming, and rooms use a horizontal walking strip. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking now uses two independently articulated legs, alternating stance/swing phases, planted soles, eased starts/stops and a stable upper body/carrier. Painted fur and boot components preserve the illustrated style.
+The greenhouse gardener also asks you to find three seed packets along the garden path and return them. Quest items and completed tasks save locally, separately from cycling scores. This is a first playable adventure pass: the lake is a calm buoy trail, with no combat or swimming on the water. Land areas now allow ground-depth movement and jumping. Entry now parks the original bicycle, plays a six-pose dismount and baby-to-carrier sequence, then walks toward the doorway. Returning reverses it. Boarding and stepping ashore are animated too, with a short fade between areas. Walking uses two independently articulated legs, separated hips/boots, longer opposing strides, planted soles, eased starts/stops and a stable upper body/carrier. Painted fur and boot components preserve the illustrated style.
+
+### On-foot brawling
+
+Move into the same lane as an adult NPC. **G** grabs; press **G** again to fling them toward the screen. **J** mauls with a claw-swipe pose, scratch trails, dark red flecks, dust, hit-stop and stagger reactions. Adult NPCs recover after being knocked down, keeping quest areas usable. The baby rests in a protected seat during the action and returns to the front carrier when things settle.
+
+Successful grabs, throws and mauls fill **Primal**. At 35 points the bear becomes primal; a full meter triggers **eight seconds of invulnerable madness bowling** with automatic forward rolling and directional steering. It then returns to the cute bear and resets the meter. Outside that burst, provoked NPCs can counterattack. If on-foot health runs out, the bear recovers by the entrance or parked bike. Cycling health and physics stay separate. Use **F3 → On-foot brawler practice** for three nearby practice NPCs; the debug readout shows depth, jump, Primal and on-foot HP.
 
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
@@ -98,6 +109,8 @@ js/illustrated-neighbourhood.js  Terrain-supported landmarks and resident routes
 js/illustrated-visits.js    Walking rooms, docks/gardens and boating
 js/autumn-quests.js         Separate adventure inventory and quest save
 js/locomotion.js            Continuous two-leg gait and joint positions
+js/brawler.js               Adult NPC reactions, Primal and timed rolling frenzy
+js/brawler-art.js           Painted brawler poses and screen-space throws
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -124,12 +137,14 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v8.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision8/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v9.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision9/`. See VALIDATION.md for results and limits.
 
-Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V7 location/quest/transition readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V9 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
 
 Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.
 
 The boat uses a dedicated bench-seated pose with lowered legs. Rear hull and bench draw behind the passengers; the clipped near gunwale draws in front. Boarding uses the same hip anchor as sailing in either direction. Run `python3 tests/browser_movement.py` for free dismounting, on-foot doors, return-to-bike and boat composition checks.
 
 A short real-time walking preview is available at `screenshots/revision8/walking-preview.mp4`.
+
+Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V9 screenshots are under `screenshots/revision9/`.

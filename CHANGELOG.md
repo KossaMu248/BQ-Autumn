@@ -1,5 +1,14 @@
 # Autumn Ride — standalone updates
 
+## Revision 9 — ground-depth movement and Primal brawling
+
+- Separated the walking hips, knees and boots, narrowed the leg silhouettes and lengthened the alternating stride to reduce crowded legs. Both movement axes advance the gait, and jump shadows remain on the ground.
+- Added on-foot up/down ground-depth movement and Space jumping, with matching four-direction and jump touch controls. E remains interaction; cycling controls and physics retain their existing behavior.
+- Added adult NPC grabs and screen-directed throws, with scaling, rotation and camera-impact accents. J mauls with painted claw poses, scratches, dark red flecks, dust, brief hit-stop and stagger reactions. Provoked NPCs counterattack and knocked-down NPCs recover.
+- Added Primal buildup and a timed eight-second invulnerable bowling-bear transformation, then a return to the cute bear. The baby has a protected seat during combat and returns to the carrier after the action settles.
+- Added dedicated painted bear action and adult NPC sheets, a Primal/HP status strip, phone combat buttons, a debug practice area and depth/jump/combat readouts.
+- Preserved shop and garden quests, boat seating, free dismount/remount, fullscreen, cozy scenery and the original mounted bear/baby artwork. Added autumn-v9.html and refreshed existing entry URLs/cache keys.
+
 ## Revision 8 — locomotion and seating fixes
 
 - Replaced the repeated-leading-leg sprite cycle with a continuous two-leg rig. Opposing phases alternate support and swing; stance soles stay grounded, with knee articulation, subtle body motion and eased acceleration/deceleration. New painted fur/boot parts preserve the cozy materials and the existing upper body/baby likeness.

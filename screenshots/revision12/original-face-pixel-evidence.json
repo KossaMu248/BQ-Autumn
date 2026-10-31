@@ -1,0 +1,963 @@
+{
+  "phases": [
+    {
+      "phase": "native_sources_and_integrated_renderer",
+      "result": "passed",
+      "run": "Completed during the final full run before its separate actual-hurt particle fixture assertion failed.",
+      "nativeMoodCases": 40,
+      "onFootRendererCases": 64,
+      "authoredBoatTransferCases": 20,
+      "moodRuleCases": 7,
+      "checks": [
+        "original source RGBA for face/chin/neck/native collar/upper torso",
+        "same continuous raster piece",
+        "unchanged native scale across moods",
+        "no chair pixels",
+        "final neck and collar visible after all layers",
+        "waist edge covered by authored carrier image or witnessed pouch rim",
+        "negative controls reject separated neck/collar, covered join and exposed waist"
+      ],
+      "artifacts": [
+        "original-passenger-source-evidence.json",
+        "original-bike-and-continuous-passenger-moods.png",
+        "original-baby-pose-board-normal.png",
+        "original-baby-pose-board-small.png",
+        "continuous-collar-and-pouch-board-normal.png",
+        "continuous-collar-and-pouch-board-small.png",
+        "original-baby-authored-board-normal.png",
+        "original-baby-authored-board-small.png",
+        "continuous-authored-collar-and-pouch-normal.png",
+        "continuous-authored-collar-and-pouch-small.png"
+      ],
+      "perCaseRendererData": "Not checkpointed before the later controls failure; this phase summary records the completed assertion phase and its saved browser captures without reconstructing missing per-case measurements.",
+      "currentStableSourceSHA256": {
+        "js/hero-rig.js": "d9a1a57132ef4de9697ee1afc7dd1e090716fb7c2f3f5e73ab52b4628615bac7",
+        "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+        "js/illustrated-visits.js": "040e67d63010199f7465aaae8bb77a838b31f8ed3ebfd718121fcb5875ffb091"
+      }
+    },
+    {
+      "phase": "actual_controls",
+      "result": "passed",
+      "viewports": [
+        "1440x1000",
+        "390x844",
+        "844x390"
+      ]
+    }
+  ],
+  "1440": {
+    "bikeSources": [
+      {
+        "pose": "idle",
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "laugh",
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "terror",
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "physicalScale": 0.6998399967169757
+      },
+      {
+        "pose": "brace",
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "leanBack",
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "leanForward",
+        "mood": "leanForward",
+        "source": "baby_pose_leanForward.webp",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "point",
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "physicalScale": 0.6998399967169759
+      },
+      {
+        "pose": "sick",
+        "mood": "sick",
+        "source": "v151_baby_pose_sick.png",
+        "physicalScale": 0.6998399967169757
+      }
+    ],
+    "controls": [
+      {
+        "screenshot": "original-baby-front-1440.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 88,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-right-1440.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 91,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-left-1440.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 95,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-jump-1440.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 91,
+          "mismatches": 0,
+          "maxError": 2,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-after-jump-1440.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 88,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-maul-1440.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5063536897319985,
+          "mirrored": true,
+          "compared": 81,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-grab-1440.png",
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 0.5190125229228428,
+          "mirrored": true,
+          "compared": 76,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-throw-1440.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 68,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-back-1440.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 63,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-genuine-shop-talk.png",
+        "pixels": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "uniformScale": 0.6424683928489685,
+          "mirrored": false,
+          "compared": 102,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "point",
+            "source": "baby_pose_point.webp",
+            "compared": 84,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-talk-ended.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.6424683928489685,
+          "mirrored": false,
+          "compared": 113,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-real-projectile-hurt.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5025614752714098,
+          "mirrored": false,
+          "compared": 73,
+          "mismatches": 0,
+          "maxError": 5,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-real-defeat.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5348360945862503,
+          "mirrored": false,
+          "compared": 80,
+          "mismatches": 0,
+          "maxError": 4,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      }
+    ]
+  },
+  "390": {
+    "bikeSources": [],
+    "controls": [
+      {
+        "screenshot": "original-baby-front-390.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 88,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-right-390.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 92,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-left-390.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 102,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-jump-390.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 92,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-after-jump-390.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 88,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-maul-390.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5063536897319985,
+          "mirrored": true,
+          "compared": 81,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-grab-390.png",
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 0.5190125229228428,
+          "mirrored": true,
+          "compared": 76,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-throw-390.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 68,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-back-390.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 63,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      }
+    ]
+  },
+  "844": {
+    "bikeSources": [],
+    "controls": [
+      {
+        "screenshot": "original-baby-front-844.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 89,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-right-844.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": false,
+          "compared": 100,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-walk-left-844.png",
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 95,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-jump-844.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 97,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-after-jump-844.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.5589475313195038,
+          "mirrored": true,
+          "compared": 88,
+          "mismatches": 0,
+          "maxError": 6,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-maul-844.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.5063536897319985,
+          "mirrored": true,
+          "compared": 81,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-grab-844.png",
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 0.5190125229228428,
+          "mirrored": true,
+          "compared": 76,
+          "mismatches": 0,
+          "maxError": 5,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-throw-844.png",
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 68,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        }
+      },
+      {
+        "screenshot": "original-baby-back-844.png",
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 0.4936948565411541,
+          "mirrored": true,
+          "compared": 63,
+          "mismatches": 0,
+          "maxError": 3,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        }
+      }
+    ]
+  },
+  "originalSHA256": {
+    "baby_pose_idle.webp": "a27d4ea977d35d89ac927ca371eb66c5e366b096b1eb057e8552853f14578823",
+    "baby_pose_laugh.webp": "4decc347ee84105fb22f47ad945d8cfa0612672360fdbd0ce879661981d6793e",
+    "baby_pose_terror.webp": "ad1faf6677a2fcb674887c42feaa4498af724b97ed2a848bb6e3df046a5ac9ea",
+    "baby_pose_brace.webp": "e0a172d980ca27bae9bf82d37d8ab97935f78bc5862c12c250e29c2604329478",
+    "baby_pose_leanBack.webp": "a0dd21135d421463620860444ebee2c862e2d659b1e19be6031ebbde88c53360",
+    "baby_pose_leanForward.webp": "4cfba1def3c14c567751d598a04a653c4f1e81159317341d3e0b68be6e79b92b",
+    "baby_pose_point.webp": "4dc3514feaf2dd70e002a25a34ef7c0707e725e6580ab61cc94e68a5b6ed2a2c",
+    "baby_pose_sick.webp": "2e1f1c4bd3c51b6919638f1135a33bea36a0cf0c886ac71478340ed910b6c22f",
+    "v151_baby_pose_excited.png": "90b655b42abd70a1e3ec7dd9f758988c4a1d26aaa91b2565ceeb58ca723e3e0b",
+    "v151_baby_pose_sick.png": "32dc7d3bbd707101c0ff82cf6ef6e359702bc6adec0de91132b59514e2caf426"
+  },
+  "entry": "autumn-v12.html"
+}

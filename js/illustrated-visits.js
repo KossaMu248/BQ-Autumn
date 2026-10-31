@@ -27,7 +27,7 @@
   let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
   const combat=window.BearlyBrawler.create();let combatState=combat.snapshot();
   let depth=0,depthVelocity=0,jumpZ=0,jumpVelocity=0,streetReturnDepth=0,externalShadow=false,viewOffset=0,practiceQueue=false;
-  let transition=null,pendingEntry=false,messageRemaining=0;
+  let transition=null,pendingEntry=false,messageRemaining=0,babyTalkUntil=0;
   let viewport={width:1160,height:640};
   new ResizeObserver(([entry])=>{viewport={width:entry.contentRect.width,height:entry.contentRect.height};}).observe(host);
   const land=()=>!!mode&&mode!=='water';
@@ -50,7 +50,7 @@
   function clear(){held.clear();contacts.clear();for(const b of controls.querySelectorAll('[data-direction],[data-depth]'))b.classList.remove('held');}
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
   function choose(next,start){
-    mode=next;x=start;velocity=0;depth=0;depthVelocity=0;jumpZ=0;jumpVelocity=0;fade=.45;paused=false;clear();setupCombat();refresh();
+    mode=next;x=start;velocity=0;depth=0;depthVelocity=0;jumpZ=0;jumpVelocity=0;fade=.45;babyTalkUntil=0;paused=false;clear();setupCombat();refresh();
   }
   function streetSeeds(){
     const residents=window.BearlyNeighbourhood.scenes.map((b,i)=>({id:'resident-'+b.key,x:b.x+145,depth:-55,variant:i%3,patrol:true}));
@@ -174,7 +174,7 @@
         break;
       default:setMessage(place.role==='cafe'?'BAKER · The boatkeeper likes a warm lunch. Try Pizza & Kebab on the market street.':'NEIGHBOUR · Welcome in. There’s a lovely walk at the greenhouse and a boat down by the boathouse.');
     }
-    refresh(false);
+    babyTalkUntil=clock+3;refresh(false);
   }
   function refresh(initial=true){
     if(!mode&&!transition)return;
@@ -286,16 +286,17 @@
   function rect(c,x,y,w,h,color){c.fillStyle=color;c.fillRect(x,y,w,h);}
   function text(c,str,x,y,size=18,color='#fff'){c.save();c.fillStyle=color;c.font=`500 ${size}px Arial, sans-serif`;c.shadowColor='#0009';c.shadowBlur=3;c.shadowOffsetY=1;c.fillText(str,x,y);c.restore();}
   function rounded(c,x,y,w,h,color,r=6){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();}
+  function babyPresentation(){return {state:land()?combatState:{hp:100},talking:clock<babyTalkUntil,mode,speed:velocity,weight:land()?walkWeight:0,jump:land()?jumpZ:0,transfer:!!transition};}
   function walkingActor(c,px,py,height=190){
     if(!externalShadow){c.save();c.fillStyle='#162e2945';c.beginPath();c.ellipse(px,py+1,height*.18,height*.032,0,0,Math.PI*2);c.fill();c.restore();}
-    window.BearlyHeroRig.draw(c,px,py,height,face,{state:combatState,distance:stride,weight:walkWeight,jump:jumpZ,groundAt:mode==='street'&&!transition?context?.road.groundAt:null});
+    window.BearlyHeroRig.draw(c,px,py,height,face,{...babyPresentation(),distance:stride,groundAt:mode==='street'&&!transition?context?.road.groundAt:null});
   }
   function actor(c,px,py,height=190,seated=false){
     if(!art.people.naturalWidth)return;
     if(!seated&&window.BearlyHeroRig.ready()){walkingActor(c,px,py,height);return;}
     const [sx,sy,sw,sh,fx,fy]=[108,64,872,1364,350,1000],scale=height/1364;
     c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    window.BearlyHeroRig.drawAuthored(c,art.passengers,[sx,sy,sw,sh],[fx,fy],scale,'boat');c.restore();
+    window.BearlyHeroRig.drawAuthored(c,art.passengers,[sx,sy,sw,sh],[fx,fy],scale,'boat',babyPresentation());c.restore();
   }
   function npc(c,px,py,key='resident-0'){
     window.BearlyAtlas.draw(c,key,px,py,80);
@@ -463,7 +464,7 @@
       c.save();c.globalAlpha*=clamp((1-walking)/.15,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
     }else{
       const frameTime=clamp((t-.03)/.69,0,1)*5,idx=Math.floor(frameTime),blend=smooth((frameTime-idx-.65)/.35);
-      function cel(n,alpha){const index=Math.min(5,n),[sx,sy,sw,sh,fx,fy]=transferFrames[index],scale=height/488;c.save();c.globalAlpha*=alpha;c.translate(px,py);if(index<2)c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);else window.BearlyHeroRig.drawAuthored(c,art.transfer,[sx,sy,sw,sh],[fx,fy],scale,'transfer'+index);c.restore();}
+      function cel(n,alpha){const index=Math.min(5,n),[sx,sy,sw,sh,fx,fy]=transferFrames[index],scale=height/488;c.save();c.globalAlpha*=alpha;c.translate(px,py);if(index<2)c.drawImage(art.transfer,sx,sy,sw,sh,(sx-fx)*scale,(sy-fy)*scale,sw*scale,sh*scale);else window.BearlyHeroRig.drawAuthored(c,art.transfer,[sx,sy,sw,sh],[fx,fy],scale,'transfer'+index,babyPresentation());c.restore();}
       const settle=transition.goal==='street'?smooth((t-.82)/.18):0;
       c.save();c.globalAlpha*=(1-settle)*(1-mountedBlend);cel(idx,1-blend);if(blend>0)cel(idx+1,blend);c.restore();
       if(settle>0){const oldV=velocity;velocity=0;c.save();c.globalAlpha*=settle;actor(c,px,py,height);c.restore();velocity=oldV;}

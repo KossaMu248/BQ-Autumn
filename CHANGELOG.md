@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 12 — continuous original baby and Stockholm streetwear
+
+- Replaced the separate head/neck/collar assembly with the original bike baby’s continuous head, chin, neck, shirt collar and upper torso. Only the lower clothing edge is hidden inside the carrier. Keep the original likeness and one common native scale across expressions.
+- Added contextual expressions off the bike: laughing walks, startled jumps/attacks/throws, braced grabs/transfers, curious shop conversations and excited boating. Render the passenger once while the standing/walking body blends, avoiding duplicate faces.
+- Fit the carrier foreground to the native shirt edge in front/back, action, hurt/defeat, transfer and boat poses. Preserve the original chin and collar above the pouch; reuse original opaque blue fabric where a background plate has a gap.
+- Dressed reactive adult NPCs in black puffers, navy tracksuits or olive vests/cargo trousers, with caps/beanies, trainers and crossbody bags. Retain matching clothes in recoil, fall, defeat and full-body healthy/damaged screen-impact art. Existing hostile crew streetwear and behavior remain.
+- Added V12 entry/cache keys and baby-mood/NPC-style debug readouts. Expanded source-feature, final-layer collar/pouch, real-control expression and independent full-body framing regressions. Original BQ, cycling physics, quests and combat rules remain unchanged.
+
 ## Revision 11.2 — complete chin and a joined collar
 
 - Replaced the cropped smile/happy portraits with the complete original in-game head from baby_pose_idle.webp. The earlier portraits ended through the lower jaw; the extra alpha fade made that cutoff more visible.

@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V11_2';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V12';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5968,6 +5968,8 @@ LOCAL X   ${area?.mode?Math.round(area.x):'—'}
 DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
 HERO        ${area?.mode&&area.mode!=='water'?(area.hero?.pose||'ready')+' · '+(area.hero?.carrier||'front')+' carrier':'—'}
 BABY FACE   ${area?.mode&&area.hero?.babyFace?.source?'original · '+area.hero.babyFace.source.split('/').pop().replace('.webp',''):'original riding art'}
+BABY MOOD   ${area?.mode?(area.hero?.babyFace?.mood||'idle'):'bike expressions'}
+NPC STYLE   Stockholm streetwear · puffer / tracksuit / cargo
 APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.combat?.phase==='apex'?'Apex Primal':'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
 GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}

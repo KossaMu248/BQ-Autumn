@@ -1,0 +1,85 @@
+{
+  "captures": [
+    {
+      "file": "passenger-front-game.png",
+      "mode": "street",
+      "pose": "walking",
+      "mood": "idle",
+      "source": "assets/baby_pose_idle.webp"
+    },
+    {
+      "file": "passenger-walking-game.png",
+      "mode": "street",
+      "pose": "walking",
+      "mood": "laugh",
+      "source": "assets/baby_pose_laugh.webp"
+    },
+    {
+      "file": "passenger-jump-game.png",
+      "mode": "street",
+      "pose": "walking",
+      "mood": "terror",
+      "source": "assets/baby_pose_terror.webp"
+    },
+    {
+      "file": "passenger-back-game.png",
+      "mode": "street",
+      "pose": "maul",
+      "mood": "terror",
+      "source": "assets/baby_pose_terror.webp"
+    },
+    {
+      "file": "streetwear-game.png",
+      "mode": "street",
+      "pose": "grab",
+      "mood": "brace",
+      "source": "assets/baby_pose_brace.webp"
+    },
+    {
+      "file": "passenger-throw-game.png",
+      "mode": "street",
+      "pose": "walking",
+      "mood": "terror",
+      "source": "assets/baby_pose_terror.webp"
+    },
+    {
+      "file": "streetwear-impact-game.png",
+      "mode": "street",
+      "pose": "walking",
+      "mood": "terror",
+      "source": "assets/baby_pose_terror.webp"
+    },
+    {
+      "file": "passenger-shop-talk.png",
+      "mode": "room",
+      "pose": "walking",
+      "mood": "point",
+      "source": "assets/baby_pose_point.webp"
+    },
+    {
+      "file": "passenger-boat-game.png",
+      "mode": "water",
+      "pose": "boat",
+      "mood": "excited",
+      "source": "assets/v151_baby_pose_excited.png"
+    },
+    {
+      "file": "passenger-phone-game.png",
+      "mode": "room",
+      "mood": "idle",
+      "source": "assets/baby_pose_idle.webp",
+      "viewport": [
+        390,
+        844
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "build": "AUTUMN_RIDE_ART_V12",
+  "entry": "autumn-v12.html",
+  "source": "Actual production game canvas; no image edits",
+  "desktopViewport": [
+    1280,
+    720
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "build": "AUTUMN_RIDE_ART_V12",
+  "entry": "autumn-v12.html",
+  "viewport": [
+    1280,
+    720
+  ],
+  "timing": "Realtime controls and recording, no virtual clock",
+  "path": "/workspace/BQ-Autumn/screenshots/revision12/passenger-gameplay.mp4",
+  "duration": 7.794,
+  "bytes": 3082295,
+  "timeline": [
+    {
+      "at": 0.0,
+      "event": "Original bike baby likeness in front carrier",
+      "mood": "idle"
+    },
+    {
+      "at": 1.57,
+      "event": "Walking smile",
+      "mood": "laugh"
+    },
+    {
+      "at": 3.14,
+      "event": "Startled jump",
+      "mood": "terror"
+    },
+    {
+      "at": 4.61,
+      "event": "Brace during grab, matching streetwear outfit",
+      "mood": "brace"
+    },
+    {
+      "at": 5.34,
+      "event": "Startled throw",
+      "mood": "terror"
+    },
+    {
+      "at": 6.16,
+      "event": "Full-body screen contact with damage",
+      "mood": "terror"
+    },
+    {
+      "at": 7.77,
+      "event": "Return to idle expression",
+      "mood": "idle"
+    }
+  ],
+  "targetHP": 28,
+  "pageErrors": [],
+  "encodedDuration": 7.8,
+  "codec": "H.264",
+  "decodedReview": {
+    "times": [
+      1.0,
+      3.2,
+      6.15
+    ],
+    "verified": [
+      "Full scene fills 1280x720 video",
+      "Front-carrier walking smile",
+      "Airborne jump with startled original baby",
+      "Full-body screen impact with matching black puffer/beanie/crossbody outfit and visible -32 damage"
+    ],
+    "debugPanelVisible": false
+  }
+}

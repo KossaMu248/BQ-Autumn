@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v9.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v9-1.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -67,7 +67,7 @@ The greenhouse gardener also asks you to find three seed packets along the garde
 
 Move into the same lane as an adult NPC. **G** grabs; press **G** again to fling them toward the screen. **J** mauls with a claw-swipe pose, scratch trails, dark red flecks, dust, hit-stop and stagger reactions. Adult NPCs recover after being knocked down, keeping quest areas usable. The baby rests in a protected seat during the action and returns to the front carrier when things settle.
 
-Successful grabs, throws and mauls fill **Primal**. At 35 points the bear becomes primal; a full meter triggers **eight seconds of invulnerable madness bowling** with automatic forward rolling and directional steering. It then returns to the cute bear and resets the meter. Outside that burst, provoked NPCs can counterattack. If on-foot health runs out, the bear recovers by the entrance or parked bike. Cycling health and physics stay separate. Use **F3 → On-foot brawler practice** for three nearby practice NPCs; the debug readout shows depth, jump, Primal and on-foot HP.
+Successful grabs, throws and mauls fill **Apex Primal**. At 35 points the bear enters the Apex Primal state; a full meter triggers **eight seconds as the invulnerable Madness Mauling Bear**. The bear stays upright, moves under your control and automatically mauls nearby adult NPCs, with faster manual claw attacks too. It then returns to the cute bear and resets the meter. Outside that burst, provoked NPCs can counterattack. If on-foot health runs out, the bear recovers by the entrance or parked bike. Cycling health and physics stay separate. Use **F3 → On-foot brawler practice** for three nearby practice NPCs; the debug readout shows depth, jump, Apex Primal and on-foot HP.
 
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
@@ -109,7 +109,7 @@ js/illustrated-neighbourhood.js  Terrain-supported landmarks and resident routes
 js/illustrated-visits.js    Walking rooms, docks/gardens and boating
 js/autumn-quests.js         Separate adventure inventory and quest save
 js/locomotion.js            Continuous two-leg gait and joint positions
-js/brawler.js               Adult NPC reactions, Primal and timed rolling frenzy
+js/brawler.js               Adult NPC reactions, Apex Primal and timed mauling frenzy
 js/brawler-art.js           Painted brawler poses and screen-space throws
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
@@ -137,9 +137,9 @@ Node is optional for playing. The new environment art was generated for this edi
 
 ## Validation
 
-Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v9.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision9/`. See VALIDATION.md for results and limits.
+Run `node tests/building-visits.cjs` for placement and interaction logic checks. Run `python3 tests/browser_v9.py` for desktop and mobile browser checks; it needs Python Playwright and Chromium (`python3 -m playwright install chromium`). The browser test starts its own local server and writes screenshots under `screenshots/revision9-1/`. See VALIDATION.md for results and limits.
 
-Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V9 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
+Fullscreen is available from the top bar, inside each area, and from settings. Escape or **Exit fullscreen** leaves it. Browsers without native element fullscreen use a viewport-filling mode. Settings now includes readable V9.1 location/quest/transition/combat readouts, building shortcuts, dismount preview and a marked dinghy test shortcut; opening it holds walking and transitions as well as cycling.
 
 Run `python3 tests/browser_polish.py` for dismount/remount, settings contrast, fullscreen and phone fallback checks.
 
@@ -147,4 +147,6 @@ The boat uses a dedicated bench-seated pose with lowered legs. Rear hull and ben
 
 A short real-time walking preview is available at `screenshots/revision8/walking-preview.mp4`.
 
-Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V9 screenshots are under `screenshots/revision9/`.
+Run `node tests/brawler.cjs` and `python3 tests/browser_brawler.py` for grab/throw, mauling, depth/jumping, Apex Primal timing, immunity expiry, NPC recovery and keyboard/touch combat checks. V9.1 screenshots are under `screenshots/revision9-1/`.
+
+Gameplay dialogue, location, quest and combat text now use a minimal white HUD inside the scene. Touch controls sit in the lower corners instead of in a panel below the canvas. On phones, on-foot play fills the viewport; portrait follows the player within an undistorted cropped view, while landscape shows the full world frame. Dialogue fades after reading time. Fullscreen and the readable debug menu remain available.

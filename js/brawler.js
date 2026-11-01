@@ -92,7 +92,8 @@
           n.x+=dx;n.depth+=dy;n.distance+=Math.hypot(dx,dy);n.moving=Math.hypot(dx,dy)>.02;
           if(close<70&&lane<25&&p.z<30&&time>n.nextHit){n.nextHit=time+1.1;n.punchUntil=time+.25;hit(8,p);effect('counter',n.x,n.depth);}
         }else if(n.patrol){
-          const wait=3+n.variant*1.25,span=285,speed=24+n.variant*3,duration=span*2/speed,cycle=duration*2+wait*2,t=(time+n.variant*7)%cycle;
+          const patrol=n.patrolVariant??n.variant%3;
+          const wait=3+patrol*1.25,span=285,speed=24+patrol*3,duration=span*2/speed,cycle=duration*2+wait*2,t=(time+patrol*7)%cycle;
           let target=n.home-span;if(t>wait&&t<wait+duration)target+=speed*(t-wait);else if(t>=wait+duration&&t<wait*2+duration)target=n.home+span;else if(t>=wait*2+duration)target=n.home+span-speed*(t-wait*2-duration);
           const dx=clamp(target-n.x,-speed*dt,speed*dt);n.x+=dx;n.face=Math.sign(dx)||n.face;n.distance+=Math.abs(dx);n.moving=Math.abs(dx)>.02;
         }

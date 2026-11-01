@@ -1,0 +1,845 @@
+{
+  "entry": "autumn-v13.html",
+  "build": "AUTUMN_RIDE_ART_V13",
+  "catalog": [
+    {
+      "variant": 0,
+      "label": "Burgundy premium puffer \u00b7 black hoodie and loose nylon trousers \u00b7 black/gray performance runners \u00b7 low cap \u00b7 patterned brown sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-a-v13.png",
+        "rect": [
+          23,
+          8,
+          609,
+          814
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-a-v13.png",
+        "stature": 331,
+        "frames": [
+          {
+            "rect": [
+              77,
+              19,
+              329,
+              355
+            ],
+            "anchor": [
+              243,
+              358
+            ]
+          },
+          {
+            "rect": [
+              525,
+              44,
+              411,
+              300
+            ],
+            "anchor": [
+              731,
+              331
+            ]
+          },
+          {
+            "rect": [
+              1060,
+              186,
+              434,
+              174
+            ],
+            "anchor": [
+              1278,
+              353
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-a-v13.png",
+        "frames": [
+          {
+            "rect": [
+              8,
+              131,
+              351,
+              621
+            ]
+          },
+          {
+            "rect": [
+              7,
+              854,
+              351,
+              624
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 1,
+      "label": "Dove-gray technical fleece set \u00b7 tapered joggers \u00b7 white leather low-top trainers \u00b7 navy cap \u00b7 black athletic sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-a-v13.png",
+        "rect": [
+          700,
+          36,
+          531,
+          790
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-a-v13.png",
+        "stature": 282,
+        "frames": [
+          {
+            "rect": [
+              90,
+              378,
+              346,
+              300
+            ],
+            "anchor": [
+              263,
+              667
+            ],
+            "outline": [
+              [
+                90,
+                378
+              ],
+              [
+                436,
+                378
+              ],
+              [
+                436,
+                678
+              ],
+              [
+                345,
+                678
+              ],
+              [
+                345,
+                649
+              ],
+              [
+                220,
+                649
+              ],
+              [
+                220,
+                678
+              ],
+              [
+                90,
+                678
+              ]
+            ]
+          },
+          {
+            "rect": [
+              553,
+              380,
+              400,
+              284
+            ],
+            "anchor": [
+              752,
+              654
+            ]
+          },
+          {
+            "rect": [
+              1063,
+              503,
+              446,
+              161
+            ],
+            "anchor": [
+              1284.5,
+              656
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-a-v13.png",
+        "frames": [
+          {
+            "rect": [
+              378,
+              140,
+              299,
+              616
+            ]
+          },
+          {
+            "rect": [
+              377,
+              857,
+              303,
+              621
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 2,
+      "label": "Oversized cream graphic hoodie \u00b7 relaxed blue denim \u00b7 white/gray luxury runners \u00b7 tan beanie \u00b7 brown sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-a-v13.png",
+        "rect": [
+          1313,
+          0,
+          551,
+          826
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-a-v13.png",
+        "stature": 325,
+        "frames": [
+          {
+            "rect": [
+              61,
+              650,
+              359,
+              360
+            ],
+            "anchor": [
+              241.5,
+              996
+            ],
+            "outline": [
+              [
+                225,
+                650
+              ],
+              [
+                340,
+                650
+              ],
+              [
+                340,
+                676
+              ],
+              [
+                420,
+                676
+              ],
+              [
+                420,
+                1010
+              ],
+              [
+                61,
+                1010
+              ],
+              [
+                61,
+                676
+              ],
+              [
+                225,
+                676
+              ]
+            ]
+          },
+          {
+            "rect": [
+              525,
+              689,
+              441,
+              294
+            ],
+            "anchor": [
+              746,
+              976
+            ]
+          },
+          {
+            "rect": [
+              1082,
+              810,
+              426,
+              183
+            ],
+            "anchor": [
+              1293.5,
+              982
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-a-v13.png",
+        "frames": [
+          {
+            "rect": [
+              685,
+              125,
+              339,
+              629
+            ]
+          },
+          {
+            "rect": [
+              691,
+              845,
+              333,
+              633
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 3,
+      "label": "Silver quilted vest \u00b7 black heavyweight hoodie \u00b7 brown tactical cargos \u00b7 black/white performance runners \u00b7 black beanie and sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-b-v13.png",
+        "rect": [
+          12,
+          6,
+          609,
+          820
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-b-v13.png",
+        "stature": 303,
+        "frames": [
+          {
+            "rect": [
+              93,
+              75,
+              284,
+              331
+            ],
+            "anchor": [
+              239,
+              391
+            ]
+          },
+          {
+            "rect": [
+              457,
+              160,
+              325,
+              231
+            ],
+            "anchor": [
+              621,
+              383
+            ]
+          },
+          {
+            "rect": [
+              835,
+              237,
+              360,
+              153
+            ],
+            "anchor": [
+              1016,
+              374
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-b-v13.png",
+        "frames": [
+          {
+            "rect": [
+              5,
+              119,
+              372,
+              643
+            ]
+          },
+          {
+            "rect": [
+              0,
+              814,
+              378,
+              622
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 4,
+      "label": "Teal/charcoal nylon windbreaker set \u00b7 loose nylon joggers \u00b7 white/silver runners \u00b7 white cap \u00b7 dark athletic sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-b-v13.png",
+        "rect": [
+          691,
+          27,
+          554,
+          799
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-b-v13.png",
+        "stature": 324,
+        "frames": [
+          {
+            "rect": [
+              90,
+              461,
+              306,
+              348
+            ],
+            "anchor": [
+              245,
+              795
+            ]
+          },
+          {
+            "rect": [
+              447,
+              556,
+              361,
+              242
+            ],
+            "anchor": [
+              630,
+              789
+            ]
+          },
+          {
+            "rect": [
+              831,
+              624,
+              369,
+              172
+            ],
+            "anchor": [
+              1015.5,
+              783
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-b-v13.png",
+        "frames": [
+          {
+            "rect": [
+              384,
+              142,
+              333,
+              621
+            ]
+          },
+          {
+            "rect": [
+              385,
+              834,
+              330,
+              602
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 5,
+      "label": "Long black premium down parka \u00b7 plum hoodie \u00b7 relaxed charcoal denim \u00b7 cream luxury runners \u00b7 burgundy beanie \u00b7 patterned brown sling",
+      "standing": {
+        "image": "assets/art/adult-wardrobe-b-v13.png",
+        "rect": [
+          1332,
+          0,
+          541,
+          826
+        ],
+        "face": 1,
+        "split": 0.76
+      },
+      "reactions": {
+        "image": "assets/art/wardrobe-reactions-b-v13.png",
+        "stature": 319,
+        "frames": [
+          {
+            "rect": [
+              95,
+              842,
+              310,
+              338
+            ],
+            "anchor": [
+              251.5,
+              1169
+            ]
+          },
+          {
+            "rect": [
+              457,
+              921,
+              337,
+              245
+            ],
+            "anchor": [
+              624.5,
+              1157
+            ]
+          },
+          {
+            "rect": [
+              815,
+              996,
+              395,
+              184
+            ],
+            "anchor": [
+              1011.5,
+              1164
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/wardrobe-screen-b-v13.png",
+        "frames": [
+          {
+            "rect": [
+              742,
+              115,
+              344,
+              647
+            ]
+          },
+          {
+            "rect": [
+              741,
+              814,
+              345,
+              624
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 6,
+      "label": "Olive work jacket \u00b7 cream knit \u00b7 relaxed blue denim \u00b7 brown boots \u00b7 burgundy beanie",
+      "standing": {
+        "image": "assets/art/adult-npcs-v9.png",
+        "rect": [
+          47,
+          13,
+          584,
+          798
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/npc-reactions-v10.png",
+        "stature": 344,
+        "frames": [
+          {
+            "rect": [
+              26,
+              6,
+              261,
+              352
+            ],
+            "anchor": [
+              181,
+              354
+            ]
+          },
+          {
+            "rect": [
+              379,
+              47,
+              363,
+              309
+            ],
+            "anchor": [
+              543,
+              352
+            ],
+            "outline": [
+              [
+                379,
+                47
+              ],
+              [
+                742,
+                47
+              ],
+              [
+                742,
+                292
+              ],
+              [
+                724,
+                292
+              ],
+              [
+                724,
+                356
+              ],
+              [
+                379,
+                356
+              ]
+            ]
+          },
+          {
+            "rect": [
+              731,
+              199,
+              355,
+              151
+            ],
+            "anchor": [
+              905,
+              346
+            ],
+            "outline": [
+              [
+                751,
+                199
+              ],
+              [
+                1086,
+                199
+              ],
+              [
+                1086,
+                350
+              ],
+              [
+                731,
+                350
+              ],
+              [
+                731,
+                280
+              ],
+              [
+                751,
+                280
+              ]
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/npc-screen-full-v10-1.png",
+        "frames": [
+          {
+            "rect": [
+              7,
+              36,
+              363,
+              692
+            ]
+          },
+          {
+            "rect": [
+              7,
+              730,
+              367,
+              681
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 7,
+      "label": "Navy autumn jacket \u00b7 rust scarf \u00b7 charcoal trousers \u00b7 brown boots \u00b7 tied hair",
+      "standing": {
+        "image": "assets/art/adult-npcs-v9.png",
+        "rect": [
+          718,
+          44,
+          503,
+          772
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/npc-reactions-v10.png",
+        "stature": 330,
+        "frames": [
+          {
+            "rect": [
+              34,
+              366,
+              251,
+              338
+            ],
+            "anchor": [
+              181,
+              700
+            ]
+          },
+          {
+            "rect": [
+              376,
+              386,
+              347,
+              318
+            ],
+            "anchor": [
+              543,
+              700
+            ]
+          },
+          {
+            "rect": [
+              731,
+              556,
+              350,
+              136
+            ],
+            "anchor": [
+              905,
+              688
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/npc-screen-full-v10-1.png",
+        "frames": [
+          {
+            "rect": [
+              389,
+              50,
+              332,
+              678
+            ]
+          },
+          {
+            "rect": [
+              386,
+              744,
+              335,
+              670
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 8,
+      "label": "Mustard jacket \u00b7 gray scarf \u00b7 olive trousers \u00b7 gray trainers \u00b7 gray beanie",
+      "standing": {
+        "image": "assets/art/adult-npcs-v9.png",
+        "rect": [
+          1298,
+          1,
+          530,
+          811
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/npc-reactions-v10.png",
+        "stature": 345,
+        "frames": [
+          {
+            "rect": [
+              21,
+              705,
+              284,
+              353
+            ],
+            "anchor": [
+              181,
+              1054
+            ]
+          },
+          {
+            "rect": [
+              372,
+              710,
+              342,
+              340
+            ],
+            "anchor": [
+              543,
+              1046
+            ]
+          },
+          {
+            "rect": [
+              734,
+              889,
+              354,
+              157
+            ],
+            "anchor": [
+              905,
+              1042
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/npc-screen-full-v10-1.png",
+        "frames": [
+          {
+            "rect": [
+              733,
+              52,
+              349,
+              675
+            ]
+          },
+          {
+            "rect": [
+              730,
+              751,
+              350,
+              661
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceCoverage": {
+    "cases": 324,
+    "minCoverage": 1,
+    "maxNeighborPixels": 0,
+    "faults": [],
+    "faultCount": 0
+  },
+  "walkingConnectivity": {
+    "cases": 288,
+    "minMainBodyRatio": 1,
+    "negativeControls": 2,
+    "faultCount": 0,
+    "faults": []
+  },
+  "result": "passed",
+  "pageErrors": [],
+  "httpFailures": []
+}

@@ -53,13 +53,15 @@
     mode=next;x=start;velocity=0;depth=0;depthVelocity=0;jumpZ=0;jumpVelocity=0;fade=.45;babyTalkUntil=0;paused=false;clear();setupCombat();refresh();
   }
   function streetSeeds(){
-    const residents=window.BearlyNeighbourhood.scenes.map((b,i)=>({id:'resident-'+b.key,x:b.x+145,depth:-55,variant:i%3,patrol:true}));
-    for(let xx=650,i=0;xx<(context?.road.finish||42000)-100;xx+=1000,i++)residents.push({id:'walker-'+i,x:xx,depth:[0,25,-35][i%3],variant:i%3,patrol:true});
+    const residents=window.BearlyNeighbourhood.scenes.map((b,i)=>({id:'resident-'+b.key,x:b.x+145,depth:-55,patrolVariant:i%3,patrol:true}));
+    for(let xx=650,i=0;xx<(context?.road.finish||42000)-100;xx+=1000,i++)residents.push({id:'walker-'+i,x:xx,depth:[0,25,-35][i%3],patrolVariant:i%3,patrol:true});
+    const count=window.BearlyBrawlArt.wardrobeCount;
+    residents.sort((a,b)=>a.x-b.x).forEach((n,i)=>n.variant=(i+1)%count);
     return [...residents,...(context?.gangs||[])];
   }
   function setupCombat(){
     combat.cancel();
-    const npcs=mode==='street'?streetSeeds():mode==='room'?[{id:'host',x:870,depth:-35,variant:place.role==='workshop'?0:place.role==='pizza'?2:1}]:mode==='dock'?[{id:'keeper',x:730,depth:0,variant:0}]:mode==='garden'?[{id:'gardener',x:590,depth:0,variant:1}]:[];
+    const npcs=mode==='street'?streetSeeds():mode==='room'?[{id:'host',x:870,depth:-35,variant:place.role==='workshop'?6:place.role==='pizza'?8:7}]:mode==='dock'?[{id:'keeper',x:730,depth:0,variant:6}]:mode==='garden'?[{id:'gardener',x:590,depth:0,variant:8}]:[];
     combat.enter(mode==='street'?'route':mode+':'+place.key,npcs);combatState=combat.snapshot();
     if(practiceQueue&&mode==='street'){combat.enter('practice-'+clock,[{id:'practice-a',x:x+65,depth:0,variant:0},{id:'practice-b',x:x+165,depth:25,variant:1},{id:'practice-c',x:x+270,depth:-25,variant:2}]);practiceQueue=false;combatState=combat.snapshot();}
   }

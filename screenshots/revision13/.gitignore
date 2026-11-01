@@ -1,0 +1,14 @@
+# Final review gallery; intermediate browser captures remain local.
+*
+!.gitignore
+!README.md
+!wardrobe-lineup.png
+!wardrobe-review.png
+!parka-walk-phases.png
+!wardrobe-street-game.png
+!wardrobe-street-phone.png
+!wardrobe-screen-impact.png
+!wardrobe-evidence.json
+!wardrobe-source-evidence.json
+!wardrobe-renderer-evidence.json
+!wardrobe-controls-evidence.json

@@ -5956,6 +5956,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     clearMobileControls();
     $('debugPanel').hidden=!debugOpen;
     $('debugOpenBtn').setAttribute('aria-expanded',String(debugOpen));
+    document.querySelector('.ride-settings')?.setAttribute('aria-expanded',String(debugOpen));
     if(debugOpen){debugRefresh(true);$('debugCloseBtn').focus();}
     else {if(debugReturnFocus?.isConnected)debugReturnFocus.focus();last=performance.now();acc=0;}
   }
@@ -6009,7 +6010,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(15700/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
     $('debugBoatBtn').addEventListener('click',()=>{for(const action of ['lunch','deliver','kit','repair'])window.BearlyQuests.game.act(action);debugRefresh(true);});
     $('debugBrawlBtn').addEventListener('click',()=>{debugOpenMenu(false);window.BearlyVisits.practice();});
-    $('debugLifeBtn')?.addEventListener('click',()=>{debugWarpTo(2500/WORLD_STRETCH);debugOpenMenu(false);document.querySelector('.dismount-button')?.click();});
+    $('debugLifeBtn')?.addEventListener('click',()=>{debugWarpTo(2500/WORLD_STRETCH);debugOpenMenu(false);requestAnimationFrame(()=>document.querySelector('.dismount-button')?.click());});
     $('debugFullscreenBtn').addEventListener('click',()=>window.BearlyFullscreen.toggle());
     $('debugWarpBtn').addEventListener('click',()=>debugWarpTo($('debugWarpMeters').value));
     $('debugWarpMeters').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();debugWarpTo(e.currentTarget.value);}});

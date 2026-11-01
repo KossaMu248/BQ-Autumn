@@ -94,8 +94,19 @@ def start(page, base, errors, failures, touch=False):
     page.evaluate('__wardrobeCalls=[]')
     page.clock.run_for(80)
     riding_draws=page.evaluate('__wardrobeCalls.filter(c=>c.actor).map(c=>({id:c.actor.id,variant:c.actor.variant,source:c.source,pose:c.sourcePose,activity:c.actor.activity}))')
-    if touch: page.locator('.dismount-button').tap()
-    else: page.keyboard.press('q')
+    settings_selector='#debugOpenBtn' if page.locator('#debugOpenBtn').is_visible() else '.ride-settings'
+    assert page.locator(settings_selector).is_visible(), 'Riding Settings must be genuinely visible'
+    if touch: page.locator(settings_selector).tap()
+    else: page.locator(settings_selector).click()
+    page.clock.run_for(180)
+    assert page.evaluate('BEARLY_DEBUG_MENU.isOpen()')
+    assert read(page)['mode'] is None, 'Shortcut must start from actual riding'
+    if touch: page.locator('#debugLifeBtn').tap()
+    else: page.locator('#debugLifeBtn').click()
+    page.clock.run_for(250)
+    shortcut_transition=read(page)
+    assert shortcut_transition['transition']=='dismount', shortcut_transition
+    assert not page.evaluate('BEARLY_DEBUG_MENU.isOpen()')
     page.clock.run_for(2300)
     assert read(page)['mode']=='street'
     foot=read(page)
@@ -104,7 +115,7 @@ def start(page, base, errors, failures, touch=False):
     assert any(c['id']=='civilian-reader' and c['pose']=='read' for c in riding_draws),riding_draws
     visible={n['id'] for n in riding if n['active'] and n['visible']}
     assert all(c['id'] in visible for c in riding_draws),riding_draws
-    return {'ridingActors':riding,'ridingDraws':riding_draws,'footActors':[{k:n.get(k) for k in ['id','variant','activity','active','visible','depth']} for n in foot['combat']['npcs']]}
+    return {'shortcut':{'settings':settings_selector,'action':'#debugLifeBtn','initialMode':None,'observedTransition':shortcut_transition['transition'],'finalMode':foot['mode'],'finalX':foot['x'],'debugClosed':not page.evaluate('BEARLY_DEBUG_MENU.isOpen()')},'ridingActors':riding,'ridingDraws':riding_draws,'footActors':[{k:n.get(k) for k in ['id','variant','activity','active','visible','depth']} for n in foot['combat']['npcs']]}
 
 
 def approach(page, ident, touch=False):

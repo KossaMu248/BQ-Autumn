@@ -1,5 +1,14 @@
 # Autumn Ride — standalone updates
 
+## Revision 13 — a varied adult wardrobe
+
+- Replaced the three repeated adult streetwear outfits with six distinct new designs: wine puffer/black nylon, grey technical fleece, cream hoodie/loose blue denim, silver vest/brown cargos, teal nylon set and long black parka/charcoal denim. Add varied low caps, fitted beanies, patterned/athletic sling bags and performance/luxury-style trainers.
+- Restored three ordinary autumn/workwear outfits alongside the six streetwear looks, for nine adult outfits. Keep these separate from the existing three gangster-kid styles and use casual clothes for shop, dock and garden hosts.
+- Cycle the whole wardrobe across residents and walkers. Preserve each NPC’s outfit, health and identity when dismounting, remounting and revisiting areas; use matched recoil/fall/defeat and healthy/damaged full-body screen-impact art.
+- Separate appearance from patrol timing so extra outfits preserve the original walking speeds and pauses. Add V13 entry/cache keys, the wardrobe count in debug, nine-outfit browser coverage and expanded independent full-body source checks.
+- Align NPC walking-leg pivots with the original body and overlap the clothing at the join, closing hip/knee gaps while retaining the long parka hem. Add walking-phase connectivity checks and detached-leg negative controls.
+- Preserve the original bear/baby artwork and expressions, cycling physics, terrain, quests and combat rules. The original BQ repository remains untouched.
+
 ## Revision 12 — continuous original baby and Stockholm streetwear
 
 - Replaced the separate head/neck/collar assembly with the original bike baby’s continuous head, chin, neck, shirt collar and upper torso. Only the lower clothing edge is hidden inside the carrier. Keep the original likeness and one common native scale across expressions.

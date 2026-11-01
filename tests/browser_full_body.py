@@ -16,8 +16,8 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v12.html"
-ASSETS = ("streetwear-screen-v12.png", "gang-screen-full-v10-1.png")
+ENTRY = "autumn-v13.html"
+ASSETS = ("wardrobe-screen-a-v13.png", "wardrobe-screen-b-v13.png", "npc-screen-full-v10-1.png", "gang-screen-full-v10-1.png")
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -75,7 +75,7 @@ def main():
                   ctx.fillText=function(value,...args){texts.push(String(value));return actualText(value,...args);};
                   // Observe the real destination corners after all renderer transforms.
                   ctx.drawImage=function(im,...args){
-                    if(/(?:streetwear-screen-v12|gang-screen-full-v10-1)\.png(?:\?|$)/.test(im.src||'') && this.globalAlpha>.01){
+                    if(/(?:wardrobe-screen-[ab]-v13|(?:npc|gang)-screen-full-v10-1)\.png(?:\?|$)/.test(im.src||'') && this.globalAlpha>.01){
                       let sx=0,sy=0,sw=im.naturalWidth,sh=im.naturalHeight,dx,dy,dw,dh;
                       if(args.length===8)[sx,sy,sw,sh,dx,dy,dw,dh]=args;
                       else if(args.length===4)[dx,dy,dw,dh]=args;
@@ -117,7 +117,7 @@ def main():
                     for(let i=1;i<major.length;i++){const distance=major[i].centerY-major[i-1].centerY;if(distance>gap){gap=distance;split=i;}}
                     if(split!==3)throw Error('Expected three distinct bodies in each visual band of '+im.src);
                     const frames=[major.slice(0,split),major.slice(split)].flatMap((row,rowIndex)=>row.sort((a,b)=>a.centerX-b.centerX).map((body,col)=>({...body,row:rowIndex,col})));
-                    const analysis={frames,width:w,height:h,kind:/streetwear-screen-v12/.test(im.src)?'resident':'gangster'};
+                    const analysis={frames,width:w,height:h,kind:/gang-screen-full-v10-1/.test(im.src)?'gangster':'resident'};
                     sourceComponents.set(im,analysis);return analysis;
                   }
                   function insideClip(x,y,clip){
@@ -156,7 +156,7 @@ def main():
                     {name:'portrait right',left:W-296,width:296}
                   ];
                   const actors=[
-                    ...[0,1,2].map(variant=>({kind:'resident',variant,item:'rock'})),
+                    ...Array.from({length:9},(_,variant)=>({kind:'resident',variant,item:'rock'})),
                     ...['bottle','rock','firecracker'].map((item,variant)=>({kind:'gangster',variant,item}))
                   ];
                   const faults=[];let samples=0,drawCount=0,damagedSamples=0,minCoverage=1,maxNeighborPixels=0;
@@ -175,7 +175,9 @@ def main():
                         drawCount++;
                         const xs=draw.points.map(p=>p.x),ys=draw.points.map(p=>p.y),bounds={left:Math.min(...xs),right:Math.max(...xs),top:Math.min(...ys),bottom:Math.max(...ys)};
                         if(bounds.left<profile.left-.5||bounds.right>profile.left+profile.width+.5||bounds.top<-.5||bounds.bottom>H+.5)faults.push({...label,issue:'full body outside visible view',bounds});
-                        const source=componentCoverage(draw,actor.variant);
+                        const source=componentCoverage(draw,actor.variant%3);
+                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':actor.variant<3?'wardrobe-screen-a-v13.png':actor.variant<6?'wardrobe-screen-b-v13.png':'npc-screen-full-v10-1.png';
+                        if(!draw.im.src.split('?')[0].endsWith('/'+expectedFile))faults.push({...label,issue:'wrong wardrobe pack',source:draw.im.src,expectedFile});
                         minCoverage=Math.min(minCoverage,source.coverage);maxNeighborPixels=Math.max(maxNeighborPixels,source.otherBodyPixels);
                         if(source.coverage<1)faults.push({...label,issue:'source crop or observed clip omits opaque body pixels',coverage:source.coverage});
                         if(source.otherBodyPixels>0)faults.push({...label,issue:'neighbor body fragment rendered',otherBodyPixels:source.otherBodyPixels});
@@ -196,11 +198,11 @@ def main():
             browser.close()
         assert not errors, errors
         assert not failed_assets, failed_assets
-        assert result["samples"] == 1008, result
+        assert result["samples"] == 2016, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
         print(
             f"Full-body renderer checks passed: {result['samples']} flight/impact samples, "
-            "all six actors, both motion preferences, complete opaque body components, "
+            "all twelve actors (nine adults and three crews), both motion preferences, complete opaque body components, "
             f"portrait-edge framing and damaged cels (opaque coverage {result['minCoverage']:.0%}, neighbor pixels {result['maxNeighborPixels']})."
         )
     finally:

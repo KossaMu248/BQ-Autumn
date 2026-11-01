@@ -6,6 +6,7 @@ that source opacity. This catches the V16 alpha crossfade that connectivity alon
 Renderer probes do not alter real game actors. Phase boards require visual review
 for anatomy, artwork, carrier placement and boot shape.
 """
+from browser_fixture import prepared_ready
 import argparse
 import base64
 import functools
@@ -19,8 +20,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v18.html'
-SHOTS=ROOT/'screenshots'/'revision18'
+ENTRY='autumn-v19.html'
+SHOTS=ROOT/'screenshots'/'revision19'
 
 PROBE=r"""async ({legacyCode}) => {
   const W=360,H=360,X=180,Y=320,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
@@ -201,7 +202,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(headless=True,args=['--no-sandbox']);page=browser.new_page();page.clock.install();page.on('pageerror',lambda e:errors.append(str(e)));page.on('response',lambda r:failures.append([r.status,r.url]) if r.status>=400 else None)
             page.goto(f'http://127.0.0.1:{server.server_port}/{ENTRY}')
-            page.wait_for_function('BearlyVisits.audit().artReady&&BearlyHeroRig.ready()&&(!BearlyNpcMotion.cacheStats||BearlyNpcMotion.cacheStats().complete)',timeout=180000)
+            page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady&&BearlyHeroRig.ready()&&(!BearlyNpcMotion.cacheStats||BearlyNpcMotion.cacheStats().complete)'),timeout=180000)
             result=page.evaluate(PROBE,{'legacyCode':legacy})
             for board in result.pop('boards'):
                 name=f"bear-weight-integrity-{board['carrier']}.png";(SHOTS/name).write_bytes(base64.b64decode(board['png'].split(',',1)[1]))

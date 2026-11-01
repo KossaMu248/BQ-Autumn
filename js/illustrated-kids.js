@@ -1,6 +1,17 @@
 /* Older-teen street cast: one physical scale through chilling, chasing and combat. */
 (() => {
   'use strict';
+  // Lossless build caches contain the exact approved prepared source pixels.
+  // Fetch/decode once; small sprite installs yield rather than flood-fill sheets
+  // on the input/render thread (including browsers without OffscreenCanvas).
+  const renderCache=window.BearlyActorRenderCache||(window.BearlyActorRenderCache=(()=>{
+    let preparation=Promise.resolve();const prepare=task=>{const next=preparation.then(task);preparation=next.catch(()=>{});return next;};
+    const images=new Map(),manifest=typeof fetch==='function'?fetch('assets/cache/actors-v19-manifest.json').then(r=>{if(!r.ok)throw Error('Actor render cache '+r.status);return r.json();}):Promise.reject(Error('No render-cache fetch'));
+    const yieldTask=()=>new Promise(resolve=>setTimeout(resolve,0));
+    const image=file=>{if(images.has(file))return images.get(file);const pending=new Promise((resolve,reject)=>{const im=new Image();im.decoding='async';im.fetchPriority='low';im.onload=async()=>{try{await im.decode?.();}catch{}resolve(im);};im.onerror=()=>reject(Error('Missing '+file));im.src=file;});images.set(file,pending);return pending;};
+    return{manifest,image,yieldTask,prepare};
+  })());
+  const yieldPreparation=()=>window.__BEARLY_BUILD_RENDER_CACHE?Promise.resolve():renderCache.yieldTask();
   const WORLD_HEIGHT=120,ADULT_HEIGHT=128,TAU=Math.PI*2;
   const cast={
     bottle:{file:'teen-molotov-poses-v18.png',oppositeUnits:1.15,releaseHand:[940,452],outfit:'Burgundy cap · black puffer gilet and hoodie · black tracksuit · sling bag · burgundy trainers'},
@@ -13,13 +24,14 @@
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   // A pose may extend across an ideal grid edge. Opaque body ownership, rather
   // than a rectangular grid crop, keeps whole shoes/hands and excludes its neighbour.
-  function prepare(image,file,rows,cols,assign){
+  async function prepare(image,file,rows,cols,assign){
     const c=make(image.naturalWidth,image.naturalHeight),g=c.getContext('2d',{willReadFrequently:true});g.drawImage(image,0,0);
     const pixels=g.getImageData(0,0,c.width,c.height),rgba=pixels.data,w=c.width,h=c.height,n=w*h,labels=new Uint16Array(n),seen=new Uint8Array(n),queue=new Int32Array(n),components=[];
     for(let seed=0;seed<n;seed++){
+      if((seed&65535)===0)await yieldPreparation();
       if(seen[seed]||rgba[seed*4+3]<160)continue;
       let head=0,tail=1,sumX=0,sumY=0;queue[0]=seed;seen[seed]=1;
-      while(head<tail){const at=queue[head++],x=at%w,y=Math.floor(at/w);sumX+=x;sumY+=y;
+      while(head<tail){if((head&2047)===0)await yieldPreparation();const at=queue[head++],x=at%w,y=Math.floor(at/w);sumX+=x;sumY+=y;
         for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
           const xx=x+dx,yy=y+dy;if(xx<0||xx>=w||yy<0||yy>=h)continue;const next=yy*w+xx;
           if(seen[next]||rgba[next*4+3]<160)continue;seen[next]=1;queue[tail++]=next;
@@ -31,7 +43,7 @@
     for(const body of components){const col=clamp(Math.floor(body.x/(w/cols)),0,cols-1),row=clamp(Math.floor(body.y/(h/rows)),0,rows-1);cells[row*cols+col].push(body);}
     if(cells.some(cell=>cell.length!==1))throw Error('Expected one complete teen per cell: '+file);
     let head=0,tail=0;for(let i=0;i<cells.length;i++)for(const body of cells[i])for(const at of body.points){labels[at]=i+1;queue[tail++]=at;}
-    while(head<tail){const at=queue[head++],x=at%w,y=Math.floor(at/w),owner=labels[at];
+    while(head<tail){if((head&2047)===0)await yieldPreparation();const at=queue[head++],x=at%w,y=Math.floor(at/w),owner=labels[at];
       for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
         const xx=x+dx,yy=y+dy;if(xx<0||xx>=w||yy<0||yy>=h)continue;const next=yy*w+xx;
         if(labels[next]||rgba[next*4+3]<25)continue;labels[next]=owner;queue[tail++]=next;
@@ -39,16 +51,17 @@
     }
     // Small disconnected details (a dazed cartoon star/fuse spark) belong to
     // their own pose. Barely visible alpha speckles are omitted once at load.
-    for(let at=0;at<n;at++)if(rgba[at*4+3]>=25&&!labels[at]){
+    for(let at=0;at<n;at++){if((at&65535)===0)await yieldPreparation();if(rgba[at*4+3]>=25&&!labels[at]){
       const col=clamp(Math.floor((at%w)/(w/cols)),0,cols-1),row=clamp(Math.floor(Math.floor(at/w)/(h/rows)),0,rows-1);labels[at]=row*cols+col+1;
-    }
+    }}
     const bounds=cells.map(()=>[w,h,-1,-1]),cores=cells.map(()=>[w,h,-1,-1]);
-    for(let at=0;at<n;at++)if(labels[at]){
+    for(let at=0;at<n;at++){if((at&65535)===0)await yieldPreparation();if(labels[at]){
       const x=at%w,y=Math.floor(at/w),b=bounds[labels[at]-1];b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
       if(rgba[at*4+3]>=160){const q=cores[labels[at]-1];q[0]=Math.min(q[0],x);q[1]=Math.min(q[1],y);q[2]=Math.max(q[2],x);q[3]=Math.max(q[3],y);}
-    }
+    }}
     const frames=[];
     for(let index=0;index<cells.length;index++){
+      await yieldPreparation();
       const b=bounds[index],core=cores[index],rect=[b[0],b[1],b[2]-b[0]+1,b[3]-b[1]+1],tile=make(rect[2],rect[3]),tg=tile.getContext('2d'),out=tg.createImageData(rect[2],rect[3]);
       for(let y=b[1];y<=b[3];y++)for(let x=b[0];x<=b[2];x++){
         const at=y*w+x;if(labels[at]!==index+1)continue;const to=((y-b[1])*rect[2]+x-b[0])*4;for(let k=0;k<4;k++)out.data[to+k]=rgba[at*4+k];
@@ -62,19 +75,19 @@
     }
     sources[file]={rows,cols,components:components.length,frames};return frames;
   }
-  const loaded=Promise.all([
+  function loadLegacy(){return Promise.all([
     ...Object.entries(cast).map(([kind,info])=>new Promise(resolve=>{
-      const image=new Image();image.onload=()=>{try{
-        const list=prepare(image,info.file,3,5,index=>({kind,pose:poseNames[index]})),stature=list[0].stature;
+      const image=new Image();image.onload=async()=>{try{
+        const list=await renderCache.prepare(()=>prepare(image,info.file,3,5,index=>({kind,pose:poseNames[index]}))),stature=list[0].stature;
         banks[kind]={stature,frames:Object.fromEntries(list.map(f=>[f.pose,{...f,stature}]))};
       }catch(error){problems.push(String(error));}resolve();};image.onerror=()=>{problems.push('Missing '+info.file);resolve();};image.src='assets/art/'+info.file;
     })),
-    new Promise(resolve=>{const image=new Image();image.onload=()=>{try{
-      const list=prepare(image,'teen-screen-v18.png',2,3,index=>({kind:['bottle','rock','firecracker'][index%3],pose:index<3?'screen':'screenDamaged'}));
+    new Promise(resolve=>{const image=new Image();image.onload=async()=>{try{
+      const list=await renderCache.prepare(()=>prepare(image,'teen-screen-v18.png',2,3,index=>({kind:['bottle','rock','firecracker'][index%3],pose:index<3?'screen':'screenDamaged'})));
       for(const frame of list){if(!banks[frame.kind])banks[frame.kind]={frames:{}};banks[frame.kind].frames[frame.pose]=frame;}
     }catch(error){problems.push(String(error));}resolve();};image.onerror=()=>{problems.push('Missing teen-screen-v18.png');resolve();};image.src='assets/art/teen-screen-v18.png';})
-    ,new Promise(resolve=>{const image=new Image();image.onload=()=>{try{
-      prepare(image,'teen-run-opposites-v18.png',3,2,index=>({kind:['bottle','rock','firecracker'][Math.floor(index/2)],pose:index%2?'runD':'runC'}));
+    ,new Promise(resolve=>{const image=new Image();image.onload=async()=>{try{
+      await renderCache.prepare(()=>prepare(image,'teen-run-opposites-v18.png',3,2,index=>({kind:['bottle','rock','firecracker'][Math.floor(index/2)],pose:index%2?'runD':'runC'})));
     }catch(error){problems.push(String(error));}resolve();};image.onerror=()=>{problems.push('Missing teen-run-opposites-v18.png');resolve();};image.src='assets/art/teen-run-opposites-v18.png';})
   ]).then(()=>{
     // Images may complete in any order: merge the screen frames after every
@@ -88,7 +101,22 @@
       banks[frame.kind].frames[frame.pose]={...frame,referenceStature,sourceUnits,stature:referenceStature*sourceUnits};
     }
     finished=true;
-  });
+  });}
+  let preparationMode='compiled',cacheFailure=null;
+  async function loadCompiled(){
+    const manifest=await renderCache.manifest;if(manifest.format!==1)throw Error('Unsupported actor cache');
+    const tiles=new Map();let slice=performance.now();const pending=manifest.teenSources.map(pack=>renderCache.image(pack.file));
+    for(const [index,pack]of manifest.teenSources.entries()){const image=await pending[index],frames=[];
+      for(const info of pack.frames){const [x,y,w,h]=info.cacheRect,tile=make(w,h),g=tile.getContext('2d');g.drawImage(image,x,y,w,h,0,0,w,h);
+        Object.assign(tile.dataset,{sourceAsset:pack.source,sourceRect:info.rect.join(','),sourcePose:info.pose,sourceVariant:info.kind,sourceTransform:'teen-source-tile'});
+        const {cacheRect,pixelSHA256,...metadata}=info,frame={...metadata,tile};frames.push(frame);tiles.set(info.source+'|'+info.kind+'|'+info.pose,tile);
+        if(performance.now()-slice>2){await renderCache.yieldTask();slice=performance.now();}
+      }sources[pack.source]={rows:pack.rows,cols:pack.cols,components:pack.components,frames};
+    }
+    for(const [kind,bank]of Object.entries(manifest.kidsBanks)){banks[kind]={stature:bank.stature,frames:{}};for(const [pose,metadata]of Object.entries(bank.frames))banks[kind].frames[pose]={...metadata,tile:tiles.get(metadata.source+'|'+kind+'|'+pose)};}
+    finished=true;
+  }
+  const loaded=(window.__BEARLY_BUILD_RENDER_CACHE?loadLegacy():loadCompiled().catch(error=>{preparationMode='cooperative-fallback';cacheFailure=String(error);return loadLegacy();}));
   function ready(){return finished&&problems.length===0&&Object.keys(cast).every(kind=>banks[kind]?.frames.idle&&banks[kind]?.frames.screenDamaged);}
   function frameFor(kind,pose){return banks[kind]?.frames[pose]||banks[kind]?.frames.idle;}
   function publicFrame(frame){if(!frame)return null;const {tile,...metadata}=frame;return JSON.parse(JSON.stringify(metadata));}
@@ -141,5 +169,5 @@
     outfit:kind=>cast[kind]?.outfit||cast.bottle.outfit,
     frames:()=>Object.values(banks).flatMap(bank=>Object.values(bank.frames).map(publicFrame)),
     sourceFrames:()=>Object.values(sources).flatMap(sheet=>sheet.frames.map(frame=>({...publicFrame(frame),active:frameFor(frame.kind,frame.pose)?.source===frame.source}))),
-    audit:()=>({ready:ready(),drawn:JSON.parse(JSON.stringify(drawn)),types:Object.keys(cast),worldHeight:WORLD_HEIGHT,adultReferenceHeight:ADULT_HEIGHT,problems:[...problems]})};
+    audit:()=>({ready:ready(),preparationMode,cacheFailure,drawn:JSON.parse(JSON.stringify(drawn)),types:Object.keys(cast),worldHeight:WORLD_HEIGHT,adultReferenceHeight:ADULT_HEIGHT,problems:[...problems]})};
 })();

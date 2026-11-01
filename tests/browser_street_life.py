@@ -4,6 +4,7 @@ Game actors are never replaced or assigned test states. Debug warps only choose 
 real starting location; all interactions and movement use keyboard/touch inputs.
 Renderer-only anatomy/source probes live in browser_wardrobe.py.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import subprocess
@@ -83,7 +84,7 @@ def start(page, base, errors, failures, touch=False):
     page.on('pageerror', lambda error: errors.append(str(error)))
     page.on('response', lambda response: failures.append([response.status,response.url]) if response.status >=400 else None)
     page.goto(f'{base}/{ENTRY}')
-    page.wait_for_function('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)', timeout=180000)
+    page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)'), timeout=180000)
     page.clock.pause_at(page.evaluate('Date.now()+1000')/1000)
     page.evaluate('__installWardrobeActorAudit();__installLifeAudit()')
     if touch: page.locator('#introStart').tap()
@@ -253,7 +254,7 @@ def run_video(browser,base,errors,failures):
         context=browser.new_context(viewport={'width':1280,'height':720},record_video_dir=str(SHOTS),record_video_size={'width':960,'height':540})
         born=time.monotonic();page=context.new_page();page.on('pageerror',lambda error:errors.append(str(error)))
         page.on('response',lambda response:failures.append([response.status,response.url]) if response.status>=400 else None)
-        page.goto(f'{base}/{ENTRY}');page.wait_for_function('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready()',timeout=120000)
+        page.goto(f'{base}/{ENTRY}');page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready()'),timeout=120000)
         page.click('#introStart');page.evaluate('BEARLY_DEBUG_MENU.settings.godMode=true;BEARLY_DEBUG_MENU.warp(2500/1.5)')
         page.wait_for_timeout(150);page.keyboard.press('q');page.wait_for_function('BearlyVisits.audit().mode==="street"',timeout=10000)
         page.locator('.area-fullscreen').click();page.wait_for_function('document.fullscreenElement!==null',timeout=5000);page.wait_for_timeout(150)

@@ -8,7 +8,15 @@
     adultsC:'assets/art/adult-cast-c-v15.png',reactionsC:'assets/art/cast-reactions-c-v15.png',screenC:'assets/art/cast-screen-c-v15.png',
     bottle:'assets/v162_projectile_bottle.png',rock:'assets/v162_projectile_rock.png',firecracker:'assets/v162_projectile_firecracker.png'
   };
-  for(const [id,path] of Object.entries(files)){const im=new Image();im.src=path;images[id]=im;sourceImages[path]=im;}
+  let preparing=null;
+  for(const [id,path] of Object.entries(files)){const im=new Image();im.decoding='async';images[id]=im;sourceImages[path]=im;if(['bottle','rock','firecracker'].includes(id))im.src=path;}
+  // Reactions and screen throws are needed after leaving the bicycle. Starting
+  // the ride does not decode nine offscreen combat sheets on a phone.
+  function prepare(){
+    if(preparing)return preparing;
+    preparing=Promise.all(Object.entries(files).map(([id,path])=>new Promise(resolve=>{const im=images[id];if(im.naturalWidth){resolve();return;}im.onload=async()=>{try{await im.decode?.();}catch{}resolve();};im.onerror=()=>resolve();if(!im.src||(im.complete&&!im.naturalWidth))im.src=path;})));
+    return preparing;
+  }
   // Each wardrobe carries its own measured source geometry. Clothing selection
   // never changes with aggression, damage, transport or the screen-throw state.
   const wardrobes=[];
@@ -105,7 +113,7 @@
       const passive=!n.hostile&&!['aggressive','hostile'].includes(n.mood)&&!['stagger','fall','dead','down','rise','held'].includes(n.state);
       if(passive&&!window.BearlyNpcMotion?.ready())return;
     }
-    const profile=wardrobe(n),im=sourceImages[profile.standing.image];if(!im.naturalWidth)return;
+    const profile=wardrobe(n),im=sourceImages[profile.standing.image];if(n.kind!=='gangster'&&!im.naturalWidth){prepare();window.BearlyNpcMotion?.drawPose(c,{variant:n.variant||0,pose:'idle',x,y,height:h,face:n.face||1});return;}
     if(n.kind==='gangster')h=window.BearlyKids.heightFor(h);
     c.save();c.translate(x,y);c.scale(scale,scale);
     const sourceFace=n.kind==='gangster'?1:profile.standing.face,flip=(n.face||1)*sourceFace<0;if(flip)c.scale(-1,1);
@@ -198,7 +206,7 @@
       c.restore();
     }
   }
-  window.BearlyBrawlArt={ready:()=>{syncCivilians();return Object.values(images).every(im=>im.naturalWidth>0)&&wardrobes.every(w=>w.reactions.frames?.length===3&&w.screen.frames?.length===2)&&window.BearlyHeroRig.ready()&&!!window.BearlyNpcMotion?.ready()&&!!window.BearlyKids?.ready();},adult,projectile,impact,overlay,
+  window.BearlyBrawlArt={prepare,ready:()=>{syncCivilians();return Object.values(images).every(im=>im.naturalWidth>0)&&wardrobes.every(w=>w.reactions.frames?.length===3&&w.screen.frames?.length===2)&&window.BearlyHeroRig.ready()&&!!window.BearlyNpcMotion?.ready()&&!!window.BearlyKids?.ready();},adult,projectile,impact,overlay,
     outfit:n=>n.kind==='gangster'?window.BearlyKids.outfit(n.item||'rock'):wardrobe(n).label,
     wardrobeCount:wardrobes.length,motionReady:()=>!!window.BearlyNpcMotion?.ready(),wardrobe:()=>{syncCivilians();return JSON.parse(JSON.stringify(wardrobes));}};
 })();

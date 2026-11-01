@@ -2,8 +2,23 @@
 (() => {
   'use strict';
   const images={},clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  for(const [key,file] of Object.entries({nearContact:'bear-near-contact-v18.png',nearSupport:'bear-near-support-v18.png',farPoses:'bear-far-poses-v18.png',lowerIdle:'bear-idle-lower-v18.png',front:'front-carrier-v7.png',back:'back-carrier-v11.png',reactions:'carrier-reactions-v11.png',parts:'matched-legs-v11.png',frontBackground:'front-background-v11-2.png',backBackground:'back-background-v11-2.png',reactionBackground:'reaction-background-v11-2.png',boatBackground:'boat-background-v11-2.png',transferBackground:'transfer-background-v11-2.png'})){
-    const im=new Image();im.src='assets/art/'+file;images[key]=im;
+  const imageFiles={nearContact:'bear-near-contact-v18.png',nearSupport:'bear-near-support-v18.png',farPoses:'bear-far-poses-v18.png',lowerIdle:'bear-idle-lower-v18.png',front:'front-carrier-v7.png',back:'back-carrier-v11.png',reactions:'carrier-reactions-v11.png',parts:'matched-legs-v11.png',frontBackground:'front-background-v11-2.png',backBackground:'back-background-v11-2.png',reactionBackground:'reaction-background-v11-2.png',boatBackground:'boat-background-v11-2.png',transferBackground:'transfer-background-v11-2.png'};
+  const decodedImages=new Set();let preloadPromise=null,preloadStarted=false;
+  // Walking/carrier artwork is optional while riding. Start these requests only
+  // after the critical cycling scene can draw, or when a visit requests them.
+  for(const key of Object.keys(imageFiles))images[key]=new Image();
+  function preload(){
+    if(preloadPromise)return preloadPromise;preloadStarted=true;
+    preloadPromise=Promise.all(Object.entries(imageFiles).map(([key,file])=>new Promise((resolve,reject)=>{
+      const im=images[key];let finished=false;
+      const finish=()=>{if(finished)return;finished=true;decodedImages.add(key);resolve();};
+      im.decoding='async';im.fetchPriority='low';
+      im.onload=()=>{if(typeof im.decode==='function')im.decode().then(finish,reject);else finish();};
+      im.onerror=()=>reject(new Error('Unable to load carrier artwork: '+file));
+      im.src='assets/art/'+file;
+      if(im.naturalWidth>0&&typeof im.decode!=='function')finish();
+    })));
+    return preloadPromise;
   }
   const heads={
     front:{box:[183,173,83,85],neck:[232,255],angle:0},
@@ -54,7 +69,7 @@
     transfer4:{box:[771,676,111,132],waist:[829,803],lip:[[791,792],[829,807],[866,789]]},
     transfer5:{box:[1265,676,102,135],waist:[1327,806],lip:[[1288,794],[1325,810],[1362,791]]}
   };
-  function ready(){return Object.values(images).every(im=>im.naturalWidth>0)&&!!window.BearlyBabyPassenger?.ready();}
+  function ready(){return preloadStarted&&Object.keys(imageFiles).every(key=>images[key].naturalWidth>0&&(typeof images[key].decode!=='function'||decodedImages.has(key)))&&!!window.BearlyBabyPassenger?.ready();}
   function babyMood(options={}){
     const state=options.state||{};
     const startled=(state.effects||[]).some(e=>e.kind==='throw'&&e.age<.65||e.kind==='screen-smack'&&e.age<.3);
@@ -260,11 +275,28 @@
     const landmarks={};for(const side of ['near','far']){const f=pose.legs[side],r=frame.rendered[side],point=v=>({x:v.x*scale,y:v.y*scale});landmarks[side]={...Object.fromEntries(['hip','knee','cuff','heel','toe','sole'].map(k=>[k,point(r[k])])),renderedFromSource:true,source:r.source,plannedSole:f.sole,plannedCuff:f.cuff,angle:f.angle,stance:f.stance,kneeFlex:f.kneeFlex,contact:f.contact,bootWidth:Math.hypot(r.toe.x-r.heel.x,r.toe.y-r.heel.y)*scale,rigidShoe:true};}
     lastAudit={pose:'walking',carrier:name,integratedCarrier:true,babyFace,height:h,source:profile.image,sourceRect:frame.rect,lowerPose:frame.lowerPose,lowerSourceRect:frame.lowerRect,authoredLowerBody:true,stature:profile.stature,landmarks,gait,body:{pivot:pose.pivot,sway:pose.shift.x,bob:pose.shift.y,roll:pose.angle,pelvisSway:gait.pelvisSway,pelvisRoll:gait.pelvisRoll,slope,opaque:true,surfaces:1,continuous:true,triangles:frame.triangles,canonicalHeight:BODY_HEIGHT,lowerHeight:LOWER_HEIGHT,cachePhase:frame.gait.phase},cache:{frames:bodyFrames.size,hits:bodyCacheHits,misses:bodyCacheMisses}};c.restore();return true;
   }
-  function cacheStats(){return {frames:bodyFrames.size,bytes:bodyCacheBytes,limitBytes:BODY_CACHE_LIMIT,frameLimit:98,phases:BODY_PHASES,canonicalHeight:BODY_HEIGHT,hits:bodyCacheHits,misses:bodyCacheMisses,transientBuilds,bitmapFrames:bodyBitmaps,bitmapFailures,mode:window.createImageBitmap?'bitmap':'raster-canvas',pendingBitmaps:[...bodyFrames.values()].filter(f=>f.pending).length,buildMs:bodyBuildMs,maxBuildMs:maxBodyBuildMs,scratchBytes:[...bodyScratch.values()].reduce((n,c)=>n+c.width*c.height*4,0)};}
+  let sourceWarmupPromise=null,sourceWarmupDone=0,sourceWarmupMs=0,sourceWarmupMaxMs=0;
+  function warmupSources(){
+    if(sourceWarmupPromise)return sourceWarmupPromise;
+    sourceWarmupPromise=preload().then(()=>new Promise((resolve,reject)=>{
+      const tasks=[...lowerKeys.map((_,index)=>()=>prepareLower(index)),()=>upperSource(profiles.front,'front'),()=>upperSource(profiles.back,'back')];
+      const schedule=()=>{if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(run,{timeout:1000});else window.setTimeout(()=>run(null),32);};
+      const run=deadline=>{
+        // Make progress even when a busy device only grants tiny idle windows.
+        // Rescheduling a fresh deadline here can starve every requested visit.
+        // Each callback prepares exactly one source piece, never the full rig.
+        const began=bodyNow();try{tasks.shift()();}catch(error){reject(error);return;}const elapsed=bodyNow()-began;sourceWarmupDone++;sourceWarmupMs+=elapsed;sourceWarmupMaxMs=Math.max(sourceWarmupMaxMs,elapsed);
+        if(tasks.length)schedule();else resolve();
+      };
+      schedule();
+    }));
+    return sourceWarmupPromise;
+  }
+  function cacheStats(){return {frames:bodyFrames.size,bytes:bodyCacheBytes,limitBytes:BODY_CACHE_LIMIT,frameLimit:98,phases:BODY_PHASES,canonicalHeight:BODY_HEIGHT,hits:bodyCacheHits,misses:bodyCacheMisses,transientBuilds,bitmapFrames:bodyBitmaps,bitmapFailures,mode:window.createImageBitmap?'bitmap':'raster-canvas',pendingBitmaps:[...bodyFrames.values()].filter(f=>f.pending).length,buildMs:bodyBuildMs,maxBuildMs:maxBodyBuildMs,scratchBytes:[...bodyScratch.values()].reduce((n,c)=>n+c.width*c.height*4,0),sourceWarmup:{prepared:sourceWarmupDone,total:7,complete:sourceWarmupDone===7,buildMs:sourceWarmupMs,maxTaskMs:sourceWarmupMaxMs}};}
   function drawAuthored(c,image,rect,origin,scale,pose,options={}){
     if(!ready()||!heads[pose])return false;
     const babyFace=drawCarrier(c,image,rect,origin,scale,pose,options);
     lastAudit={pose,carrier:'front',integratedCarrier:true,babyFace};return true;
   }
-  window.BearlyHeroRig={ready,draw,drawAuthored,babyMood,cacheStats,layout:()=>JSON.parse(JSON.stringify(upperBodies)),audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
+  window.BearlyHeroRig={ready,preload,warmupSources,draw,drawAuthored,babyMood,cacheStats,layout:()=>JSON.parse(JSON.stringify(upperBodies)),audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
 })();

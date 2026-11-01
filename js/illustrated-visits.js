@@ -19,9 +19,19 @@
   host.append(panel,controls);
   const nameEl=panel.querySelector('.area-name'),messageEl=panel.querySelector('.area-message'),questEl=panel.querySelector('.area-quest'),actionButton=controls.querySelector('.area-action');
   const journal=document.createElement('div');journal.className='adventure-journal';journal.hidden=true;host.append(journal);
-  const art={};
-  for(const [key,file] of Object.entries({transfer:'bike-transfer-v7.png',workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',passengers:'boat-passengers-v8.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'})){
-    const im=new Image();im.src='assets/art/'+file;art[key]=im;
+  const art={},artFiles={transfer:'bike-transfer-v7.png',workshop:'workshop-interior-v7.png',room:'pizzeria-walkable-v7.png',people:'front-carrier-v7.png',passengers:'boat-passengers-v8.png',boat:'dinghy-v7.png',water:'waterfront.png',forest:'forest.png',verge:'autumn-verge.png'},artLoads=new Map();
+  for(const key of Object.keys(artFiles)){art[key]=new Image();art[key].decoding='async';art[key].fetchPriority='low';}
+  let footPreparation=null,footPrepared=false,waitingDoor=null;
+  const preparation={hero:false,combat:false,base:false,sources:false},decodedArt=new Set();
+  function loadArt(key){
+    if(artLoads.has(key))return artLoads.get(key);const im=art[key];
+    const job=new Promise(resolve=>{im.onload=async()=>{try{await im.decode?.();}catch(_){}decodedArt.add(key);resolve();};im.onerror=resolve;im.src='assets/art/'+artFiles[key];});artLoads.set(key,job);return job;
+  }
+  const placeArt=p=>!p?[]:p.role==='pizza'?['room']:p.role==='workshop'?['workshop']:p.role==='water'?['water']:['park','castle'].includes(p.role)?['forest','verge']:[];
+  const placeReady=p=>placeArt(p).every(key=>art[key].naturalWidth>0);
+  function preload(p=null){
+    if(!footPreparation)footPreparation=Promise.all([Promise.all(['people','transfer','passengers','boat'].map(loadArt)).then(()=>{preparation.base=true;}),window.BearlyHeroRig.preload().then(()=>{preparation.hero=true;}),Promise.resolve(window.BearlyBrawlArt.prepare?.()).then(()=>{preparation.combat=true;})]).then(()=>window.BearlyHeroRig.warmupSources?.()).then(()=>{preparation.sources=true;footPrepared=true;});
+    return Promise.all([footPreparation,...placeArt(p).map(loadArt)]);
   }
   let candidate=null,context=null,place=null,mode=null,x=160,velocity=0,face=1,clock=0,stride=0,fade=0,focused=null,paused=false,lastMessage='';
   let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
@@ -79,7 +89,8 @@
   }
   function enter(){
     if(mode==='street'){enterFromStreet();return;}
-    if(transition||!candidate||!eligible(context)||!art.people.naturalWidth||!art.transfer.naturalWidth||!window.BearlyHeroRig.ready())return;
+    if(transition||!candidate||!eligible(context))return;
+    preload(candidate);if(!footPrepared||!placeReady(candidate)){pendingEntry=true;return;}
     place=candidate;focused=document.activeElement;context.clearInput();clock=0;stride=0;face=1;paused=false;
     streetEntry=false;transition={kind:'dismount',elapsed:0,duration:2.4,goal:'entry'};
     if(place.role==='water')quests.act('start');
@@ -88,7 +99,7 @@
   }
   function stepOff(){
     if(mode||transition||!context?.playing)return;
-    pendingStepOff=!pendingStepOff;
+    preload();pendingStepOff=!pendingStepOff;
   }
   function startStreet(){
     pendingStepOff=false;streetEntry=false;returning=false;walkWeight=0;
@@ -100,13 +111,14 @@
   }
   function enterFromStreet(){
     const b=window.BearlyNeighbourhood.nearestEntrance(x);if(!b)return;
+    preload(b);if(!placeReady(b)){waitingDoor=b.key;setMessage('Opening the door…');return;}waitingDoor=null;
     if(jumpZ>3)return;place=b;streetReturnDepth=depth;if(b.role==='water')quests.act('start');streetEntry=true;streetReturn=x;clear();velocity=0;
     transition={kind:'door-enter',elapsed:0,duration:.65,goal:'entry'};
     setMessage('Walking inside…');refresh(false);
   }
   function close(){
     if(!mode&&!transition){pendingStepOff=false;return;}
-    pendingStepOff=false;returning=false;combat.cancel();combatState=combat.snapshot();jumpZ=0;jumpVelocity=0;depth=0;
+    pendingStepOff=false;waitingDoor=null;returning=false;combat.cancel();combatState=combat.snapshot();jumpZ=0;jumpVelocity=0;depth=0;
     context?.clearInput();clear();transition=null;pendingEntry=false;document.getElementById('mobilePauseBtn').textContent='Ⅱ PAUSE';mode=null;place=null;panel.hidden=true;controls.hidden=true;
     document.body.classList.remove('autumn-exploring');focused?.focus();
   }
@@ -208,11 +220,12 @@
     if(transition){if(!paused)stepTransition(Math.min(.05,Math.max(0,s.dt||0)));refresh(false);return;}
     const q=quests.snapshot();journal.hidden=!!mode||!s.playing||!q.started;
     journal.textContent=q.voyage?'LAKE TRAIL COMPLETE ✓':q.delivered&&q.repaired?`MÄLAREN · Buoys ${q.buoys.length}/3 · Return to the boatkeeper`:`BOATKEEPER · Lunch ${q.delivered?'✓':q.lunch?'packed':'at Pizza & Kebab'} · Patch ${q.repaired?'✓':q.kit?'kit packed':'at workshop'}`;
-    if(!mode){if(combat.setHealth)combat.setHealth(s.readHealth?.()??s.health??combatState.hp);combat.enter('route',streetSeeds());if(s.playing)combat.update(Math.min(.05,s.dt||0),{x:s.x,depth:0,z:0,face:Math.sign(s.speed)||1,riding:true,gangPose:s.gangPose,speed:s.speed,health:s.health,readHealth:s.readHealth,populationViewRadius:1000,godMode:s.godMode,hurtRider:s.hurtRider});combatState=combat.snapshot();if(s.playing){reactWeaponContacts(combatState,s.playSound);window.BearlyStreetLife.react(combatState,s.playSound);}if(!s.playing)pendingStepOff=false;candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&window.BearlyHeroRig.ready()&&art.passengers.naturalWidth>0;
-      dismountButton.disabled=!ready;dismountButton.textContent=pendingStepOff?'SLOWING TO DISMOUNT…':'DISMOUNT · Q';
-      if(pendingStepOff&&s.playing&&ready&&s.brakeToStop?.()){startStreet();return;}
-      if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
+    if(!mode){if(combat.setHealth)combat.setHealth(s.readHealth?.()??s.health??combatState.hp);combat.enter('route',streetSeeds());if(s.playing)combat.update(Math.min(.05,s.dt||0),{x:s.x,depth:0,z:0,face:Math.sign(s.speed)||1,riding:true,gangPose:s.gangPose,speed:s.speed,health:s.health,readHealth:s.readHealth,populationViewRadius:1000,godMode:s.godMode,hurtRider:s.hurtRider});combatState=combat.snapshot();if(s.playing){reactWeaponContacts(combatState,s.playSound);window.BearlyStreetLife.react(combatState,s.playSound);}if(!s.playing)pendingStepOff=false;candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=footPrepared&&art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&window.BearlyHeroRig.ready()&&art.passengers.naturalWidth>0;
+      dismountButton.disabled=false;dismountButton.textContent=pendingStepOff?ready?'SLOWING TO DISMOUNT…':'GETTING READY…':'DISMOUNT · Q';
+      if(pendingStepOff&&s.playing){const stopped=s.brakeToStop?.();if(ready&&stopped){startStreet();return;}}
+      if(pendingEntry&&candidate)preload(candidate);if(candidate){prompt.disabled=!eligible(s);prompt.textContent=pendingEntry&&(!ready||!placeReady(candidate))?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready&&placeReady(candidate)){pendingEntry=false;enter();}return;}
     const dt=Math.min(.05,Math.max(0,s.dt||0));if(paused)return;
+    if(waitingDoor){const door=window.BearlyNeighbourhood.nearestEntrance(x);if(mode!=='street'||door?.key!==waitingDoor)waitingDoor=null;else if(placeReady(door))enterFromStreet();}
     messageRemaining=Math.max(0,messageRemaining-dt);messageEl.hidden=messageRemaining===0;
     if(held.has('maul'))maul();
     const moveDt=combatState.hitStop>0?0:dt;
@@ -501,5 +514,5 @@
     const p=transition.elapsed/transition.duration,t=transition.kind==='mount'?1-p:p;
     return t>=.03+.69*2/5;
   }
-  window.BearlyVisits={residents:()=>combat.snapshot('route').npcs,lifeTime:()=>combatState.time,gangStatus:id=>combat.lookup(id),provokeGang:(id,p)=>combat.provokeGang?.(id,p||player()),active:()=>!!mode||!!transition,paused:()=>paused,setHealth:value=>{combat.setHealth(value);combatState=combat.snapshot();context?.storeHealth?.(combatState.hp);refresh(false);},close,update,render,overlay,footActive:()=>!!mode&&mode!=='water',practice:()=>{practiceQueue=true;if(land())setupCombat();else pendingStepOff=true;},roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:combatState.baby?'back-carrier':'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),hero:window.BearlyHeroRig.audit(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,depth,jump:jumpZ,combat:combatState,streetLife:window.BearlyStreetLife.audit(),artReady:window.BearlyStreetLife.ready()&&window.BearlyBrawlArt.ready()&&!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!window.BearlyHeroRig.ready()&&!!art.passengers.naturalWidth}),quests};
+  window.BearlyVisits={assetState:()=>({...preparation,footPrepared,images:Object.fromEntries(Object.entries(art).map(([key,im])=>[key,{requested:artLoads.has(key),complete:im.complete,width:im.naturalWidth,decoded:decodedArt.has(key)}]))}),preload,prepareAll:()=>Promise.all([preload(),...Object.keys(artFiles).map(loadArt)]),residents:()=>combat.snapshot('route').npcs,lifeTime:()=>combatState.time,gangStatus:id=>combat.lookup(id),provokeGang:(id,p)=>combat.provokeGang?.(id,p||player()),active:()=>!!mode||!!transition,paused:()=>paused,setHealth:value=>{combat.setHealth(value);combatState=combat.snapshot();context?.storeHealth?.(combatState.hp);refresh(false);},close,update,render,overlay,footActive:()=>!!mode&&mode!=='water',practice:()=>{preload();practiceQueue=true;if(land())setupCombat();else pendingStepOff=true;},roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;preload(candidate);},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:combatState.baby?'back-carrier':'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),hero:window.BearlyHeroRig.audit(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,depth,jump:jumpZ,combat:combatState,streetLife:window.BearlyStreetLife.audit(),artReady:footPrepared&&window.BearlyStreetLife.ready()&&window.BearlyBrawlArt.ready()&&!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!window.BearlyHeroRig.ready()&&!!art.passengers.naturalWidth}),quests};
 })();

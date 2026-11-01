@@ -1,0 +1,8 @@
+{
+  "result": "passed",
+  "cases": 720,
+  "sourceCases": 144,
+  "walkCases": 576,
+  "sourcePixelDifferences": 0,
+  "mode": "new async legacy prepare + source renderer, output isolated outside repository"
+}

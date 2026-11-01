@@ -5,6 +5,7 @@ cells. Runtime rigs are checked independently for connected bodies and visible
 lower/upper-body motion; unused pixels from a limb's source are not falsely
 required to appear in a posed torso.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import hashlib
@@ -16,8 +17,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v18.html"
-SHOTS = ROOT / "screenshots" / "revision18"
+ENTRY = "autumn-v19.html"
+SHOTS = ROOT / "screenshots" / "revision19"
 
 
 def source_hashes():
@@ -254,7 +255,7 @@ def main():
     SHOTS.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
-    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V18"}
+    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V19"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -264,7 +265,7 @@ def main():
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 page.on("response", lambda r: failures.append([r.status, r.url]) if r.status >= 400 else None)
                 page.goto(f"http://127.0.0.1:{server.server_port}/{ENTRY}")
-                page.wait_for_function("BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)", timeout=180000)
+                page.wait_for_function(prepared_ready("BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)"), timeout=180000)
                 page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
                 catalog = page.evaluate("BearlyBrawlArt.wardrobe()")
                 assert len(catalog) == 12 and len({n['label'] for n in catalog}) == 12

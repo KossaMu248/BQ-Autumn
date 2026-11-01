@@ -2,6 +2,17 @@
    a connected texture mesh supplies continuous opposing steps and relaxed arms. */
 (() => {
   'use strict';
+  // Lossless build caches contain the exact approved prepared source pixels.
+  // Fetch/decode once; small sprite installs yield rather than flood-fill sheets
+  // on the input/render thread (including browsers without OffscreenCanvas).
+  const renderCache=window.BearlyActorRenderCache||(window.BearlyActorRenderCache=(()=>{
+    let preparation=Promise.resolve();const prepare=task=>{const next=preparation.then(task);preparation=next.catch(()=>{});return next;};
+    const images=new Map(),manifest=typeof fetch==='function'?fetch('assets/cache/actors-v19-manifest.json').then(r=>{if(!r.ok)throw Error('Actor render cache '+r.status);return r.json();}):Promise.reject(Error('No render-cache fetch'));
+    const yieldTask=()=>new Promise(resolve=>setTimeout(resolve,0));
+    const image=file=>{if(images.has(file))return images.get(file);const pending=new Promise((resolve,reject)=>{const im=new Image();im.decoding='async';im.fetchPriority='low';im.onload=async()=>{try{await im.decode?.();}catch{}resolve(im);};im.onerror=()=>reject(Error('Missing '+file));im.src=file;});images.set(file,pending);return pending;};
+    return{manifest,image,yieldTask,prepare};
+  })());
+  const yieldPreparation=()=>window.__BEARLY_BUILD_RENDER_CACHE?Promise.resolve():renderCache.yieldTask();
   const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),atlases={},profiles=Array.from({length:12},(_,variant)=>({variant,poses:{},heightScale:variant===9?1.05:variant===11?.84:1}));
   let lastAudit=null;
   const WALK_PHASES=48,CACHE_LIMIT=48*1024*1024,walkBanks=new Map();
@@ -21,15 +32,16 @@
   // Resolve ownership from the opaque authored bodies, then grow into their
   // translucent edges. This keeps whole toes/hoods even when the atlas is not a
   // mathematically perfect grid, without importing the neighbour's silhouette.
-  function prepare(spec,image){
+  async function prepare(spec,image){
     const source=make(image.naturalWidth,image.naturalHeight),g=source.getContext('2d',{willReadFrequently:true});g.drawImage(image,0,0);
     const rgba=g.getImageData(0,0,source.width,source.height).data,w=source.width,h=source.height,size=w*h,cw=w/spec.cols,ch=h/spec.rows;
     for(const at of [0,w-1,(h-1)*w,size-1])if(rgba[at*4+3]>1)throw Error('Motion atlas must have transparent corners: '+spec.file);
     const labels=new Int16Array(size),seen=new Uint8Array(size),queue=new Int32Array(size),components=[];
     for(let seed=0;seed<size;seed++){
+      if((seed&65535)===0)await yieldPreparation();
       if(seen[seed]||rgba[seed*4+3]<160)continue;
       let head=0,tail=1,sumX=0,sumY=0;queue[0]=seed;seen[seed]=1;
-      while(head<tail){const at=queue[head++],x=at%w,y=Math.floor(at/w);sumX+=x;sumY+=y;
+      while(head<tail){if((head&2047)===0)await yieldPreparation();const at=queue[head++],x=at%w,y=Math.floor(at/w);sumX+=x;sumY+=y;
         for(let oy=-1;oy<=1;oy++)for(let ox=-1;ox<=1;ox++){
           const xx=x+ox,yy=y+oy;if(xx<0||xx>=w||yy<0||yy>=h)continue;
           const next=yy*w+xx;if(seen[next]||rgba[next*4+3]<160)continue;seen[next]=1;queue[tail++]=next;
@@ -42,18 +54,19 @@
     if(cells.some(v=>!v.length))throw Error('Missing complete motion pose: '+spec.file);
     // Large disconnected props such as a newspaper belong to the same pose.
     let head=0,tail=0;for(let i=0;i<cells.length;i++)for(const body of cells[i])for(const at of body.pixels){labels[at]=i+1;queue[tail++]=at;}
-    while(head<tail){const at=queue[head++],x=at%w,y=Math.floor(at/w),label=labels[at];
+    while(head<tail){if((head&2047)===0)await yieldPreparation();const at=queue[head++],x=at%w,y=Math.floor(at/w),label=labels[at];
       for(let oy=-1;oy<=1;oy++)for(let ox=-1;ox<=1;ox++){
         const xx=x+ox,yy=y+oy;if(xx<0||xx>=w||yy<0||yy>=h)continue;const next=yy*w+xx;
         if(labels[next]||!rgba[next*4+3])continue;labels[next]=label;queue[tail++]=next;
       }
     }
     // Isolated smoke/soft ink has no opaque bridge. Keep it in its own cell.
-    for(let at=0;at<size;at++)if(rgba[at*4+3]&&!labels[at])labels[at]=clamp(Math.floor(Math.floor(at/w)/ch),0,spec.rows-1)*spec.cols+clamp(Math.floor((at%w)/cw),0,spec.cols-1)+1;
+    for(let at=0;at<size;at++){if((at&65535)===0)await yieldPreparation();if(rgba[at*4+3]&&!labels[at])labels[at]=clamp(Math.floor(Math.floor(at/w)/ch),0,spec.rows-1)*spec.cols+clamp(Math.floor((at%w)/cw),0,spec.cols-1)+1;}
     const bounds=cells.map(()=>[w,h,-1,-1]),cores=cells.map(()=>[w,h,-1,-1]);
-    for(let at=0;at<size;at++)if(labels[at]){const b=bounds[labels[at]-1],x=at%w,y=Math.floor(at/w);b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
-      if(rgba[at*4+3]>=160){const q=cores[labels[at]-1];q[0]=Math.min(q[0],x);q[1]=Math.min(q[1],y);q[2]=Math.max(q[2],x);q[3]=Math.max(q[3],y);}}
+    for(let at=0;at<size;at++){if((at&65535)===0)await yieldPreparation();if(labels[at]){const b=bounds[labels[at]-1],x=at%w,y=Math.floor(at/w);b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
+      if(rgba[at*4+3]>=160){const q=cores[labels[at]-1];q[0]=Math.min(q[0],x);q[1]=Math.min(q[1],y);q[2]=Math.max(q[2],x);q[3]=Math.max(q[3],y);}}}
     for(let index=0;index<cells.length;index++){
+      await yieldPreparation();
       const row=Math.floor(index/spec.cols),col=index%spec.cols,variant=spec.standing?spec.variants[col]:spec.variants[row],pose=spec.standing?'idle':spec.poses[col];
       const [x0,y0,x1,y1]=bounds[index],rect=[x0,y0,x1-x0+1,y1-y0+1],tile=make(rect[2],rect[3]),tg=tile.getContext('2d'),pixels=tg.createImageData(rect[2],rect[3]);
       for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const at=y*w+x;if(labels[at]!==index+1)continue;const d=((y-y0)*rect[2]+x-x0)*4;for(let k=0;k<4;k++)pixels.data[d+k]=rgba[at*4+k];}
@@ -90,9 +103,24 @@
       }
     }
   }
-  for(const spec of specifications){const image=new Image(),entry={image,ready:false,error:null};atlases[spec.file]=entry;
-    image.onload=()=>{try{prepare(spec,image);finalize();entry.ready=true;entry.error=null;if(ready())startWalkCache();}catch(e){entry.error=String(e);}};image.onerror=()=>entry.error='Missing '+spec.file;image.src='assets/art/'+spec.file;
+  function loadLegacy(){return Promise.all(specifications.map(spec=>new Promise(resolve=>{const image=new Image(),entry={image,ready:false,error:null};atlases[spec.file]=entry;
+    image.onload=async()=>{try{await renderCache.prepare(()=>prepare(spec,image));finalize();entry.ready=true;entry.error=null;if(ready())startWalkCache();}catch(e){entry.error=String(e);}resolve();};image.onerror=()=>{entry.error='Missing '+spec.file;resolve();};image.src='assets/art/'+spec.file;
+  })));}
+  let preparedManifest=null,preparationMode='compiled',cacheFailure=null;
+  async function loadCompiled(){
+    const manifest=await renderCache.manifest;if(manifest.format!==1)throw Error('Unsupported actor cache');preparedManifest=manifest;
+    let slice=performance.now();const pending=manifest.npcSources.map(pack=>renderCache.image(pack.file));
+    for(const [index,pack]of manifest.npcSources.entries()){const entry=atlases[pack.source]={image:null,ready:false,error:null},image=await pending[index];
+      for(const info of pack.frames){const [x,y,w,h]=info.cacheRect,tile=make(w,h);tile.getContext('2d').drawImage(image,x,y,w,h,0,0,w,h);
+        Object.assign(tile.dataset,{sourceAsset:pack.source,sourceRect:info.rect.join(','),sourcePose:info.pose,sourceVariant:String(info.variant)});
+        const {cacheRect,pixelSHA256,...metadata}=info;profiles[info.variant].poses[info.pose]={...metadata,tile};
+        if(performance.now()-slice>2){await renderCache.yieldTask();slice=performance.now();}
+      }entry.ready=true;
+    }
+    startWalkCache();
   }
+  for(const spec of specifications)atlases[spec.file]={image:null,ready:false,error:null};
+  const loaded=window.__BEARLY_BUILD_RENDER_CACHE?loadLegacy():loadCompiled().catch(error=>{preparationMode='cooperative-fallback';cacheFailure=String(error);return loadLegacy();});
   function ready(){return Object.values(atlases).every(a=>a.ready)&&profiles.every(p=>p.poses.idle);}
   function publicFrame(frame){const {tile,feet,legSplit,...data}=frame;return JSON.parse(JSON.stringify({...data,heightScale:profiles[frame.variant].heightScale}));}
   function frames(){return profiles.flatMap(p=>Object.values(p.poses).map(publicFrame));}
@@ -151,14 +179,31 @@
   // walker, independent of its height, heading or number of times it is drawn.
   // Work yields between poses, and an unseen phase never tessellates in draw().
   function startWalkCache(){
-    if(cacheState.started||!ready())return;cacheState.started=true;cacheState.startedAt=performance.now();
+    if(cacheState.started||(!preparedManifest&&!ready()))return;cacheState.started=true;cacheState.startedAt=performance.now();
+    if(preparedManifest){cacheState.mode='compiled';for(const item of preparedManifest.walks)walkBanks.set(item.variant,{...item,frames:Array(WALK_PHASES).fill(null),cursor:0,built:0,hits:0,misses:0,activeUntil:0,workerReady:false,requested:false,loading:null});return;}
     const layout=height=>profiles.map(profile=>{const f=profile.poses.idle,width=Math.ceil(Math.max(.72,f.core[2]/f.stature+.16)*height)+12,heightPx=Math.ceil(height*1.10)+12;return{variant:profile.variant,width,height:heightPx,x:width/2,y:height+8};});
     let layouts=layout(cacheState.height);
     if(layouts.reduce((sum,p)=>sum+p.width*p.height*4*WALK_PHASES,0)>CACHE_LIMIT){cacheState.height=128;layouts=layout(cacheState.height);}
     const priority=[0,9,11,10,1,2,3,4,5,6,7,8];
-    for(const variant of priority){const geometry=layouts[variant];walkBanks.set(variant,{...geometry,frames:Array(WALK_PHASES).fill(null),cursor:0,built:0,hits:0,misses:0,activeUntil:0,workerReady:false});}
-    startCacheWorker();scheduleWalkCache();
+    for(const variant of priority){const geometry=layouts[variant];walkBanks.set(variant,{...geometry,frames:Array(WALK_PHASES).fill(null),cursor:0,built:0,hits:0,misses:0,activeUntil:0,workerReady:false,requested:!!window.__BEARLY_BUILD_RENDER_CACHE,loading:null});}
+    if(window.__BEARLY_BUILD_RENDER_CACHE){startCacheWorker();scheduleWalkCache();}
   }
+  function warmVariant(variant){
+    startWalkCache();const bank=walkBanks.get(variant);if(!bank)return Promise.resolve();bank.requested=true;
+    if(bank.loading)return bank.loading;
+    if(!preparedManifest){if(!cacheWorker)startCacheWorker();scheduleWalkCache();return Promise.resolve();}
+    bank.loading=(async()=>{const image=await renderCache.image(bank.file);let slice=performance.now();
+      for(const frame of bank.framesMeta||preparedManifest.walks.find(p=>p.variant===variant).frames){const index=frame.index;if(bank.frames[index])continue;const x=index%bank.columns*bank.width,y=Math.floor(index/bank.columns)*bank.height,started=performance.now();let tile;
+        if(window.createImageBitmap)tile=await createImageBitmap(image,x,y,bank.width,bank.height);
+        else{tile=make(bank.width,bank.height);tile.getContext('2d').drawImage(image,x,y,bank.width,bank.height,0,0,bank.width,bank.height);}
+        acceptPose(bank,index,tile,frame.details,performance.now()-started,false);
+        if(performance.now()-slice>2){await renderCache.yieldTask();slice=performance.now();}
+      }
+      if([...walkBanks.values()].every(b=>b.built===WALK_PHASES))finishCache();
+    })().catch(error=>{bank.error=String(error);cacheState.mode='compiled-with-cooperative-fallback';if(!cacheWorker)startCacheWorker();scheduleWalkCache();});
+    return bank.loading;
+  }
+  function preloadAll(){startWalkCache();return Promise.all([...walkBanks.keys()].map(warmVariant));}
   function finishCache(){
     cacheState.complete=true;cacheState.completedMs=performance.now()-cacheState.startedAt;
     if(cacheWorker){cacheWorker.terminate();cacheWorker=null;}
@@ -189,27 +234,28 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
   }
   function scheduleWalkCache(){
     if(cacheState.scheduled||cacheState.complete||workerJob)return;
-    const pending=[...walkBanks.values()].filter(bank=>bank.built<WALK_PHASES);
-    if(!pending.length){finishCache();return;}
+    const pending=[...walkBanks.values()].filter(bank=>bank.requested&&bank.built<WALK_PHASES);
+    if(!pending.length){if([...walkBanks.values()].every(b=>b.built===WALK_PHASES))finishCache();return;}
     const now=performance.now(),eligible=cacheWorker?pending.filter(b=>b.workerReady):pending;
     if(!eligible.length)return;
-    const bank=eligible.find(b=>b.activeUntil>now)||eligible[0],index=phaseOrder[bank.cursor++];
+    const bank=eligible.find(b=>b.activeUntil>now)||eligible[0];while(bank.frames[phaseOrder[bank.cursor]])bank.cursor++;const index=phaseOrder[bank.cursor++];
     if(cacheWorker){workerJob={bank,index};cacheWorker.postMessage({type:'bake',variant:bank.variant,index,phaseCount:WALK_PHASES,heightScale:cacheState.height,width:bank.width,height:bank.height,x:bank.x,y:bank.y});return;}
     cacheState.scheduled=true;
-    const next=()=>{cacheState.scheduled=false;const frame=profiles[bank.variant].poses.idle,canvas=make(bank.width,bank.height),g=canvas.getContext('2d'),started=performance.now();
+    const next=deadline=>{cacheState.scheduled=false;if(!window.__BEARLY_BUILD_RENDER_CACHE&&deadline&&deadline.timeRemaining()<12){setTimeout(scheduleWalkCache,100);return;}const frame=profiles[bank.variant].poses.idle,canvas=make(bank.width,bank.height),g=canvas.getContext('2d'),started=performance.now();
       g.translate(bank.x,bank.y);const details=rig(g,frame,index/WALK_PHASES,cacheState.height,frame.sourceFace);
       g.getImageData(0,0,bank.width,bank.height);acceptPose(bank,index,canvas,details,performance.now()-started,true);scheduleWalkCache();
     };
-    if(window.requestIdleCallback)requestIdleCallback(next,{timeout:80});else setTimeout(next,0);
+    if(window.requestIdleCallback)requestIdleCallback(next);else setTimeout(()=>next(null),32);
   }
   function cachedWalk(c,frame,phase,h,face){
-    startWalkCache();const bank=walkBanks.get(frame.variant),normalized=((phase%1)+1)%1,index=Math.round(normalized*WALK_PHASES)%WALK_PHASES;
+    warmVariant(frame.variant);const bank=walkBanks.get(frame.variant),normalized=((phase%1)+1)%1,index=Math.round(normalized*WALK_PHASES)%WALK_PHASES;
+    if(!bank){raw(c,get(frame.variant,normalized<.5?'walkA':'walkB')||frame,0,0,h,face);return null;}
     bank.activeUntil=performance.now()+2500;let entry=bank.frames[index];
     if(entry){cacheState.hits++;bank.hits++;}else{
       cacheState.misses++;bank.misses++;let distance=WALK_PHASES;
-      for(let i=0;i<WALK_PHASES;i++)if(bank.frames[i]){const gap=Math.min(Math.abs(i-index),WALK_PHASES-Math.abs(i-index));if(gap<distance){entry=bank.frames[i];distance=gap;}}
+      for(let i=0;!preparedManifest&&i<WALK_PHASES;i++)if(bank.frames[i]){const gap=Math.min(Math.abs(i-index),WALK_PHASES-Math.abs(i-index));if(gap<distance){entry=bank.frames[i];distance=gap;}}
     }
-    if(!entry){raw(c,frame,0,0,h,face);return null;}
+    if(!entry){const authored=get(frame.variant,normalized<.5?'walkA':'walkB')||frame;raw(c,authored,0,0,h,face);return null;}
     const scale=h/cacheState.height,flip=face*frame.sourceFace<0?-1:1;c.save();c.scale(flip,1);c.drawImage(entry.canvas,-bank.x*scale,-bank.y*scale,bank.width*scale,bank.height*scale);c.restore();return{cacheEntry:entry,scale};
   }
   function motionAudit(){
@@ -217,7 +263,7 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
     if(details?.cacheEntry){const {cacheEntry,scale}=details,d=cacheEntry.details,point=p=>({x:p.x*scale,y:p.y*scale});details={...d,landmarks:Object.fromEntries(Object.entries(d.landmarks).map(([key,foot])=>[key,{...foot,sole:point(foot.sole)}])),bodyShift:d.bodyShift*scale,bob:d.bob*scale,halfStride:d.halfStride*scale,armSwing:d.armSwing*scale,cached:true,phaseIndex:cacheEntry.index,phaseCount:WALK_PHASES};}
     return JSON.parse(JSON.stringify({...lastAudit,details}));
   }
-  function cacheStats(){return{phaseCount:WALK_PHASES,canonicalHeight:cacheState.height,frameCount:cacheState.bakes,capacity:profiles.length*WALK_PHASES,bytes:cacheState.bytes,limitBytes:CACHE_LIMIT,hits:cacheState.hits,misses:cacheState.misses,bakes:cacheState.bakes,buildMs:cacheState.buildMs,maxBuildMs:cacheState.maxBuildMs,mainBuildMs:cacheState.mainBuildMs,maxMainBuildMs:cacheState.maxMainBuildMs,mode:cacheState.mode,warmupMs:cacheState.completedMs||performance.now()-cacheState.startedAt,complete:cacheState.complete,variants:[...walkBanks.values()].map(b=>({variant:b.variant,frames:b.built,width:b.width,height:b.height,bytes:b.built*b.width*b.height*4,hits:b.hits,misses:b.misses}))};}
+  function cacheStats(){return{preparationMode,cacheFailure,onDemand:!!preparedManifest,visibleComplete:[...walkBanks.values()].filter(b=>b.requested).every(b=>b.built===WALK_PHASES),requestedVariants:[...walkBanks.values()].filter(b=>b.requested).map(b=>b.variant),phaseCount:WALK_PHASES,canonicalHeight:cacheState.height,frameCount:cacheState.bakes,capacity:profiles.length*WALK_PHASES,bytes:cacheState.bytes,limitBytes:CACHE_LIMIT,hits:cacheState.hits,misses:cacheState.misses,bakes:cacheState.bakes,buildMs:cacheState.buildMs,maxBuildMs:cacheState.maxBuildMs,mainBuildMs:cacheState.mainBuildMs,maxMainBuildMs:cacheState.maxMainBuildMs,mode:cacheState.mode,warmupMs:cacheState.completedMs||performance.now()-cacheState.startedAt,complete:cacheState.complete,variants:[...walkBanks.values()].map(b=>({variant:b.variant,frames:b.built,width:b.width,height:b.height,bytes:b.built*b.width*b.height*4,hits:b.hits,misses:b.misses}))};}
   function seated(c,frame,x,y,h,face,seatHeight,t=0,reading=false){
     const s=h/frame.stature,flip=face*frame.sourceFace<0?-1:1,[px,py]=frame.seatPivot||frame.anchor,[sx,sy]=frame.rect;
     c.save();c.translate(x,y-seatHeight);c.rotate(Math.sin(t*.75+frame.variant)* (reading?.0035:.0018));c.scale(flip,1+.0025*Math.sin(t*1.6+frame.variant));c.drawImage(frame.tile,(sx-px)*s,(sy-py)*s,frame.tile.width*s,frame.tile.height*s);c.restore();
@@ -225,7 +271,8 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
   function draw(c,n,x,y,height=130,scale=1){
     if(n.active===false||n.visible===false)return true;
     const variant=Number.isFinite(n.variant)?((n.variant%12)+12)%12:0,profile=profiles[variant],reaction=['stagger','fall','dead','down','rise'].includes(n.state);
-    if(!ready()||!profile?.poses.idle)return false;
+    if(!profile?.poses.idle)return false;
+    warmVariant(variant);
     if(variant<9&&(reaction||n.state==='held'))return false;
     const moving=!!n.moving,aggressive=n.hostile||n.mood==='hostile'||n.mood==='aggressive',activity=n.activity||(moving?(aggressive?'run':'walk'):'idle'),face=n.face||1,h=height*profile.heightScale,t=n.age||0;
     let pose='idle',mode=activity,phase=0,details=null;
@@ -253,5 +300,5 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
     if(n.state==='held'){/* Supporting hands/throw motion is provided by the bear rig. */}
     c.restore();lastAudit={variant,activity,pose,phase,source:frame.source,sourceRect:frame.rect,height:h,heightScale:profile.heightScale,civilian:n.civilian===true,details};return true;
   }
-  window.BearlyNpcMotion={ready,frames,frame:(variant,pose)=>{const f=get(variant,pose);return f?publicFrame(f):null;},source,drawPose,draw,audit:motionAudit,cacheStats,diagnostics:()=>Object.fromEntries(Object.entries(atlases).map(([k,v])=>[k,{ready:v.ready,error:v.error}]))};
+  window.BearlyNpcMotion={ready,loaded,preloadAll,frames,frame:(variant,pose)=>{const f=get(variant,pose);return f?publicFrame(f):null;},source,drawPose,draw,audit:motionAudit,cacheStats,diagnostics:()=>Object.fromEntries(Object.entries(atlases).map(([k,v])=>[k,{ready:v.ready,error:v.error}]))};
 })();

@@ -1,14 +1,15 @@
 """Transition, fullscreen and readable V18 debug menu checks."""
+from browser_fixture import prepared_ready
 import functools
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision18';errors=[];failures=[]
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision19';errors=[];failures=[]
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v18.html'
+base=f'http://127.0.0.1:{server.server_port}/autumn-v19.html'
 def luminance(rgb):
     values=[float(n)/255 for n in rgb.removeprefix('rgb(').removesuffix(')').split(',')]
     vals=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in values]
@@ -17,7 +18,7 @@ try:
     with sync_playwright() as pw:
         b=pw.chromium.launch(headless=True,args=['--no-sandbox']);p=b.new_page(viewport={'width':1440,'height':1000});p.clock.install()
         p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
-        p.goto(base);p.wait_for_function('BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0',timeout=60000);p.clock.pause_at(p.evaluate('Date.now()+1000')/1000);p.click('#introStart');p.clock.run_for(100)
+        p.goto(base);p.wait_for_function(prepared_ready('BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0'),timeout=60000);p.clock.pause_at(p.evaluate('Date.now()+1000')/1000);p.click('#introStart');p.clock.run_for(100)
         p.click('#fullscreenBtn');p.wait_for_function('BearlyFullscreen.state() !== "window"');assert p.locator('.fullscreen-tools').is_visible()
         p.locator('.fullscreen-settings').click();p.clock.run_for(50);assert p.locator('#debugPanel').is_visible()
         for selector in ['#debugPanel h3','#debugPanel .dbg-toggles label','#debugPanel .dbg-readout','#debugPanel .dbg-content button','#debugPanel .dbg-help']:
@@ -49,7 +50,7 @@ try:
     with sync_playwright() as pw:
         b=pw.chromium.launch(headless=True,args=['--no-sandbox']);ctx=b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
         p=ctx.new_page();p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)))
-        p.add_init_script('Element.prototype.requestFullscreen=undefined');p.goto(base);p.wait_for_function('BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0',timeout=60000);p.clock.pause_at(p.evaluate('Date.now()+1000')/1000);p.click('#introStart');p.clock.run_for(80)
+        p.add_init_script('Element.prototype.requestFullscreen=undefined');p.goto(base);p.wait_for_function(prepared_ready('BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0'),timeout=60000);p.clock.pause_at(p.evaluate('Date.now()+1000')/1000);p.click('#introStart');p.clock.run_for(80)
         p.locator('#fullscreenBtn').tap();assert p.evaluate('BearlyFullscreen.state()')=='viewport';assert p.locator('.fullscreen-tools').is_visible()
         p.locator('.fullscreen-settings').tap();assert p.locator('#debugPanel').is_visible();p.screenshot(path=str(SHOTS/'debug-phone.png'))
         p.locator('#debugCloseBtn').tap();p.locator('.fullscreen-exit').tap();assert p.evaluate('BearlyFullscreen.state()')=='window'

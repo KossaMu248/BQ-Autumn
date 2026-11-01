@@ -1,0 +1,155 @@
+{
+  "pixels": [
+    {
+      "file": "assets/cache/scene-v19-centrum.png",
+      "width": 1536,
+      "height": 1024,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/scene-v19-neighbourhood.png",
+      "width": 1536,
+      "height": 1024,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/scene-v19-hazards.png",
+      "width": 768,
+      "height": 512,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/scene-v19-residents.png",
+      "width": 768,
+      "height": 512,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/scene-v19-castle.png",
+      "width": 1536,
+      "height": 1024,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/scene-v19-shops.png",
+      "width": 1983,
+      "height": 793,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tree-v19-0.png",
+      "width": 466,
+      "height": 700,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tree-v19-1.png",
+      "width": 466,
+      "height": 700,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tree-v19-2.png",
+      "width": 466,
+      "height": 700,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tile-v19-road.png",
+      "width": 256,
+      "height": 256,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tile-v19-wood.png",
+      "width": 256,
+      "height": 256,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tile-v19-grass.png",
+      "width": 256,
+      "height": 256,
+      "mismatches": 0,
+      "maxError": 0
+    },
+    {
+      "file": "assets/cache/tile-v19-paving.png",
+      "width": 256,
+      "height": 256,
+      "mismatches": 0,
+      "maxError": 0
+    }
+  ],
+  "normal": {
+    "atlas": {
+      "cached": 6,
+      "fallback": 0,
+      "errors": [],
+      "textures": [
+        "residents",
+        "hazards",
+        "neighbourhood",
+        "castle",
+        "centrum",
+        "shops"
+      ],
+      "mode": "precompiled"
+    },
+    "world": {
+      "tilesCached": 4,
+      "treesCached": 3,
+      "fallback": 0,
+      "errors": [],
+      "treeVariants": 3,
+      "requestedImages": [
+        "assets/v57_pano_homes.webp",
+        "assets/art/autumn-verge.png"
+      ],
+      "mode": "precompiled"
+    }
+  },
+  "fallback": {
+    "atlas": {
+      "cached": 0,
+      "fallback": 6,
+      "errors": [],
+      "textures": [
+        "shops",
+        "castle",
+        "centrum",
+        "neighbourhood",
+        "hazards",
+        "residents"
+      ],
+      "mode": "cooperative-source"
+    },
+    "world": {
+      "tilesCached": 0,
+      "treesCached": 0,
+      "fallback": 7,
+      "errors": [],
+      "treeVariants": 3,
+      "requestedImages": [
+        "assets/v57_pano_homes.webp",
+        "assets/art/autumn-verge.png"
+      ],
+      "mode": "cooperative-source"
+    },
+    "longTasks": [],
+    "clicked": true,
+    "clickMs": 186.93428699771175
+  },
+  "result": "passed"
+}

@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "x": 0,
+      "layer": "fence",
+      "meanChannelError": 0.45174205479227375,
+      "core": 137788,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 580221,
+      "filledGap": 0
+    },
+    {
+      "x": 0,
+      "layer": "road",
+      "meanChannelError": 0.4017072697352235,
+      "core": 262750,
+      "lostCore": 10,
+      "seams": 0,
+      "gapCore": 453003,
+      "filledGap": 0
+    },
+    {
+      "x": 0,
+      "layer": "foreground",
+      "meanChannelError": 0.19054044634217016,
+      "core": 1432,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 721321,
+      "filledGap": 0
+    },
+    {
+      "x": 5000,
+      "layer": "fence",
+      "meanChannelError": 0.037455784023749515,
+      "core": 11881,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 717638,
+      "filledGap": 0
+    },
+    {
+      "x": 5000,
+      "layer": "road",
+      "meanChannelError": 0.3768267280450935,
+      "core": 244669,
+      "lostCore": 11,
+      "seams": 0,
+      "gapCore": 472337,
+      "filledGap": 0
+    },
+    {
+      "x": 5000,
+      "layer": "foreground",
+      "meanChannelError": 0.1913065376772056,
+      "core": 1863,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 719832,
+      "filledGap": 0
+    },
+    {
+      "x": 18000,
+      "layer": "fence",
+      "meanChannelError": 0.2879314303834147,
+      "core": 113605,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 605511,
+      "filledGap": 0
+    },
+    {
+      "x": 18000,
+      "layer": "road",
+      "meanChannelError": 0.4209863238003597,
+      "core": 248932,
+      "lostCore": 10,
+      "seams": 0,
+      "gapCore": 467699,
+      "filledGap": 0
+    },
+    {
+      "x": 18000,
+      "layer": "foreground",
+      "meanChannelError": 0.16710973762909426,
+      "core": 1880,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 719018,
+      "filledGap": 0
+    },
+    {
+      "x": 23500,
+      "layer": "fence",
+      "meanChannelError": 0.23932050910562083,
+      "core": 58512,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 661031,
+      "filledGap": 0
+    },
+    {
+      "x": 23500,
+      "layer": "road",
+      "meanChannelError": 0.38414149932480085,
+      "core": 253435,
+      "lostCore": 22,
+      "seams": 0,
+      "gapCore": 461646,
+      "filledGap": 0
+    },
+    {
+      "x": 23500,
+      "layer": "foreground",
+      "meanChannelError": 0.20500118911589915,
+      "core": 1434,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 720650,
+      "filledGap": 0
+    },
+    {
+      "x": 31000,
+      "layer": "fence",
+      "meanChannelError": 0.5494518449064836,
+      "core": 0,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 692200,
+      "filledGap": 0
+    },
+    {
+      "x": 31000,
+      "layer": "road",
+      "meanChannelError": 0.2737498564860122,
+      "core": 255094,
+      "lostCore": 17,
+      "seams": 0,
+      "gapCore": 459938,
+      "filledGap": 0
+    },
+    {
+      "x": 31000,
+      "layer": "foreground",
+      "meanChannelError": 0.18142286601534097,
+      "core": 1757,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 719374,
+      "filledGap": 0
+    },
+    {
+      "x": 41000,
+      "layer": "fence",
+      "meanChannelError": 0.5656501320328688,
+      "core": 0,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 692727,
+      "filledGap": 0
+    },
+    {
+      "x": 41000,
+      "layer": "road",
+      "meanChannelError": 0.32670617629531623,
+      "core": 260016,
+      "lostCore": 10,
+      "seams": 0,
+      "gapCore": 455832,
+      "filledGap": 0
+    },
+    {
+      "x": 41000,
+      "layer": "foreground",
+      "meanChannelError": 0.17721038877255904,
+      "core": 1690,
+      "lostCore": 0,
+      "seams": 0,
+      "gapCore": 720482,
+      "filledGap": 0
+    }
+  ],
+  "cache": {
+    "mode": "immutable-raster-chunks",
+    "chunkWidth": 512,
+    "overscan": 128,
+    "scale": 1.35,
+    "limitBytes": 41943040,
+    "hits": 1338,
+    "misses": 0,
+    "builds": 90,
+    "evictions": 57,
+    "direct": 0,
+    "bytes": 39302300,
+    "peakBytes": 41915540,
+    "buildingBytes": 0,
+    "paintMs": 584.6999999806285,
+    "maxPaintMs": 41.29999999701977,
+    "bitmapFailures": 0,
+    "entries": 36,
+    "ready": 33,
+    "pending": 4
+  },
+  "errors": [],
+  "sourceSHA256": "deda8ba6d2b770ae35c792a2f7740abc2f1babf3c43cf7ab1ba7dcfe77209e81"
+}

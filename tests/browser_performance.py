@@ -5,6 +5,7 @@ and no recording. Debug warps choose locations; NPC state is never replaced.
 Only one performance browser should run at a time. Results describe this headless
 Chromium environment, not measurements on a physical phone.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import hashlib
@@ -18,9 +19,9 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = 'autumn-v18.html'
+ENTRY = 'autumn-v19.html'
 FOOT_SPEED = 120
-SHOTS = ROOT / 'screenshots' / 'revision18'
+SHOTS = ROOT / 'screenshots' / 'revision19'
 
 INSTRUMENT = r"""(() => {
   const raf=requestAnimationFrame.bind(window),draw=CanvasRenderingContext2D.prototype.drawImage;
@@ -134,7 +135,7 @@ def open_page(browser,base,profile,errors,failures):
     page=context.new_page();page.add_init_script(INSTRUMENT)
     page.on('pageerror',lambda error:errors.append(str(error)))
     page.on('response',lambda response:failures.append([response.status,response.url]) if response.status>=400 else None)
-    page.goto(f'{base}/{ENTRY}');page.wait_for_function('BearlyVisits.audit().artReady&&BearlyNpcMotion.ready()',timeout=120000)
+    page.goto(f'{base}/{ENTRY}');page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady&&BearlyNpcMotion.ready()'),timeout=120000)
     if touch:page.locator('#introStart').tap()
     else:page.locator('#introStart').click()
     page.evaluate('BEARLY_DEBUG_MENU.settings.godMode=true')

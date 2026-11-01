@@ -4,6 +4,7 @@ Screenshots are evidence for anatomical/carrier review, not a claim that visual
 quality can be decided by assertions. --desktop-only and --phones-only allow a
 focused rerun without repeating unrelated scenarios.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import json
@@ -15,8 +16,8 @@ from playwright.sync_api import sync_playwright
 from browser_encounters import provoke_existing_gang
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v18.html"
-SHOTS = ROOT / "screenshots" / "revision18"
+ENTRY = "autumn-v19.html"
+SHOTS = ROOT / "screenshots" / "revision19"
 
 CHAIR_DRAW_AUDIT = r"""(() => {
   window.__heroLooseChairDraws=[];
@@ -57,7 +58,7 @@ def ready(context, base, errors, failures):
     )
     page.goto(f"{base}/{ENTRY}")
     page.wait_for_function(
-        "BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0 && window.BearlyHeroRig?.ready?.()",
+        prepared_ready("BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0 && window.BearlyHeroRig?.ready?.()"),
         timeout=60000,
     )
     # Pause in the near future to avoid racing the real clock between calls.

@@ -1,0 +1,20 @@
+{
+  "entry": "autumn-v15.html",
+  "result": "passed",
+  "samples": 2016,
+  "drawCount": 2016,
+  "damagedSamples": 576,
+  "minCoverage": 1,
+  "maxNeighborPixels": 0,
+  "faults": [],
+  "faultCount": 0,
+  "pageErrors": [],
+  "httpFailures": [],
+  "sourceSHA256": {
+    "js/brawler-art.js": "b044577cb8aed2b6127ec725299fe7330a0a4a0bc8141a07f56ccc1793be19a2",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a",
+    "assets/art/gang-screen-full-v10-1.png": "98dd2a4d4d28f7313ecec23e5dd5950df4f5887ae584f5013dbe6213ea0ce5fc"
+  }
+}

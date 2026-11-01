@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 15 — dark tactical streetwear
+
+- Shifted all nine adult outfits to black, charcoal, navy-black and very dark olive, replacing the pale/bright coats, trousers and trainers. Keep varied puffer, fleece, field-jacket, utility-vest, technical-shell, parka and civilian-coat silhouettes, with readable fabric highlights and seams.
+- Added black tactical jackets over hoodies, utility chest rigs/pouches, dark cargos and sling bags. Two young characters wear black balaclavas that remain on throughout every pose and healthy/damaged full-body impact; the other seven stay unmasked.
+- Broadened medium/deep skin tones while preserving the youthful cast, older neighbours and distinct facial features. Match visible hands, necks and eye areas to each character.
+- Added fresh standing/reaction/screen artwork, measured source geometry, two face-covering metadata flags, updated debug readouts and V15 entry/cache keys.
+- Preserve walking attachment logic, NPC identities/behaviour, health, cycling, quests, terrain and the original bear/baby. Original BQ remains untouched.
+
 ## Revision 14 — a younger, multicultural neighbourhood cast
 
 - Replaced the repeated middle-aged streetwear faces with six distinct young-adult designs around 18–24, with varied complexions, facial features, hair textures and hairstyles. Keep the six V13 streetwear outfits, trainers and bags.

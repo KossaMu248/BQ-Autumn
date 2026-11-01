@@ -3,9 +3,9 @@
   'use strict';
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),images={},sourceImages={};
   const files={
-    adultsA:'assets/art/adult-cast-a-v14.png',reactionsA:'assets/art/cast-reactions-a-v14.png',screenA:'assets/art/cast-screen-a-v14.png',
-    adultsB:'assets/art/adult-cast-b-v14.png',reactionsB:'assets/art/cast-reactions-b-v14.png',screenB:'assets/art/cast-screen-b-v14.png',
-    adultsC:'assets/art/adult-cast-c-v14.png',reactionsC:'assets/art/cast-reactions-c-v14.png',screenC:'assets/art/cast-screen-c-v14.png',
+    adultsA:'assets/art/adult-cast-a-v15.png',reactionsA:'assets/art/cast-reactions-a-v15.png',screenA:'assets/art/cast-screen-a-v15.png',
+    adultsB:'assets/art/adult-cast-b-v15.png',reactionsB:'assets/art/cast-reactions-b-v15.png',screenB:'assets/art/cast-screen-b-v15.png',
+    adultsC:'assets/art/adult-cast-c-v15.png',reactionsC:'assets/art/cast-reactions-c-v15.png',screenC:'assets/art/cast-screen-c-v15.png',
     gangReactions:'assets/art/gang-reactions-v10.png',gangScreenFull:'assets/art/gang-screen-full-v10-1.png',
     bottle:'assets/v162_projectile_bottle.png',rock:'assets/v162_projectile_rock.png',firecracker:'assets/v162_projectile_firecracker.png'
   };
@@ -14,65 +14,64 @@
   // never changes with aggression, damage, transport or the screen-throw state.
   const wardrobes=[];
   function addWardrobe(label,pack,standing,reactions,screen,age,sourceFace){
-    wardrobes.push({variant:wardrobes.length,label,character:{ageGroup:pack==='C'?'older-adult':'young-adult',age},standing:{image:files['adults'+pack],rect:standing,face:sourceFace,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
+    wardrobes.push({variant:wardrobes.length,label,character:{ageGroup:pack==='C'?'older-adult':'young-adult',age,faceCovered:[2,5].includes(wardrobes.length)},standing:{image:files['adults'+pack],rect:standing,face:sourceFace,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
       reactions:{image:files['reactions'+pack],...reactions},screen:{image:files['screen'+pack],frames:screen}});
   }
   const frame=(rect,anchor,outline)=>({rect,anchor,...(outline?{outline}:{})});
-  // Fresh V14 anatomy is measured from each authored cast sheet. No frame
-  // geometry is shared with the earlier faces or bodies.
+  // Fresh V15 anatomy is measured from each authored cast sheet. No frame
+  // geometry is shared with the earlier faces, bodies or tactical layers.
   const newReactionsA=[
-    {stature:400,frames:[frame([26,4,365,421],[208.5,416]),frame([395,74,434,317],[612,379],[[395,74],[829,74],[829,330],[750,330],[750,391],[395,391]]),frame([784,275,451,163],[1009.5,426],[[832,275],[1235,275],[1235,438],[784,438],[784,330],[832,330]])]},
-    {stature:395,frames:[frame([19,425,375,405],[211.5,829]),frame([394,474,449,329],[613.5,791],[[394,474],[843,474],[843,750],[760,750],[760,803],[394,803]]),frame([810,690,425,163],[1022.5,841],[[848,690],[1235,690],[1235,853],[810,853],[810,750],[848,750]])]},
-    {stature:399,frames:[frame([25,830,376,413],[218,1231]),frame([401,865,434,336],[612.5,1189],[[401,865],[835,865],[835,1150],[750,1150],[750,1201],[401,1201]]),frame([785,1092,446,161],[1008,1241],[[840,1092],[1231,1092],[1231,1253],[785,1253],[785,1150],[840,1150]])]}
+    {stature:378,frames:[frame([45,50,345,396],[216.5,436]),frame([415,123,379,305],[606,419]),frame([816,293,412,147],[1023,430])]},
+    {stature:367,frames:[frame([65,459,301,379],[215.5,834]),frame([413,528,398,294],[616.5,810]),frame([826,685,416,143],[1033.5,820])]},
+    {stature:382,frames:[frame([32,838,348,395],[206,1225]),frame([419,895,379,313],[610,1195]),frame([818,1071,411,157],[1025.5,1214])]}
   ];
   const newReactionsB=[
-    {stature:301,frames:[frame([125,28,299,320],[275.5,340]),frame([579,105,375,233],[768.5,330]),frame([1083,175,391,167],[1277,329])]},
-    {stature:287,frames:[frame([121,362,324,310],[288.5,667]),frame([573,413,392,249],[777,650]),frame([1058,488,418,178],[1270,654])]},
-    {stature:311,frames:[frame([117,672,334,328],[284.5,987]),frame([573,706,408,266],[775,964]),frame([1064,795,412,189],[1271,977])]}
+    {stature:301,frames:[frame([98,30,355,326],[277.5,342]),frame([575,78,408,278],[781,345]),frame([1039,151,408,207],[1244.5,346])]},
+    {stature:304,frames:[frame([107,375,387,319],[303.5,687],[[107,375],[494,375],[494,694],[400,694],[400,687],[107,687]]),frame([586,397,411,265],[787,654]),frame([1053,445,399,247],[1255,677])]},
+    {stature:287,frames:[frame([109,683,394,301],[309.5,978],[[109,683],[400,683],[400,690],[503,690],[503,984],[109,984]]),frame([572,693,413,280],[778.5,964]),frame([1064,754,388,228],[1257.5,975])]}
   ];
   const newReactionsC=[
-    {stature:295,frames:[frame([109,64,251,326],[237.5,375]),frame([495,120,287,236],[639.5,344]),frame([881,236,298,140],[1032.5,368])]},
-    {stature:299,frames:[frame([107,458,285,320],[252,767]),frame([509,495,276,235],[647,722]),frame([881,608,312,155],[1037.5,756])]},
-    {stature:301,frames:[frame([109,838,303,324],[261,1150]),frame([511,873,285,250],[656.5,1113]),frame([879,992,302,170],[1029.5,1148])]}
+    {stature:258,frames:[frame([111,116,254,274],[239.5,382]),frame([513,151,261,216],[645,358]),frame([910,251,278,139],[1049,379])]},
+    {stature:262,frames:[frame([109,497,271,279],[247.5,767]),frame([521,527,244,218],[642,737]),frame([912,612,269,161],[1048.5,765])]},
+    {stature:263,frames:[frame([108,873,285,285],[251,1145]),frame([530,898,249,227],[658.5,1115]),frame([895,1019,297,145],[1044,1157])]}
   ];
   const newScreenA=[
-    [{rect:[51,5,458,518]},{rect:[52,523,467,495]}],
-    [{rect:[585,30,402,497]},{rect:[589,529,398,483]}],
-    [{rect:[1068,16,411,512]},{rect:[1071,528,419,489]}]
+    [{rect:[57,11,449,509]},{rect:[58,522,460,502]}],
+    [{rect:[603,20,395,501]},{rect:[602,531,396,493]}],
+    [{rect:[1109,1,382,527],outline:[[1109,1],[1491,1],[1491,528],[1320,528],[1320,520],[1109,520]]},
+      {rect:[1118,520,384,504],outline:[[1118,520],[1320,520],[1320,528],[1502,528],[1502,1024],[1118,1024]]}]
   ];
   const newScreenB=[
-    [{rect:[74,14,400,472]},{rect:[71,518,404,478]}],
-    [{rect:[584,15,380,481]},{rect:[586,521,379,466]}],
-    [{rect:[1085,14,379,487]},{rect:[1085,523,378,473]}]
+    [{rect:[81,20,397,504],outline:[[81,20],[478,20],[478,524],[380,524],[380,511],[200,511],[200,524],[81,524]]},
+      {rect:[77,511,403,498],outline:[[77,524],[200,524],[200,511],[380,511],[380,524],[480,524],[480,1009],[77,1009]]}],
+    [{rect:[590,37,371,484]},{rect:[591,533,374,475]}],
+    [{rect:[1103,30,353,497],outline:[[1103,30],[1456,30],[1456,527],[1320,527],[1320,526],[1103,526]]},
+      {rect:[1101,526,355,482],outline:[[1101,526],[1320,526],[1320,527],[1456,527],[1456,1008],[1101,1008]]}]
   ];
-  // The woman's outer boot reaches into the next nominal column, while the
-  // neighboring dad's palm reaches left. Follow their actual separate contours.
   const newScreenC=[
-    [{rect:[13,84,363,675]},{rect:[11,813,364,667]}],
-    [{rect:[377,97,333,664],outline:[[377,97],[686,97],[686,600],[710,600],[710,761],[377,761]]},
-      {rect:[375,827,339,663],outline:[[375,827],[686,827],[686,1330],[714,1330],[714,1490],[375,1490]]}],
-    [{rect:[683,88,329,672],outline:[[683,88],[1012,88],[1012,760],[714,760],[714,600],[683,600]]},
-      {rect:[683,817,329,673],outline:[[683,817],[1012,817],[1012,1490],[714,1490],[714,1330],[683,1330]]}]
+    [{rect:[38,167,320,575]},{rect:[38,860,332,572]}],
+    [{rect:[391,171,301,571]},{rect:[390,861,302,571]}],
+    [{rect:[697,171,298,576]},{rect:[701,861,293,572]}]
   ];
   const namesA=[
-    'Burgundy premium puffer · black hoodie and loose nylon trousers · black/gray performance runners · low cap · patterned brown sling',
-    'Dove-gray technical fleece set · tapered joggers · white leather low-top trainers · navy cap · black athletic sling',
-    'Oversized cream graphic hoodie · relaxed blue denim · white/gray luxury runners · tan beanie · brown sling'
+    'Black quilted puffer · black hoodie and loose nylon trousers · black performance runners · black cap and sling',
+    'Charcoal technical fleece set · black tapered joggers · black low-top trainers · black cap · black athletic sling',
+    'Black tactical field jacket · black hoodie and utility chest rig · black cargo trousers · black runners · black balaclava'
   ];
   const namesB=[
-    'Silver quilted vest · black heavyweight hoodie · brown tactical cargos · black/white performance runners · black beanie and sling',
-    'Teal/charcoal nylon windbreaker set · loose nylon joggers · white/silver runners · white cap · dark athletic sling',
-    'Long black premium down parka · plum hoodie · relaxed charcoal denim · cream luxury runners · burgundy beanie · patterned brown sling'
+    'Black utility vest · black heavyweight hoodie · dark tactical cargos · dark runners · black beanie and sling',
+    'Black technical hooded jacket · black nylon joggers · dark performance runners · black cap · black athletic sling',
+    'Long black technical parka · hooded layer · charcoal trousers · black runners · black balaclava'
   ];
-  const standingA=[[13,3,649,823],[698,27,552,801],[1313,0,562,831]],standingB=[[0,0,632,824],[674,25,586,799],[1324,0,558,828]];
+  const standingA=[[13,0,649,818],[699,28,563,793],[1328,0,553,825]],standingB=[[71,93,498,669],[739,120,478,643],[1372,108,437,662]];
   for(let i=0;i<3;i++)addWardrobe(namesA[i],'A',standingA[i],newReactionsA[i],newScreenA[i],[20,21,22][i],[-1,1,1][i]);
   for(let i=0;i<3;i++)addWardrobe(namesB[i],'B',standingB[i],newReactionsB[i],newScreenB[i],[21,20,20][i],[-1,1,1][i]);
   const casualNames=[
-    'Olive work jacket · cream knit · relaxed blue denim · brown boots · burgundy beanie',
-    'Navy autumn jacket · rust scarf · charcoal trousers · brown boots · tied hair',
-    'Mustard jacket · gray scarf · olive trousers · gray trainers · gray beanie'
+    'Black work jacket · dark knit · charcoal relaxed denim · black boots · black beanie',
+    'Midnight autumn coat · deep-plum scarf · black trousers · black boots · tied hair',
+    'Black quilted bomber · dark scarf · deep-olive trousers · black trainers · black beanie'
   ];
-  const standingC=[[15,108,494,810],[575,127,452,792],[1053,110,474,806]];
+  const standingC=[[49,182,417,672],[607,196,388,660],[1081,186,393,680]];
   for(let i=0;i<3;i++)addWardrobe(casualNames[i],'C',standingC[i],newReactionsC[i],newScreenC[i],[52,42,55][i],[1,1,1][i]);
   function wardrobe(n){const variant=Number.isFinite(n.variant)?Math.trunc(n.variant):0;return wardrobes[(variant%wardrobes.length+wardrobes.length)%wardrobes.length];}
   function reaction(c,n,col,h){

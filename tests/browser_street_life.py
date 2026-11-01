@@ -235,7 +235,7 @@ def run_controls(browser,base,errors,failures):
 
 
 def run_video(browser,base,errors,failures):
-    """Real wall-clock footage without virtual clocks or per-frame probes."""
+    """Cropped wall-clock animation preview; complete UI stays in screenshots."""
     evidence={'sourceSHA256':source_hashes(),'viewport':{'width':1280,'height':720},'capture':{'width':960,'height':540},'fullscreen':True,'segments':[]};clips=[]
     for kind in ['bear-walk','neighbourhood']:
         context=browser.new_context(viewport={'width':1280,'height':720},record_video_dir=str(SHOTS),record_video_size={'width':960,'height':540})
@@ -269,14 +269,14 @@ def run_video(browser,base,errors,failures):
             details={'mauls':final['combat']['stats']['mauls'],'screams':final['combat']['stats']['screams'],'hides':final['combat']['stats']['hides'],'baby':final['baby'],'npcs':[{k:n.get(k) for k in ['id','activity','moving','running','speed','hp','hiding','civilian']} for n in final['combat']['npcs'] if n['id'] in ['promenade-walker','civilian-reader','civilian-bench','civilian-smoker']]}
         end=time.monotonic()-born;video=page.video;page.close();context.close();raw=Path(video.path())
         trimmed=SHOTS/f'street-life-{kind}-realtime.webm'
-        subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-ss',f'{begin:.3f}','-i',str(raw),'-t',f'{end-begin:.3f}','-an','-c:v','libvpx-vp9','-crf','28','-b:v','0',str(trimmed)],check=True)
+        subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-ss',f'{begin:.3f}','-i',str(raw),'-t',f'{end-begin:.3f}','-an','-c:v','libvpx-vp9','-deadline','realtime','-cpu-used','6','-crf','28','-b:v','0',str(trimmed)],check=True)
         raw.unlink();clips.append(trimmed)
         evidence['segments'].append({'kind':kind,'file':trimmed.name,'wallClockSeconds':round(end-begin,3),**details})
         (SHOTS/'street-life-video-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
     concat=SHOTS/'street-life-video-list.txt';concat.write_text(''.join("file '"+p.name+"'\n" for p in clips))
-    output=SHOTS/'street-life-realtime.webm'
-    subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','concat','-safe','0','-i',str(concat),'-c','copy',str(output)],check=True)
-    concat.unlink();evidence['file']=output.name;evidence['result']='passed';evidence['pageErrors']=errors;evidence['httpFailures']=failures
+    output=SHOTS/'street-life-animation-preview.webm'
+    subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','concat','-safe','0','-i',str(concat),'-vf','crop=720:540:0:0','-an','-c:v','libvpx-vp9','-deadline','realtime','-cpu-used','6','-crf','28','-b:v','0',str(output)],check=True)
+    concat.unlink();evidence['file']=output.name;evidence['label']='Cropped animation preview; full UI is shown in the accompanying screenshots.';evidence['export']={'width':720,'height':540,'crop':[0,0,720,540]};evidence['captureArtifact']='Headless fullscreen can crop the outer UI and pad the right side of its screencast. This intentionally cropped preview is not evidence of full-frame UI fitting.';evidence['requestedViewport']=evidence.pop('viewport');evidence['captureRequestedFullscreen']=evidence.pop('fullscreen');evidence['result']='passed';evidence['pageErrors']=errors;evidence['httpFailures']=failures
     (SHOTS/'street-life-video-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
     assert not errors,errors
     assert not failures,failures

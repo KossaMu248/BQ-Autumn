@@ -7,7 +7,7 @@
 !bear-walk-game-front-right.png
 !bear-walk-game-back-right.png
 !bear-walking-continuous-gameplay.mp4
-!street-life-realtime.webm
+!street-life-animation-preview.webm
 !street-life-desktop-resting.png
 !street-life-desktop-relaxed-walk.png
 !street-life-desktop-scream.png
@@ -24,3 +24,4 @@
 bear-walking-gameplay.json
 bear-walking-back-gameplay.json
 street-life-neutral-independent.json
+!street-life-desktop-relaxed-walk-opposite.png

@@ -1,0 +1,73 @@
+{
+  "result": "passed",
+  "entry": "autumn-v18.html",
+  "actualInputsOnly": true,
+  "noSyntheticActorsShotsOrHealth": true,
+  "passiveViewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "passiveCases": 3,
+  "naturalDamageCases": 6,
+  "exactDamageHP": {
+    "rock": 10,
+    "bottle": 30,
+    "firecracker": 20
+  },
+  "cyclingFlightCases": 3,
+  "sameModelProjectileDrawnAcrossMountModes": true,
+  "sceneryPositions": [
+    2500,
+    10000,
+    16000,
+    23500,
+    27500,
+    32000
+  ],
+  "scopedFinalEncounterSourceSHA256": {
+    "js/game.js": "4b87811bdc13fc2a12cb70ddf6ca1d32e29dd60d24688d586144e4c5a50bbdde",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f"
+  },
+  "components": {
+    "encounter-behavior-evidence.json": {
+      "result": "passed",
+      "sha256": "0d16f4f024c3e542bbb3cb01b8a8560b25d3ac88e1f67bc900bdb4364a349cc2",
+      "sourceStage": "Final encounter source; hero geometry may predate final gait revision"
+    },
+    "encounter-damage-evidence.json": {
+      "result": "passed",
+      "sha256": "de1d46ec2310c1a1813f3e0749f836b945bf93701b24fe5e72bbda32994ad6dc",
+      "sourceStage": "Final encounter source; hero geometry may predate final gait revision"
+    },
+    "encounter-flights-evidence.json": {
+      "result": "passed",
+      "sha256": "c1124b2d7659e90c8b19f5ca2ce607e4c2aabb388ebdaa1d654800db3a3e0e51",
+      "sourceStage": "Final encounter source; hero geometry may predate final gait revision"
+    },
+    "encounter-remount-evidence.json": {
+      "result": "passed",
+      "sha256": "f74018d5c326b8ca7048e7353cd88177627b0022fb8d1b23cf543f82b68799a3",
+      "sourceStage": "Final encounter source; hero geometry may predate final gait revision"
+    },
+    "scene-progression-evidence.json": {
+      "result": "passed",
+      "sha256": "b44bbf73c03d301df4486a4bddb34eb23f1ba05e374e13a2945751131dd6bcf2",
+      "sourceStage": "Final scenery/CSS contracts; unrelated encounter fixes occurred later"
+    }
+  },
+  "limits": "Desktop Chromium with simulated mobile viewports/touch; physical phone performance is not measured."
+}

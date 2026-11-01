@@ -1,0 +1,1567 @@
+{
+  "entry": "autumn-v18.html",
+  "result": "passed",
+  "sourceSHA256AtStart": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "4b87811bdc13fc2a12cb70ddf6ca1d32e29dd60d24688d586144e4c5a50bbdde",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "9758dc6b9cfbbbc8d29ac39e9062711cb2206000f68a0345d73b2a77624cf46c",
+    "js/locomotion.js": "1024600c4bb9b3919f957d55a8686b057d4a72132bc7ef9457a5b853eefeaf0d",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "passive": [],
+  "damage": [
+    {
+      "weapon": "rock",
+      "mode": "foot",
+      "expectedDamage": 10,
+      "expectedHearts": 0.5,
+      "contact": {
+        "id": 14,
+        "arena": "route",
+        "time": 6.720000000000005,
+        "weapon": "rock",
+        "target": "bear",
+        "hit": true,
+        "appliedDamage": 10,
+        "hpBefore": 100,
+        "hpAfter": 90,
+        "x": 7236.573531482917,
+        "depth": -91.40050292669545,
+        "z": 39.10815842208433,
+        "direction": -1,
+        "ownerId": "gang-7545-0",
+        "domain": "model",
+        "uid": "model:14"
+      },
+      "health": 90,
+      "heartWidths": [
+        100,
+        100,
+        100,
+        100,
+        50
+      ],
+      "provocation": {
+        "targetId": "gang-7545-0",
+        "item": "rock",
+        "side": -1,
+        "beforeHp": 100,
+        "targetHp": 60,
+        "crewId": "crew-7545"
+      },
+      "contacts": [
+        {
+          "id": 4,
+          "arena": "route",
+          "time": 3.968000000000003,
+          "weapon": "rock",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 7244.243199999997,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-7545-0",
+          "domain": "model",
+          "uid": "model:4"
+        },
+        {
+          "id": 6,
+          "arena": "route",
+          "time": 4.224000000000003,
+          "weapon": "firecracker",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 7244.243199999997,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-7545-1",
+          "domain": "model",
+          "uid": "model:6"
+        },
+        {
+          "id": 8,
+          "arena": "route",
+          "time": 4.352000000000003,
+          "weapon": "bottle",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 7243.3215999999975,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-7545-2",
+          "domain": "model",
+          "uid": "model:8"
+        },
+        {
+          "id": 14,
+          "arena": "route",
+          "time": 6.720000000000005,
+          "weapon": "rock",
+          "target": "bear",
+          "hit": true,
+          "appliedDamage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "x": 7236.573531482917,
+          "depth": -91.40050292669545,
+          "z": 39.10815842208433,
+          "direction": -1,
+          "ownerId": "gang-7545-0",
+          "domain": "model",
+          "uid": "model:14"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 90,
+        "after": 90,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.30400000000000016,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5120000000000003,
+          "x": 7236.573531482917,
+          "y": 771.0541729385814,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.3200000000000002,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3200000000000002,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5280000000000004,
+          "x": 7236.573531482917,
+          "y": 771.0541729385814,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.3360000000000002,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3360000000000002,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5440000000000004,
+          "x": 7236.573531482917,
+          "y": 771.0541729385814,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.3520000000000002,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3520000000000002,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.3680000000000002,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3680000000000002,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.38400000000000023,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.38400000000000023,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.40000000000000024,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.40000000000000024,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.41600000000000026,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.41600000000000026,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4320000000000003,
+          "x": 7236.216425399094,
+          "y": 784.6999014442538,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4320000000000003,
+          "x": 7240.388631734238,
+          "y": 777.1972084418156,
+          "mode": "street"
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 90,
+        "after": 90,
+        "mode": null,
+        "contactDamage": 0,
+        "observedMeleeDamage": 0,
+        "changes": []
+      }
+    },
+    {
+      "weapon": "bottle",
+      "mode": "foot",
+      "expectedDamage": 30,
+      "expectedHearts": 1.5,
+      "contact": {
+        "id": 10,
+        "arena": "route",
+        "time": 7.291000000000006,
+        "weapon": "bottle",
+        "target": "bear",
+        "hit": true,
+        "appliedDamage": 30,
+        "hpBefore": 100,
+        "hpAfter": 70,
+        "x": 3824.5609641927535,
+        "depth": -91.75877824021113,
+        "z": 49.35808728279003,
+        "direction": -1,
+        "ownerId": "gang-4080-0",
+        "domain": "model",
+        "uid": "model:10"
+      },
+      "health": 70,
+      "heartWidths": [
+        100,
+        100,
+        100,
+        50,
+        0
+      ],
+      "provocation": {
+        "targetId": "gang-4080-0",
+        "item": "bottle",
+        "side": -1,
+        "beforeHp": 100,
+        "targetHp": 60,
+        "crewId": "crew-4080"
+      },
+      "contacts": [
+        {
+          "id": 3,
+          "arena": "route",
+          "time": 4.555000000000003,
+          "weapon": "bottle",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 3827.4992,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-4080-0",
+          "domain": "model",
+          "uid": "model:3"
+        },
+        {
+          "id": 5,
+          "arena": "route",
+          "time": 4.8110000000000035,
+          "weapon": "rock",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 3827.4992,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-4080-1",
+          "domain": "model",
+          "uid": "model:5"
+        },
+        {
+          "id": 10,
+          "arena": "route",
+          "time": 7.291000000000006,
+          "weapon": "bottle",
+          "target": "bear",
+          "hit": true,
+          "appliedDamage": 30,
+          "hpBefore": 100,
+          "hpAfter": 70,
+          "x": 3824.5609641927535,
+          "depth": -91.75877824021113,
+          "z": 49.35808728279003,
+          "direction": -1,
+          "ownerId": "gang-4080-0",
+          "domain": "model",
+          "uid": "model:10"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 70,
+        "after": 70,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4800000000000003,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.27200000000000013,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.49600000000000033,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.28800000000000014,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5120000000000003,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.30400000000000016,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5280000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3200000000000002,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5440000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3360000000000002,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5600000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3520000000000002,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5760000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3680000000000002,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5920000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.38400000000000023,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.6080000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.40000000000000024,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.6240000000000004,
+          "x": 3824.5609641927535,
+          "y": 498.2028089185512,
+          "mode": "street"
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.41600000000000026,
+          "x": 3820.7522228141806,
+          "y": 521.7916391573757,
+          "mode": "street"
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 70,
+        "after": 70,
+        "mode": null,
+        "contactDamage": 0,
+        "observedMeleeDamage": 0,
+        "changes": []
+      }
+    },
+    {
+      "weapon": "firecracker",
+      "mode": "foot",
+      "expectedDamage": 20,
+      "expectedHearts": 1.0,
+      "contact": {
+        "id": 10,
+        "arena": "route",
+        "time": 7.308000000000006,
+        "weapon": "firecracker",
+        "target": "bear",
+        "hit": true,
+        "appliedDamage": 20,
+        "hpBefore": 100,
+        "hpAfter": 80,
+        "x": 11471.810505612813,
+        "depth": -91.43874006021777,
+        "z": 40.578674199611356,
+        "direction": -1,
+        "ownerId": "gang-11730-0",
+        "domain": "model",
+        "uid": "model:10"
+      },
+      "health": 80,
+      "heartWidths": [
+        100,
+        100,
+        100,
+        100,
+        0
+      ],
+      "provocation": {
+        "targetId": "gang-11730-0",
+        "item": "firecracker",
+        "side": -1,
+        "beforeHp": 100,
+        "targetHp": 60,
+        "crewId": "crew-11730"
+      },
+      "contacts": [
+        {
+          "id": 3,
+          "arena": "route",
+          "time": 4.556000000000004,
+          "weapon": "firecracker",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 11477.499199999998,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-11730-0",
+          "domain": "model",
+          "uid": "model:3"
+        },
+        {
+          "id": 5,
+          "arena": "route",
+          "time": 4.812000000000004,
+          "weapon": "bottle",
+          "target": "ground",
+          "hit": false,
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100,
+          "x": 11477.499199999998,
+          "depth": -90,
+          "z": 0,
+          "direction": -1,
+          "ownerId": "gang-11730-1",
+          "domain": "model",
+          "uid": "model:5"
+        },
+        {
+          "id": 10,
+          "arena": "route",
+          "time": 7.308000000000006,
+          "weapon": "firecracker",
+          "target": "bear",
+          "hit": true,
+          "appliedDamage": 20,
+          "hpBefore": 100,
+          "hpAfter": 80,
+          "x": 11471.810505612813,
+          "depth": -91.43874006021777,
+          "z": 40.578674199611356,
+          "direction": -1,
+          "ownerId": "gang-11730-0",
+          "domain": "model",
+          "uid": "model:10"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 80,
+        "after": 80,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4640000000000003,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.28800000000000014,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4800000000000003,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.30400000000000016,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.49600000000000033,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3200000000000002,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5120000000000003,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3360000000000002,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5280000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3520000000000002,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5440000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3680000000000002,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5600000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.38400000000000023,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5760000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.40000000000000024,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5920000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.41600000000000026,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.6080000000000004,
+          "x": 11471.810505612813,
+          "y": 1115.7104155524642,
+          "mode": "street"
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4320000000000003,
+          "x": 11474.707747634598,
+          "y": 1123.3105642300036,
+          "mode": "street"
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 80,
+        "after": 80,
+        "mode": null,
+        "contactDamage": 0,
+        "observedMeleeDamage": 0,
+        "changes": []
+      }
+    },
+    {
+      "weapon": "rock",
+      "mode": "bike",
+      "expectedDamage": 10,
+      "expectedHearts": 0.5,
+      "contact": {
+        "id": 1,
+        "x": 7370.036990370078,
+        "y": 786.3415965947223,
+        "kind": "rock",
+        "weapon": "rock",
+        "at": 3.408333333333324,
+        "contact": "rider",
+        "target": "bear",
+        "appliedDamage": 10,
+        "hpBefore": 100,
+        "hpAfter": 90,
+        "actor": "bear",
+        "part": "head",
+        "domain": "cycling",
+        "uid": "cycling:1"
+      },
+      "health": 90,
+      "heartWidths": null,
+      "provocation": {
+        "targetId": "gang-7545-0",
+        "method": "stopped facing proximity warning"
+      },
+      "contacts": [
+        {
+          "id": 1,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "kind": "rock",
+          "weapon": "rock",
+          "at": 3.408333333333324,
+          "contact": "rider",
+          "target": "bear",
+          "appliedDamage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "actor": "bear",
+          "part": "head",
+          "domain": "cycling",
+          "uid": "cycling:1"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 90,
+        "after": 90,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.31666666666666554,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.466666666666665,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.32499999999999885,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.4833333333333316,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.34166666666666545,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.4999999999999982,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.35833333333333206,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5166666666666648,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.37499999999999867,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5333333333333314,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.3916666666666653,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.549999999999998,
+          "x": 7370.036990370078,
+          "y": 786.3415965947223,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4083333333333319,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4249999999999985,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4416666666666651,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.008333333333333304,
+          "x": 7365.263813949807,
+          "y": 828.0614553507514,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.45833333333333215,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.025000000000000355,
+          "x": 7365.263813949807,
+          "y": 828.0614553507514,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.47499999999999964,
+          "x": 7375.120791162953,
+          "y": 797.9602421425335,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.04166666666666785,
+          "x": 7365.263813949807,
+          "y": 828.0614553507514,
+          "mode": null
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 90,
+        "after": 90,
+        "mode": "street",
+        "contactDamage": 0,
+        "observedMeleeDamage": 0,
+        "changes": []
+      }
+    },
+    {
+      "weapon": "bottle",
+      "mode": "bike",
+      "expectedDamage": 30,
+      "expectedHearts": 1.5,
+      "contact": {
+        "id": 1,
+        "x": 3953.3498414789683,
+        "y": 523.4842384782285,
+        "kind": "bottle",
+        "weapon": "bottle",
+        "at": 3.416666666666657,
+        "contact": "rider",
+        "target": "bear",
+        "appliedDamage": 30,
+        "hpBefore": 100,
+        "hpAfter": 70,
+        "actor": "bear",
+        "part": "head",
+        "domain": "cycling",
+        "uid": "cycling:1"
+      },
+      "health": 70,
+      "heartWidths": null,
+      "provocation": {
+        "targetId": "gang-4080-0",
+        "method": "stopped facing proximity warning"
+      },
+      "contacts": [
+        {
+          "id": 1,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "kind": "bottle",
+          "weapon": "bottle",
+          "at": 3.416666666666657,
+          "contact": "rider",
+          "target": "bear",
+          "appliedDamage": 30,
+          "hpBefore": 100,
+          "hpAfter": 70,
+          "actor": "bear",
+          "part": "head",
+          "domain": "cycling",
+          "uid": "cycling:1"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 70,
+        "after": 70,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4999999999999982,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.35833333333333206,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5166666666666648,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.37499999999999867,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5333333333333314,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3916666666666653,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5416666666666647,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.3999999999999986,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.5583333333333313,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.4166666666666652,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.574999999999998,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.4333333333333318,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.591666666666665,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.44999999999999885,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.6083333333333325,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.46666666666666634,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.625,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.48333333333333384,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.6416666666666675,
+          "x": 3953.3498414789683,
+          "y": 523.4842384782285,
+          "mode": null
+        },
+        {
+          "weapon": "rock",
+          "target": "bear",
+          "age": 0.5000000000000013,
+          "x": 3959.3719839296627,
+          "y": 534.9044794253685,
+          "mode": null
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 70,
+        "after": 60,
+        "mode": "street",
+        "contactDamage": 0,
+        "observedMeleeDamage": 10,
+        "changes": [
+          {
+            "before": 70,
+            "after": 60,
+            "delta": 10,
+            "modelHealth": 60,
+            "mode": "street",
+            "x": 3973,
+            "depth": 0,
+            "newContacts": [],
+            "punchers": [
+              {
+                "id": "gang-4080-0",
+                "kind": "gangster",
+                "x": 4030,
+                "depth": -21.820799999999963
+              }
+            ],
+            "counterEffects": [
+              {
+                "id": 2,
+                "kind": "counter",
+                "x": 4030,
+                "depth": -21.820799999999963,
+                "age": 0.016
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "weapon": "firecracker",
+      "mode": "bike",
+      "expectedDamage": 20,
+      "expectedHearts": 1.0,
+      "contact": {
+        "id": 1,
+        "x": 11605.260600874155,
+        "y": 1137.9287146356414,
+        "kind": "firecracker",
+        "weapon": "firecracker",
+        "at": 3.408333333333324,
+        "contact": "rider",
+        "target": "bear",
+        "appliedDamage": 20,
+        "hpBefore": 100,
+        "hpAfter": 80,
+        "actor": "bear",
+        "part": "head",
+        "domain": "cycling",
+        "uid": "cycling:1"
+      },
+      "health": 80,
+      "heartWidths": null,
+      "provocation": {
+        "targetId": "gang-11730-0",
+        "method": "stopped facing proximity warning"
+      },
+      "contacts": [
+        {
+          "id": 1,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "kind": "firecracker",
+          "weapon": "firecracker",
+          "at": 3.408333333333324,
+          "contact": "rider",
+          "target": "bear",
+          "appliedDamage": 20,
+          "hpBefore": 100,
+          "hpAfter": 80,
+          "actor": "bear",
+          "part": "head",
+          "domain": "cycling",
+          "uid": "cycling:1"
+        }
+      ],
+      "noUnrecordedTickWindow": {
+        "before": 80,
+        "after": 80,
+        "newContactDamage": 0
+      },
+      "actualEffectDraws": [
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4583333333333317,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.33333333333333215,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4749999999999983,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.34999999999999876,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.4916666666666649,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.36666666666666536,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5083333333333315,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.38333333333333197,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5249999999999981,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.3999999999999986,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5416666666666647,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4166666666666652,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5583333333333313,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4333333333333318,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5666666666666647,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4416666666666651,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5833333333333313,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.4583333333333317,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        },
+        {
+          "weapon": "firecracker",
+          "target": "bear",
+          "age": 0.5999999999999983,
+          "x": 11605.260600874155,
+          "y": 1137.9287146356414,
+          "mode": null
+        },
+        {
+          "weapon": "bottle",
+          "target": "bear",
+          "age": 0.47499999999999876,
+          "x": 11611.61659658805,
+          "y": 1145.6198977536596,
+          "mode": null
+        }
+      ],
+      "sharedHealthModeSwap": {
+        "before": 80,
+        "after": 80,
+        "mode": "street",
+        "contactDamage": 0,
+        "observedMeleeDamage": 0,
+        "changes": []
+      }
+    }
+  ],
+  "sourceSHA256AtEnd": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "4b87811bdc13fc2a12cb70ddf6ca1d32e29dd60d24688d586144e4c5a50bbdde",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "ffb2166e2014f0c19cd2d8c58fb2077d9343ca297f5a22b45047c20e68403941",
+    "js/locomotion.js": "1024600c4bb9b3919f957d55a8686b057d4a72132bc7ef9457a5b853eefeaf0d",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

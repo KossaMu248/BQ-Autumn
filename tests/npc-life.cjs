@@ -61,7 +61,7 @@ assert.equal(sawRun,true);assert.ok(smallest<72,smallest);
 const cycle=make();cycle.enter('street',[{id:'crew',x:350,depth:-65,hostile:true,kind:'gangster',item:'rock'}]);step(cycle,4,{...player,riding:true});assert.equal(cycle.snapshot().stats.enemyShots,0);
 const projectileWitness=make();projectileWitness.enter('street',[{id:'crew',x:350,depth:-70,hostile:true,kind:'gangster',item:'rock'},
  {id:'bystander',x:540,depth:-70,civilian:true,schedule:{period:20,on:1,exitX:540},hideSpots:[{id:'distant-bush',kind:'bush',x:1100,depth:-76}]}]);
-step(projectileWitness,3,player);assert.ok(projectileWitness.snapshot().stats.enemyShots>0);
+assert.ok(projectileWitness.provokeGang('crew',player));step(projectileWitness,3,player);assert.ok(projectileWitness.snapshot().stats.enemyShots>0);
 assert.equal(by(projectileWitness,'bystander').mood,'scared');assert.equal(by(projectileWitness,'bystander').hp,60,'seeing a projectile fight is enough to flee without being hit');
 
 // A schedule stages people instead of spawning every identity simultaneously.

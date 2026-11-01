@@ -13,11 +13,11 @@
     coverTile=tile;
   };
   bush.src='assets/art/autumn-verge.png';
-  let cacheKey='',locals=[],furniture=[];
+  let cacheKey='',locals=[],gangLocals=[],furniture=[];
   const painted=new Map(),heard=new Set();let audioRequests=0,lastSoundAt=-99;
-  function prepare(scenes,finish,count){
-    const key=finish+':'+count;if(cacheKey===key)return;
-    cacheKey=key;locals=[];furniture=[];
+  function prepare(scenes,finish,count,gangs=[]){
+    const key=finish+':'+count+':'+gangs.map(n=>n.id).join(',');if(cacheKey===key)return;
+    cacheKey=key;locals=[];gangLocals=[];furniture=[];
     const safe=x=>Math.max(100,Math.min(finish-100,x));
     function prop(id,kind,x,depth=-82){
       const p={id,kind,x:safe(x),depth,seatHeight:38};furniture.push(p);return p;
@@ -45,7 +45,7 @@
       const base=scene.x,depth=-64-(i%2)*4;
       const bench=prop(scene.key+'-life-bench','bench',base+scene.w*.5+120,-84);
       const bin=prop(scene.key+'-life-bin','bin',bench.x+170,-82);
-      const shrubs=[prop(scene.key+'-life-bush-left','bush',base-700,-80),prop(scene.key+'-life-bush-right','bush',base+850,-80)];
+      const shrubs=[prop(scene.key+'-life-bush-left','bush',base-Math.max(700,scene.w*.5+250),-80),prop(scene.key+'-life-bush-right','bush',base+Math.max(850,scene.w*.5+580),-80)];
       const spots=[...shrubs.map(hide),hide(bin)];
       const visitor=9+i%3;
       locals.push({id:'civilian-'+scene.key,variant:visitor,x:bench.x,depth,sidewalkDepth:depth,civilian:true,patrol:true,
@@ -64,10 +64,25 @@
           schedule:{period:135,on:56,offset:i*13,entryX:safe(base+950),exitX:safe(base+950)}});
       }
     });
+    // Gang members keep stable IDs and homes. One member of each crew has a
+    // real foreground prop to linger behind; other members chat nearby.
+    const crews=new Map();
+    for(const seed of gangs){const crewId=seed.crewId||String(seed.id).replace(/-\d+$/,'');if(!crews.has(crewId))crews.set(crewId,[]);crews.get(crewId).push(seed);}
+    let crewIndex=0;
+    for(const [crewId,members]of crews){
+      const first=members[0],kind=crewIndex++%2?'utility':'firebin',coverProp=prop(crewId+'-hangout-cover',kind,first.x,-94);
+      coverProp.width=kind==='utility'?88:72;coverProp.footprintHalf=kind==='utility'?64:48;
+      members.forEach((seed,index)=>{
+        const behind=index===0,depth=seed.depth??-102,spot={id:coverProp.id,kind:coverProp.kind,x:coverProp.x,depth:coverProp.depth-8,width:coverProp.width};
+        gangLocals.push({...seed,kind:'gangster',crewId,civilian:false,hostile:false,patrol:false,
+          face:seed.face||(index%2?-1:1),x:behind?spot.x:seed.x,depth:behind?spot.depth:depth,
+          homeHangout:{x:behind?spot.x:seed.x,depth:behind?spot.depth:depth},coverSpots:behind?[spot]:[]});
+      });
+    }
   }
-  function seeds(scenes,finish,count,gangs=[]){prepare(scenes,finish,count);return [...locals,...gangs];}
+  function seeds(scenes,finish,count,gangs=[]){prepare(scenes,finish,count,gangs);return [...locals,...gangLocals];}
   function overlaps(x,halfWidth=0){
-    return furniture.some(p=>Math.abs(p.x-x)<halfWidth+(p.kind==='bench'?108:p.kind==='bin'?45:124));
+    return furniture.some(p=>Math.abs(p.x-x)<halfWidth+(p.footprintHalf??(p.kind==='bench'?108:p.kind==='bin'?45:124)));
   }
   function propsNear(cameraX,width=1160){return furniture.filter(p=>p.x>cameraX-260&&p.x<cameraX+width+260);}
   function beginFrame(){painted.clear();}
@@ -76,6 +91,10 @@
     const y=g+p.depth;
     if(p.kind==='bench')window.BearlyStreetProps.draw(c,'bench',p.x,y,196,time);
     else if(p.kind==='bin')window.BearlyStreetProps.draw(c,'bin',p.x,y,68,time);
+    else if(p.kind==='utility')window.BearlyStreetProps.draw(c,'utility',p.x,y,p.width||88,time);
+    else if(p.kind==='firebin'){
+      const scale=(p.width||72)/64;c.save();c.translate(p.x,y);c.scale(scale,scale);window.BearlyStreetProps.hazard(c,{type:'firebin',x:0},0,time);c.restore();
+    }
     else if(p.kind==='bush'&&coverTile){
       c.save();c.fillStyle='#19372835';c.beginPath();c.ellipse(p.x,y+1,105,7,0,0,Math.PI*2);c.fill();
       const scale=cover.width/cover.w;
@@ -88,6 +107,9 @@
     if(n.screaming){
       c.save();c.font=`600 ${Math.max(13,h*.11)}px Arial, sans-serif`;c.textAlign='center';c.fillStyle='#fff';c.shadowColor='#18241f';c.shadowBlur=4;
       c.fillText('AAH!',x,y-h-10-Math.sin(time*16)*2);c.restore();
+    }else if(n.kind==='gangster'&&n.gangAlert&&time<n.warnUntil){
+      c.save();c.font=`600 ${Math.max(12,h*.09)}px Arial, sans-serif`;c.textAlign='center';c.fillStyle='#fff';c.shadowColor='#18241f';c.shadowBlur=4;
+      c.fillText(n.warningText||'PERSONAL SPACE, FURBALL.',x,y-h-12);c.restore();
     }
   }
   function react(state,playSound){
@@ -98,6 +120,6 @@
     }
     if(heard.size>500){const values=[...heard];heard.clear();values.slice(-200).forEach(id=>heard.add(id));}
   }
-  function audit(){return {localSlots:locals.length,civilianSlots:locals.filter(n=>n.civilian).length,coverSource:{image:'assets/art/autumn-verge.png',rect:[cover.x,cover.y,cover.w,cover.h],width:cover.width,foot:cover.foot},props:furniture.map(p=>({...p})),drawnProps:[...painted.values()],audioRequests};}
+  function audit(){return {localSlots:locals.length,civilianSlots:locals.filter(n=>n.civilian).length,gangSlots:gangLocals.length,gangCoverSlots:gangLocals.filter(n=>n.coverSpots.length).length,coverSource:{image:'assets/art/autumn-verge.png',rect:[cover.x,cover.y,cover.w,cover.h],width:cover.width,foot:cover.foot},props:furniture.map(p=>({...p})),drawnProps:[...painted.values()],audioRequests};}
   window.BearlyStreetLife={seeds,overlaps,propsNear,beginFrame,drawProp,caption,react,audit,ready:()=>!!coverTile&&!!window.BearlyStreetProps?.ready()};
 })();

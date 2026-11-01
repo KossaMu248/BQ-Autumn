@@ -4,16 +4,17 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision17';SHOTS.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision18';SHOTS.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v17.html';errors=[];failures=[]
+base=f'http://127.0.0.1:{server.server_port}/autumn-v18.html';errors=[];failures=[]
 def read(p):return p.evaluate('BearlyVisits.audit()')
 def ready(p):
  p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
- p.goto(base);p.wait_for_function('BearlyVisits.audit().artReady && BearlyAtlas.ready()');p.click('#introStart');p.clock.run_for(100);p.evaluate('BEARLY_DEBUG_MENU.settings.godMode=true')
+ p.goto(base);p.wait_for_function('BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0',timeout=60000);p.clock.pause_at(p.evaluate('Date.now()+1000')/1000);p.click('#introStart');p.clock.run_for(100);p.evaluate('BEARLY_DEBUG_MENU.settings.godMode=true')
 def warp(p,x):p.evaluate('(x)=>BEARLY_DEBUG_MENU.warp(x/1.5)',x);p.clock.run_for(80)
+def entrance(p,key):return p.evaluate('(key)=>BearlyNeighbourhood.entrance(BearlyNeighbourhood.scenes.find(b=>b.key===key)).x',key)
 def finish(p):
  for _ in range(100):
   if read(p)['mode'] is None:return
@@ -40,14 +41,14 @@ try:
   p.keyboard.up('ArrowRight');p.clock.run_for(250);p.screenshot(path=str(SHOTS/'free-walking.png'))
   p.keyboard.press('q');finish(p);assert abs(p.evaluate('BEARLY_TOUCH_STATUS().x')-parked)<2
   # Walk into a building after leaving the bike elsewhere, then step back outside.
-  warp(p,15400);p.locator('.dismount-button').click();p.clock.run_for(2600);assert read(p)['mode']=='street';streetPark=read(p)['parkedAt']
-  move(p,15660);p.keyboard.press('e');p.clock.run_for(1100);assert read(p)['mode']=='room'
+  shop=entrance(p,'pizzeria');warp(p,shop-250);p.locator('.dismount-button').click();p.clock.run_for(2600);assert read(p)['mode']=='street';streetPark=read(p)['parkedAt']
+  move(p,shop);p.keyboard.press('e');p.clock.run_for(1100);assert read(p)['mode']=='room'
   p.screenshot(path=str(SHOTS/'shop-walking.png'));p.keyboard.press('Escape');p.clock.run_for(800)
   assert read(p)['mode']=='street' and read(p)['parkedAt']==streetPark,'leaving shop returns outside without teleporting bike'
   p.keyboard.press('q');finish(p)
   # Boarding uses the same bench anchor and foreground mask as sailing.
   p.evaluate("for(const a of ['lunch','deliver','kit','repair'])BearlyQuests.game.act(a)")
-  warp(p,31750);p.keyboard.press('e');p.clock.run_for(3000);assert read(p)['mode']=='dock';move(p,1980);p.keyboard.press('e');p.clock.run_for(600);p.screenshot(path=str(SHOTS/'boarding.png'));p.clock.run_for(1000)
+  warp(p,entrance(p,'boathouse'));p.keyboard.press('e');p.clock.run_for(3000);assert read(p)['mode']=='dock';move(p,1980);p.keyboard.press('e');p.clock.run_for(600);p.screenshot(path=str(SHOTS/'boarding.png'));p.clock.run_for(1000)
   assert read(p)['mode']=='water';p.keyboard.down('ArrowRight');p.clock.run_for(3500);p.keyboard.up('ArrowRight');p.clock.run_for(200);p.screenshot(path=str(SHOTS/'boat-right.png'))
   p.keyboard.down('ArrowLeft');p.clock.run_for(500);p.keyboard.up('ArrowLeft');p.clock.run_for(200);p.screenshot(path=str(SHOTS/'boat-left.png'))
   p.close()

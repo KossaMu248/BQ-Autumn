@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V17';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V18';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -247,12 +247,14 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   ].map(o=>({...o,x:stretchX(o.x)}));
   const crewState=new Map(), projectiles=[];
   const projectileImpactFX=[];
+  let projectileFootTime=0,roadsideSuspended=false;
+  const projectileClock=()=>time+projectileFootTime;
   let thrownCount=0, dodgedCount=0, hitCount=0;
   // V6.1 visual-only feedback: warning -> projectile -> impact -> breathing room.
   // No new enemies or physics changes; the long scenic stretches remain untouched.
   let impactCues=[], encounterHeat=0, lastHitKind='none';
   let reactionCount=0;
-  const projectileLabels={bottle:'MOLOTOV',rock:'ROCK',firecracker:'DYNAMITE'};
+  const projectileLabels={bottle:'MOLOTOV',rock:'ROCK',firecracker:'FIRECRACKER'};
   function carriedPropFor(crew,i){
     if(i===null||i===undefined)return crew.item;
     const palette=['bottle','rock','firecracker'];
@@ -286,6 +288,8 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   const throwingHandX=(crew,i=null)=>{
     const idx=i===null?(crewState.get(crew.x)?.throwerIndex||0):i;
+    const resident=window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+idx);
+    if(resident&&Number.isFinite(resident.x)){const hand=window.BearlyKids.projectileOrigin(carriedPropFor(crew,idx));return resident.x+(bike.x>resident.x?1:-1)*hand.x;}
     const c=crewState.get(crew.x),m=c?.members?.[idx];
     const motion=patrolMotion(crew,idx);
     const shift=m?.phase && m.phase!=='idle'
@@ -294,7 +298,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const facing=bike.x>anchor?1:-1;
     return anchor + 16*facing;
   };
-  const throwingHandY=(crew,i=null)=>(groundAt(throwingHandX(crew, i===null?(crewState.get(crew.x)?.throwerIndex||0):i))??bike.y)-148;
+  const throwingHandY=(crew,i=null)=>{const idx=i===null?(crewState.get(crew.x)?.throwerIndex||0):i,n=window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+idx),hand=window.BearlyKids.projectileOrigin(carriedPropFor(crew,idx));return(groundAt(n?.x??throwingHandX(crew,idx))??bike.y)+(n?.depth??-102)-hand.z;};
   // Independent, bounded two-way patrols: characters walk, pause, and turn around.
   // We animate the torso but keep every shadow and shoe grounded on the raised sidewalk.
   function patrolMotion(crew,i,t=time){
@@ -352,7 +356,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const rate=target>encounterHeat?5.8:1.15;
     encounterHeat=lerp(encounterHeat,target,1-Math.exp(-rate*dt));
     impactCues=impactCues.filter(c=>time-c.at<.8);
-    for(let i=projectileImpactFX.length-1;i>=0;i--)if(time-projectileImpactFX[i].at>projectileImpactFX[i].duration)projectileImpactFX.splice(i,1);
+    for(let i=projectileImpactFX.length-1;i>=0;i--)if(projectileClock()-projectileImpactFX[i].at>projectileImpactFX[i].duration)projectileImpactFX.splice(i,1);
   }
   const landmarks=[
     {x:7550,kind:'metro',name:'HÄSSELBY GÅRD T-BANA'},
@@ -615,7 +619,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       }
       const osc=audio.createOscillator(),gain=audio.createGain();
       const t=audio.currentTime;
-      const presets={jump:[310,540,.18,'square'],star:[670,1150,.25,'sine'],crash:[160,33,.6,'sawtooth'],bounce:[180,115,.12,'triangle'],finish:[560,950,.55,'sine'],checkpoint:[360,720,.30,'triangle'],panic:[250,125,.11,'square'],cry:[310,170,.4,'triangle'],trick:[460,810,.15,'sine']};
+      const presets={'rock-impact':[145,75,.11,'triangle'],'molotov-impact':[210,45,.38,'sawtooth'],'firecracker-impact':[740,50,.18,'square'],jump:[310,540,.18,'square'],star:[670,1150,.25,'sine'],crash:[160,33,.6,'sawtooth'],bounce:[180,115,.12,'triangle'],finish:[560,950,.55,'sine'],checkpoint:[360,720,.30,'triangle'],panic:[250,125,.11,'square'],cry:[310,170,.4,'triangle'],trick:[460,810,.15,'sine']};
       const [from,to,len,wave]=presets[type]||presets.bounce;
       osc.type=wave;osc.frequency.setValueAtTime(from,t);osc.frequency.exponentialRampToValueAtTime(to,t+len);
       gain.gain.setValueAtTime(type==='cry'?.021:.055,t);gain.gain.exponentialRampToValueAtTime(.001,t+len);
@@ -692,6 +696,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     return (c.x-x)**2+(c.y-y)**2 <=c.r*c.r;
   }
   function hitBabyInSeat(h){
+    if(debugSettings.godMode||state!=='playing'||time<damageCooldown)return false;
     // Nonfatal collisions do NOT release the child seat. The harness stays on.
     babyHitAt=time;panic=100;cameraShake=Math.max(8,cameraShake);bumpPoseUntil=time+0.4;damagePoseUntil=time+0.58;
     if(time>=damageCooldown){
@@ -702,9 +707,9 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const seat=childSeatPos();spawnImpactCue(seat.x,seat.y,'passenger');
     say(choose(['THE SEAT HAS A WARRANTY. I DO NOT.','I AM STILL IN THE CHAIR. THIS IS WORSE.','THIS IS A VERY BAD FAMILY HOLIDAY.']),2.3);
     banner('PASSENGER SURVIVED · HARNESS HELD',1.8);
-    sound('panic');
+    sound('panic');return true;
   }
-  function projectileDamage(kind){return kind==='firecracker'?57:kind==='rock'?55:53;} // Two unhealed enemy hits are lethal from full health.
+  function projectileDamage(kind){return ['rock','bottle','molotov','firecracker','dynamite'].includes(kind)?window.BearlyWeapons.damage(kind):53;}
   // Compact artwork matches the hand-sized props carried by the illustrated crews.
   const projectileArtSpec={bottle:{w:32,h:18,r:6.8},rock:{w:16,h:10,r:6.2},firecracker:{w:29,h:16,r:6.0}};
   const projectileImpactHistory=[];
@@ -762,7 +767,9 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   function updateRoadsideEncounters(dt,bikeOldX=bike.x,bikeOldY=bike.y){
     if(state!=='playing')return;
     for(const crew of gangCrews){
-      const d=crew.x-bike.x;
+      const roster=Array.from({length:crew.count},(_,i)=>window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+i)).filter(Boolean);
+      const closest=roster.reduce((best,n)=>Math.abs(n.x-bike.x)<Math.abs(best-bike.x)?n.x:best,roster[0]?.x??crew.x);
+      const d=closest-bike.x;
       let c=crewState.get(crew.x);
       // Fully disengage when out of sight; no delayed throws from an old warning.
       if(d < -320 || d > 980){
@@ -780,12 +787,15 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       }
       if(!c){c={phase:'idle',since:time,result:null};crewState.set(crew.x,c);}
       ensureCrewState(crew,c);
-      // Scale enemy warning range with actual bike movement, leaving time to dodge.
-      const canAttack=d>-260&&d<Math.max(500,Math.min(940,Math.max(0,bike.vx)*1.25+150));
+      // Warning range follows the resident's current position and bike speed.
       for(let i=0;i<crew.count;i++){
         const m=c.members[i],resident=window.BearlyVisits?.gangStatus('gang-'+crew.x+'-'+i);
+        if(!resident?.aggressive||resident.hiding||['hide','cover','cower'].includes(resident.activity)){
+          m.phase='idle';m.since=time;m.nextReadyAt=Math.max(m.nextReadyAt,time+.25);continue;
+        }
         if(resident&&['held','screen','stagger','down','fall','dead','rise'].includes(resident.state)){m.phase='idle';m.nextReadyAt=time+.7;continue;}
-        if(m.phase==='idle'&&canAttack&&time>=m.nextReadyAt){
+        const actorDX=(resident?.x??crew.x)-bike.x,withinRange=actorDX>-520&&actorDX<Math.max(500,Math.min(940,Math.max(0,bike.vx)*1.25+150));
+        if(m.phase==='idle'&&withinRange&&time>=m.nextReadyAt){
           m.phase='warn';m.since=time;
           m.patrolOrigin=patrolMotion(crew,i).x;
           hazardReactUntil=Math.max(hazardReactUntil,time+.58);
@@ -816,25 +826,29 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
         c.patrolOrigins=c.members.map((m,j)=>m.patrolOrigin??patrolMotion(crew,j).x);
       }else{c.phase='idle';}
     }
-    const parts=mountedParts(),bikeDX=bike.x-bikeOldX,bikeDY=bike.y-bikeOldY;
+    advanceThrownItems(dt,bikeOldX,bikeOldY);
+  }
+  function advanceThrownItems(dt,bikeOldX=bike.x,bikeOldY=bike.y,hitRider=true){
+    const parts=hitRider?mountedParts():null,bikeDX=bike.x-bikeOldX,bikeDY=bike.y-bikeOldY;
     for(let i=projectiles.length-1;i>=0;i--){
       const p=projectiles[i];
       p.px=p.x;p.py=p.y;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.g*dt;
       p.angle+=p.spin*dt;p.life-=dt;
       if(p.life<=0){projectiles.splice(i,1);dodgedCount++;reactionForCrew(p.owner,'miss');reactionCount++;continue;}
-      const floor=projectileGroundContact(p),body=projectileRiderContact(p,parts,bikeDX,bikeDY);
+      const floor=projectileGroundContact(p),body=hitRider?projectileRiderContact(p,parts,bikeDX,bikeDY):null;
       if(body&&(!floor||body.t<floor.t)){
         const point={x:body.x,y:body.y};
         projectiles.splice(i,1);hitCount++;reactionForCrew(p.owner,'hit');reactionCount++;
-        addProjectileImpact({...p,...point},false);
+        const hpBefore=health;
         if(body.part.who==='baby')hitBabyInSeat({type:p.kind});
         else if(time>=damageCooldown)injure(projectileDamage(p.kind),'thrown '+p.kind,false,body.part.part,point);
         else {sound('bounce');cameraShake=Math.max(cameraShake,1.4);}
+        addProjectileImpact({...p,...point},false,{hpBefore,hpAfter:health,appliedDamage:hpBefore-health,actor:body.part.who,part:body.part.part});
         for(let k=0;k<7;k++)sparks.push({x:point.x,y:point.y,vx:rand(-105,100),vy:rand(-105,45),life:rand(.18,.4),r:rand(.8,2.2),color:p.kind==='firecracker'?'#ffbc63':p.kind==='bottle'?'#a8d6a0':'#d9c1a0'});
       }else if(floor){
         projectiles.splice(i,1);dodgedCount++;reactionForCrew(p.owner,'miss');reactionCount++;
         // Every real ground collision gets its own effect, including stones.
-        addProjectileImpact({...p,x:floor.x,y:floor.y},true);
+        addProjectileImpact({...p,x:floor.x,y:floor.y},true,{hpBefore:health,hpAfter:health,appliedDamage:0});
         if(debugSettings.particles)for(let k=0;k<5;k++)groundDust.push({x:floor.x,y:floor.y-2,vx:rand(-60,60),vy:rand(-65,-20),life:rand(.2,.4),r:rand(1.2,2.4)});
       }
     }
@@ -876,84 +890,28 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       ctx.restore();
     }
   }
-  function addProjectileImpact(p,groundHit=false){
-    const duration=p.kind==='bottle'?1.1:p.kind==='firecracker'?1.05:.8;
-    const fx={id:++projectileImpactSequence,x:p.x,y:p.y,kind:p.kind,at:time,groundHit,duration,seed:(p.x*.17+p.y*.13)%37};
+  function addProjectileImpact(p,groundHit=false,contact={}){
+    const duration=window.BearlyWeaponEffects.duration(p.kind,groundHit?'ground':'bear');
+    const fx={id:++projectileImpactSequence,x:p.x,y:p.y,kind:p.kind,direction:Math.sign(p.vx)||1,at:projectileClock(),groundHit,duration,seed:(p.x*.17+p.y*.13)%37};
     projectileImpactFX.push(fx);
     if(projectileImpactFX.length>20)projectileImpactFX.shift();
-    projectileImpactHistory.push({id:fx.id,x:fx.x,y:fx.y,kind:fx.kind,at:fx.at,contact:groundHit?'ground':'rider'});
+    projectileImpactHistory.push({id:fx.id,x:fx.x,y:fx.y,kind:fx.kind,weapon:fx.kind,at:fx.at,contact:groundHit?'ground':'rider',target:groundHit?'ground':'bear',appliedDamage:0,...contact});
+    sound(fx.kind==='bottle'?'molotov-impact':fx.kind==='firecracker'?'firecracker-impact':'rock-impact');
     if(projectileImpactHistory.length>60)projectileImpactHistory.shift();
   }
   // Impact animations are cosmetic: they never apply a second damage pulse.
   function drawProjectileImpactFX(){
+    const reduced=!debugSettings.particles||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     for(const fx of projectileImpactFX){
-      const age=time-fx.at;if(age<0||age>=fx.duration)continue;
-      const life=1-age/fx.duration,fast=Math.max(0,1-age/.16),seed=fx.seed;
-      ctx.save();ctx.translate(fx.x,fx.y);ctx.lineCap='round';ctx.lineJoin='round';
-      const dust=(count,color,radius)=>{
-        for(let i=0;i<count;i++){
-          const spread=(i-(count-1)/2)*5,drift=Math.sin(seed+i*1.8)*age*13;
-          const x=spread+drift,y=-age*(17+i%3*5),r=4+age*radius*(.7+i%3*.14);
-          const g=ctx.createRadialGradient(x,y,1,x,y,r);g.addColorStop(0,color);g.addColorStop(1,'rgba(70,63,52,0)');
-          ctx.globalAlpha=life*.66;ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
-        }
-      };
-      if(fx.kind==='bottle'){
-        // Green glass shatters outwards while the liquid splashes along the road.
-        ctx.globalAlpha=Math.min(1,life*1.7);ctx.fillStyle='#304b3270';
-        ctx.beginPath();ctx.ellipse(0,fx.groundHit?-1:2,6+Math.min(age,.45)*37,fx.groundHit?3:7,0,0,Math.PI*2);ctx.fill();
-        for(let i=0;i<13;i++){
-          const a=-Math.PI+(i/12)*Math.PI,v=29+(i%4)*13;
-          const x=Math.cos(a)*v*age,y=Math.sin(a)*v*age+age*age*65;
-          ctx.save();ctx.translate(x,fx.groundHit?Math.min(-1,y):y);ctx.rotate(seed+i+age*(i%2?9:-7));
-          ctx.globalAlpha=life;ctx.fillStyle=['#70ad70','#b3d9a0','#315f48','#d4e8bd'][i%4];ctx.strokeStyle='#284637';ctx.lineWidth=.65;
-          const size=1.4+i%3*.7;ctx.beginPath();ctx.moveTo(-size,-size*.4);ctx.lineTo(size,-size);ctx.lineTo(size*.6,size*.6);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
-        }
-        const burn=Math.max(0,1-age/.72);
-        if(burn>0){
-          const halo=ctx.createRadialGradient(0,-6,1,0,-6,25);halo.addColorStop(0,`rgba(255,163,54,${burn*.46})`);halo.addColorStop(1,'#f98b2400');ctx.globalAlpha=1;ctx.fillStyle=halo;ctx.fillRect(-26,-32,52,52);
-          for(let i=0;i<5;i++){
-            const x=(i-2)*6,h=(11+(i%3)*4)*burn*(.85+.15*Math.sin(age*29+i));ctx.globalAlpha=burn;
-            ctx.fillStyle=i%2?'#ffb848':'#ed6c29';ctx.beginPath();ctx.moveTo(x-5,0);ctx.bezierCurveTo(x-7,-h*.5,x+3,-h*.6,x+Math.sin(age*22+i)*3,-h);ctx.quadraticCurveTo(x+8,-h*.3,x+5,0);ctx.fill();
-            ctx.fillStyle='#ffe99a';ctx.beginPath();ctx.ellipse(x,-h*.24,2.2,h*.28,0,0,Math.PI*2);ctx.fill();
-          }
-        }
-        dust(3,'rgba(68,70,58,.38)',14);
-      }else if(fx.kind==='rock'){
-        dust(4,'rgba(137,119,94,.52)',22);
-        for(let i=0;i<9;i++){
-          const a=-Math.PI+i*Math.PI/8,v=26+i%3*14,x=Math.cos(a)*age*v,y=Math.sin(a)*age*v+age*age*72;
-          ctx.save();ctx.translate(x,fx.groundHit?Math.min(-1,y):y);ctx.rotate(i+age*7);ctx.globalAlpha=life;ctx.fillStyle=i%2?'#a79b82':'#595b52';ctx.strokeStyle='#3f453d';ctx.lineWidth=.65;
-          const r=1.6+i%3*.6;ctx.beginPath();ctx.moveTo(-r,0);ctx.lineTo(-r*.4,-r);ctx.lineTo(r,-r*.2);ctx.lineTo(r*.5,r);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
-        }
-        ctx.globalAlpha=fast;ctx.strokeStyle='#f1d7a1';ctx.lineWidth=2;
-        for(let i=0;i<5;i++){const a=-Math.PI+i*Math.PI/4;ctx.beginPath();ctx.moveTo(Math.cos(a)*5,Math.sin(a)*5);ctx.lineTo(Math.cos(a)*14,Math.sin(a)*14);ctx.stroke();}
-      }else{
-        // A readable flash, then expanding smoke and spinning red paper fragments.
-        if(fast>0){
-          const flash=ctx.createRadialGradient(0,0,1,0,0,34);flash.addColorStop(0,'#fff8cf');flash.addColorStop(.25,'#ffe68c');flash.addColorStop(.6,'#f99439a0');flash.addColorStop(1,'#e86e2400');
-          ctx.globalAlpha=fast;ctx.fillStyle=flash;ctx.fillRect(-35,-35,70,70);
-          ctx.fillStyle='#fff2ae';ctx.beginPath();for(let i=0;i<16;i++){const a=i*Math.PI/8,r=i%2?6:14+age*50;i?ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r):ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r);}ctx.closePath();ctx.fill();
-        }
-        dust(5,'rgba(72,65,57,.56)',27);
-        for(let i=0;i<16;i++){
-          const a=i*Math.PI*2/16+seed*.1,v=45+i%4*16,x=Math.cos(a)*v*age,y=Math.sin(a)*v*age+age*age*24;
-          ctx.globalAlpha=Math.max(0,1-age/.48);ctx.strokeStyle=i%3?'#ffb654':'#fff0a7';ctx.lineWidth=i%3?1.4:2;
-          ctx.beginPath();ctx.moveTo(x-Math.cos(a)*4,y-Math.sin(a)*4);ctx.lineTo(x,y);ctx.stroke();
-        }
-        for(let i=0;i<7;i++){
-          const a=-Math.PI+i*.5,x=Math.cos(a)*age*(29+i*4),y=Math.sin(a)*age*40+age*age*55;
-          ctx.save();ctx.translate(x,fx.groundHit?Math.min(-1,y):y);ctx.rotate(i+age*(i%2?11:-9));ctx.globalAlpha=life;ctx.fillStyle=i%2?'#a83e33':'#d5b57b';ctx.fillRect(-1.5,-1,3,2);ctx.restore();
-        }
-      }
-      ctx.restore();
+      const age=projectileClock()-fx.at;if(age<0||age>=fx.duration)continue;
+      window.BearlyWeaponEffects.draw(ctx,{weapon:fx.kind,target:fx.groundHit?'ground':'bear',age,seed:fx.seed,direction:fx.direction},fx.x,fx.y,{scale:1,reducedMotion:reduced});
     }
   }
   // Developer-only probes exercise the real projectile simulation and contacts.
   window.BEARLY_PROJECTILE_QA={
     state(){return {time,health,particles:debugSettings.particles,spec:projectileArtSpec,
       projectiles:projectiles.map(p=>({kind:p.kind,x:p.x,y:p.y,r:p.r})),
-      impacts:projectileImpactFX.map(f=>({id:f.id,kind:f.kind,contact:f.groundHit?'ground':'rider',x:f.x,y:f.y,age:time-f.at,duration:f.duration})),history:projectileImpactHistory.slice()};},
+      impacts:projectileImpactFX.map(f=>({id:f.id,kind:f.kind,contact:f.groundHit?'ground':'rider',x:f.x,y:f.y,age:projectileClock()-f.at,duration:f.duration})),history:projectileImpactHistory.slice()};},
     clear(){projectiles.length=0;projectileImpactFX.length=0;projectileImpactHistory.length=0;},
     spawn(kind='bottle',target='ground'){
       if(!projectileArtSpec[kind])throw new Error('Unknown projectile kind');
@@ -1128,7 +1086,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     motion.impactAt=time;motion.impactPower=severe?1:0.6;
     bike.vx*=severe?.79:.89;bike.vy-=severe?125:65;bike.va+=rand(-.48,.48);
     banner(`${part.toUpperCase()} HIT · BEAR ${Math.round(health)}%`,1.65);
-    talk('BEAR',choose(['I THINK THAT WAS A IMPORTANT BIT.','DO WE HAVE SPARE LEGS?','THERE WAS A SPEED BUMP WITH TEETH.','THAT IS PROBABLY NORMAL.']),2.15,true);
+    talk('BEAR',choose(kind==='thrown bottle'?['THAT IS NOT A HEATED SEAT.','MY INSURANCE EXCLUDES AMBIENCE.']:kind==='thrown firecracker'?['THE SAFETY DEMONSTRATION FOUND US.','FESTIVE. LEGALLY QUESTIONABLE.']:kind==='thrown rock'?['GRAVITY HAS A COMPLAINTS DEPARTMENT.','WAS THAT LOCALLY SOURCED?']:['I THINK THAT WAS AN IMPORTANT BIT.','DO WE HAVE SPARE LEGS?','THERE WAS A SPEED BUMP WITH TEETH.']),2.15,true);
     $('statusLine').textContent=`BEAR ${Math.round(health)}% · TARGET: ${part.toUpperCase()} · ${lostParts.size} PARTS LOST`;
     if(health<=0)crash('unrecoverable bear-related incident');
     return true;
@@ -2554,7 +2512,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     const originalKey=`v72_${crew.kind}_${variant}_${frame}`;
     const propKey=`v158_firecracker_${crew.kind}_${variant}_${frame}`;
     const art=visualKind==='firecracker'?(images[propKey]||images[originalKey]):images[originalKey];
-    const paintedHeight=108*(profile.scale||.76);
+    const paintedHeight=window.BearlyKids.worldHeight?.()||120;
     if(window.BearlyKids.draw(ctx,{kind:visualKind,frame,height:paintedHeight})){
       // Poses and prop visibility come from the actual wind-up/release state.
     }else if(art?.naturalWidth){
@@ -4144,7 +4102,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   function groundDraw(){
     const scene=illustratedState();
     window.BearlyWorld.backstreet(ctx,scene);
-    drawGangCrews();
+    if(!window.BearlyVisits)drawGangCrews();
     window.BearlyWorld.road(ctx,scene);
     drawFinishBrakingZone();
     for(const r of ramps)if(r.x>cameraX-100&&r.x<cameraX+W+100)drawRamp(r);
@@ -5911,7 +5869,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     if(window.BearlyVisits?.render(ctx,W,H))return;
     ctx.clearRect(0,0,W,H);window.BearlyWorld.sky(ctx,illustratedState());
     ctx.save();ctx.translate(W*.32,H*.22);ctx.scale(1.35,1.35);ctx.translate(-W*.32,-H*.22);ctx.translate(-cameraX+(cameraShake?(Math.random()-.5)*cameraShake:0),-cameraY+(cameraShake?(Math.random()-.5)*cameraShake*.6:0));
-    groundDraw();if($('introOverlay').hidden)drawGroundedBikeShadow();if(debugSettings.particles){drawPukeSplashes();drawEffects();drawBabyPee();}autumnBikePresentation();if(debugSettings.particles)drawPukeFlow();drawVictoryCelebration();drawThrownItems();if(debugSettings.particles){drawImpactCues();drawProjectileImpactFX();}
+    groundDraw();if($('introOverlay').hidden)drawGroundedBikeShadow();if(debugSettings.particles){drawPukeSplashes();drawEffects();drawBabyPee();}autumnBikePresentation();if(debugSettings.particles)drawPukeFlow();drawVictoryCelebration();drawThrownItems();if(debugSettings.particles)drawImpactCues();drawProjectileImpactFX();
     const compositeSheet=demo.active && !!selectedSheetPose();
     if(!compositeSheet){drawBearThrown();drawSeatThrown();if(!window.BearlyVisits?.hideRoadBaby())drawBaby();drawFragments();}
     if(debugSettings.foreground)window.BearlyWorld.foreground(ctx,illustratedState());
@@ -5983,6 +5941,9 @@ NPC DRAW    ${walkCache?`${walkCache.frameCount}/${walkCache.capacity} cached po
 NPC LIFE    ${area?.combat?.population?.active??0} active · ${area?.combat?.population?.offstage??0} offstage
 CIVILIANS   ${area?.combat?.population?.civilian??0} peaceful · ${area?.combat?.population?.fleeing??0} fleeing · ${area?.combat?.population?.hiding??0} hiding
 ROUTINES    ${area?.combat?.population?.resting??0} sitting / reading / smoking
+GANGS       ${area?.combat?.population?.gangChilling??0} chilling · ${area?.combat?.population?.gangAggressive??0} aggressive · ${area?.combat?.population?.gangCover??0} in cover
+WEAPONS     rock ½ ♥ · Molotov 1½ ♥ · firecracker 1 ♥
+SCALE       bear 145 · adults 128 · teens 120
 MASKS       2 balaclava looks
 APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.combat?.phase==='apex'?'Apex Primal':'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
@@ -6008,26 +5969,43 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
       });
     }
     for(const btn of document.querySelectorAll('[data-dbg-warp]'))btn.addEventListener('click',()=>debugWarpTo(btn.dataset.dbgWarp));
-    for(const b of document.querySelectorAll('[data-dbg-place]'))b.addEventListener('click',()=>{const scene=window.BearlyNeighbourhood.scenes.find(s=>s.key===b.dataset.dbgPlace);if(scene){debugWarpTo(scene.x/WORLD_STRETCH);debugRefresh(true);}});
-    $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(15700/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
+    for(const b of document.querySelectorAll('[data-dbg-place]'))b.addEventListener('click',()=>{const scene=window.BearlyNeighbourhood.scenes.find(s=>s.key===b.dataset.dbgPlace);if(scene){debugWarpTo(window.BearlyNeighbourhood.entrance(scene).x/WORLD_STRETCH);debugRefresh(true);}});
+    $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(window.BearlyNeighbourhood.entrance(window.BearlyNeighbourhood.scenes.find(b=>b.key==='pizzeria')).x/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
     $('debugBoatBtn').addEventListener('click',()=>{for(const action of ['lunch','deliver','kit','repair'])window.BearlyQuests.game.act(action);debugRefresh(true);});
     $('debugBrawlBtn').addEventListener('click',()=>{debugOpenMenu(false);window.BearlyVisits.practice();});
     $('debugLifeBtn')?.addEventListener('click',()=>{debugWarpTo(2500/WORLD_STRETCH);debugOpenMenu(false);requestAnimationFrame(()=>document.querySelector('.dismount-button')?.click());});
     $('debugFullscreenBtn').addEventListener('click',()=>window.BearlyFullscreen.toggle());
     $('debugWarpBtn').addEventListener('click',()=>debugWarpTo($('debugWarpMeters').value));
     $('debugWarpMeters').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();debugWarpTo(e.currentTarget.value);}});
-    $('debugHealBtn').addEventListener('click',()=>{health=100;panic=0;damageCooldown=time+3;updateHud();debugRefresh(true);});
+    $('debugHealBtn').addEventListener('click',()=>{health=100;window.BearlyVisits?.setHealth(100);panic=0;damageCooldown=time+3;updateHud();debugRefresh(true);});
     $('debugSpeedBtn').addEventListener('click',()=>{bike.vx=Math.min(730,MAX_SPEED);debugRefresh(true);});
     $('debugCrashBtn').addEventListener('click',()=>{if(state!=='playing')reset(true);const wasGod=debugSettings.godMode;debugSettings.godMode=false;bike.vx=390;crash('debug crash test');debugSettings.godMode=wasGod;debugOpenMenu(false);});
     $('debugRestartBtn').addEventListener('click',()=>{reset(true);debugRefresh(true);});
     window.BEARLY_DEBUG_MENU={toggle:debugOpenMenu,warp:debugWarpTo,settings:debugSettings,stats:()=>({...debugPerf}),isOpen:()=>debugOpen};
   }
+  function cyclingGangPose(id){
+    for(const crew of gangCrews)for(let i=0;i<crew.count;i++)if(id==='gang-'+crew.x+'-'+i){
+      const m=crewState.get(crew.x)?.members?.[i];if(!m||m.phase==='idle')return null;
+      return {state:m.phase==='warn'?'windup':m.phase==='throw'?'release':'recover',age:Math.max(0,time-m.since),activity:'fight'};
+    }
+    return null;
+  }
   function loop(now){
     let dt=Math.min(.04,(now-last)/1000||0);last=now;
     let iter=0;
+    const exploring=!!window.BearlyVisits?.active();
+    if(exploring&&!roadsideSuspended){impactCues=[];blood=[];for(const c of crewState.values()){c.phase='idle';c.since=time;for(const m of c.members||[]){m.phase='idle';m.since=time;m.nextReadyAt=Math.max(m.nextReadyAt,time+.7);}}}
+    roadsideSuspended=exploring;
+    if(exploring&&!debugOpen&&state==='playing'&&!window.BearlyVisits?.paused()){
+      // Existing throws finish their flight after the rider leaves the seat.
+      // The parked bicycle is not an invisible hurtbox for the walking bear.
+      projectileFootTime+=dt;advanceThrownItems(dt,bike.x,bike.y,false);
+      for(let i=projectileImpactFX.length-1;i>=0;i--)if(projectileClock()-projectileImpactFX[i].at>projectileImpactFX[i].duration)projectileImpactFX.splice(i,1);
+      updateParticles(sparks,dt);updateParticles(groundDust,dt);
+    }
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,playSound:sound,godMode:debugSettings.godMode,gangs:gangCrews.flatMap(crew=>Array.from({length:crew.count},(_,i)=>({id:'gang-'+crew.x+'-'+i,x:crew.x+crewMemberLocalX(crew,i),depth:-102,variant:i%3,kind:'gangster',hostile:true,item:carriedPropFor(crew,i)}))),hurtRider:(amount)=>injure(amount,'provoked resident'),road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,playSound:sound,godMode:debugSettings.godMode,gangs:gangCrews.flatMap(crew=>Array.from({length:crew.count},(_,i)=>({id:'gang-'+crew.x+'-'+i,x:crew.x+crewMemberLocalX(crew,i),depth:-102,variant:i%3,crewId:'crew-'+crew.x,kind:'gangster',hostile:false,item:carriedPropFor(crew,i)}))),gangPose:cyclingGangPose,health,readHealth:()=>health,storeHealth:value=>{const next=clamp(value,0,100);if(next!==health){health=next;updateHud();}},hurtRider:amount=>{const before=health;injure(amount,'provoked resident');return before-health;},road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

@@ -1,0 +1,344 @@
+{
+  "entry": "autumn-v18.html",
+  "result": "passed",
+  "sourceSHA256AtStart": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "bbb579907ef816868d9d9b8c0cd81f00f06b20d62fe7056b07f3fb724ca41049",
+    "js/illustrated-visits.js": "3799dee9b0caf5cec6a47a97adc96d3ecdd37a8d068aa22a98807e6fdca4f71f",
+    "js/brawler.js": "c919a46357fc6a22395282b3b394b6207f03b5e70005e25772501fc82b11abf0",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "ef4b2f4859a9e6360bc599f09061565e8f16034d1c2784f8541336bf638cc4ab",
+    "js/locomotion.js": "145ab43e7b59f954db59afc0142d91ad59f969443bdcab1d6181c3b54123ba82",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "passive": [],
+  "damage": [],
+  "scenes": {
+    "samples": [
+      {
+        "x": 2500,
+        "weights": {
+          "homes": 1,
+          "metro": 0,
+          "market": 0,
+          "forest": 0,
+          "waterfront": 0
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      },
+      {
+        "x": 10000,
+        "weights": {
+          "homes": 0,
+          "metro": 1,
+          "market": 0,
+          "forest": 0,
+          "waterfront": 0
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      },
+      {
+        "x": 16000,
+        "weights": {
+          "homes": 0,
+          "metro": 0,
+          "market": 1,
+          "forest": 0,
+          "waterfront": 0
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      },
+      {
+        "x": 23500,
+        "weights": {
+          "homes": 0,
+          "metro": 0,
+          "market": 0,
+          "forest": 1,
+          "waterfront": 0
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      },
+      {
+        "x": 27500,
+        "weights": {
+          "homes": 0,
+          "metro": 0,
+          "market": 0,
+          "forest": 0.9962645772594753,
+          "waterfront": 0.0037354227405247808
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      },
+      {
+        "x": 32000,
+        "weights": {
+          "homes": 0,
+          "metro": 0,
+          "market": 0,
+          "forest": 0,
+          "waterfront": 1
+        },
+        "frame": {
+          "body": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".canvas-wrap": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(255, 242, 211)"
+          },
+          "#game": {
+            "background": "rgba(0, 0, 0, 0)",
+            "border": "rgb(255, 242, 211)"
+          },
+          ".touch-controls": {
+            "background": "rgb(23, 25, 28)",
+            "border": "rgb(56, 60, 64) rgb(255, 242, 211) rgb(255, 242, 211)"
+          },
+          ".game-shell": {
+            "background": "rgb(16, 18, 20)",
+            "border": "rgb(43, 46, 49)"
+          }
+        }
+      }
+    ],
+    "doorScaleAudit": [
+      {
+        "key": "apartment",
+        "width": 1040,
+        "estimatedDoorHeight": 159.80173482032217,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "courtyard",
+        "width": 680,
+        "estimatedDoorHeight": 159.5307917888563,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "workshop",
+        "width": 620,
+        "estimatedDoorHeight": 159.71896955503513,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "arcade",
+        "width": 680,
+        "estimatedDoorHeight": 160,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "metro",
+        "width": 900,
+        "estimatedDoorHeight": 160.60806345009914,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "civic-hall",
+        "width": 540,
+        "estimatedDoorHeight": 159.70822281167108,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "pizzeria",
+        "width": 680,
+        "estimatedDoorHeight": 159.8258977149075,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "library",
+        "width": 800,
+        "estimatedDoorHeight": 160.66481994459835,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "castle",
+        "width": 360,
+        "estimatedDoorHeight": 160,
+        "foregroundGate": true,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "greenhouse",
+        "width": 540,
+        "estimatedDoorHeight": 160.05755395683454,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "boathouse",
+        "width": 740,
+        "estimatedDoorHeight": 160.21650879566982,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      },
+      {
+        "key": "cafe",
+        "width": 735,
+        "estimatedDoorHeight": 159.92797573919637,
+        "foregroundGate": false,
+        "bearHeight": 145,
+        "adultHeight": 128,
+        "teenHeight": 120
+      }
+    ]
+  },
+  "sourceSHA256AtEnd": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "bbb579907ef816868d9d9b8c0cd81f00f06b20d62fe7056b07f3fb724ca41049",
+    "js/illustrated-visits.js": "3799dee9b0caf5cec6a47a97adc96d3ecdd37a8d068aa22a98807e6fdca4f71f",
+    "js/brawler.js": "c919a46357fc6a22395282b3b394b6207f03b5e70005e25772501fc82b11abf0",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "ef4b2f4859a9e6360bc599f09061565e8f16034d1c2784f8541336bf638cc4ab",
+    "js/locomotion.js": "145ab43e7b59f954db59afc0142d91ad59f969443bdcab1d6181c3b54123ba82",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

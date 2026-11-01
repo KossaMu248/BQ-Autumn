@@ -1,4 +1,4 @@
-"""Actual V17 street routines, civilian panic and keyboard/touch integration.
+"""Actual V18 street routines, civilian panic and keyboard/touch integration.
 
 Game actors are never replaced or assigned test states. Debug warps only choose a
 real starting location; all interactions and movement use keyboard/touch inputs.

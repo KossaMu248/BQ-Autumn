@@ -1,5 +1,14 @@
 # Autumn Ride — standalone updates
 
+## V18 — Street scale, encounters and movement
+
+- Align street character scale across standing, pursuit and combat; paint older-teen hangout, running, throwing and complete screen-impact poses. Enlarge usable building entrances and keep the castle as a distant landmark with a human-scale foreground gate.
+- Rework bear walking around alternating lower-body poses and coordinated upper-body motion while retaining original bear and continuous baby artwork, carriers, cycling and bounded bitmap caches.
+- Let crews chill, warn and react to deliberate pressure or provocation, with group reactions and real utility-box/burning-bin cover. Keep peaceful civilians and sidewalk routines.
+- Share weapon balance and health across riding/walking: rock 10 HP, Molotov 30 HP, firecracker 20 HP. Distinguish body hits from ground impacts with fire, flash, dust and scorch effects, with no hidden fire damage ticks.
+- Restore housing/town → woodland → waterfront background progression, remove green window framing, expose encounter/scale/damage debug readouts and add contextual dry injury dialogue.
+- Add V18 entry/cache keys and focused behavior, rendering, phone-layout and performance evidence. Original BQ remains untouched.
+
 ## Revision 17 — smoother rendering and intact walking silhouettes
 
 - Reuse bounded rendered NPC walking phases instead of submitting hundreds of textured triangles for each walker every frame. Build poses in an OffscreenCanvas worker where available, with a cooperative fallback, and expose cache diagnostics in settings.

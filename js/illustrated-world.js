@@ -4,6 +4,7 @@
   const ink='#292d26', TAU=Math.PI*2;
   const noise=(n,s=0)=>{const v=Math.sin(n*127.1+s*311.7)*43758.5453;return v-Math.floor(v);};
   const panorama=new Image();panorama.src='assets/art/waterfront.png';
+  const town={};for(const key of ['homes','metro','market']){town[key]=new Image();town[key].src='assets/v57_pano_'+key+'.webp';}
   const tree=new Image();tree.src='assets/art/autumn-tree.png';
   const verge=new Image();verge.src='assets/art/autumn-verge.png';
   const cafe=new Image();cafe.src='assets/art/cafe.png';
@@ -87,8 +88,8 @@
     for(let i=0;i<14;i++){const xx=x+(noise(seed+i,8)-.5)*w;const yy=y-noise(seed+i,9)*15;ellipse(c,xx,yy,5+noise(i,6)*5,5,['#68783c','#9c9b42','#b5a547','#4a663a'][i%4]);}
   }
   function lamp(c,x,y){c.save();c.translate(x,y);ellipse(c,5,2,22,3,'#27312433');rect(c,-4,-220,8,220,'#38483d',ink,2);line(c,[[0,-214],[15,-235],[42,-235]],ink,7);line(c,[[0,-215],[16,-233],[41,-233]],'#7d8770',3);shape(c,[[27,-236],[51,-236],[47,-220],[32,-220]],'#e8c875');rect(c,29,-240,22,5,'#38483d',ink,2);ellipse(c,39,-224,5,2,'#fff1b2');c.restore();}
-  function shop(c,x,y,name,seed){
-    if(cafe.complete&&cafe.naturalWidth){const w=310,scale=w/1319;c.drawImage(cafe,63,8,1319,1040,x-w/2,y-1039*scale,w,1040*scale);return;}
+  function shop(c,x,y,name,seed,paintWidth=735){
+    if(cafe.complete&&cafe.naturalWidth){const w=paintWidth,scale=w/1319;c.drawImage(cafe,63,8,1319,1040,x-w/2,y-1039*scale,w,1040*scale);return;}
     c.save();c.translate(x,y);const width=260;const wall=['#c28e63','#b9a177','#ba8062'][Math.abs(seed)%3];
     ellipse(c,0,4,150,10,'#2d352d30');rect(c,-width/2,-250,width,250,wall,ink,2);
     shape(c,[[-144,-247],[0,-296],[144,-247]],'#64584a');line(c,[[-140,-245],[140,-245]],'#d2b389',5);
@@ -100,8 +101,8 @@
     for(let i=0;i<85;i++){const xx=-124+noise(i,seed)*249,yy=-242+noise(i,seed+2)*91;c.fillStyle='#5b513215';c.fillRect(xx,yy,noise(i,3)*12+2,1);}
     c.restore();
   }
-  function station(c,x,y){
-    if(metro.complete&&metro.naturalWidth){const w=350,h=w*678/1513;c.drawImage(metro,11,162,1513,678,x-w/2,y-h+3,w,h);return;}
+  function station(c,x,y,width=900){
+    if(metro.complete&&metro.naturalWidth){const w=width,h=w*678/1513;c.drawImage(metro,11,162,1513,678,x-w/2,y-h+3,w,h);return;}
     c.save();c.translate(x,y);ellipse(c,0,3,180,10,'#25372d30');rect(c,-150,-120,300,120,'#748775',ink,3);rect(c,-155,-135,310,23,'#384f46',ink,3);
     for(let i=0;i<5;i++)rect(c,-140+i*57,-105,48,99,'#80a5a0',ink,1);rect(c,-13,-102,26,98,'#2b4542',ink,1);
     rect(c,-121,-173,242,38,'#254e79',ink,4);label(c,'HÄSSELBY GÅRD',0,-148,17,'#f6ecd0');
@@ -112,30 +113,43 @@
   function frontage(s,x,pad=0){return window.BearlyNeighbourhood?.frontage(x,pad)||false;}
   function fenceGap(s,x){return ['forest','lake'].includes(s.districtAt(x).style)||window.BearlyNeighbourhood?.fenceGap(x);}
   function skylineFallback(c,s){const sky=c.createLinearGradient(0,0,0,640);sky.addColorStop(0,'#75acd0');sky.addColorStop(.6,'#b8d0c9');sky.addColorStop(1,'#e5ca9a');c.fillStyle=sky;c.fillRect(0,0,s.W,s.H);c.fillStyle='#7b9e92';for(let i=-1;i<18;i++){const x=i*93-(s.cameraX*.09)%93;rect(c,x,250-noise(i,4)*70,80,140,'#859c8f',null);}c.fillStyle='#699fa8';c.fillRect(0,310,s.W,330);}
+  const ease=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
+  function backdropAt(x){
+    // Match the original BQ district order. Open water first appears only when
+    // the actual lake district starts, after the woodland descent.
+    const metro=ease(5725,7325,x),market=ease(12175,13775,x),woods=ease(20050,21650,x),water=ease(27450,28850,x);
+    return {homes:1-metro,metro:metro*(1-market),market:market*(1-woods),forest:woods*(1-water),waterfront:water};
+  }
+  function backdropBand(c,image,crop,s,alpha,mode){
+    if(alpha<.001||!image.naturalWidth)return;
+    const [sx,sy,sw,sh]=crop;
+    const h=mode==='town'?s.H*.72:mode==='water'?s.H*.78:s.H,w=h*sw/sh,top=mode==='town'?-15:mode==='water'?-110:0;
+    const scroll=s.cameraX*(mode==='forest'?.16:.075),first=Math.floor(scroll/w)-1;
+    c.save();c.globalAlpha=alpha;
+    for(let i=first;i<first+4;i++){
+      const x=i*w-scroll;if(x>s.W||x+w<0)continue;
+      c.save();if(i%2){c.translate(x+w,top);c.scale(-1,1);c.drawImage(image,sx,sy,sw,sh,0,0,w,h);}else c.drawImage(image,sx,sy,sw,sh,x,top,w,h);c.restore();
+    }
+    c.restore();
+  }
   window.BearlyWorld={
-    station,cafe:(c,x,y)=>shop(c,x,y,'FIKA',0),
+    station,cafe:(c,x,y,width)=>shop(c,x,y,'FIKA',0,width),backdropAt,material:(c,name)=>tiles[name]?c.createPattern(tiles[name],'repeat'):null,
     sky(c,s){
       skylineFallback(c,s);
       if(!s.backdrop)return;
-      if(panorama.complete&&panorama.naturalWidth){
-        const h=s.H*.78,w=h*panorama.naturalWidth/panorama.naturalHeight, top=-110;
-        const scroll=s.cameraX*.075,phase=scroll%(w*2);let start=-phase;
-        for(let i=-1;i<5;i++){const x=start+i*w;if(x>s.W||x+w<0)continue;c.save();if(i%2){c.translate(x+w,top);c.scale(-1,1);c.drawImage(panorama,0,0,w,h);}else c.drawImage(panorama,x,top,w,h);c.restore();}
-        c.fillStyle='#75a7aa';c.fillRect(0,h+top,s.W,s.H-h-top);
-      }
-      if(forest.complete&&forest.naturalWidth){
-        const fadeIn=Math.min(1,Math.max(0,(s.cameraX-20250)/1000));
-        const fadeOut=Math.min(1,Math.max(0,(27750-s.cameraX)/1000));
-        const alpha=fadeIn*fadeOut;
-        if(alpha>0){
-          c.save();c.globalAlpha=alpha;
-          const h=s.H,w=h*forest.naturalWidth/forest.naturalHeight;
-          const scroll=s.cameraX*.16,phase=scroll%(w*2);
-          for(let i=-1;i<5;i++){const x=-phase+i*w;if(x>s.W||x+w<0)continue;c.save();if(i%2){c.translate(x+w,0);c.scale(-1,1);c.drawImage(forest,0,0,w,h);}else c.drawImage(forest,x,0,w,h);c.restore();}
-          c.restore();
-        }
-      }
-      // A quiet translucent warm light ties the lake to the street.
+      const x=s.footActive?s.cameraX+s.W*.36:(s.bikeX??s.cameraX+s.W*.36),weights=backdropAt(x);
+      // The original suburban panels include a far lake at their opposite edge;
+      // use the complete housing side so early streets stay inside town.
+      let weight=0;
+      const band=(image,crop,amount,mode)=>{if(amount<.001)return;weight+=amount;backdropBand(c,image,crop,s,amount/weight,mode);};
+      band(town.homes,[0,0,850,380],weights.homes,'town');
+      band(town.metro,[0,0,850,380],weights.metro,'town');
+      band(town.market,[850,0,686,380],weights.market,'town');
+      band(forest,[0,0,forest.naturalWidth||1536,forest.naturalHeight||1024],weights.forest,'forest');
+      band(panorama,[0,0,panorama.naturalWidth||1536,panorama.naturalHeight||1024],weights.waterfront,'water');
+      // This lower field is hidden behind the terrain bank; its colour follows
+      // the actual district instead of leaving a turquoise water band in town.
+      c.save();c.globalAlpha=1;c.fillStyle=weights.waterfront>.5?'#75a7aa':'#778364';c.fillRect(0,s.H*.80,s.W,s.H*.2);c.restore();
       const light=c.createLinearGradient(0,0,s.W,s.H);light.addColorStop(0,'#f4cd6a00');light.addColorStop(1,'#e4b85a13');c.fillStyle=light;c.fillRect(0,0,s.W,s.H);
     },
     backstreet(c,s){
@@ -206,6 +220,6 @@
       // Falling leaves are atmospheric, rather than a full-screen effect.
       if(!s.reducedMotion){for(let k=Math.floor(lo/330);k<hi/330;k++){const x=k*330+120+Math.sin(s.time*.5+k)*27,y=ground(s,x);if(y==null)continue;const drift=(s.time*15+k*81)%240;leaf(c,x,y-340+drift,3.4,k);}}
     },
-    ready(){return{panorama:panorama.complete&&panorama.naturalWidth>0,tree:tree.complete&&tree.naturalWidth>0,verge:verge.complete&&verge.naturalWidth>0,cafe:cafe.complete&&cafe.naturalWidth>0,metro:metro.complete&&metro.naturalWidth>0,forest:forest.complete&&forest.naturalWidth>0};}
+    ready(){return{panorama:panorama.complete&&panorama.naturalWidth>0,tree:tree.complete&&tree.naturalWidth>0,verge:verge.complete&&verge.naturalWidth>0,cafe:cafe.complete&&cafe.naturalWidth>0,metro:metro.complete&&metro.naturalWidth>0,forest:forest.complete&&forest.naturalWidth>0,town:Object.values(town).every(im=>im.complete&&im.naturalWidth>0)};}
   };
 })();

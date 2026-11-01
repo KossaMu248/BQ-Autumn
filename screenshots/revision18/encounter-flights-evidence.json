@@ -1,0 +1,308 @@
+{
+  "entry": "autumn-v18.html",
+  "result": "passed",
+  "sourceSHA256AtStart": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "4b87811bdc13fc2a12cb70ddf6ca1d32e29dd60d24688d586144e4c5a50bbdde",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "faa9c352671facde735eee0e872712cb12d8cef0a12ef37b31c88136738bed74",
+    "js/locomotion.js": "145ab43e7b59f954db59afc0142d91ad59f969443bdcab1d6181c3b54123ba82",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "passive": [],
+  "damage": [],
+  "cyclingDismountProjectiles": [
+    {
+      "weapon": "rock",
+      "launch": {
+        "time": 2.5416666666666603,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "rock",
+            "x": 7378.227779069317,
+            "y": 730.9466872676841,
+            "r": 6.2
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "flightDuringDismount": {
+        "time": 2.558333333333327,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "rock",
+            "x": 7377.589439730327,
+            "y": 722.5661701788804,
+            "r": 6.2
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "groundContacts": [
+        {
+          "id": 1,
+          "x": 7371.194713753556,
+          "y": 905.6422640531381,
+          "kind": "rock",
+          "weapon": "rock",
+          "at": 3.6143333333333274,
+          "contact": "ground",
+          "target": "ground",
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100
+        }
+      ],
+      "plantedCueFrames": 151,
+      "cueTravelByActor": {
+        "gang-7545-0": 0,
+        "gang-7545-1": 0,
+        "gang-7545-2": 0.0
+      },
+      "effectAgeProgress": null,
+      "parkedBikeDamage": 0
+    },
+    {
+      "weapon": "bottle",
+      "launch": {
+        "time": 2.533333333333327,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "bottle",
+            "x": 3955.786007858383,
+            "y": 463.7636850933396,
+            "r": 6.8
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "flightDuringDismount": {
+        "time": 2.5499999999999936,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "bottle",
+            "x": 3955.9587781084315,
+            "y": 455.1497242543512,
+            "r": 6.8
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "groundContacts": [
+        {
+          "id": 1,
+          "x": 3957.4120824443517,
+          "y": 643.4528203427132,
+          "kind": "bottle",
+          "weapon": "bottle",
+          "at": 3.6059999999999945,
+          "contact": "ground",
+          "target": "ground",
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100
+        }
+      ],
+      "plantedCueFrames": 116,
+      "cueTravelByActor": {
+        "gang-4080-0": 0,
+        "gang-4080-1": 0
+      },
+      "effectAgeProgress": 0.2400000000000002,
+      "parkedBikeDamage": 0
+    },
+    {
+      "weapon": "firecracker",
+      "launch": {
+        "time": 2.5499999999999936,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "firecracker",
+            "x": 11616.823443369434,
+            "y": 1083.9533439443303,
+            "r": 6
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "flightDuringDismount": {
+        "time": 2.558333333333327,
+        "health": 100,
+        "particles": true,
+        "spec": {
+          "bottle": {
+            "w": 32,
+            "h": 18,
+            "r": 6.8
+          },
+          "rock": {
+            "w": 16,
+            "h": 10,
+            "r": 6.2
+          },
+          "firecracker": {
+            "w": 29,
+            "h": 16,
+            "r": 6
+          }
+        },
+        "projectiles": [
+          {
+            "kind": "firecracker",
+            "x": 11615.715693372458,
+            "y": 1076.3356623726968,
+            "r": 6
+          }
+        ],
+        "impacts": [],
+        "history": []
+      },
+      "groundContacts": [
+        {
+          "id": 1,
+          "x": 11603.537628104988,
+          "y": 1258.968544264959,
+          "kind": "firecracker",
+          "weapon": "firecracker",
+          "at": 3.6143333333333274,
+          "contact": "ground",
+          "target": "ground",
+          "appliedDamage": 0,
+          "hpBefore": 100,
+          "hpAfter": 100
+        }
+      ],
+      "plantedCueFrames": 118,
+      "cueTravelByActor": {
+        "gang-11730-0": 0,
+        "gang-11730-1": 0
+      },
+      "effectAgeProgress": null,
+      "parkedBikeDamage": 0
+    }
+  ],
+  "sourceSHA256AtEnd": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "4b87811bdc13fc2a12cb70ddf6ca1d32e29dd60d24688d586144e4c5a50bbdde",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/hero-rig.js": "9758dc6b9cfbbbc8d29ac39e9062711cb2206000f68a0345d73b2a77624cf46c",
+    "js/locomotion.js": "1024600c4bb9b3919f957d55a8686b057d4a72132bc7ef9457a5b853eefeaf0d",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

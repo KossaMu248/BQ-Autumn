@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 14 — a younger, multicultural neighbourhood cast
+
+- Replaced the repeated middle-aged streetwear faces with six distinct young-adult designs around 18–24, with varied complexions, facial features, hair textures and hairstyles. Keep the six V13 streetwear outfits, trainers and bags.
+- Added two older Middle Eastern-inspired dad neighbours and a middle-aged woman in the three retained casual outfits. Keep the characters natural and individual within the cosy painted style.
+- Created matching standing, recoil, falling, prone and healthy/damaged full-body screen-impact artwork for all nine cast members. Use fresh source geometry while preserving the connected walking pivots, clothing overlap and long parka hem.
+- Added age-group metadata for the cast gallery and a debug cast-count readout, plus V14 entry/cache keys and fresh visual/source/control evidence.
+- Preserve NPC identities, patrols, aggression and combat rules, cycling, quests, terrain and the original bear/baby artwork. The original BQ repository remains untouched.
+
 ## Revision 13 — a varied adult wardrobe
 
 - Replaced the three repeated adult streetwear outfits with six distinct new designs: wine puffer/black nylon, grey technical fleece, cream hoodie/loose blue denim, silver vest/brown cargos, teal nylon set and long black parka/charcoal denim. Add varied low caps, fitted beanies, patterned/athletic sling bags and performance/luxury-style trainers.

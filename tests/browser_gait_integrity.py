@@ -96,6 +96,10 @@ PROBE=r"""async ({legacyCode}) => {
       for(let j=0;j<rows.length;j++)for(const joint of ['knee','cuff','heel','toe','sole']){const next=(j+1)%rows.length,a=rows[j].legs[side][joint],b=rows[next].legs[side][joint],distance=Math.hypot(a.x-b.x,a.y-b.y);if(distance>maxStep){maxStep=distance;maxStepPair={joint,phase:rows[j].phase,nextPhase:rows[next].phase,from:a,to:b,fromSource:rows[j].legs[side].source,toSource:rows[next].legs[side].source};}}
       const range=Math.max(...angles)-Math.min(...angles);motion.legs[side]={kneeAngleRange:range,maxJointStep:maxStep,maxStepPair};
       if(range<.12)throw Error('Rendered authored knee stays rigid '+JSON.stringify({side,motion}));
+      // These hand-registered points describe each source drawing. A sole
+      // corner in one key is not the same material point as another key's
+      // toe tip, so retain marker differences as diagnostics. The deciding
+      // continuity guard below measures the actual painted boot contours.
       if(maxStep>145*.12)jointContinuityFaults.push({carrier:motion.carrier,side,maxStep,maxStepPair});
     }
     let maxVisibleStep=0,maxVisiblePair=null;

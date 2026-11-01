@@ -1,0 +1,207 @@
+{
+  "result": "passed",
+  "stages": [
+    {
+      "x": 2500,
+      "homes": 1,
+      "metro": 0,
+      "market": 0,
+      "forest": 0,
+      "waterfront": 0
+    },
+    {
+      "x": 10000,
+      "homes": 0,
+      "metro": 1,
+      "market": 0,
+      "forest": 0,
+      "waterfront": 0
+    },
+    {
+      "x": 16000,
+      "homes": 0,
+      "metro": 0,
+      "market": 1,
+      "forest": 0,
+      "waterfront": 0
+    },
+    {
+      "x": 23500,
+      "homes": 0,
+      "metro": 0,
+      "market": 0,
+      "forest": 1,
+      "waterfront": 0
+    },
+    {
+      "x": 27450,
+      "homes": 0,
+      "metro": 0,
+      "market": 0,
+      "forest": 1,
+      "waterfront": 0
+    },
+    {
+      "x": 28150,
+      "homes": 0,
+      "metro": 0,
+      "market": 0,
+      "forest": 0.5,
+      "waterfront": 0.5
+    },
+    {
+      "x": 32000,
+      "homes": 0,
+      "metro": 0,
+      "market": 0,
+      "forest": 0,
+      "waterfront": 1
+    }
+  ],
+  "scale": [
+    {
+      "key": "apartment",
+      "width": 1040,
+      "estimatedDoorHeight": 159.80173482032217,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "courtyard",
+      "width": 680,
+      "estimatedDoorHeight": 159.5307917888563,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "workshop",
+      "width": 620,
+      "estimatedDoorHeight": 159.71896955503513,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "arcade",
+      "width": 680,
+      "estimatedDoorHeight": 160,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "metro",
+      "width": 900,
+      "estimatedDoorHeight": 160.60806345009914,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "civic-hall",
+      "width": 540,
+      "estimatedDoorHeight": 159.70822281167108,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "pizzeria",
+      "width": 680,
+      "estimatedDoorHeight": 159.8258977149075,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "library",
+      "width": 800,
+      "estimatedDoorHeight": 160.66481994459835,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "castle",
+      "width": 360,
+      "estimatedDoorHeight": 160,
+      "foregroundGate": true,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "greenhouse",
+      "width": 540,
+      "estimatedDoorHeight": 160.05755395683454,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "boathouse",
+      "width": 740,
+      "estimatedDoorHeight": 160.21650879566982,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    },
+    {
+      "key": "cafe",
+      "width": 735,
+      "estimatedDoorHeight": 159.92797573919637,
+      "foregroundGate": false,
+      "bearHeight": 145,
+      "adultHeight": 128,
+      "teenHeight": 120
+    }
+  ],
+  "props": {
+    "bench": {
+      "width": 196,
+      "bodyHeight": 78.39999999999999,
+      "seatHeight": 38.11111111111111,
+      "footprintWidth": 195.99999999999997
+    },
+    "bin": {
+      "width": 68,
+      "bodyHeight": 72.9514563106796,
+      "seatHeight": null,
+      "footprintWidth": 83.9375
+    },
+    "utility": {
+      "width": 88,
+      "bodyHeight": 89.10000000000001,
+      "seatHeight": null,
+      "footprintWidth": 126.50000000000001
+    },
+    "firebin": {
+      "width": 72,
+      "bodyHeight": 77.24271844660194,
+      "seatHeight": null,
+      "footprintWidth": 88.875
+    }
+  },
+  "sourceSHA256": {
+    "js/illustrated-world.js": "f84b9da8f5b75ae7478d9beee0c6491af7c49ffe5348099059d0f2393e0d50b7",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "js/illustrated-props.js": "2e38bc7fb55df3caf111f11257b8f6fe4e51b0ee79e0f011acbf6d8dd55acf3e"
+  },
+  "notes": [
+    "Source-door heights are estimates from painted opening bounds.",
+    "Ordinary doors target 155–165 world pixels; castle uses a foreground 160px gate with original 360-wide distant manor.",
+    "Source ratio board keeps shared 145/128/120 reference figures on both sides to compare building scale, not old NPC size."
+  ]
+}

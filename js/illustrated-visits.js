@@ -26,12 +26,14 @@
   let candidate=null,context=null,place=null,mode=null,x=160,velocity=0,face=1,clock=0,stride=0,fade=0,focused=null,paused=false,lastMessage='';
   let walkWeight=0,pendingStepOff=false,streetEntry=false,streetReturn=0,returning=false;
   const combat=window.BearlyBrawler.create();let combatState=combat.snapshot();
+  const heardImpacts=new Set();
+  function reactWeaponContacts(state,playSound){for(const e of state.effects||[])if(e.kind==='weapon-impact'&&!heardImpacts.has(e.id)){heardImpacts.add(e.id);playSound?.(e.weapon==='bottle'?'molotov-impact':e.weapon==='firecracker'?'firecracker-impact':'rock-impact');}if(heardImpacts.size>256){const recent=[...heardImpacts].slice(-128);heardImpacts.clear();recent.forEach(id=>heardImpacts.add(id));}}
   let depth=0,depthVelocity=0,jumpZ=0,jumpVelocity=0,streetReturnDepth=0,externalShadow=false,viewOffset=0,practiceQueue=false;
   let transition=null,pendingEntry=false,messageRemaining=0,babyTalkUntil=0;
   let viewport={width:1160,height:640};
   new ResizeObserver(([entry])=>{viewport={width:entry.contentRect.width,height:entry.contentRect.height};}).observe(host);
   const land=()=>!!mode&&mode!=='water';
-  const player=()=>({x,depth,z:jumpZ,face,populationViewRadius:1000,godMode:!!context?.godMode});
+  const player=()=>({x,depth,z:jumpZ,face,speed:Math.hypot(velocity,depthVelocity),populationViewRadius:1000,godMode:!!context?.godMode});
   const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const held=new Set(),contacts=new Map(),buoys=[1150,2450,3900],seeds=[1050,1540,2110];
@@ -50,6 +52,7 @@
   function clear(){held.clear();contacts.clear();for(const b of controls.querySelectorAll('[data-direction],[data-depth]'))b.classList.remove('held');}
   function eligible(s){return s?.playing&&s.grounded&&Math.abs(s.speed)<45;}
   function choose(next,start){
+    if(!mode&&combat.setHealth)combat.setHealth(context?.readHealth?.()??context?.health??combatState.hp);
     mode=next;x=start;velocity=0;depth=0;depthVelocity=0;jumpZ=0;jumpVelocity=0;fade=.45;babyTalkUntil=0;paused=false;clear();setupCombat();refresh();
   }
   function streetSeeds(){
@@ -136,7 +139,8 @@
     const q=quests.snapshot();
     if(mode==='street'){
       const b=window.BearlyNeighbourhood.nearestEntrance(x);
-      return [...(b?[{x:window.BearlyNeighbourhood.entrance(b).x,label:'ENTER '+b.label,kind:'enter'}]:[]),{x:context.x+28,label:'MOUNT BICYCLE',kind:'remount'}];
+      const neighbours=combatState.npcs.filter(n=>n.kind==='gangster'&&!n.aggressive&&n.active!==false&&n.visible!==false&&n.hp>0&&Math.abs(n.depth-depth)<55&&Math.abs(n.x-x)<105).map(n=>({x:n.x,label:'BOTHER THE NEIGHBOURS',kind:'gang',id:n.id}));
+      return [...(b?[{x:window.BearlyNeighbourhood.entrance(b).x,label:'ENTER '+b.label,kind:'enter'}]:[]),...neighbours,{x:context.x+28,label:'MOUNT BICYCLE',kind:'remount'}];
     }
     if(mode==='water')return [{x:180,label:'MOOR AT THE DOCK',kind:'moor'}];
     if(mode==='dock')return [{x:115,label:'BACK TO BIKE',kind:'exit'},{x:730,label:q.lunch?'DELIVER LUNCH':'TALK TO BOATKEEPER',kind:'keeper'},{x:2050,label:!q.repaired?'PATCH THE DINGHY':q.boatReady?'BOARD BOAT':'CHECK THE BOAT',kind:'boat'}];
@@ -152,6 +156,7 @@
     switch(t.kind){
       case 'exit':case 'remount':leave();return;
       case 'enter':enterFromStreet();return;
+      case 'gang':if(combat.provokeGang?.(t.id,player())){combatState=combat.snapshot();setMessage('BEAR · Your business plan has too many explosions.');}else setMessage('BEAR · Nobody here has a permit.');break;
       case 'moor':leave();return;
       case 'lunch':quests.act('lunch');setMessage(q.delivered?'COOK · Thanks for taking lunch to the boatkeeper. Enjoy the lake!':q.lunch?'COOK · It’s wrapped up warm. The boatkeeper is at Mälaren’s boathouse.':'COOK · Could you take this warm lunch to the boatkeeper? There’s room in your satchel.');break;
       case 'kit':quests.act('kit');setMessage(q.repaired?'MECHANIC · That little boat should hold water now. Happy sailing!':'MECHANIC · Here’s a patch kit for the leaky dinghy. Use it beside the boat at the boathouse.');break;
@@ -203,7 +208,7 @@
     if(transition){if(!paused)stepTransition(Math.min(.05,Math.max(0,s.dt||0)));refresh(false);return;}
     const q=quests.snapshot();journal.hidden=!!mode||!s.playing||!q.started;
     journal.textContent=q.voyage?'LAKE TRAIL COMPLETE ✓':q.delivered&&q.repaired?`MÄLAREN · Buoys ${q.buoys.length}/3 · Return to the boatkeeper`:`BOATKEEPER · Lunch ${q.delivered?'✓':q.lunch?'packed':'at Pizza & Kebab'} · Patch ${q.repaired?'✓':q.kit?'kit packed':'at workshop'}`;
-    if(!mode){combat.enter('route',streetSeeds());if(s.playing)combat.update(Math.min(.05,s.dt||0),{x:s.x,depth:0,z:0,face:Math.sign(s.speed)||1,riding:true,populationViewRadius:1000,godMode:s.godMode,hurtRider:s.hurtRider});combatState=combat.snapshot();if(s.playing)window.BearlyStreetLife.react(combatState,s.playSound);if(!s.playing)pendingStepOff=false;candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&window.BearlyHeroRig.ready()&&art.passengers.naturalWidth>0;
+    if(!mode){if(combat.setHealth)combat.setHealth(s.readHealth?.()??s.health??combatState.hp);combat.enter('route',streetSeeds());if(s.playing)combat.update(Math.min(.05,s.dt||0),{x:s.x,depth:0,z:0,face:Math.sign(s.speed)||1,riding:true,gangPose:s.gangPose,speed:s.speed,health:s.health,readHealth:s.readHealth,populationViewRadius:1000,godMode:s.godMode,hurtRider:s.hurtRider});combatState=combat.snapshot();if(s.playing){reactWeaponContacts(combatState,s.playSound);window.BearlyStreetLife.react(combatState,s.playSound);}if(!s.playing)pendingStepOff=false;candidate=s.playing?window.BearlyNeighbourhood.nearestEntrance(s.x):null;prompt.hidden=!candidate;const ready=art.people.naturalWidth>0&&art.transfer.naturalWidth>0&&window.BearlyHeroRig.ready()&&art.passengers.naturalWidth>0;
       dismountButton.disabled=!ready;dismountButton.textContent=pendingStepOff?'SLOWING TO DISMOUNT…':'DISMOUNT · Q';
       if(pendingStepOff&&s.playing&&ready&&s.brakeToStop?.()){startStreet();return;}
       if(candidate){prompt.disabled=!eligible(s)||!ready;prompt.textContent=!ready?'GETTING READY…':eligible(s)?`ENTER ${candidate.label} · E`:`STOP TO VISIT ${candidate.label}`;}if(pendingEntry&&candidate&&eligible(s)&&ready){pendingEntry=false;enter();}return;}
@@ -240,8 +245,8 @@
     depth=clamp(depth+depthVelocity*moveDt,...bounds);
     if(mode!=='water')stride+=Math.hypot(velocity,depthVelocity)*moveDt;
     if(jumpZ>0||jumpVelocity>0){jumpZ+=jumpVelocity*moveDt;jumpVelocity-=1050*moveDt;if(jumpZ<=0){jumpZ=0;jumpVelocity=0;}}
-    combat.update(dt,player());combatState=combat.snapshot();window.BearlyStreetLife.react(combatState,s.playSound);
-    if(combatState.hp===0&&combatState.defeatAge>1.85){combat.cancel();combat.recover();combatState=combat.snapshot();x=mode==='street'?context.x+28:160;depth=0;jumpZ=0;setMessage('The bear shakes it off back by the entrance.');}
+    combat.update(dt,player());combatState=combat.snapshot();s.storeHealth?.(combatState.hp);reactWeaponContacts(combatState,s.playSound);window.BearlyStreetLife.react(combatState,s.playSound);
+    if(combatState.hp===0&&combatState.defeatAge>1.85){combat.cancel();combat.recover();combatState=combat.snapshot();s.storeHealth?.(combatState.hp);x=mode==='street'?context.x+28:160;depth=0;jumpZ=0;setMessage('The bear shakes it off back by the entrance.');}
     walkWeight+=(Math.min(1,Math.hypot(velocity,depthVelocity)/120)-walkWeight)*(1-Math.exp(-dt*16));
     refresh(false);
   }
@@ -322,10 +327,14 @@
         externalShadow=false;
       }
     }
-    for(const q of combatState.shots){const gy=ground(q.x,q.depth);if(gy!=null)window.BearlyBrawlArt.projectile(c,q,q.x,gy-q.z);}
-    for(const e of combatState.effects){
-      if(e.kind==='scream')continue;
-      const follow=['transform','hurt','faint'].includes(e.kind),ex=follow?x:e.x,ed=follow?depth:e.depth,gy=ground(ex,ed);if(gy!=null)window.BearlyBrawlArt.impact(c,e,ex,gy,height,reduced());
+    drawCombatEffects(c,combatState,ground,height);
+  }
+  function drawCombatEffects(c,state,ground,height){
+    for(const q of state.shots){const gy=ground(q.x,q.depth);if(gy!=null)window.BearlyBrawlArt.projectile(c,q,q.x,gy-q.z);}
+    for(const e of state.effects){
+      if(e.kind==='scream'||e.kind==='gang-warning')continue;
+      if(e.kind==='weapon-impact'){const gy=ground(e.x,e.depth);if(gy!=null)window.BearlyWeaponEffects.draw(c,{...e,kind:e.weapon},e.x,gy-(e.z||0),{scale:1,reducedMotion:reduced()});continue;}
+      const follow=['transform','hurt','faint'].includes(e.kind),ex=follow?(mode?x:context?.x??x):e.x,ed=follow?(mode?depth:0):e.depth,gy=ground(ex,ed);if(gy!=null)window.BearlyBrawlArt.impact(c,e,ex,gy,height,reduced());
     }
   }
   function overlay(c,W,H,road=null){
@@ -432,14 +441,16 @@
     c.restore();overlay(c,W,H);return true;
   }
   function drawStreetResidents(c,s){
-    const draws=combat.snapshot('route').npcs.filter(n=>n.visible!==false&&n.active!==false&&n.state!=='screen'&&!(n.kind==='gangster'&&['idle','windup','release'].includes(n.state))&&Math.abs(n.x-s.cameraX-580)<950).map(n=>({kind:'npc',depth:n.depth+(['sit','read','smoke'].includes(n.activity)?1:0),n}));
+    const state=combat.snapshot('route'),draws=state.npcs.filter(n=>n.visible!==false&&n.active!==false&&n.state!=='screen'&&Math.abs(n.x-s.cameraX-580)<950).map(n=>({kind:'npc',depth:n.depth+(['sit','read','smoke'].includes(n.activity)?1:0),n}));
     for(const p of window.BearlyStreetLife.propsNear(s.cameraX))draws.push({kind:'prop',depth:p.depth,p});
     draws.sort((a,b)=>a.depth-b.depth);
     for(const d of draws){
       if(d.kind==='prop'){window.BearlyStreetLife.drawProp(c,d.p,s.groundAt,combatState.time);continue;}
       const n=d.n,gy=s.groundAt(n.x);if(gy==null)continue;
-      window.BearlyBrawlArt.adult(c,n,n.x,gy+n.depth,128);window.BearlyStreetLife.caption(c,n,n.x,gy+n.depth,128,combatState.time);
+      const cue=!mode&&!transition&&n.kind==='gangster'&&n.aggressive&&!n.hiding&&!n.behindCover&&!['held','screen','stagger','down','fall','dead','rise'].includes(n.state)?context?.gangPose?.(n.id):null;
+      const posed=cue?{...n,...cue}:n;window.BearlyBrawlArt.adult(c,posed,n.x,gy+n.depth,128);window.BearlyStreetLife.caption(c,n,n.x,gy+n.depth,128,combatState.time);
     }
+    drawCombatEffects(c,state,(xx,dd)=>{const gy=s.groundAt(xx);return gy==null?null:gy+dd;},145);
   }
   function roadPresentation(c,s,bike,ride,park){
     window.BearlyStreetLife.beginFrame();
@@ -452,7 +463,7 @@
       if(doorway){
         const f=smooth(transition.elapsed/transition.duration),t=transition.kind==='door-enter'?f:1-f;
         const door=window.BearlyNeighbourhood.entrance(place).x,base=window.BearlyNeighbourhood.placement(place,s.groundAt)?.foot??py-100;
-        px=streetReturn+(door-streetReturn)*t;py=py+(base-py)*t;height=145-65*t;
+        px=streetReturn+(door-streetReturn)*t;py=py+(base-py)*t;height=145-6*t;
       }
       if(doorway){const oldV=velocity,oldStride=stride,oldFace=face;velocity=100;stride=transition.elapsed*110;face=(Math.sign(window.BearlyNeighbourhood.entrance(place).x-streetReturn)||1)*(transition.kind==='door-exit'?-1:1);actor(c,px,py,height);velocity=oldV;stride=oldStride;face=oldFace;}
       else landActors(c,(xx,dd)=>{const g=s.groundAt(xx);return g==null?null:g+dd;},height);return true;
@@ -465,7 +476,7 @@
     const walking=transition.goal==='entry'?smooth(clamp((t-.72)/.28,0,1)):0;
     const door=transition.goal==='entry'?window.BearlyNeighbourhood.entrance(place).x:bike.x+28;
     const base=transition.goal==='entry'?window.BearlyNeighbourhood.placement(place,s.groundAt)?.foot??gy-106:s.groundAt(bike.x+28)??gy;
-    const standingX=bike.x+6+22*smooth(t/.18),px=standingX+(door-standingX)*walking,py=gy+(base-gy)*(transition.goal==='street'?smooth((t-.72)/.28):walking),height=145-65*walking;
+    const standingX=bike.x+6+22*smooth(t/.18),px=standingX+(door-standingX)*walking,py=gy+(base-gy)*(transition.goal==='street'?smooth((t-.72)/.28):walking),height=145-6*walking;
     if(walking>0){
       const oldFace=face,oldV=velocity,oldStride=stride;face=(Math.sign(door-bike.x-28)||1)*(transition.kind==='mount'?-1:1);velocity=100;stride=(transition.kind==='mount'?1-walking:walking)*130;
       c.save();c.globalAlpha*=clamp((1-walking)/.15,0,1);actor(c,px,py,height);c.restore();face=oldFace;velocity=oldV;stride=oldStride;
@@ -490,5 +501,5 @@
     const p=transition.elapsed/transition.duration,t=transition.kind==='mount'?1-p:p;
     return t>=.03+.69*2/5;
   }
-  window.BearlyVisits={residents:()=>combat.snapshot('route').npcs,lifeTime:()=>combatState.time,gangStatus:id=>combat.lookup(id),active:()=>!!mode||!!transition,close,update,render,overlay,footActive:()=>!!mode&&mode!=='water',practice:()=>{practiceQueue=true;if(land())setupCombat();else pendingStepOff=true;},roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:combatState.baby?'back-carrier':'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),hero:window.BearlyHeroRig.audit(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,depth,jump:jumpZ,combat:combatState,streetLife:window.BearlyStreetLife.audit(),artReady:window.BearlyStreetLife.ready()&&window.BearlyBrawlArt.ready()&&!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!window.BearlyHeroRig.ready()&&!!art.passengers.naturalWidth}),quests};
+  window.BearlyVisits={residents:()=>combat.snapshot('route').npcs,lifeTime:()=>combatState.time,gangStatus:id=>combat.lookup(id),provokeGang:(id,p)=>combat.provokeGang?.(id,p||player()),active:()=>!!mode||!!transition,paused:()=>paused,setHealth:value=>{combat.setHealth(value);combatState=combat.snapshot();context?.storeHealth?.(combatState.hp);refresh(false);},close,update,render,overlay,footActive:()=>!!mode&&mode!=='water',practice:()=>{practiceQueue=true;if(land())setupCombat();else pendingStepOff=true;},roadPresentation,hideRoadBaby,roadBabyAlpha,requestEntry:()=>{pendingEntry=true;},audit:()=>({mode:mode||transition?.kind||null,transition:transition?.kind||null,phase:transition?Math.min(1,transition.elapsed/transition.duration):null,place:place?.key,x,velocity,frame:Math.floor(stride/15)%8,baby:combatState.baby?'back-carrier':'front-carrier',paused,near:nearby()?.kind,quest:quests.snapshot(),hero:window.BearlyHeroRig.audit(),gait:window.BearlyLocomotion.pose(stride,mode==='street'?145:225,walkWeight),boatSeat:{...boatSeat},parkedAt:context?.x,depth,jump:jumpZ,combat:combatState,streetLife:window.BearlyStreetLife.audit(),artReady:window.BearlyStreetLife.ready()&&window.BearlyBrawlArt.ready()&&!!art.people.naturalWidth&&!!art.boat.naturalWidth&&!!art.transfer.naturalWidth&&!!window.BearlyHeroRig.ready()&&!!art.passengers.naturalWidth}),quests};
 })();

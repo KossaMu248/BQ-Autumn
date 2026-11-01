@@ -17,8 +17,9 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v17.html"
-ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "civilian-reactions-v16.png", "gang-screen-full-v10-1.png")
+ENTRY = "autumn-v18.html"
+ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "civilian-reactions-v16.png", "teen-screen-v18.png")
+TEEN_POSE_ASSETS = ("teen-molotov-poses-v18.png", "teen-rock-poses-v18.png", "teen-firecracker-poses-v18.png", "teen-run-opposites-v18.png")
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -27,7 +28,7 @@ class QuietHandler(SimpleHTTPRequestHandler):
 
 
 def main():
-    required = [ROOT / ENTRY, *(ROOT / "assets" / "art" / name for name in ASSETS)]
+    required = [ROOT / ENTRY, *(ROOT / "assets" / "art" / name for name in (*ASSETS, *TEEN_POSE_ASSETS))]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
     if missing:
         raise SystemExit("Full-body regression needs: " + ", ".join(missing))
@@ -50,12 +51,15 @@ def main():
                 else None,
             )
             page.goto(f"http://127.0.0.1:{server.server_port}/{ENTRY}")
-            page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready()")
+            page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready() && BearlyKids.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0")
             page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
             result = page.evaluate(
                 r"""async () => {
+                  await BearlyKids.loaded;
+                  const teenScreenFrames=BearlyKids.frames().filter(frame=>/^screen/.test(frame.pose));
+                  if(teenScreenFrames.length!==6||teenScreenFrames.some(frame=>!frame.source.endsWith('/teen-screen-v18.png')))throw Error('Missing six authored teen full-body screen cels');
                   const rawSources=new Map();
-                  for(const name of ['cast-screen-a-v15.png','cast-screen-b-v15.png','cast-screen-c-v15.png','civilian-reactions-v16.png','gang-screen-full-v10-1.png']){const im=new Image();im.src='assets/art/'+name;await im.decode();rawSources.set(name,im);}
+                  for(const name of ['cast-screen-a-v15.png','cast-screen-b-v15.png','cast-screen-c-v15.png','civilian-reactions-v16.png','teen-screen-v18.png']){const im=new Image();im.src='assets/art/'+name;await im.decode();rawSources.set(name,im);}
                   const W=1160,H=640,canvas=document.createElement('canvas');
                   canvas.width=W;canvas.height=H;
                   const ctx=canvas.getContext('2d'),actualDraw=ctx.drawImage.bind(ctx),actualText=ctx.fillText.bind(ctx);
@@ -125,7 +129,7 @@ def main():
                     major.sort((a,b)=>a.centerY-b.centerY);
                     const frames=[];
                     for(let row=0;row<rows;row++)frames.push(...major.slice(row*columns,(row+1)*columns).sort((a,b)=>a.centerX-b.centerX).map((body,col)=>({...body,row,col})));
-                    const analysis={frames,pixels,width:w,height:h,civilian,kind:/gang-screen-full-v10-1/.test(im.src)?'gangster':'resident'};
+                    const analysis={frames,pixels,width:w,height:h,civilian,kind:/teen-screen-v18/.test(im.src)?'gangster':'resident'};
                     sourceComponents.set(im,analysis);return analysis;
                   }
                   function insideClip(x,y,clip){
@@ -189,7 +193,7 @@ def main():
                         const xs=draw.points.map(p=>p.x),ys=draw.points.map(p=>p.y),bounds={left:Math.min(...xs),right:Math.max(...xs),top:Math.min(...ys),bottom:Math.max(...ys)};
                         if(bounds.left<profile.left-.5||bounds.right>profile.left+profile.width+.5||bounds.top<-.5||bounds.bottom>H+.5)faults.push({...label,issue:'full body outside visible view',bounds});
                         const source=componentCoverage(draw,actor,age>=.74);
-                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':actor.variant>=9?'civilian-reactions-v16.png':'cast-screen-'+['a','b','c'][Math.floor(actor.variant/3)]+'-v15.png';
+                        const expectedFile=actor.kind==='gangster'?'teen-screen-v18.png':actor.variant>=9?'civilian-reactions-v16.png':'cast-screen-'+['a','b','c'][Math.floor(actor.variant/3)]+'-v15.png';
                         if(!draw.im.src.split('?')[0].endsWith('/'+expectedFile))faults.push({...label,issue:'wrong wardrobe pack',source:draw.im.src,expectedFile});
                         minCoverage=Math.min(minCoverage,source.coverage);maxNeighborPixels=Math.max(maxNeighborPixels,source.otherBodyPixels);
                         if(source.coverage<1)faults.push({...label,issue:'source crop or observed clip omits opaque body pixels',coverage:source.coverage});
@@ -205,7 +209,7 @@ def main():
                       samples++;
                     }
                   }
-                  return {samples,drawCount,damagedSamples,minCoverage,maxNeighborPixels,faults:faults.slice(0,30),faultCount:faults.length};
+                  return {samples,drawCount,damagedSamples,minCoverage,maxNeighborPixels,teenScreenFrames,faults:faults.slice(0,30),faultCount:faults.length};
                 }"""
             )
             browser.close()
@@ -213,9 +217,9 @@ def main():
         assert not failed_assets, failed_assets
         assert result["samples"] == 2520, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
-        directory = ROOT / "screenshots" / "revision17"
+        directory = ROOT / "screenshots" / "revision18"
         directory.mkdir(exist_ok=True)
-        paths = [ROOT / ENTRY, ROOT / "js" / "brawler-art.js", ROOT / "js" / "npc-motion.js", *(ROOT / "assets" / "art" / name for name in ASSETS)]
+        paths = [ROOT / ENTRY, ROOT / "js" / "brawler-art.js", ROOT / "js" / "npc-motion.js", ROOT / "js" / "illustrated-kids.js", *(ROOT / "assets" / "art" / name for name in (*ASSETS, *TEEN_POSE_ASSETS))]
         evidence = {"entry": ENTRY, "result": "passed", **result,
                     "pageErrors": errors, "httpFailures": failed_assets,
                     "sourceSHA256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}}

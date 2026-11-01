@@ -15,8 +15,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-SHOTS = ROOT / "screenshots" / "revision17"
-ENTRY = "autumn-v17.html"
+SHOTS = ROOT / "screenshots" / "revision18"
+ENTRY = "autumn-v18.html"
 ORIGINALS = {
     "baby_pose_idle.webp": "a27d4ea977d35d89ac927ca371eb66c5e366b096b1eb057e8552853f14578823",
     "baby_pose_laugh.webp": "4decc347ee84105fb22f47ad945d8cfa0612672360fdbd0ce879661981d6793e",
@@ -220,7 +220,7 @@ def load(context, base, errors, failures):
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.on("response", lambda r: failures.append((r.status, r.url)) if r.status >= 400 else None)
     page.goto(f"{base}/{ENTRY}")
-    page.wait_for_function("BearlyHeroRig.ready() && BearlyBabyPassenger.ready() && BearlyVisits.audit().artReady && BearlyAtlas.ready()", timeout=60000)
+    page.wait_for_function("BearlyHeroRig.ready() && BearlyBabyPassenger.ready() && BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0", timeout=60000)
     page.evaluate("__prepareReferences", SOURCE_FRAMES)
     page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
     return page
@@ -485,7 +485,7 @@ def game_controls(browser, base, errors, failures, width, height, mobile=False):
     assert page.evaluate("BearlyVisits.audit().baby") == "back-carrier"
     evidence.append(game_capture(page, f"original-baby-back-{width}", "idle"))
     if not mobile:
-        page.evaluate("BEARLY_DEBUG_MENU.warp(15700/1.5)")
+        page.evaluate("BEARLY_DEBUG_MENU.warp(BearlyNeighbourhood.entrance(BearlyNeighbourhood.scenes.find(b=>b.key==='pizzeria')).x/1.5)")
         page.clock.run_for(100)
         page.locator(".visit-prompt").click()
         page.clock.run_for(3200)

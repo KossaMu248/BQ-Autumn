@@ -16,6 +16,11 @@
     binImage.onerror = () => resolve();
   });
   binImage.src='assets/art/painted-bin.png';
+  const utilityImage=new Image();
+  const paintedUtilityLoaded=new Promise(resolve=>{
+    utilityImage.onload=()=>{cache.delete('utility');resolve();};utilityImage.onerror=resolve;
+  });
+  utilityImage.src='assets/v98_clean_utility.webp';
   const fraction = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   function gradient(c, a, b, colors) {
     const g = c.createLinearGradient(...a, ...b);
@@ -77,7 +82,7 @@
       c.restore();
     }
     for (let j = 0; j < 4; j++) {
-      const y = -88 + j * 13;
+      const y = -70 + j * 8.5;
       shape(c, [[-78,y+1],[76,y-1],[79,y+9],[-78,y+11]], gradient(c, [-65,y], [72,y+8], ['#dfad5e','#bc813e','#925c2e']), INK, 2.1);
       stroke(c, [[-75,y+2],[74,y]], '#f5c37a', 1.2);
       scratches(c, -74, y + 2, 145, 7, 18, 70 + j * 12);
@@ -101,6 +106,13 @@
     c.imageSmoothingQuality='high';
     const height=64*binCrop.h/binCrop.w;
     c.drawImage(binImage,binCrop.x,binCrop.y,binCrop.w,binCrop.h,-32,-height,64,height);
+  }
+  function utility(c){
+    if(!utilityImage.naturalWidth)return;
+    // The original cabinet is square; preserve its proportions and the whole
+    // planted silhouette rather than stretching or clipping it into a tall box.
+    const scale=80/120;shadow(c,94,.20);
+    c.drawImage(utilityImage,-110*scale,-142*scale,195*scale,142*scale);
   }
   function cone(c, x = 0, y = 0, scale = 1) {
     c.save(); c.translate(x,y); c.scale(scale,scale);
@@ -216,7 +228,7 @@
     for(let i=0;i<3;i++) stroke(c,[[-7+i*6,-8],[-7+i*6,-2]],'#858970',.8);
   }
   const painters = {
-    bench: {paint:bench,base:180}, bin: {paint:bin,base:64},
+    bench: {paint:bench,base:180}, bin: {paint:bin,base:64},utility:{paint:utility,base:80},
     cone: {paint:cone,base:50}, barrier: {paint:barrier,base:110},
     scooter: {paint:scooter,base:106}, cart: {paint:cart,base:106},
     glass: {paint:glass,base:78}, parcel: {paint:parcel,base:60},
@@ -350,5 +362,6 @@
     if(h.type==='roadwork'){draw(ctx,'cone',h.x,groundY,64,time);return true;}
     return draw(ctx,h.type==='roadblock'?'barrier':h.type,h.x,groundY,widths[h.type],time);
   }
-  window.BearlyStreetProps={draw,hazard,loaded:paintedBinLoaded,ready:()=>!!binCrop};
+  const dimensions=(kind,width)=>{const base=kind==='utility'?80:kind==='bench'?180:64,scale=(width||base)/base;return{width:width||base,bodyHeight:(kind==='utility'?81:kind==='bench'?72:64*1105/1030)*scale,seatHeight:kind==='bench'?35*scale:null,footprintWidth:(kind==='utility'?115:kind==='bench'?180:79)*scale};};
+  window.BearlyStreetProps={draw,hazard,dimensions,loaded:Promise.all([paintedBinLoaded,paintedUtilityLoaded]),ready:()=>!!binCrop&&!!utilityImage.naturalWidth};
 })();

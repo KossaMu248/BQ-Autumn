@@ -1,0 +1,31 @@
+{
+  "status": "independently approved continuous motion",
+  "sourceSHA256": {
+    "js/hero-rig.js": "ffb2166e2014f0c19cd2d8c58fb2077d9343ca297f5a22b45047c20e68403941",
+    "js/locomotion.js": "1024600c4bb9b3919f957d55a8686b057d4a72132bc7ef9457a5b853eefeaf0d",
+    "tests/hero-gait.cjs": "46d861296a6d6e498dfec2da83273a008baf7d4db5d9a5e6ad0f5338775c53ac",
+    "assets/art/bear-near-contact-v18.png": "98204b77df52ac8ffc50a3d967e95dbff7d39a396d6976122aaf5525ac4fd190",
+    "assets/art/bear-near-support-v18.png": "94f899a65a3d6bd59a50a2a545207ee6421c2d7384b36a38bb8024ca91aac69c",
+    "assets/art/bear-far-poses-v18.png": "73fb903cd9dd8e6288de641fd171871714ca67e0e3fbe79720622391cf672ab3",
+    "assets/art/bear-idle-lower-v18.png": "ea49613d5e7954e5be0b8e9d0cb6ead8aa013a371d9c67d0094fa47dad7a7cf9"
+  },
+  "nominalStreetHeight": 145,
+  "speed": 120,
+  "cycleDistance": 104.4,
+  "cyclesPerSecond": 1.1494252873563218,
+  "stanceDuty": 0.5,
+  "authoredKeys": [
+    "near-contact",
+    "near-support",
+    "far-contact",
+    "far-support",
+    "idle"
+  ],
+  "evidence": {
+    "phases": "bear-gait-final-phases.png",
+    "comparison": "bear-gait-final-comparison.mp4"
+  },
+  "registration": "Whole authored lower-body poses, locally rigid footwear, native upper body and one native passenger; no alpha crossfades.",
+  "stageNote": "Approved visual geometry was recorded immediately before the metadata-only addition of barycentrically sampled rendered source landmarks. Geometry is unchanged; final functional/opacity/performance captures use the frozen source hashes above.",
+  "unitCases": 1152
+}

@@ -4,18 +4,18 @@
   const A=()=>window.BearlyAtlas;
   // Placed scenes, not a repeating bakery strip. x uses the existing 42,000-unit route.
   const scenes=[
-    {x:1500,key:'apartment',w:370,label:'BACKSTUGEVÄGEN',role:'home'},
-    {x:3600,key:'courtyard',w:350,label:'GÅRDEN',role:'home'},
-    {x:5600,key:'workshop',w:355,label:'CYKELVERKSTAD',role:'workshop',door:0},
-    {x:7700,key:'arcade',w:510,label:'HÄSSELBY CENTRUM',role:'shop'},
-    {x:11325,key:'metro',w:400,label:'HÄSSELBY GÅRD',role:'metro'},
-    {x:13750,key:'civic-hall',w:370,label:'PÅ TORGET',role:'square'},
-    {x:15700,key:'pizzeria',w:375,label:'PIZZA & KEBAB',role:'pizza',door:.14},
-    {x:17700,key:'library',w:470,label:'BIBLIOTEKET',role:'library'},
+    {x:1500,key:'apartment',w:1040,label:'BACKSTUGEVÄGEN',role:'home'},
+    {x:3600,key:'courtyard',w:680,label:'GÅRDEN',role:'home'},
+    {x:5600,key:'workshop',w:620,label:'CYKELVERKSTAD',role:'workshop',door:0},
+    {x:7700,key:'arcade',w:680,label:'HÄSSELBY CENTRUM',role:'shop'},
+    {x:11325,key:'metro',w:900,label:'HÄSSELBY GÅRD',role:'metro'},
+    {x:13750,key:'civic-hall',w:540,label:'PÅ TORGET',role:'square'},
+    {x:15700,key:'pizzeria',w:680,label:'PIZZA & KEBAB',role:'pizza',door:.14},
+    {x:17700,key:'library',w:800,label:'BIBLIOTEKET',role:'library'},
     {x:21400,key:'castle',w:360,label:'SLOTTSVÄGEN',role:'castle'},
-    {x:24400,key:'greenhouse',w:290,label:'GRIMSTA TRÄDGÅRD',role:'park'},
-    {x:31750,key:'boathouse',w:360,label:'MÄLARENS BÅTHUS',role:'water'},
-    {x:35200,key:'cafe',w:295,label:'BAGERI VID VATTNET',role:'cafe',door:.17},
+    {x:24400,key:'greenhouse',w:540,label:'GRIMSTA TRÄDGÅRD',role:'park'},
+    {x:31750,key:'boathouse',w:740,label:'MÄLARENS BÅTHUS',role:'water'},
+    {x:35200,key:'cafe',w:735,label:'BAGERI VID VATTNET',role:'cafe',door:.203},
   ];
   const publicRoles=new Set(['shop','workshop','pizza','library','cafe','square','park','castle','water']);
   function entrance(b){return {x:b.x+(b.door||0)*b.w,halfWidth:48};}
@@ -59,11 +59,36 @@
     c.save();c.lineCap='round';c.lineWidth=1.7;c.strokeStyle='#f3e5c7';
     for(let i=0;i<3;i++){const age=(t*.25+i*.33)%1;c.globalAlpha=alpha*(1-age);const yy=y-age*30;c.beginPath();c.moveTo(x+i*5,yy);c.bezierCurveTo(x-6+i*5,yy-7,x+6+i*5,yy-12,x+i*5,yy-18);c.stroke();}c.restore();
   }
+  function estateEntrance(c,s,b,p){
+    // The manor is a distant hill landmark. Its small painted door is not the
+    // player's entrance: the near estate gate has the same 160px clearance as
+    // the street's shops, with its own fully supported foreground threshold.
+    const rearFoot=p.foot-30;
+    c.save();c.fillStyle=window.BearlyWorld.material(c,'grass')||'#68794c';c.strokeStyle='#536345';c.lineWidth=2;c.beginPath();
+    c.moveTo(p.left-35,s.groundAt(p.left-35)-105);
+    c.quadraticCurveTo(b.x-b.w*.35,rearFoot-25,b.x,rearFoot-8);
+    c.quadraticCurveTo(b.x+b.w*.35,rearFoot-25,p.right+35,s.groundAt(p.right+35)-105);
+    for(const q of [...p.samples].reverse())c.lineTo(q.x,q.y);c.closePath();c.fill();c.stroke();c.restore();
+    A().draw(c,'castle',b.x,rearFoot,b.w);
+    const gateX=entrance(b).x,gateY=p.foot;
+    c.save();c.translate(gateX,gateY);c.lineJoin='round';
+    for(const side of [-1,1]){
+      const x=side*89;c.fillStyle=window.BearlyWorld.material(c,'paving')||'#8d9279';c.strokeStyle='#4c5c48';c.lineWidth=2;c.beginPath();c.roundRect(x-12,-178,24,178,2);c.fill();c.stroke();
+      c.fillStyle='#c3bea2';c.fillRect(x-15,-183,30,8);c.strokeRect(x-15,-183,30,8);
+      c.strokeStyle='#64745b';c.lineWidth=1;for(let y=-158;y<-8;y+=23){c.beginPath();c.moveTo(x-11,y);c.lineTo(x+11,y);c.stroke();}
+    }
+    c.strokeStyle='#30483b';c.lineWidth=5;c.beginPath();c.moveTo(-77,-160);c.quadraticCurveTo(0,-207,77,-160);c.stroke();
+    // Open gate leaves follow the posts, leaving the clear entry unobstructed.
+    c.lineWidth=2;for(const side of [-1,1]){c.beginPath();c.moveTo(side*77,-154);c.lineTo(side*60,-141);c.lineTo(side*60,-5);c.lineTo(side*77,-12);c.stroke();for(let y=-125;y<-15;y+=22){c.beginPath();c.moveTo(side*77,y-12);c.lineTo(side*60,y);c.stroke();}}
+    c.fillStyle='#304c3d';c.fillRect(-61,-194,122,19);c.fillStyle='#f1dfb3';c.font='bold 10px Trebuchet MS';c.textAlign='center';c.fillText('SLOTTSVÄGEN',0,-181);
+    c.fillStyle='#aca58b';c.fillRect(-76,-4,152,5);c.strokeStyle='#777e65';c.lineWidth=1;c.strokeRect(-76,-4,152,5);c.restore();
+  }
   function building(c,s,b){
     const p=placement(b,s.groundAt);if(!p)return;
     const foot=p.foot;foundation(c,p);
-    if(b.key==='metro'){if(s.metro)window.BearlyWorld.station(c,b.x,foot);}
-    else if(b.key==='cafe')window.BearlyWorld.cafe(c,b.x,foot);
+    if(b.key==='metro'){if(s.metro)window.BearlyWorld.station(c,b.x,foot,b.w);}
+    else if(b.key==='cafe')window.BearlyWorld.cafe(c,b.x,foot,b.w);
+    else if(b.key==='castle')estateEntrance(c,s,b,p);
     else A().draw(c,b.key,b.x,foot,b.w);
     // Warm open-window/cafe glow stays very restrained and belongs to the facade.
     if(['cafe','shop','pizza','workshop','library'].includes(b.role)){
@@ -87,6 +112,7 @@
   window.BearlyNeighbourhood={
     scenes,
     entrance,placement,walkingAt,
+    scaleAudit:()=>scenes.map(b=>{const source={apartment:[807,124],courtyard:[682,160],workshop:[854,220],arcade:[765,180],metro:[1513,270],'civic-hall':[754,223],pizzeria:[919,216],library:[722,145],greenhouse:[695,206],boathouse:[739,160],cafe:[1319,287]}[b.key];return{key:b.key,width:b.w,estimatedDoorHeight:b.key==='castle'?160:source[1]*b.w/source[0],foregroundGate:b.key==='castle',bearHeight:145,adultHeight:128,teenHeight:120};}),
     canVisit:b=>publicRoles.has(b.role),
     nearestEntrance(x){return scenes.filter(b=>publicRoles.has(b.role)&&Math.abs(entrance(b).x-x)<=110).sort((a,b)=>Math.abs(entrance(a).x-x)-Math.abs(entrance(b).x-x))[0]||null;},
     entrances(c,s){

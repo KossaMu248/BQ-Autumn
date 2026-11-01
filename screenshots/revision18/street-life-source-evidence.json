@@ -1,0 +1,2157 @@
+{
+  "entry": "autumn-v18.html",
+  "build": "AUTUMN_RIDE_ART_V18",
+  "catalog": [
+    {
+      "variant": 0,
+      "label": "Black quilted puffer \u00b7 black hoodie and loose nylon trousers \u00b7 black performance runners \u00b7 black cap and sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "civilian": false,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          13,
+          0,
+          649,
+          818
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 378,
+        "frames": [
+          {
+            "rect": [
+              45,
+              50,
+              345,
+              396
+            ],
+            "anchor": [
+              216.5,
+              436
+            ]
+          },
+          {
+            "rect": [
+              415,
+              123,
+              379,
+              305
+            ],
+            "anchor": [
+              606,
+              419
+            ]
+          },
+          {
+            "rect": [
+              816,
+              293,
+              412,
+              147
+            ],
+            "anchor": [
+              1023,
+              430
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              57,
+              11,
+              449,
+              509
+            ]
+          },
+          {
+            "rect": [
+              58,
+              522,
+              460,
+              502
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 1,
+      "label": "Charcoal technical fleece set \u00b7 black tapered joggers \u00b7 black low-top trainers \u00b7 black cap \u00b7 black athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21,
+        "civilian": false,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          699,
+          28,
+          563,
+          793
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 367,
+        "frames": [
+          {
+            "rect": [
+              65,
+              459,
+              301,
+              379
+            ],
+            "anchor": [
+              215.5,
+              834
+            ]
+          },
+          {
+            "rect": [
+              413,
+              528,
+              398,
+              294
+            ],
+            "anchor": [
+              616.5,
+              810
+            ]
+          },
+          {
+            "rect": [
+              826,
+              685,
+              416,
+              143
+            ],
+            "anchor": [
+              1033.5,
+              820
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              603,
+              20,
+              395,
+              501
+            ]
+          },
+          {
+            "rect": [
+              602,
+              531,
+              396,
+              493
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 2,
+      "label": "Black tactical field jacket \u00b7 black hoodie and utility chest rig \u00b7 black cargo trousers \u00b7 black runners \u00b7 black balaclava",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 22,
+        "civilian": false,
+        "faceCovered": true
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          1328,
+          0,
+          553,
+          825
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 382,
+        "frames": [
+          {
+            "rect": [
+              32,
+              838,
+              348,
+              395
+            ],
+            "anchor": [
+              206,
+              1225
+            ]
+          },
+          {
+            "rect": [
+              419,
+              895,
+              379,
+              313
+            ],
+            "anchor": [
+              610,
+              1195
+            ]
+          },
+          {
+            "rect": [
+              818,
+              1071,
+              411,
+              157
+            ],
+            "anchor": [
+              1025.5,
+              1214
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              1109,
+              1,
+              382,
+              527
+            ],
+            "outline": [
+              [
+                1109,
+                1
+              ],
+              [
+                1491,
+                1
+              ],
+              [
+                1491,
+                528
+              ],
+              [
+                1320,
+                528
+              ],
+              [
+                1320,
+                520
+              ],
+              [
+                1109,
+                520
+              ]
+            ]
+          },
+          {
+            "rect": [
+              1118,
+              520,
+              384,
+              504
+            ],
+            "outline": [
+              [
+                1118,
+                520
+              ],
+              [
+                1320,
+                520
+              ],
+              [
+                1320,
+                528
+              ],
+              [
+                1502,
+                528
+              ],
+              [
+                1502,
+                1024
+              ],
+              [
+                1118,
+                1024
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 3,
+      "label": "Black utility vest \u00b7 black heavyweight hoodie \u00b7 dark tactical cargos \u00b7 dark runners \u00b7 black beanie and sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21,
+        "civilian": false,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          71,
+          93,
+          498,
+          669
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 301,
+        "frames": [
+          {
+            "rect": [
+              98,
+              30,
+              355,
+              326
+            ],
+            "anchor": [
+              277.5,
+              342
+            ]
+          },
+          {
+            "rect": [
+              575,
+              78,
+              408,
+              278
+            ],
+            "anchor": [
+              781,
+              345
+            ]
+          },
+          {
+            "rect": [
+              1039,
+              151,
+              408,
+              207
+            ],
+            "anchor": [
+              1244.5,
+              346
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              81,
+              20,
+              397,
+              504
+            ],
+            "outline": [
+              [
+                81,
+                20
+              ],
+              [
+                478,
+                20
+              ],
+              [
+                478,
+                524
+              ],
+              [
+                380,
+                524
+              ],
+              [
+                380,
+                511
+              ],
+              [
+                200,
+                511
+              ],
+              [
+                200,
+                524
+              ],
+              [
+                81,
+                524
+              ]
+            ]
+          },
+          {
+            "rect": [
+              77,
+              511,
+              403,
+              498
+            ],
+            "outline": [
+              [
+                77,
+                524
+              ],
+              [
+                200,
+                524
+              ],
+              [
+                200,
+                511
+              ],
+              [
+                380,
+                511
+              ],
+              [
+                380,
+                524
+              ],
+              [
+                480,
+                524
+              ],
+              [
+                480,
+                1009
+              ],
+              [
+                77,
+                1009
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 4,
+      "label": "Black technical hooded jacket \u00b7 black nylon joggers \u00b7 dark performance runners \u00b7 black cap \u00b7 black athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "civilian": false,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          739,
+          120,
+          478,
+          643
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 304,
+        "frames": [
+          {
+            "rect": [
+              107,
+              375,
+              387,
+              319
+            ],
+            "anchor": [
+              303.5,
+              687
+            ],
+            "outline": [
+              [
+                107,
+                375
+              ],
+              [
+                494,
+                375
+              ],
+              [
+                494,
+                694
+              ],
+              [
+                400,
+                694
+              ],
+              [
+                400,
+                687
+              ],
+              [
+                107,
+                687
+              ]
+            ]
+          },
+          {
+            "rect": [
+              586,
+              397,
+              411,
+              265
+            ],
+            "anchor": [
+              787,
+              654
+            ]
+          },
+          {
+            "rect": [
+              1053,
+              445,
+              399,
+              247
+            ],
+            "anchor": [
+              1255,
+              677
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              590,
+              37,
+              371,
+              484
+            ]
+          },
+          {
+            "rect": [
+              591,
+              533,
+              374,
+              475
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 5,
+      "label": "Long black technical parka \u00b7 hooded layer \u00b7 charcoal trousers \u00b7 black runners \u00b7 black balaclava",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "civilian": false,
+        "faceCovered": true
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          1372,
+          108,
+          437,
+          662
+        ],
+        "face": 1,
+        "split": 0.76
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 287,
+        "frames": [
+          {
+            "rect": [
+              109,
+              683,
+              394,
+              301
+            ],
+            "anchor": [
+              309.5,
+              978
+            ],
+            "outline": [
+              [
+                109,
+                683
+              ],
+              [
+                400,
+                683
+              ],
+              [
+                400,
+                690
+              ],
+              [
+                503,
+                690
+              ],
+              [
+                503,
+                984
+              ],
+              [
+                109,
+                984
+              ]
+            ]
+          },
+          {
+            "rect": [
+              572,
+              693,
+              413,
+              280
+            ],
+            "anchor": [
+              778.5,
+              964
+            ]
+          },
+          {
+            "rect": [
+              1064,
+              754,
+              388,
+              228
+            ],
+            "anchor": [
+              1257.5,
+              975
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              1103,
+              30,
+              353,
+              497
+            ],
+            "outline": [
+              [
+                1103,
+                30
+              ],
+              [
+                1456,
+                30
+              ],
+              [
+                1456,
+                527
+              ],
+              [
+                1320,
+                527
+              ],
+              [
+                1320,
+                526
+              ],
+              [
+                1103,
+                526
+              ]
+            ]
+          },
+          {
+            "rect": [
+              1101,
+              526,
+              355,
+              482
+            ],
+            "outline": [
+              [
+                1101,
+                526
+              ],
+              [
+                1320,
+                526
+              ],
+              [
+                1320,
+                527
+              ],
+              [
+                1456,
+                527
+              ],
+              [
+                1456,
+                1008
+              ],
+              [
+                1101,
+                1008
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 6,
+      "label": "Black work jacket \u00b7 dark knit \u00b7 charcoal relaxed denim \u00b7 black boots \u00b7 black beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 52,
+        "civilian": true,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          49,
+          182,
+          417,
+          672
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 258,
+        "frames": [
+          {
+            "rect": [
+              111,
+              116,
+              254,
+              274
+            ],
+            "anchor": [
+              239.5,
+              382
+            ]
+          },
+          {
+            "rect": [
+              513,
+              151,
+              261,
+              216
+            ],
+            "anchor": [
+              645,
+              358
+            ]
+          },
+          {
+            "rect": [
+              910,
+              251,
+              278,
+              139
+            ],
+            "anchor": [
+              1049,
+              379
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              38,
+              167,
+              320,
+              575
+            ]
+          },
+          {
+            "rect": [
+              38,
+              860,
+              332,
+              572
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 7,
+      "label": "Midnight autumn coat \u00b7 deep-plum scarf \u00b7 black trousers \u00b7 black boots \u00b7 tied hair",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 42,
+        "civilian": true,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          607,
+          196,
+          388,
+          660
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 262,
+        "frames": [
+          {
+            "rect": [
+              109,
+              497,
+              271,
+              279
+            ],
+            "anchor": [
+              247.5,
+              767
+            ]
+          },
+          {
+            "rect": [
+              521,
+              527,
+              244,
+              218
+            ],
+            "anchor": [
+              642,
+              737
+            ]
+          },
+          {
+            "rect": [
+              912,
+              612,
+              269,
+              161
+            ],
+            "anchor": [
+              1048.5,
+              765
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              391,
+              171,
+              301,
+              571
+            ]
+          },
+          {
+            "rect": [
+              390,
+              861,
+              302,
+              571
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 8,
+      "label": "Black quilted bomber \u00b7 dark scarf \u00b7 deep-olive trousers \u00b7 black trainers \u00b7 black beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 55,
+        "civilian": true,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          1081,
+          186,
+          393,
+          680
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 263,
+        "frames": [
+          {
+            "rect": [
+              108,
+              873,
+              285,
+              285
+            ],
+            "anchor": [
+              251,
+              1145
+            ]
+          },
+          {
+            "rect": [
+              530,
+              898,
+              249,
+              227
+            ],
+            "anchor": [
+              658.5,
+              1115
+            ]
+          },
+          {
+            "rect": [
+              895,
+              1019,
+              297,
+              145
+            ],
+            "anchor": [
+              1044,
+              1157
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              697,
+              171,
+              298,
+              576
+            ]
+          },
+          {
+            "rect": [
+              701,
+              861,
+              293,
+              572
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 9,
+      "label": "Peaceful student \u00b7 navy hoodie \u00b7 blue jeans \u00b7 canvas backpack \u00b7 gray trainers",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 24,
+        "civilian": true,
+        "faceCovered": false,
+        "heightScale": 1.05
+      },
+      "standing": {
+        "image": "assets/art/civilian-standing-v16.png",
+        "rect": [
+          0,
+          14,
+          512,
+          950
+        ],
+        "face": 1,
+        "stature": 942
+      },
+      "reactions": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "stature": 335,
+        "frames": [
+          {
+            "rect": [
+              44,
+              13,
+              244,
+              342
+            ],
+            "anchor": [
+              164,
+              351
+            ]
+          },
+          {
+            "rect": [
+              315,
+              47,
+              358,
+              299
+            ],
+            "anchor": [
+              492.5,
+              341
+            ]
+          },
+          {
+            "rect": [
+              640,
+              9,
+              367,
+              347
+            ],
+            "anchor": [
+              841.5,
+              348
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "frames": [
+          {
+            "rect": [
+              962,
+              11,
+              306,
+              342
+            ]
+          },
+          {
+            "rect": [
+              1269,
+              12,
+              268,
+              342
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 10,
+      "label": "Peaceful stocky neighbour \u00b7 tan windbreaker \u00b7 burgundy knit \u00b7 dark jeans \u00b7 brown shoes",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 46,
+        "civilian": true,
+        "faceCovered": false,
+        "heightScale": 1
+      },
+      "standing": {
+        "image": "assets/art/civilian-standing-v16.png",
+        "rect": [
+          529,
+          9,
+          495,
+          989
+        ],
+        "face": 1,
+        "stature": 890
+      },
+      "reactions": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "stature": 316,
+        "frames": [
+          {
+            "rect": [
+              44,
+              331,
+              278,
+              357
+            ],
+            "anchor": [
+              183,
+              675
+            ]
+          },
+          {
+            "rect": [
+              302,
+              355,
+              345,
+              301
+            ],
+            "anchor": [
+              474,
+              646
+            ]
+          },
+          {
+            "rect": [
+              638,
+              331,
+              386,
+              349
+            ],
+            "anchor": [
+              846,
+              676
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "frames": [
+          {
+            "rect": [
+              986,
+              331,
+              282,
+              359
+            ]
+          },
+          {
+            "rect": [
+              1291,
+              353,
+              257,
+              337
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 11,
+      "label": "Peaceful older neighbour \u00b7 teal cardigan \u00b7 plum scarf \u00b7 charcoal trousers \u00b7 canvas tote",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 68,
+        "civilian": true,
+        "faceCovered": false,
+        "heightScale": 0.84
+      },
+      "standing": {
+        "image": "assets/art/civilian-standing-v16.png",
+        "rect": [
+          1025,
+          17,
+          471,
+          969
+        ],
+        "face": 1,
+        "stature": 745
+      },
+      "reactions": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "stature": 291,
+        "frames": [
+          {
+            "rect": [
+              25,
+              663,
+              293,
+              315
+            ],
+            "anchor": [
+              182.5,
+              974
+            ]
+          },
+          {
+            "rect": [
+              306,
+              676,
+              341,
+              294
+            ],
+            "anchor": [
+              476.5,
+              926
+            ]
+          },
+          {
+            "rect": [
+              639,
+              671,
+              356,
+              303
+            ],
+            "anchor": [
+              838,
+              965
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/civilian-reactions-v16.png",
+        "frames": [
+          {
+            "rect": [
+              952,
+              662,
+              298,
+              316
+            ]
+          },
+          {
+            "rect": [
+              1273,
+              667,
+              279,
+              311
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceCoverage": {
+    "authoredFrames": 138,
+    "adultAuthoredFrames": 87,
+    "teenAuthoredFrames": 51,
+    "cases": 696,
+    "minCoverage": 1,
+    "maxNeighborPixels": 0,
+    "faultCount": 0,
+    "faults": []
+  },
+  "runtimeMotion": {
+    "cases": 4608,
+    "cachedFrameCount": 576,
+    "cacheRGBABytes": 45702144,
+    "cachedPhases": {
+      "0": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "1": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "2": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "3": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "4": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "5": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "6": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "7": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "8": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "9": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "10": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "11": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ]
+    },
+    "minMainBodyRatio": 0.9986798679867986,
+    "negativeControls": 2,
+    "faultCount": 0,
+    "faults": []
+  },
+  "boundedWalkCache": {
+    "before": {
+      "phaseCount": 48,
+      "canonicalHeight": 144,
+      "frameCount": 576,
+      "capacity": 576,
+      "bytes": 45702144,
+      "limitBytes": 50331648,
+      "hits": 0,
+      "misses": 0,
+      "bakes": 576,
+      "buildMs": 6439.899999909103,
+      "maxBuildMs": 84,
+      "mainBuildMs": 0,
+      "maxMainBuildMs": 0,
+      "mode": "worker",
+      "warmupMs": 27241,
+      "complete": true,
+      "variants": [
+        {
+          "variant": 0,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 9,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 11,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 10,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 1,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 2,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 3,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 4,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 5,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 6,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 7,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        },
+        {
+          "variant": 8,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 0,
+          "misses": 0
+        }
+      ]
+    },
+    "after": {
+      "phaseCount": 48,
+      "canonicalHeight": 144,
+      "frameCount": 576,
+      "capacity": 576,
+      "bytes": 45702144,
+      "limitBytes": 50331648,
+      "hits": 2304,
+      "misses": 0,
+      "bakes": 576,
+      "buildMs": 6439.899999909103,
+      "maxBuildMs": 84,
+      "mainBuildMs": 0,
+      "maxMainBuildMs": 0,
+      "mode": "worker",
+      "warmupMs": 27241,
+      "complete": true,
+      "variants": [
+        {
+          "variant": 0,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 9,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 11,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 10,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 1,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 2,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 3,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 4,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 5,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 6,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 7,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        },
+        {
+          "variant": 8,
+          "frames": 48,
+          "width": 116,
+          "height": 171,
+          "bytes": 3808512,
+          "hits": 192,
+          "misses": 0
+        }
+      ]
+    },
+    "variedHeightAndHeadingCases": 2304,
+    "unchangedBytes": true,
+    "unchangedFrameCount": true
+  },
+  "result": "passed",
+  "sourceSHA256": {
+    "autumn-v18.html": "bda88942f61dddbf8814d8ced9d9593bb07556fefbde5153a8fc11af1b6fc4dd",
+    "js/game.js": "afedb1b6ab9def4f363bf03d5b5ce695ae657435c1757d1e3046344c201d41f5",
+    "js/brawler-art.js": "cb97fefd668b96d54adf75e6902ae020fe26e7d1aa2b09267f00c79f2b1728a1",
+    "js/npc-motion.js": "cdb4337d66b77b83871e2bdb75c2a6315f8e8f74553f25439a6a7cfb2e784029",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/hero-rig.js": "ef4b2f4859a9e6360bc599f09061565e8f16034d1c2784f8541336bf638cc4ab",
+    "js/locomotion.js": "145ab43e7b59f954db59afc0142d91ad59f969443bdcab1d6181c3b54123ba82",
+    "js/illustrated-visits.js": "db82e534a1789258fc2af97b301cd27ffdd12091bdc95bb724873412b2de639d",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "assets/art/npc-motion-a-v16.png": "78ac5e1cb0a47d6df857622976ee95845da3bcf161dab138f559869cc950546b",
+    "assets/art/npc-motion-b-v16.png": "5aeba4c9e8b1c82648384743d28b52e0b8ad5b9f2f88d92681a53e2b15c68528",
+    "assets/art/npc-motion-c-v16.png": "8d0307d2e42346626e2c4ee5c20c0cf5266f197970aa678c3e1896244f6387d6",
+    "assets/art/civilian-standing-v16.png": "cf7ea6884f1e716901377ee68a91f045075b7687d97533d7e650f09d69bf92d1",
+    "assets/art/civilian-motion-v16.png": "68a233b1bc0ee4b9167fde8aad97c32c623540bf26d7efc09c99ad6b984f8568",
+    "assets/art/civilian-rest-v16.png": "a3caa1e0c152048fac759773c903bddaa2e5ab47c6efd7484597af56befffb6c",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/cast-reactions-a-v15.png": "6bab2a5b59eda35cd04e40ecd0770e4cbe51ae7dc0f482703ce169d57c82f7c5",
+    "assets/art/cast-reactions-b-v15.png": "cdddd35cf4a4eaa7d0372475dda754e223887616c5ae82c406c74c7f7f4fef2b",
+    "assets/art/cast-reactions-c-v15.png": "77fc73768131ba53654461732634a645fa59408f2d485cb4483e57c1e739a227",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a",
+    "assets/art/teen-molotov-poses-v18.png": "a80ad917dc7870ec815db8ec4693837adafa83efba210d61438770613f864f40",
+    "assets/art/teen-rock-poses-v18.png": "b55f898712109ac277e9abf751c1738457f4119e8b1236a03f6146c2b032ed06",
+    "assets/art/teen-firecracker-poses-v18.png": "c04d540631cb2a6cfe18880d5e9a1cb376cb0df8297e7671ac41a69418273c79",
+    "assets/art/teen-screen-v18.png": "52bf853e147af2a59eed11ba35d43265434c768b2d95fa70bd0a0e8aae8f84dd",
+    "assets/art/teen-run-opposites-v18.png": "e9cf93edbceb49410291301a2585069ef6b5090df47ba95ef8a19cefd45b2943",
+    "js/illustrated-kids.js": "47bbd51dc63395812d583be88250b297c90beea32b6932a983e32dbfe6f649eb",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

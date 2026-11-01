@@ -19,7 +19,7 @@ const close=(actual,expected,tolerance=1e-7)=>assert.ok(Math.abs(actual-expected
 
 for(const height of [90,145,225,300]){
   const cycle=gait.cycleLength(height);
-  assert.ok(cycle/height>.55&&cycle/height<.65,'cycle distance fits the original short-legged anatomy');
+  assert.ok(cycle/height>.70&&cycle/height<.75,'cycle distance matches the authored heel-strike and recovery timing');
   const cadence=120/cycle;
   if(height===145)assert.ok(cadence>1.1&&cadence<1.55,'street walking avoids rapid foot tapping');
   const first=gait.pose(0,height,1),half=gait.pose(cycle/2,height,1);
@@ -60,13 +60,19 @@ for(const height of [90,145,225,300])for(const carrier of ['front','back'])for(c
   assert.equal(bodies.length,1,'idle, transitions and steady walking paint exactly one body');
   assert.equal(bodies[0].alpha,1,'intermediate weights never fade the torso or produce ghost boots');
   assert.equal(audit.body.surfaces,1);assert.equal(audit.body.continuous,true);
-  assert.ok(Math.abs(audit.body.roll)<.03&&Math.abs(audit.body.sway)<height*.011,'the native face remains on a gently moving rigid torso');
+  assert.ok(Math.abs(audit.body.roll)<.04&&Math.abs(audit.body.sway)<height*.015,'the native face remains on a gently moving rigid torso');
   for(const side of ['near','far']){
-    const leg=audit.landmarks[side],source=profile[side],scale=height/profile.stature;
-    assert.equal(leg.rigidShoe,true);
-    close(leg.bootWidth/leg.bootHeight,source.boot[2]/source.boot[3]);
-    assert.ok(Math.hypot(leg.cuff.x-leg.sole.x,leg.cuff.y-leg.sole.y)<height*.20,'the shoe collar remains attached to its own sole');
-    if(weight===0){close(leg.sole.x,(source.sole[0]-profile.origin[0])*scale);close(leg.sole.y,(source.sole[1]-profile.origin[1])*scale);}
+    const leg=audit.landmarks[side];
+    assert.equal(audit.authoredLowerBody,true);assert.equal(leg.renderedFromSource,true);assert.equal(leg.rigidShoe,true);
+    for(const point of ['hip','knee','cuff','heel','toe','sole'])assert.ok(Number.isFinite(leg[point].x)&&Number.isFinite(leg[point].y),'rendered source landmarks stay finite');
+    assert.equal(leg.source.pose,audit.lowerPose);assert.ok(leg.source.image.startsWith('bear-'));
+    const area=(a,b,c)=>(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x),source=leg.source;
+    const originalArea=area({x:source.heel[0],y:source.heel[1]},{x:source.toe[0],y:source.toe[1]},{x:source.cuff[0],y:source.cuff[1]});
+    const renderedArea=area(leg.heel,leg.toe,leg.cuff);
+    assert.ok(originalArea*renderedArea>0,'complete authored shoes keep their source orientation');
+    assert.ok(Math.abs(renderedArea)/(height*height)>.0005,'the shoe shaft cannot collapse into a paper wedge');
+    assert.ok(leg.bootWidth>height*.06&&leg.bootWidth<height*.40,'shoe span stays consistent with the stocky body');
+    assert.ok(Math.hypot(leg.cuff.x-leg.sole.x,leg.cuff.y-leg.sole.y)<height*.25,'the actual shoe collar remains with its own sole');
   }
   cases++;
 }

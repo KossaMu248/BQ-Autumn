@@ -1,4 +1,4 @@
-"""V17 opaque-body regression and intermediate-weight visual evidence.
+"""V18 opaque-body regression and intermediate-weight visual evidence.
 
 A source-alpha template uses the same pose and draw transforms at full draw
 alpha, then its core is eroded in final display pixels. Starts/stops must retain
@@ -19,8 +19,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v17.html'
-SHOTS=ROOT/'screenshots'/'revision17'
+ENTRY='autumn-v18.html'
+SHOTS=ROOT/'screenshots'/'revision18'
 
 PROBE=r"""async ({legacyCode}) => {
   const W=360,H=360,X=180,Y=320,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
@@ -68,6 +68,58 @@ PROBE=r"""async ({legacyCode}) => {
     if(!legacy.caught)throw Error('Known V16 body-alpha regression was not caught '+JSON.stringify(legacy));
   }
   let boundedBodyCache=null;
+  const renderedJointMotion=[],jointContinuityFaults=[],footSilhouetteFaults=[];let footSilhouetteNegativeControls=0;
+  function footCore(pixels){
+    const xs=[],ys=[];
+    for(let y=Math.floor(Y-145*.17);y<Y+145*.04;y++)for(let x=0;x<W;x++)if(pixels[(y*W+x)*4+3]>=200){xs.push(x);ys.push(y);}
+    if(xs.length<60)throw Error('No complete visible planted boot core');
+    xs.sort((a,b)=>a-b);ys.sort((a,b)=>a-b);const q=(v,p)=>v[Math.floor((v.length-1)*p)];
+    return {pixels:xs.length,left:q(xs,.01),right:q(xs,.99),top:q(ys,.01),bottom:q(ys,.99)};
+  }
+  for(const back of [false,true]){
+    const rows=[];
+    for(let index=0;index<48;index++){
+      const pixels=paint(finalRig,145,1,back,index/48,1),audit=finalRig.audit(),legs=audit.landmarks;
+      if(!audit.authoredLowerBody||!legs.near.renderedFromSource||!legs.far.renderedFromSource)throw Error('Joint audit is not sampled from the rendered source mesh');
+      const row={phase:index/48,lowerPose:audit.lowerPose,footCore:footCore(pixels),legs:{}};
+      for(const side of ['near','far']){
+        const leg=legs[side],a={x:leg.hip.x-leg.knee.x,y:leg.hip.y-leg.knee.y},b={x:leg.cuff.x-leg.knee.x,y:leg.cuff.y-leg.knee.y},angle=Math.acos(Math.max(-1,Math.min(1,(a.x*b.x+a.y*b.y)/(Math.hypot(a.x,a.y)*Math.hypot(b.x,b.y)))));
+        if(!Number.isFinite(angle)||!leg.source.image||!leg.source.pose)throw Error('Invalid authored knee/source attribution');
+        row.legs[side]={hip:leg.hip,knee:leg.knee,cuff:leg.cuff,heel:leg.heel,toe:leg.toe,sole:leg.sole,kneeAngle:angle,source:leg.source};
+      }
+      rows.push(row);
+    }
+    const leads=rows.map(r=>r.legs.near.sole.x-r.legs.far.sole.x),motion={carrier:back?'back':'front',frames:rows.length,leadRange:[Math.min(...leads),Math.max(...leads)],legs:{}};
+    if(motion.leadRange[0]>=-4||motion.leadRange[1]<=4)throw Error('Rendered shoes do not visibly exchange the lead '+JSON.stringify(motion));
+    for(const side of ['near','far']){
+      const angles=rows.map(r=>r.legs[side].kneeAngle);let maxStep=0,maxStepPair=null;
+      for(let j=0;j<rows.length;j++)for(const joint of ['knee','cuff','heel','toe','sole']){const next=(j+1)%rows.length,a=rows[j].legs[side][joint],b=rows[next].legs[side][joint],distance=Math.hypot(a.x-b.x,a.y-b.y);if(distance>maxStep){maxStep=distance;maxStepPair={joint,phase:rows[j].phase,nextPhase:rows[next].phase,from:a,to:b,fromSource:rows[j].legs[side].source,toSource:rows[next].legs[side].source};}}
+      const range=Math.max(...angles)-Math.min(...angles);motion.legs[side]={kneeAngleRange:range,maxJointStep:maxStep,maxStepPair};
+      if(range<.12)throw Error('Rendered authored knee stays rigid '+JSON.stringify({side,motion}));
+      // These hand-registered points describe each source drawing. A sole
+      // corner in one key is not the same material point as another key's
+      // toe tip, so retain marker differences as diagnostics. The deciding
+      // continuity guard below measures the actual painted boot contours.
+      if(maxStep>145*.12)jointContinuityFaults.push({carrier:motion.carrier,side,maxStep,maxStepPair});
+    }
+    let maxVisibleStep=0,maxVisiblePair=null;
+    for(let j=0;j<rows.length;j++)for(const bound of ['left','right','top','bottom']){const next=(j+1)%rows.length,distance=Math.abs(rows[j].footCore[bound]-rows[next].footCore[bound]);if(distance>maxVisibleStep){maxVisibleStep=distance;maxVisiblePair={phase:rows[j].phase,nextPhase:rows[next].phase,bound,from:rows[j].footCore,to:rows[next].footCore};}}
+    motion.visibleBootCore={maxStep:maxVisibleStep,maxStepPair:maxVisiblePair,threshold:145*.12,rule:'Actual rendered alpha>=200 boot/contact region;1%/99% contour quantiles;adjacent48phase keys'};
+    if(maxVisibleStep>145*.12)footSilhouetteFaults.push({carrier:motion.carrier,...motion.visibleBootCore});
+    const widest=rows.reduce((a,b)=>a.footCore.right-a.footCore.left>b.footCore.right-b.footCore.left?a:b),reference=widest.footCore,pixels=paint(finalRig,145,1,back,widest.phase,1),shifted=new Uint8ClampedArray(pixels),missing=new Uint8ClampedArray(pixels),offset=Math.round(145*.2),cut=(reference.left+reference.right)/2;
+    for(let y=Math.floor(Y-145*.17);y<Y+145*.04;y++)for(let x=0;x<W;x++){
+      const at=(y*W+x)*4;shifted[at+3]=0;if(x>cut)missing[at+3]=0;
+    }
+    for(let y=Math.floor(Y-145*.17);y<Y+145*.04;y++)for(let x=0;x<W-offset;x++){
+      const from=(y*W+x)*4,to=(y*W+x+offset)*4;for(let channel=0;channel<4;channel++)shifted[to+channel]=pixels[from+channel];
+    }
+    const translated=footCore(shifted),shiftDistance=Math.max(...['left','right','top','bottom'].map(k=>Math.abs(translated[k]-reference[k])));
+    if(shiftDistance<=145*.12)throw Error('Actual pixel boot-teleport negative control was not caught');footSilhouetteNegativeControls++;
+    let missingCaught=false;
+    try{const damaged=footCore(missing);missingCaught=Math.max(...['left','right','top','bottom'].map(k=>Math.abs(damaged[k]-reference[k])))>145*.12;}catch(error){missingCaught=String(error).includes('No complete visible planted boot core');}
+    if(!missingCaught)throw Error('Actual pixel missing-boot negative control was not caught');footSilhouetteNegativeControls++;
+    renderedJointMotion.push({...motion,rows});
+  }
   if(finalRig.cacheStats){
     const initial=finalRig.cacheStats();
     for(const height of [145,90,225])for(const back of [false,true])for(let phase=0;phase<48;phase++)paint(finalRig,height,1,back,phase/48,1);
@@ -81,6 +133,14 @@ PROBE=r"""async ({legacyCode}) => {
     boundedBodyCache={initial,after,reused,canonicalStorageReused:true};
   }
   const boards=[];
+  for(const diagnostic of jointContinuityFaults){
+    const board=document.createElement('canvas');board.width=1080;board.height=360;const g=board.getContext('2d'),pair=diagnostic.maxStepPair,back=diagnostic.carrier==='back';
+    for(const [col,phase] of [pair.phase,pair.nextPhase].entries()){
+      g.fillStyle='#ece7dc';g.fillRect(col*540,0,540,360);g.fillStyle='#242820';g.font='14px Arial';g.fillText(`${diagnostic.carrier} ${diagnostic.side} ${pair.joint} · phase ${phase}`,col*540+12,20);
+      finalRig.draw(g,col*540+270,330,290,1,{state:{hp:100,...(back?{baby:{position:'back'}}:{})},distance:BearlyLocomotion.cycleLength(290)*phase,weight:1});
+    }
+    boards.push({carrier:`${diagnostic.carrier}-${diagnostic.side}-joint-diagnostic`,png:board.toDataURL('image/png')});
+  }
   for(const back of [false,true]){
     const board=document.createElement('canvas');board.width=1320;board.height=880;const g=board.getContext('2d');
     const boardWeights=[0,.1,.2,.3,.4,1];
@@ -91,7 +151,7 @@ PROBE=r"""async ({legacyCode}) => {
     }
     boards.push({carrier:back?'back':'front',png:board.toDataURL('image/png')});
   }
-  return{cases:results.length,minOpaqueRatio:Math.min(...results.map(r=>r.opaqueRatio)),minMeanAlpha:Math.min(...results.map(r=>r.meanAlpha)),negativeControls:controls,faultCount:faults.length,faults:faults.slice(0,40),legacy,edgeDiagnostics,coreRule:'Same pose/source transforms at full draw alpha;2pixel erosion in final display space;unchanged99.5%ofcore≥246alpha',boundedBodyCache,boards};
+  return{cases:results.length,minOpaqueRatio:Math.min(...results.map(r=>r.opaqueRatio)),minMeanAlpha:Math.min(...results.map(r=>r.meanAlpha)),negativeControls:controls,faultCount:faults.length,faults:faults.slice(0,40),legacy,edgeDiagnostics,coreRule:'Same pose/source transforms at full draw alpha;2pixel erosion in final display space;unchanged99.5%ofcore≥246alpha',renderedJointMotion,jointContinuityFaults,footSilhouetteFaults,footSilhouetteNegativeControls,boundedBodyCache,boards};
 }"""
 
 
@@ -100,7 +160,7 @@ class Quiet(SimpleHTTPRequestHandler):
 
 
 def source_hashes():
-    paths=[ROOT/ENTRY,*[ROOT/'js'/name for name in ['hero-rig.js','locomotion.js','baby-passenger.js','npc-motion.js']]]
+    paths=[ROOT/ENTRY,*[ROOT/'js'/name for name in ['hero-rig.js','locomotion.js','baby-passenger.js','npc-motion.js']],*[ROOT/'assets'/'art'/name for name in ['bear-near-contact-v18.png','bear-near-support-v18.png','bear-far-poses-v18.png','bear-idle-lower-v18.png']]]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 
@@ -147,9 +207,9 @@ def main():
                 name=f"bear-weight-integrity-{board['carrier']}.png";(SHOTS/name).write_bytes(base64.b64decode(board['png'].split(',',1)[1]))
             if not result['faultCount']:result['actualControls']=actual_front_frames(page)
             browser.close()
-        result.update({'entry':ENTRY,'result':'passed' if not result['faultCount'] else 'failed','sourceSHA256':before,'pageErrors':errors,'httpFailures':failures})
+        result.update({'entry':ENTRY,'result':'passed' if not result['faultCount'] and not result['footSilhouetteFaults'] else 'failed','sourceSHA256':before,'pageErrors':errors,'httpFailures':failures})
         (SHOTS/'bear-weight-integrity-evidence.json').write_text(json.dumps(result,indent=2)+'\n')
-        print(json.dumps(result));assert not result['faultCount'],result;assert not errors,errors;assert not failures,failures;assert before==source_hashes(),'Source changed while probing'
+        print(json.dumps(result));assert not result['faultCount'],result;assert not result['footSilhouetteFaults'],result['footSilhouetteFaults'];assert not errors,errors;assert not failures,failures;assert before==source_hashes(),'Source changed while probing'
     finally:server.shutdown();server.server_close()
 
 

@@ -1,4 +1,4 @@
-"""V17 authored NPC-frame coverage and runtime walking/running checks.
+"""V18 authored NPC-frame coverage and runtime walking/running checks.
 
 Whole authored frames retain every opaque body/prop component and exclude other
 cells. Runtime rigs are checked independently for connected bodies and visible
@@ -16,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v17.html"
-SHOTS = ROOT / "screenshots" / "revision17"
+ENTRY = "autumn-v18.html"
+SHOTS = ROOT / "screenshots" / "revision18"
 
 
 def source_hashes():
@@ -25,12 +25,14 @@ def source_hashes():
     paths.extend(ROOT / "assets" / "art" / f"npc-motion-{g}-v16.png" for g in "abc")
     paths.extend(ROOT / "assets" / "art" / f"civilian-{kind}-v16.png" for kind in ["standing", "motion", "rest", "reactions"])
     paths.extend(ROOT / "assets" / "art" / f"cast-{kind}-{g}-v15.png" for kind in ["reactions", "screen"] for g in "abc")
+    paths.extend(ROOT / 'assets' / 'art' / name for name in ['teen-molotov-poses-v18.png','teen-rock-poses-v18.png','teen-firecracker-poses-v18.png','teen-screen-v18.png','teen-run-opposites-v18.png'])
+    paths.extend(ROOT / 'js' / name for name in ['illustrated-kids.js','weapon-effects.js'])
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths if p.is_file()}
 
 
 AUDIT = r"""(() => {
   const native=CanvasRenderingContext2D.prototype.drawImage;
-  const assets=/^(?:adult-cast-[abc]-v15|cast-(?:reactions|screen)-[abc]-v15|npc-motion-[abc]-v16|civilian-(?:standing|motion|rest|reactions)-v16)\.png$/;
+  const assets=/^(?:adult-cast-[abc]-v15|cast-(?:reactions|screen)-[abc]-v15|npc-motion-[abc]-v16|civilian-(?:standing|motion|rest|reactions)-v16|teen-(?:molotov|rock|firecracker)-poses-v18|teen-screen-v18|teen-run-opposites-v18)\.png$/;
   window.__wardrobeCalls=[];window.__wardrobeActor=null;
   CanvasRenderingContext2D.prototype.drawImage=function(im,...args){
     const source=(im.dataset?.sourceAsset||im.src||'').split('/').pop().split('?')[0];
@@ -80,6 +82,9 @@ PROBES = r"""async () => {
     return native(im,...args);
   };
   function spec(name){
+    if(/^teen-(molotov|rock|firecracker)-poses-v18/.test(name))return{rows:3,cols:5,type:'teenPose',kind:({molotov:'bottle',rock:'rock',firecracker:'firecracker'})[name.match(/^teen-(.*)-poses/)[1]]};
+    if(name==='teen-screen-v18.png')return{rows:2,cols:3,type:'teenScreen'};
+    if(name==='teen-run-opposites-v18.png')return{rows:3,cols:2,type:'teenOpposite'};
     if(/^npc-motion-[abc]-v16/.test(name))return{rows:3,cols:5,type:'motion',group:'abc'.indexOf(name.match(/-([abc])-v16/)[1])};
     if(name==='civilian-standing-v16.png')return{rows:1,cols:3,type:'civilStanding'};
     if(name==='civilian-motion-v16.png')return{rows:3,cols:4,type:'civilMotion'};
@@ -120,6 +125,9 @@ PROBES = r"""async () => {
   }
   function expected(s,variant,pose){
     const p=String(pose).toLowerCase().replace(/[-_]/g,''),local=variant%3;
+    if(s.type==='teenPose'){if(s.kind!==variant)throw Error('Wrong teen identity source');return ['idle','phone','lean','warn','cover','ready','windup','release','recover','hurt','runa','runb','runc','rund','prone'].indexOf(p);}
+    if(s.type==='teenOpposite')return ['bottle','rock','firecracker'].indexOf(variant)*2+['runc','rund'].indexOf(p);
+    if(s.type==='teenScreen')return (p==='screendamaged'?3:0)+['bottle','rock','firecracker'].indexOf(variant);
     if(['motion','reaction','screen'].includes(s.type)&&s.group!==Math.floor(variant/3))throw Error('Wrong identity pack '+JSON.stringify({source:s.name,variant,pose}));
     if(s.type==='motion')return local*5+({idle:0,walka:1,walkb:2,runa:3,runb:4}[p]);
     if(s.type==='reaction')return local*3+({hurt:0,stagger:0,fall:1,falling:1,prone:2,dead:2}[p]);
@@ -175,7 +183,15 @@ PROBES = r"""async () => {
     const proof=await coverage(calls,variant,pose),label={variant,pose,heading,height,...proof};
     if(proof.coverage!==1||proof.neighborPixels!==0||proof.unsupported)faults.push(label);results.push(label);
   }
-  return{authoredFrames:frames.length,cases:results.length,minCoverage:Math.min(...results.map(r=>r.coverage)),maxNeighborPixels:Math.max(...results.map(r=>r.neighborPixels)),faultCount:faults.length,faults:faults.slice(0,30)};
+  const teenFrames=BearlyKids.frames();
+  for(const frame of teenFrames)for(const heading of [1,-1])for(const height of [145,90]){
+    calls=[];active=[];stack=[];contours=[];c.resetTransform();c.globalAlpha=1;c.clearRect(0,0,440,340);
+    const source=BearlyKids.source(frame.kind,frame.pose),scale=height/source.stature;
+    c.save();c.translate(220,290);c.scale(heading,1);c.drawImage(source.image,...source.rect,-source.anchor[0]*scale,-source.anchor[1]*scale,source.rect[2]*scale,source.rect[3]*scale);c.restore();
+    const proof=await coverage(calls,frame.kind,frame.pose),label={kind:frame.kind,pose:frame.pose,heading,height,...proof};
+    if(proof.coverage!==1||proof.neighborPixels!==0||proof.unsupported)faults.push(label);results.push(label);
+  }
+  return{authoredFrames:frames.length+teenFrames.length,adultAuthoredFrames:frames.length,teenAuthoredFrames:teenFrames.length,cases:results.length,minCoverage:Math.min(...results.map(r=>r.coverage)),maxNeighborPixels:Math.max(...results.map(r=>r.neighborPixels)),faultCount:faults.length,faults:faults.slice(0,30)};
 }"""
 
 RUNTIME = r"""() => {
@@ -238,7 +254,7 @@ def main():
     SHOTS.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
-    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V17"}
+    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V18"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])

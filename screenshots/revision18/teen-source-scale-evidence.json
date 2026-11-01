@@ -1,0 +1,2086 @@
+{
+  "result": "passed",
+  "pageErrors": [],
+  "ready": true,
+  "frames": [
+    {
+      "kind": "bottle",
+      "pose": "idle",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        107,
+        13,
+        153,
+        346
+      ],
+      "core": [
+        108,
+        14,
+        151,
+        344
+      ],
+      "anchor": [
+        175.01518270715388,
+        357
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "phone",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        394,
+        19,
+        164,
+        339
+      ],
+      "core": [
+        394,
+        20,
+        163,
+        337
+      ],
+      "anchor": [
+        466.73649032992034,
+        356
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "lean",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        684,
+        13,
+        148,
+        342
+      ],
+      "core": [
+        685,
+        14,
+        147,
+        340
+      ],
+      "anchor": [
+        754.7113333333333,
+        353
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "warn",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        948,
+        14,
+        263,
+        344
+      ],
+      "core": [
+        949,
+        14,
+        262,
+        343
+      ],
+      "anchor": [
+        1019.8182963132585,
+        356
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "cover",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        1258,
+        138,
+        227,
+        220
+      ],
+      "core": [
+        1259,
+        139,
+        225,
+        218
+      ],
+      "anchor": [
+        1345.5102907980347,
+        356
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "ready",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        37,
+        389,
+        260,
+        291
+      ],
+      "core": [
+        38,
+        390,
+        258,
+        289
+      ],
+      "anchor": [
+        161.99325306207183,
+        678
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "windup",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        347,
+        345,
+        266,
+        335
+      ],
+      "core": [
+        348,
+        348,
+        263,
+        331
+      ],
+      "anchor": [
+        493.3384487764413,
+        678
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "release",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        617,
+        394,
+        336,
+        286
+      ],
+      "core": [
+        618,
+        395,
+        335,
+        284
+      ],
+      "anchor": [
+        727.8351462070914,
+        678
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "recover",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        956,
+        389,
+        229,
+        291
+      ],
+      "core": [
+        956,
+        390,
+        229,
+        290
+      ],
+      "anchor": [
+        1062.260259591525,
+        679
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "hurt",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        1268,
+        372,
+        229,
+        308
+      ],
+      "core": [
+        1269,
+        373,
+        227,
+        306
+      ],
+      "anchor": [
+        1389.5007735946365,
+        678
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "runA",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        44,
+        691,
+        245,
+        307
+      ],
+      "core": [
+        45,
+        692,
+        243,
+        305
+      ],
+      "anchor": [
+        159.162502068509,
+        996
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "runB",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        341,
+        693,
+        213,
+        298
+      ],
+      "core": [
+        342,
+        694,
+        211,
+        296
+      ],
+      "anchor": [
+        460.1350364963504,
+        989
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "runC",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        269,
+        8,
+        340,
+        335
+      ],
+      "core": [
+        270,
+        8,
+        338,
+        334
+      ],
+      "anchor": [
+        423.04191489361705,
+        341
+      ],
+      "stature": 394.45,
+      "referenceStature": 343,
+      "sourceUnits": 1.15
+    },
+    {
+      "kind": "bottle",
+      "pose": "runD",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        953,
+        8,
+        327,
+        335
+      ],
+      "core": [
+        954,
+        8,
+        325,
+        334
+      ],
+      "anchor": [
+        1117.8173928603383,
+        341
+      ],
+      "stature": 394.45,
+      "referenceStature": 343,
+      "sourceUnits": 1.15
+    },
+    {
+      "kind": "bottle",
+      "pose": "prone",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "rect": [
+        1150,
+        846,
+        364,
+        139
+      ],
+      "core": [
+        1150,
+        847,
+        364,
+        137
+      ],
+      "anchor": [
+        1353.7448979591836,
+        983
+      ],
+      "stature": 343
+    },
+    {
+      "kind": "bottle",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        15,
+        8,
+        460,
+        498
+      ],
+      "core": [
+        15,
+        8,
+        459,
+        497
+      ],
+      "anchor": [
+        254.29454938772358,
+        504
+      ],
+      "stature": 496
+    },
+    {
+      "kind": "bottle",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        15,
+        516,
+        464,
+        499
+      ],
+      "core": [
+        15,
+        517,
+        463,
+        497
+      ],
+      "anchor": [
+        255.1877163295131,
+        1013
+      ],
+      "stature": 496
+    },
+    {
+      "kind": "rock",
+      "pose": "idle",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        96,
+        13,
+        163,
+        362
+      ],
+      "core": [
+        97,
+        13,
+        161,
+        361
+      ],
+      "anchor": [
+        169.63665943600867,
+        373
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "phone",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        382,
+        14,
+        167,
+        360
+      ],
+      "core": [
+        383,
+        15,
+        166,
+        358
+      ],
+      "anchor": [
+        455.9205030575747,
+        372
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "lean",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        691,
+        14,
+        142,
+        361
+      ],
+      "core": [
+        692,
+        14,
+        140,
+        361
+      ],
+      "anchor": [
+        755.6150903574726,
+        374
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "warn",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        923,
+        18,
+        292,
+        357
+      ],
+      "core": [
+        924,
+        19,
+        290,
+        355
+      ],
+      "anchor": [
+        1022.7314269952188,
+        373
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "cover",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        1271,
+        132,
+        235,
+        241
+      ],
+      "core": [
+        1272,
+        133,
+        233,
+        239
+      ],
+      "anchor": [
+        1362.0232771471162,
+        371
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "ready",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        30,
+        392,
+        255,
+        319
+      ],
+      "core": [
+        31,
+        393,
+        254,
+        318
+      ],
+      "anchor": [
+        160.78353298464654,
+        710
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "windup",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        333,
+        386,
+        275,
+        325
+      ],
+      "core": [
+        333,
+        387,
+        274,
+        324
+      ],
+      "anchor": [
+        489.09604468046143,
+        710
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "release",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        613,
+        402,
+        342,
+        310
+      ],
+      "core": [
+        614,
+        402,
+        340,
+        309
+      ],
+      "anchor": [
+        739.8484249680344,
+        710
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "recover",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        956,
+        390,
+        261,
+        321
+      ],
+      "core": [
+        957,
+        391,
+        259,
+        320
+      ],
+      "anchor": [
+        1083.5590186278964,
+        710
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "hurt",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        1283,
+        393,
+        215,
+        319
+      ],
+      "core": [
+        1284,
+        394,
+        214,
+        317
+      ],
+      "anchor": [
+        1412.4877344877345,
+        710
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "runA",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        31,
+        716,
+        251,
+        285
+      ],
+      "core": [
+        32,
+        717,
+        250,
+        284
+      ],
+      "anchor": [
+        150.7535495441638,
+        1000
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "runB",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        325,
+        717,
+        259,
+        266
+      ],
+      "core": [
+        326,
+        718,
+        258,
+        265
+      ],
+      "anchor": [
+        455.8471856917412,
+        982
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "runC",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        271,
+        343,
+        348,
+        338
+      ],
+      "core": [
+        272,
+        344,
+        347,
+        336
+      ],
+      "anchor": [
+        426.3903251868309,
+        679
+      ],
+      "stature": 403.20000000000005,
+      "referenceStature": 360,
+      "sourceUnits": 1.12
+    },
+    {
+      "kind": "rock",
+      "pose": "runD",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        955,
+        343,
+        326,
+        338
+      ],
+      "core": [
+        956,
+        344,
+        324,
+        337
+      ],
+      "anchor": [
+        1117.602490421456,
+        680
+      ],
+      "stature": 403.20000000000005,
+      "referenceStature": 360,
+      "sourceUnits": 1.12
+    },
+    {
+      "kind": "rock",
+      "pose": "prone",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "rect": [
+        1155,
+        838,
+        364,
+        161
+      ],
+      "core": [
+        1156,
+        839,
+        363,
+        160
+      ],
+      "anchor": [
+        1338.971332392225,
+        998
+      ],
+      "stature": 360
+    },
+    {
+      "kind": "rock",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        554,
+        4,
+        462,
+        508
+      ],
+      "core": [
+        555,
+        5,
+        461,
+        506
+      ],
+      "anchor": [
+        759.2156017392587,
+        510
+      ],
+      "stature": 505
+    },
+    {
+      "kind": "rock",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        554,
+        512,
+        463,
+        507
+      ],
+      "core": [
+        555,
+        512,
+        461,
+        507
+      ],
+      "anchor": [
+        759.2635132655682,
+        1018
+      ],
+      "stature": 506
+    },
+    {
+      "kind": "firecracker",
+      "pose": "idle",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        133,
+        8,
+        151,
+        365
+      ],
+      "core": [
+        134,
+        8,
+        149,
+        364
+      ],
+      "anchor": [
+        200.6673122444588,
+        371
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "phone",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        411,
+        12,
+        167,
+        358
+      ],
+      "core": [
+        411,
+        13,
+        166,
+        357
+      ],
+      "anchor": [
+        482.4808308757533,
+        369
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "lean",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        679,
+        10,
+        159,
+        357
+      ],
+      "core": [
+        679,
+        11,
+        158,
+        355
+      ],
+      "anchor": [
+        758.6758241758242,
+        365
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "warn",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        917,
+        29,
+        297,
+        340
+      ],
+      "core": [
+        918,
+        30,
+        296,
+        338
+      ],
+      "anchor": [
+        1014.5470540920974,
+        367
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "cover",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        1279,
+        140,
+        197,
+        229
+      ],
+      "core": [
+        1279,
+        141,
+        196,
+        228
+      ],
+      "anchor": [
+        1363.8148738379814,
+        368
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "ready",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        50,
+        397,
+        256,
+        306
+      ],
+      "core": [
+        51,
+        397,
+        254,
+        305
+      ],
+      "anchor": [
+        180.08206298493837,
+        701
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "windup",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        343,
+        371,
+        269,
+        333
+      ],
+      "core": [
+        344,
+        377,
+        267,
+        327
+      ],
+      "anchor": [
+        482.7294015611448,
+        703
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "release",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        631,
+        396,
+        326,
+        308
+      ],
+      "core": [
+        632,
+        397,
+        324,
+        306
+      ],
+      "anchor": [
+        751.523169728544,
+        702
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "recover",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        946,
+        401,
+        263,
+        304
+      ],
+      "core": [
+        947,
+        401,
+        261,
+        303
+      ],
+      "anchor": [
+        1074.6685787671233,
+        703
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "hurt",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        1279,
+        391,
+        231,
+        315
+      ],
+      "core": [
+        1280,
+        392,
+        230,
+        313
+      ],
+      "anchor": [
+        1391.0689789051378,
+        704
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "runA",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        27,
+        711,
+        277,
+        287
+      ],
+      "core": [
+        28,
+        712,
+        275,
+        285
+      ],
+      "anchor": [
+        169.1311425061425,
+        996
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "runB",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        350,
+        714,
+        253,
+        268
+      ],
+      "core": [
+        351,
+        715,
+        252,
+        266
+      ],
+      "anchor": [
+        503.2022288665398,
+        980
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "runC",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        270,
+        683,
+        349,
+        328
+      ],
+      "core": [
+        270,
+        684,
+        348,
+        326
+      ],
+      "anchor": [
+        428.2694025090368,
+        1009
+      ],
+      "stature": 392.04,
+      "referenceStature": 363,
+      "sourceUnits": 1.08
+    },
+    {
+      "kind": "firecracker",
+      "pose": "runD",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "rect": [
+        953,
+        683,
+        332,
+        328
+      ],
+      "core": [
+        954,
+        684,
+        330,
+        326
+      ],
+      "anchor": [
+        1120.5068347239483,
+        1009
+      ],
+      "stature": 392.04,
+      "referenceStature": 363,
+      "sourceUnits": 1.08
+    },
+    {
+      "kind": "firecracker",
+      "pose": "prone",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "rect": [
+        1212,
+        833,
+        309,
+        159
+      ],
+      "core": [
+        1213,
+        834,
+        307,
+        157
+      ],
+      "anchor": [
+        1369.749374251823,
+        990
+      ],
+      "stature": 363
+    },
+    {
+      "kind": "firecracker",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        1075,
+        3,
+        459,
+        501
+      ],
+      "core": [
+        1076,
+        4,
+        457,
+        499
+      ],
+      "anchor": [
+        1278.100540921919,
+        502
+      ],
+      "stature": 498
+    },
+    {
+      "kind": "firecracker",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        1075,
+        512,
+        459,
+        500
+      ],
+      "core": [
+        1076,
+        513,
+        457,
+        498
+      ],
+      "anchor": [
+        1279.1177305523795,
+        1010
+      ],
+      "stature": 497
+    }
+  ],
+  "audits": [
+    {
+      "kind": "bottle",
+      "label": "Chill",
+      "pose": "idle",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        107,
+        13,
+        153,
+        346
+      ],
+      "stature": 343,
+      "anchor": [
+        175.01518270715388,
+        357
+      ],
+      "core": [
+        108,
+        14,
+        151,
+        344
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Phone",
+      "pose": "phone",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        394,
+        19,
+        164,
+        339
+      ],
+      "stature": 343,
+      "anchor": [
+        466.73649032992034,
+        356
+      ],
+      "core": [
+        394,
+        20,
+        163,
+        337
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Lean",
+      "pose": "lean",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        684,
+        13,
+        148,
+        342
+      ],
+      "stature": 343,
+      "anchor": [
+        754.7113333333333,
+        353
+      ],
+      "core": [
+        685,
+        14,
+        147,
+        340
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Cover",
+      "pose": "cover",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        1258,
+        138,
+        227,
+        220
+      ],
+      "stature": 343,
+      "anchor": [
+        1345.5102907980347,
+        356
+      ],
+      "core": [
+        1259,
+        139,
+        225,
+        218
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "RunA",
+      "pose": "runA",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        44,
+        691,
+        245,
+        307
+      ],
+      "stature": 343,
+      "anchor": [
+        159.162502068509,
+        996
+      ],
+      "core": [
+        45,
+        692,
+        243,
+        305
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "RunB",
+      "pose": "runB",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        341,
+        693,
+        213,
+        298
+      ],
+      "stature": 343,
+      "anchor": [
+        460.1350364963504,
+        989
+      ],
+      "core": [
+        342,
+        694,
+        211,
+        296
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "RunC",
+      "pose": "runC",
+      "height": 120,
+      "physicalScale": 0.30422106730891113,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        269,
+        8,
+        340,
+        335
+      ],
+      "stature": 394.45,
+      "anchor": [
+        423.04191489361705,
+        341
+      ],
+      "core": [
+        270,
+        8,
+        338,
+        334
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "RunD",
+      "pose": "runD",
+      "height": 120,
+      "physicalScale": 0.30422106730891113,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        953,
+        8,
+        327,
+        335
+      ],
+      "stature": 394.45,
+      "anchor": [
+        1117.8173928603383,
+        341
+      ],
+      "core": [
+        954,
+        8,
+        325,
+        334
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Throw",
+      "pose": "release",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        617,
+        394,
+        336,
+        286
+      ],
+      "stature": 343,
+      "anchor": [
+        727.8351462070914,
+        678
+      ],
+      "core": [
+        618,
+        395,
+        335,
+        284
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Hurt",
+      "pose": "hurt",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        1268,
+        372,
+        229,
+        308
+      ],
+      "stature": 343,
+      "anchor": [
+        1389.5007735946365,
+        678
+      ],
+      "core": [
+        1269,
+        373,
+        227,
+        306
+      ]
+    },
+    {
+      "kind": "bottle",
+      "label": "Prone",
+      "pose": "prone",
+      "height": 120,
+      "physicalScale": 0.3498542274052478,
+      "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+      "source": "assets/art/teen-molotov-poses-v18.png",
+      "sourceRect": [
+        1150,
+        846,
+        364,
+        139
+      ],
+      "stature": 343,
+      "anchor": [
+        1353.7448979591836,
+        983
+      ],
+      "core": [
+        1150,
+        847,
+        364,
+        137
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Chill",
+      "pose": "idle",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        96,
+        13,
+        163,
+        362
+      ],
+      "stature": 360,
+      "anchor": [
+        169.63665943600867,
+        373
+      ],
+      "core": [
+        97,
+        13,
+        161,
+        361
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Phone",
+      "pose": "phone",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        382,
+        14,
+        167,
+        360
+      ],
+      "stature": 360,
+      "anchor": [
+        455.9205030575747,
+        372
+      ],
+      "core": [
+        383,
+        15,
+        166,
+        358
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Lean",
+      "pose": "lean",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        691,
+        14,
+        142,
+        361
+      ],
+      "stature": 360,
+      "anchor": [
+        755.6150903574726,
+        374
+      ],
+      "core": [
+        692,
+        14,
+        140,
+        361
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Cover",
+      "pose": "cover",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        1271,
+        132,
+        235,
+        241
+      ],
+      "stature": 360,
+      "anchor": [
+        1362.0232771471162,
+        371
+      ],
+      "core": [
+        1272,
+        133,
+        233,
+        239
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "RunA",
+      "pose": "runA",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        31,
+        716,
+        251,
+        285
+      ],
+      "stature": 360,
+      "anchor": [
+        150.7535495441638,
+        1000
+      ],
+      "core": [
+        32,
+        717,
+        250,
+        284
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "RunB",
+      "pose": "runB",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        325,
+        717,
+        259,
+        266
+      ],
+      "stature": 360,
+      "anchor": [
+        455.8471856917412,
+        982
+      ],
+      "core": [
+        326,
+        718,
+        258,
+        265
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "RunC",
+      "pose": "runC",
+      "height": 120,
+      "physicalScale": 0.29761904761904756,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        271,
+        343,
+        348,
+        338
+      ],
+      "stature": 403.20000000000005,
+      "anchor": [
+        426.3903251868309,
+        679
+      ],
+      "core": [
+        272,
+        344,
+        347,
+        336
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "RunD",
+      "pose": "runD",
+      "height": 120,
+      "physicalScale": 0.29761904761904756,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        955,
+        343,
+        326,
+        338
+      ],
+      "stature": 403.20000000000005,
+      "anchor": [
+        1117.602490421456,
+        680
+      ],
+      "core": [
+        956,
+        344,
+        324,
+        337
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Throw",
+      "pose": "release",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        613,
+        402,
+        342,
+        310
+      ],
+      "stature": 360,
+      "anchor": [
+        739.8484249680344,
+        710
+      ],
+      "core": [
+        614,
+        402,
+        340,
+        309
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Hurt",
+      "pose": "hurt",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        1283,
+        393,
+        215,
+        319
+      ],
+      "stature": 360,
+      "anchor": [
+        1412.4877344877345,
+        710
+      ],
+      "core": [
+        1284,
+        394,
+        214,
+        317
+      ]
+    },
+    {
+      "kind": "rock",
+      "label": "Prone",
+      "pose": "prone",
+      "height": 120,
+      "physicalScale": 0.3333333333333333,
+      "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+      "source": "assets/art/teen-rock-poses-v18.png",
+      "sourceRect": [
+        1155,
+        838,
+        364,
+        161
+      ],
+      "stature": 360,
+      "anchor": [
+        1338.971332392225,
+        998
+      ],
+      "core": [
+        1156,
+        839,
+        363,
+        160
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Chill",
+      "pose": "idle",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        133,
+        8,
+        151,
+        365
+      ],
+      "stature": 363,
+      "anchor": [
+        200.6673122444588,
+        371
+      ],
+      "core": [
+        134,
+        8,
+        149,
+        364
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Phone",
+      "pose": "phone",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        411,
+        12,
+        167,
+        358
+      ],
+      "stature": 363,
+      "anchor": [
+        482.4808308757533,
+        369
+      ],
+      "core": [
+        411,
+        13,
+        166,
+        357
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Lean",
+      "pose": "lean",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        679,
+        10,
+        159,
+        357
+      ],
+      "stature": 363,
+      "anchor": [
+        758.6758241758242,
+        365
+      ],
+      "core": [
+        679,
+        11,
+        158,
+        355
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Cover",
+      "pose": "cover",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        1279,
+        140,
+        197,
+        229
+      ],
+      "stature": 363,
+      "anchor": [
+        1363.8148738379814,
+        368
+      ],
+      "core": [
+        1279,
+        141,
+        196,
+        228
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "RunA",
+      "pose": "runA",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        27,
+        711,
+        277,
+        287
+      ],
+      "stature": 363,
+      "anchor": [
+        169.1311425061425,
+        996
+      ],
+      "core": [
+        28,
+        712,
+        275,
+        285
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "RunB",
+      "pose": "runB",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        350,
+        714,
+        253,
+        268
+      ],
+      "stature": 363,
+      "anchor": [
+        503.2022288665398,
+        980
+      ],
+      "core": [
+        351,
+        715,
+        252,
+        266
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "RunC",
+      "pose": "runC",
+      "height": 120,
+      "physicalScale": 0.30609121518212423,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        270,
+        683,
+        349,
+        328
+      ],
+      "stature": 392.04,
+      "anchor": [
+        428.2694025090368,
+        1009
+      ],
+      "core": [
+        270,
+        684,
+        348,
+        326
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "RunD",
+      "pose": "runD",
+      "height": 120,
+      "physicalScale": 0.30609121518212423,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-run-opposites-v18.png",
+      "sourceRect": [
+        953,
+        683,
+        332,
+        328
+      ],
+      "stature": 392.04,
+      "anchor": [
+        1120.5068347239483,
+        1009
+      ],
+      "core": [
+        954,
+        684,
+        330,
+        326
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Throw",
+      "pose": "release",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        631,
+        396,
+        326,
+        308
+      ],
+      "stature": 363,
+      "anchor": [
+        751.523169728544,
+        702
+      ],
+      "core": [
+        632,
+        397,
+        324,
+        306
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Hurt",
+      "pose": "hurt",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        1279,
+        391,
+        231,
+        315
+      ],
+      "stature": 363,
+      "anchor": [
+        1391.0689789051378,
+        704
+      ],
+      "core": [
+        1280,
+        392,
+        230,
+        313
+      ]
+    },
+    {
+      "kind": "firecracker",
+      "label": "Prone",
+      "pose": "prone",
+      "height": 120,
+      "physicalScale": 0.3305785123966942,
+      "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+      "source": "assets/art/teen-firecracker-poses-v18.png",
+      "sourceRect": [
+        1212,
+        833,
+        309,
+        159
+      ],
+      "stature": 363,
+      "anchor": [
+        1369.749374251823,
+        990
+      ],
+      "core": [
+        1213,
+        834,
+        307,
+        157
+      ]
+    }
+  ],
+  "kids": {
+    "ready": true,
+    "drawn": {
+      "bottle": {
+        "pose": "prone",
+        "height": 120,
+        "physicalScale": 0.3498542274052478,
+        "outfit": "Burgundy cap \u00b7 black puffer gilet and hoodie \u00b7 black tracksuit \u00b7 sling bag \u00b7 burgundy trainers",
+        "source": "assets/art/teen-molotov-poses-v18.png",
+        "sourceRect": [
+          1150,
+          846,
+          364,
+          139
+        ],
+        "stature": 343,
+        "anchor": [
+          1353.7448979591836,
+          983
+        ],
+        "core": [
+          1150,
+          847,
+          364,
+          137
+        ]
+      },
+      "rock": {
+        "pose": "prone",
+        "height": 120,
+        "physicalScale": 0.3333333333333333,
+        "outfit": "Blue cap \u00b7 olive technical jacket \u00b7 charcoal cargos \u00b7 sling bag \u00b7 gray trainers",
+        "source": "assets/art/teen-rock-poses-v18.png",
+        "sourceRect": [
+          1155,
+          838,
+          364,
+          161
+        ],
+        "stature": 360,
+        "anchor": [
+          1338.971332392225,
+          998
+        ],
+        "core": [
+          1156,
+          839,
+          363,
+          160
+        ]
+      },
+      "firecracker": {
+        "pose": "prone",
+        "height": 120,
+        "physicalScale": 0.3305785123966942,
+        "outfit": "Red cap \u00b7 navy puffer and tracksuit \u00b7 sling bag \u00b7 red/navy trainers",
+        "source": "assets/art/teen-firecracker-poses-v18.png",
+        "sourceRect": [
+          1212,
+          833,
+          309,
+          159
+        ],
+        "stature": 363,
+        "anchor": [
+          1369.749374251823,
+          990
+        ],
+        "core": [
+          1213,
+          834,
+          307,
+          157
+        ]
+      }
+    },
+    "types": [
+      "bottle",
+      "rock",
+      "firecracker"
+    ],
+    "worldHeight": 120,
+    "adultReferenceHeight": 128,
+    "problems": []
+  }
+}

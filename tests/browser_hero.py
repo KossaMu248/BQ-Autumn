@@ -12,10 +12,11 @@ from pathlib import Path
 from threading import Thread
 
 from playwright.sync_api import sync_playwright
+from browser_encounters import provoke_existing_gang
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v17.html"
-SHOTS = ROOT / "screenshots" / "revision17"
+ENTRY = "autumn-v18.html"
+SHOTS = ROOT / "screenshots" / "revision18"
 
 CHAIR_DRAW_AUDIT = r"""(() => {
   window.__heroLooseChairDraws=[];
@@ -56,7 +57,7 @@ def ready(context, base, errors, failures):
     )
     page.goto(f"{base}/{ENTRY}")
     page.wait_for_function(
-        "BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BearlyHeroRig?.ready?.()",
+        "BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0 && window.BearlyHeroRig?.ready?.()",
         timeout=60000,
     )
     # Pause in the near future to avoid racing the real clock between calls.
@@ -152,7 +153,7 @@ def desktop(browser, base, errors, failures):
     assert read(page)["jump"] == 0
 
     # Check the larger indoor stature and an interaction as well as the street rig.
-    page.evaluate("BEARLY_DEBUG_MENU.warp(15700/1.5)")
+    page.evaluate("BEARLY_DEBUG_MENU.warp(BearlyNeighbourhood.entrance(BearlyNeighbourhood.scenes.find(b=>b.key==='pizzeria')).x/1.5)")
     page.clock.run_for(100)
     page.locator(".visit-prompt").click()
     page.clock.run_for(3200)
@@ -194,12 +195,13 @@ def desktop(browser, base, errors, failures):
     page.keyboard.up("ArrowRight")
     page.clock.run_for(200)
 
-    # The original hostile crew supplies real projectiles, avoiding a synthetic
-    # hit state that could miss the visible hurt/collapse/recovery path.
+    # A real passive crew is provoked through E before supplying projectiles.
+    # This preserves actual contact, hurt, collapse and recovery coverage.
     page.evaluate("BEARLY_DEBUG_MENU.settings.godMode=false;BEARLY_DEBUG_MENU.warp(3800/1.5)")
     page.clock.run_for(100)
     page.keyboard.press("q")
     page.clock.run_for(2300)
+    provoke_existing_gang(page)
     saw_hurt = False
     saw_defeat = False
     for _ in range(160):

@@ -1,4 +1,4 @@
-"""Sustained V17 browser performance after street routines have started.
+"""Sustained V18 browser performance after street routines have started.
 
 This uses real game actors, actual keyboard/touch controls, native browser time,
 and no recording. Debug warps choose locations; NPC state is never replaced.
@@ -18,9 +18,9 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = 'autumn-v17.html'
+ENTRY = 'autumn-v18.html'
 FOOT_SPEED = 120
-SHOTS = ROOT / 'screenshots' / 'revision17'
+SHOTS = ROOT / 'screenshots' / 'revision18'
 
 INSTRUMENT = r"""(() => {
   const raf=requestAnimationFrame.bind(window),draw=CanvasRenderingContext2D.prototype.drawImage;
@@ -139,7 +139,7 @@ def open_page(browser,base,profile,errors,failures):
     else:page.locator('#introStart').click()
     page.evaluate('BEARLY_DEBUG_MENU.settings.godMode=true')
     if profile['mode'] in ['garden','dock']:
-        page.evaluate('(x)=>BEARLY_DEBUG_MENU.warp(x/1.5)',profile['location']);page.wait_for_timeout(100)
+        page.evaluate('(x)=>{const scene=BearlyNeighbourhood.scenes.find(s=>s.x===x);BEARLY_DEBUG_MENU.warp(BearlyNeighbourhood.entrance(scene).x/1.5)}',profile['location']);page.wait_for_timeout(100)
         page.locator('.visit-prompt').click();page.wait_for_function('(m)=>BearlyVisits.audit().mode===m',arg=profile['mode'],timeout=15000)
     else:
         page.evaluate('BEARLY_DEBUG_MENU.warp(2500/1.5)');page.wait_for_timeout(150)

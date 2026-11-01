@@ -1,11 +1,16 @@
 /* A light material/ink pass over the familiar bear art. Rig and silhouette stay intact. */
 (() => {
   'use strict';
-  const cache=new WeakMap();
+  const cache=new WeakMap(),compiled={"bear_pedal_3.webp":"assets/cache/hero-cycling-v19/bear_pedal_3.png","bear_pose_pedal.webp":"assets/cache/hero-cycling-v19/bear_pose_pedal.png","bear_pose_coast.webp":"assets/cache/hero-cycling-v19/bear_pose_coast.png","bear_pose_brake.webp":"assets/cache/hero-cycling-v19/bear_pose_brake.png","bear_pose_wheelie.webp":"assets/cache/hero-cycling-v19/bear_pose_wheelie.png","bear_pose_jump.webp":"assets/cache/hero-cycling-v19/bear_pose_jump.png","bear_pose_land.webp":"assets/cache/hero-cycling-v19/bear_pose_land.png","bear_pose_hurt.webp":"assets/cache/hero-cycling-v19/bear_pose_hurt.png","bear_pedal_0.webp":"assets/cache/hero-cycling-v19/bear_pedal_0.png","bear_pedal_1.webp":"assets/cache/hero-cycling-v19/bear_pedal_1.png","bear_pedal_2.webp":"assets/cache/hero-cycling-v19/bear_pedal_2.png","bear_upper.webp":"assets/cache/hero-cycling-v19/bear_upper.png","bear_upper_rightarm_injured.webp":"assets/cache/hero-cycling-v19/bear_upper_rightarm_injured.png","bear_leg_clean.webp":"assets/cache/hero-cycling-v19/bear_leg_clean.png","bear_leg_original.webp":"assets/cache/hero-cycling-v19/bear_leg_original.png"};
+  const stats={compiledDraws:0,legacyBuilds:0,legacyLargeBuilds:0,legacyPixels:0};
+  function source(url){const name=String(url||'').split('/').pop().split('?')[0];return compiled[name]||url;}
+  function prepared(im){return String(im?.src||'').includes('/assets/cache/hero-cycling-v19/');}
   function sprite(im){
     if(!im?.naturalWidth)return im;
+    if(prepared(im)){stats.compiledDraws++;return im;}
     if(cache.has(im))return cache.get(im);
     try{
+      stats.legacyBuilds++;stats.legacyPixels+=im.naturalWidth*im.naturalHeight;if(im.naturalWidth*im.naturalHeight>10000)stats.legacyLargeBuilds++;
       const layer=document.createElement('canvas');layer.width=im.naturalWidth;layer.height=im.naturalHeight;
       const g=layer.getContext('2d',{willReadFrequently:true});
       g.filter='contrast(1.045) saturate(1.06)';g.drawImage(im,0,0);g.filter='none';
@@ -24,5 +29,5 @@
       out.globalAlpha=1;out.drawImage(layer,0,0);cache.set(im,result);return result;
     }catch(_){cache.set(im,im);return im;}
   }
-  window.BearlyHero={sprite};
+  window.BearlyHero={sprite,source,audit:()=>({...stats,compiledSources:Object.keys(compiled).length})};
 })();

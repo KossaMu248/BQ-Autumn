@@ -6,6 +6,7 @@ Opaque connected components identify the actual bodies; observed clip paths
 are checked in source coordinates rather than assuming fixed sheet cells.
 It does not write screenshots or mutate the game state.
 """
+from browser_fixture import prepared_ready
 import functools
 import hashlib
 import json
@@ -17,7 +18,7 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v18.html"
+ENTRY = "autumn-v19.html"
 ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "civilian-reactions-v16.png", "teen-screen-v18.png")
 TEEN_POSE_ASSETS = ("teen-molotov-poses-v18.png", "teen-rock-poses-v18.png", "teen-firecracker-poses-v18.png", "teen-run-opposites-v18.png")
 
@@ -51,7 +52,7 @@ def main():
                 else None,
             )
             page.goto(f"http://127.0.0.1:{server.server_port}/{ENTRY}")
-            page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready() && BearlyKids.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0")
+            page.wait_for_function(prepared_ready("BearlyVisits.audit().artReady && BearlyAtlas.ready() && BearlyKids.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0"))
             page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
             result = page.evaluate(
                 r"""async () => {
@@ -217,7 +218,7 @@ def main():
         assert not failed_assets, failed_assets
         assert result["samples"] == 2520, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
-        directory = ROOT / "screenshots" / "revision18"
+        directory = ROOT / "screenshots" / "revision19"
         directory.mkdir(exist_ok=True)
         paths = [ROOT / ENTRY, ROOT / "js" / "brawler-art.js", ROOT / "js" / "npc-motion.js", ROOT / "js" / "illustrated-kids.js", *(ROOT / "assets" / "art" / name for name in (*ASSETS, *TEEN_POSE_ASSETS))]
         evidence = {"entry": ENTRY, "result": "passed", **result,

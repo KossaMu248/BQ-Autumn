@@ -8,11 +8,13 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v18.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v19.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 The neighborhood now starts among housing and town streets, passes through woodland, and reaches the water background near the lake. Street doors and furniture are scaled around the 145-pixel bear, 128-pixel adults and 120-pixel teens. Windowed framing uses neutral charcoal; fullscreen remains optional.
 
 Street crews hang out or shelter behind utility boxes and burning bins. Passing by can draw a warning; lingering close, bothering them with **E**, or attacking can provoke the group. Peaceful civilians retain their own routines and flee nearby fights. Five hearts represent 100 HP: rocks cost **½ heart**, Molotovs **1½ hearts**, and firecrackers **1 heart**. Body and ground impacts have distinct effects; ground fire is visual and adds no hidden repeated damage.
+
+V19 removes the startup freeze by using lossless prepared artwork, requesting walking frames only for visible characters, and loading optional on-foot/room artwork when it is needed. The title remains responsive if you press **Let’s Ride** before loading finishes. Static street drawing is reused, and persistently slow touch devices automatically reduce the backing buffer. Character artwork, walking geometry, cycling physics and V18 damage balance are preserved.
 
 ## Play locally
 
@@ -181,6 +183,6 @@ Run `python3 tests/browser_hero.py` to capture front/back carriers, both walking
 
 Run `python3 tests/browser_baby_face.py` for the original head-file hash, source eye/nose/mouth/chin pixels, removed chair/cloth pixels and final chin visibility after all collar/body layers. Focused 8× probes cover both headings and character sizes; negative controls reject an erased jaw or a collar drawn across it.
 
-Run `node tests/npc-life.cjs` for civilian safety, routes, rests, pursuit and schedules; `node tests/hero-gait.cjs` measures the longer gait and source-sized limbs. `python3 tests/browser_street_life.py` exercises real street controls and furniture on desktop and both phone orientations. `python3 tests/browser_wardrobe.py --renderer-only` checks the complete cast and continuous neutral walking rig. Current V18 evidence is in `screenshots/revision18/`.
+Run `node tests/npc-life.cjs` for civilian safety, routes, rests, pursuit and schedules; `node tests/hero-gait.cjs` measures the longer gait and source-sized limbs. `python3 tests/browser_street_life.py` exercises real street controls and furniture on desktop and both phone orientations. `python3 tests/browser_wardrobe.py --renderer-only` checks the complete cast and continuous neutral walking rig. Current startup evidence is in `screenshots/revision19/`; artwork and gameplay evidence remains in `screenshots/revision18/`.
 
 NPC walking phases are baked into a bounded sprite cache and reused during play. Supporting browsers bake them off the main thread; older browsers use cooperative background slices. Settings shows animation-cache counts and memory. Hiding foliage uses a complete painted silhouette, and overlapping half-size sidewalk furniture is removed.

@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V18';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V19';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -98,8 +98,24 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   const TIRE_R=WHEEL_RADIUS*ART_SCALE;
   const riderX=(x)=>(x-ART_ORIGIN_X)*ART_SCALE;
   const riderY=(y)=>(y-ART_ORIGIN_Y)*ART_SCALE;
-  const images = {};
-  const scenicImage=new Image();scenicImage.src=(window.BEARLY_ASSETS&&window.BEARLY_ASSETS.suburb_sunset)||'assets/suburb_sunset.jpg';
+  const imagePaths=new Map(),imageSources=new Map(),imageRecords=Object.create(null);
+  const rendering={scale:1,adaptive:window.matchMedia('(pointer: coarse)').matches,samples:0,slow:0,total:0};
+  const startup={beganAt:performance.now(),ready:false,requested:false,readyAt:null,firstFrameAt:null,errors:[]};
+  const images=new Proxy(imageRecords,{get(target,key){if(typeof key==='string'&&!target[key]&&imagePaths.has(key))requestGameImage(key);return target[key];}});
+  function requestGameImage(name,priority='low'){
+    const original=imagePaths.get(name);if(!original)return Promise.resolve();
+    const material=/^(bear_pose_|bear_pedal_|bear_upper(?:_|$))/.test(name),url=material?(window.BearlyHero?.source(original)||original):original;
+    let entry=imageSources.get(url);
+    if(!entry){
+      const image=new Image();image.decoding='async';image.fetchPriority=priority;
+      const ready=new Promise(resolve=>{image.onload=async()=>{try{await image.decode?.();}catch(_){}resolve(image);};image.onerror=()=>{startup.errors.push(name);resolve(image);};});
+      entry={image,ready};imageSources.set(url,entry);image.src=url;
+    }
+    imageRecords[name]=entry.image;return entry.ready;
+  }
+  window.BEARLY_STARTUP=()=>({...startup,state,x:bike.x,speed:bike.vx,renderScale:rendering.scale,backingWidth:canvas.width,backingHeight:canvas.height,requestedImages:imageSources.size,registeredImages:imagePaths.size,readyImages:[...imageSources.values()].filter(e=>e.image.naturalWidth>0).length});
+  const scenicImage=new Image(); // Archival backdrop is not part of the active painted world.
+
   const keys = new Set();
   const debugSettings={foreground:true,backdrop:true,metro:true,particles:true,hitboxes:false,miniStats:false,godMode:false,hideHud:false};
   let debugOpen=false;
@@ -484,11 +500,18 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
   }
   function load(){
     const files=[...Object.keys(window.BEARLY_ASSETS||{}).filter(n=>n.startsWith('v105_')||n.startsWith('v149_')||n.startsWith('v151_')||n.startsWith('v153_hud_')),...['bear_pose_brake','bear_pose_coast','bear_pose_hurt','bear_pose_idle','bear_pose_jump','bear_pose_land','bear_pose_pedal','bear_pose_wheelie',...Array.from({length:4},(_,i)=>'bear_pedal_'+i)].flatMap(k=>Array.from({length:5},(_,i)=>`v77_${k}_face_${i}`)),...['hoodie','video','toll','scooter'].flatMap(k=>Array.from({length:6},(_,j)=>Array.from({length:6},(_,i)=>`v72_${k}_${j}_${i}`)).flat()),...['hoodie','video','toll','scooter'].flatMap(k=>Array.from({length:6},(_,j)=>[0,3].map(f=>`v158_firecracker_${k}_${j}_${f}`))).flat(),...['happy','terrified','angry','laughing','crying','knocked','excited','sick'].map(n=>'v158_hud_'+n),...['istanbul','corner','cafe','piccola'].map(n=>'v96_shop_'+n),...Array.from({length:6},(_,i)=>'v96_civilian_'+i),'v60_fire_bin',...['utility','lamp','bike_rack','trash_bin','planter','guardrail','market_crates'].map(n=>'v98_clean_'+n),'v95_stone_border','v95_rockbed','v95_garden_screen','v95_noticeboard', ...['bench_a','bench_b','planter','market_crates','courtyard_fence','bike_rack','lamp','bollards','guardrail','swings','playground','utility','bus_shelter','trash_bin','barrier','scooter_broken','cart_hazard','glass','rocks','scrap','sign_debris','fireworks','construction','tree'].map(n=>'v60_'+n),...Array.from({length:6},(_,i)=>'v162_firebin_'+i),...['bottle','rock','firecracker'].map(n=>'v162_projectile_'+n),...Array.from({length:6},(_,i)=>'v59_fire_'+i),...['bottle','rock','firecracker'].flatMap(k=>Array.from({length:6},(_,i)=>'v59_enemy_'+k+'_'+i)),...['scooter_broken','bench_a','bench_b','bus_shelter','bike_rack','trash_bin','planter','courtyard_fence','balcony','guardrail','lamp','bollards','utility','market_crates','playground','swings','metro_entrance','metro_signs','direction','barrier','glass','cart_hazard','construction','scrap','fireworks','rocks','sign_debris','tree'].map(n=>'v59_'+n),...['ride','wheelie','jump','landing','crash','flyoff','drag','recover'].map(n=>'sheet_pose_'+n),...['ride','wheelie','jump','land','recover'].map(n=>'bear_sheet_'+n),...['idle','pedal','coast','brake','wheelie','jump','land','hurt'].map(n=>'bear_pose_'+n),...['0','1','2','3'].map(n=>'bear_pedal_'+n),'v142_pizza_wrapper','v85_bear_prone_crash','v89_metro_station','v115_metro_complete','v116_metro_clean','v118_metro_complete','v118_close_tree','v118_close_bush_0','v118_close_bush_1','v118_close_bush_2','metro_option_logos','metro_option_panel','v89_bike_crashed','v91_nearfoliage_0','v91_nearfoliage_1','v91_nearfoliage_2','v92_near_branch',...Array.from({length:6},(_,i)=>'v99_front_'+i),'v99_front_canopy',...Array.from({length:8},(_,i)=>'v102_lens_'+i),...Array.from({length:8},(_,i)=>'v102_close_'+i),...Array.from({length:9},(_,i)=>'v103_bank_'+i),...Array.from({length:9},(_,i)=>'v104_shrub_'+i),...Array.from({length:4},(_,i)=>'v104_close_'+i),...Array.from({length:4},(_,i)=>'v103_bloom_'+i),...Array.from({length:16},(_,i)=>'v87_prone_'+i),'bear_upper','bear_upper_rightarm_injured','bear_leg_original','bear_leg_clean','bear_glove_part','bear_body','bear_head','bear_arm','bear_boot',...expressionNames.map(x=>'face_'+x),...babyFrameNames.map(x=>'baby_pose_'+x),...babyCrashFrames.map(x=>'baby_crash_'+x),...v125CrashCels,...v131CrashCels,...['castle_hill','apartment_terrace','metro_gard','metro_strand','waterfront','park_props','swedish_sign','flower_rocks','lakeside_dock','road_slope','road_arched','road_bridge'].map(x=>'env_'+x),...['hoodie','scooter','filmmaker','fireworks','kiosk','metro_kiosk','mailboxes','props_cart','props_cones','props_bins','props_barricade','street_signs'].map(x=>'v53_'+x),...['hoodie_night','hoodie_olive','filmmaker_charcoal','filmmaker_ink','scooter_night','scooter_olive','fireworks_burgundy','fireworks_dark'].map(x=>'v56_'+x),...['homes','metro','market','forest','lake'].flatMap((z)=>Array.from({length:({homes:4,metro:3,market:3,forest:4,lake:4})[z]},(_,i)=>`v57_scene_${z}_${i}`)),...['homes','metro','market','forest','lake'].map(z=>'v57_pano_'+z)];
-    return Promise.all(files.filter(n=>!n.startsWith('v57_scene_')&&!/^v158_firecracker_scooter_[0234]_3$/.test(n)).map(n=>new Promise(resolve=>{
-      const img=new Image();img.onload=resolve;img.onerror=resolve;
-      img.src=(window.BEARLY_V163_ASSETS&&window.BEARLY_V163_ASSETS[n]) || (window.BEARLY_ASSETS&&window.BEARLY_ASSETS[n]) || `assets/${n}.png`;images[n]=img;
-    })));
+    for(const name of files)if(!name.startsWith('v57_scene_')&&!/^v158_firecracker_scooter_[0234]_3$/.test(name))imagePaths.set(name,(window.BEARLY_V163_ASSETS&&window.BEARLY_V163_ASSETS[name])||(window.BEARLY_ASSETS&&window.BEARLY_ASSETS[name])||`assets/${name}.png`);
+    // Only the native riding cast and first collectible are needed to start.
+    // Archive/debug assets are requested lazily at their actual point of use.
+    const critical=[...bearPoseNames.map(n=>'bear_pose_'+n),...Array.from({length:4},(_,i)=>'bear_pedal_'+i),...babyFrameNames.map(n=>'baby_pose_'+n),'v151_baby_pose_excited','v151_baby_pose_sick','v142_pizza_wrapper','bear_leg_original'];
+    return Promise.all(critical.map(name=>requestGameImage(name,'high')));
   }
+  function prepareRideReactions(){
+    const names=['bear_upper','bear_upper_rightarm_injured','bear_leg_original','bear_glove_part','v89_bike_crashed','v85_bear_prone_crash',...expressionNames.map(n=>'face_'+n),...babyCrashFrames.map(n=>'baby_crash_'+n),...v125CrashCels,...v131CrashCels,...Array.from({length:16},(_,i)=>'v87_prone_'+i),...['bottle','rock','firecracker'].map(n=>'v162_projectile_'+n)];
+    let index=0;const next=()=>{if(index>=names.length)return;requestGameImage(names[index++]);if(window.requestIdleCallback)requestIdleCallback(next,{timeout:1200});else setTimeout(next,32);};
+    if(window.requestIdleCallback)requestIdleCallback(next,{timeout:1200});else setTimeout(next,32);
+  }
+
   function groundAt(x) {
     for(const seg of segments) if(x>=seg[0]&&x<=seg[1])return lerp(seg[2],seg[3],(x-seg[0])/(seg[1]-seg[0]));
     return null;
@@ -3338,7 +3361,9 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
     c.beginPath();c.ellipse(217,473,24,4,0,0,6.283);c.fill();c.globalAlpha=1;
     return cv;
   }
-  for(let n=0;n<6;n++)v108TreeSprites.push(v108BuildTree(n));
+  // The active painted world supplies its own trees. Build archived V108
+  // micro-leaf sprites only if an archived drawing path actually requests one.
+  function v108TreeSprite(variant){return v108TreeSprites[variant]||(v108TreeSprites[variant]=v108BuildTree(variant));}
   // Orchard/courtyard groups are assigned once, not at a repeating camera interval.
   // Clear the Hässelby Gård station's sightline and the major shopfronts.
   for(let n=0,x=270;x<FINISH-420;n++){
@@ -3365,7 +3390,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       if(v129LeftMetroApproach(p.x) || v129MetroBuffer(p.x,270))continue;
       const gy=groundAt(p.x);if(!Number.isFinite(gy)){v108Audits.invalidFoot++;continue;}
       // Tree roots are always embedded behind the far pavement at gy-102.
-      const img=v108TreeSprites[p.variant];
+      const img=v108TreeSprite(p.variant);
       ctx.save();ctx.translate(p.x,gy-104);
       ctx.globalAlpha=p.alpha;
       ctx.filter=p.zone==='forest'?'saturate(.92) contrast(1.02)':'saturate(.89) contrast(1.02)';
@@ -3594,7 +3619,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       if(g.mood!==1){
         const xx=begin+g.w*(g.mood===0?.26:.72),gy=groundAt(xx);
         if(Number.isFinite(gy)){
-          const im=v108TreeSprites[(g.i+2)%6],h=119+v105Seed(247,g.i)*50,w=h*.93;
+          const im=v108TreeSprite((g.i+2)%6),h=119+v105Seed(247,g.i)*50,w=h*.93;
           ctx.save();ctx.translate(xx,gy-102);ctx.globalAlpha=.86;
           ctx.filter='saturate(.81) contrast(.98)';
           if(g.i%2)ctx.scale(-1,1);
@@ -3609,7 +3634,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
       if(t.x+t.h<cameraX-120||t.x-t.h>cameraX+W+120)continue;
       const gy=groundAt(t.x);
       if(!Number.isFinite(gy)){v110Audit.invalidGround++;continue;}
-      const im=v108TreeSprites[t.variant],width=t.h*.93;
+      const im=v108TreeSprite(t.variant),width=t.h*.93;
       ctx.save();ctx.translate(t.x,gy-110);ctx.globalAlpha=.93;
       ctx.filter='saturate(.88) contrast(1.01)';
       if(t.x>v110MetroX)ctx.scale(-1,1);
@@ -3756,7 +3781,7 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
         const canopy=images['v99_front_canopy'];
         if(Number.isFinite(gy)){
           // Reuse a fully illustrated smaller tree, not procedural leaf rings.
-          const sprite=v108TreeSprites[(g.sector+g.type)%6];
+          const sprite=v108TreeSprite((g.sector+g.type)%6);
           const height=98+g.bloom*52,width=height*.93;
           ctx.save();ctx.translate(x,gy-101);
           if(g.sector%2)ctx.scale(-1,1);
@@ -5866,6 +5891,7 @@ function babyFigure(expr, thrown=false, pose='idle'){
     }else drawBike();
   }
   function render(){
+    ctx.setTransform(rendering.scale,0,0,rendering.scale,0,0);
     if(window.BearlyVisits?.render(ctx,W,H))return;
     ctx.clearRect(0,0,W,H);window.BearlyWorld.sky(ctx,illustratedState());
     ctx.save();ctx.translate(W*.32,H*.22);ctx.scale(1.35,1.35);ctx.translate(-W*.32,-H*.22);ctx.translate(-cameraX+(cameraShake?(Math.random()-.5)*cameraShake:0),-cameraY+(cameraShake?(Math.random()-.5)*cameraShake*.6:0));
@@ -5949,6 +5975,7 @@ APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.comba
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
 GARDEN      ${q?.seeds.length||0}/3${q?.garden?' returned':''}
 SCREEN      ${window.BearlyFullscreen?.state()||'window'}
+RENDER      ${canvas.width} × ${canvas.height}${rendering.scale<1?' · automatic phone performance':''}
 STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bike.x).name}\nMAP X       ${x} / 28000\nCAMERA      ${Math.round(cameraX)}, ${cy}\nBIKE        ${Math.round(bike.x)}, ${Math.round(bike.y)}\nSPEED       ${Math.round(bike.vx*KMH_PER_SPEED)} km/h\nHEALTH      ${Math.round(health)}%    PANIC ${Math.round(panic)}%\nGROUND Y    ${ground==null?'none':Math.round(ground)}\nENEMIES     ${gangCrews.length} crews  ·  ${hazards.length} hazards`;
     }
     $('debugMini').hidden=!debugSettings.miniStats;
@@ -5991,6 +6018,20 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     return null;
   }
   function loop(now){
+    // The opaque title does not need a second animated street behind it.
+    if(!introOverlay.hidden&&startup.firstFrameAt!==null){last=now;acc=0;requestAnimationFrame(loop);return;}
+    const frameMs=now-last;
+    if(rendering.adaptive&&rendering.scale>.675&&state==='playing'&&!debugOpen&&!document.hidden&&frameMs>0){
+      rendering.samples++;rendering.slow+=frameMs>(rendering.scale===1?50:70)?1:0;rendering.total+=Math.min(250,frameMs);
+      if(rendering.samples>=6){
+        if(rendering.slow>=4&&rendering.total/rendering.samples>(rendering.scale===1?50:70)){
+          // Logical world coordinates and every control stay at 1160×640.
+          // Only a persistently slow touch device uses a smaller backing store.
+          rendering.scale=rendering.scale===1?.75:.675;canvas.width=Math.round(W*rendering.scale);canvas.height=Math.round(H*rendering.scale);
+        }
+        rendering.samples=0;rendering.slow=0;rendering.total=0;
+      }
+    }
     let dt=Math.min(.04,(now-last)/1000||0);last=now;
     let iter=0;
     const exploring=!!window.BearlyVisits?.active();
@@ -6050,7 +6091,8 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
   const introReduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ictx=introCanvas.getContext('2d',{alpha:true});
   const IW=1672, IH=941;
-  introCanvas.width=IW; introCanvas.height=IH;
+  function sizeIntro(){const box=introCanvas.getBoundingClientRect(),density=Math.min(1.5,window.devicePixelRatio||1),width=Math.max(1,Math.min(IW,Math.ceil(box.width*density))),height=Math.max(1,Math.min(IH,Math.ceil(box.height*density)));if(introCanvas.width!==width||introCanvas.height!==height){introCanvas.width=width;introCanvas.height=height;}ictx.setTransform(width/IW,0,0,height/IH,0,0);}
+  sizeIntro();new ResizeObserver(sizeIntro).observe(introCanvas);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden && !introOverlay.hidden) introRunning=true;});
   let introSeed=325621;
   function irand(){introSeed=(Math.imul(introSeed,1664525)+1013904223)>>>0;return introSeed/4294967296;}
@@ -6115,18 +6157,19 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     ictx.fillRect(667,758,312,27);
   }
   function introAnim(ms){
+    if(introOverlay.hidden || !introRunning)return;
     requestAnimationFrame(introAnim);
-    if(introOverlay.hidden || !introRunning || introReduce || !introReady)return;
+    if(introReduce || !introReady)return;
     const t=ms/1000;
     ictx.clearRect(0,0,IW,IH);
     introSunDraw(t); introLampsDraw(t); introFoliageDraw(t); introWindDraw(t); introPulseDraw(t);
   }
   if(!introReduce)requestAnimationFrame(introAnim);
+  function enterReadyRide(){introOverlay.hidden=true;introRunning=false;introBtn.removeAttribute('aria-busy');start();}
   window.BEARLY_ENTER_GAME=function(){
-    introOverlay.hidden=true;
-    introRunning=false;
-    unlockMobileAudio();
-    start();
+    unlockMobileAudio();startup.requested=true;introRunning=false;
+    if(!startup.ready){introBtn.textContent='GETTING READY…';introBtn.setAttribute('aria-busy','true');return;}
+    enterReadyRide();
   };
   introBtn.addEventListener('click',()=>window.BEARLY_ENTER_GAME());
 
@@ -6235,9 +6278,9 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
   // A read-only snapshot for debugging and tuning the ride (no developer tools required).
   window.BEARLY_PANIC_TEST={max(){panic=100;panicHighTime=3.7;panicEpisodeCooldown=0;return true;},state(){return {panic,panicHighTime,panicEpisodeType,panicEvents,pukeWheelSlipUntil}}};
   window.BEARLY_V89_TEST={pizza(){const s=stars.find(x=>!x.got);if(!s)return false;bike.x=s.x;bike.y=s.y;return true;},crew(i=0){const c=gangCrews[i];bike.x=c.x-260;bike.y=(groundAt(bike.x)??440)-94;bike.vx=MAX_SPEED*.85;return c.name;},health(v=50){health=clamp(v,0,100);return health;},panic(v=100){panic=clamp(v,0,100);return panic;},faster(){bike.vx=MAX_SPEED;return bike.vx;}};
-  window.BEARLY_V118_AUDIT=()=>({metro:v116MetroAnchor(),cleanStation:!!images.v118_metro_complete?.naturalWidth,treeLoaded:!!images.v118_close_tree?.naturalWidth,bushAssets:[0,1,2].map(i=>!!images['v118_close_bush_'+i]?.naturalWidth),near:{...v118CloseQA},backdropUnchanged:true});
-  window.BEARLY_V117_AUDIT=()=>({forecourt:{...V117_FORECOURT},metro:v116MetroAnchor(),assets:['v59_courtyard_fence','v98_clean_lamp','v98_clean_bike_rack','v98_clean_planter'].map(k=>({key:k,loaded:!!images[k]?.naturalWidth})),restoredBackdrop:true});
-  window.BEARLY_V116_AUDIT=()=>({station:v116MetroAnchor(),stationLoaded:!!images.v116_metro_clean?.naturalWidth,foreground:{...v116ForegroundAudit},background:'restored v110'});
+  window.BEARLY_V118_AUDIT=()=>({metro:v116MetroAnchor(),cleanStation:!!imageRecords.v118_metro_complete?.naturalWidth,treeLoaded:!!imageRecords.v118_close_tree?.naturalWidth,bushAssets:[0,1,2].map(i=>!!imageRecords['v118_close_bush_'+i]?.naturalWidth),near:{...v118CloseQA},backdropUnchanged:true});
+  window.BEARLY_V117_AUDIT=()=>({forecourt:{...V117_FORECOURT},metro:v116MetroAnchor(),assets:['v59_courtyard_fence','v98_clean_lamp','v98_clean_bike_rack','v98_clean_planter'].map(k=>({key:k,loaded:!!imageRecords[k]?.naturalWidth})),restoredBackdrop:true});
+  window.BEARLY_V116_AUDIT=()=>({station:v116MetroAnchor(),stationLoaded:!!imageRecords.v116_metro_clean?.naturalWidth,foreground:{...v116ForegroundAudit},background:'restored v110'});
   window.BEARLY_CAPTURE_METRO=(cx=10620,cy=440)=>{cameraX=cx;cameraY=cy;render();return canvas.toDataURL('image/png');};
   window.BEARLY_V110_TEST=()=>({version:'10.10',planCount:v110CourtyardPlan.length,metroX:v110MetroX,groveCount:v110MetroGrove.length,borders:v110MetroBorders.length,visible:{...v110Audit},metroCentreClear:v110Audit.entranceClear,metroFeet:v110MetroGrove.map(t=>({x:Math.round(t.x),height:t.h,foot:Number((groundAt(t.x)-110).toFixed(1))}))});
   window.BEARLY_V109_TEST=()=>({version:'10.10',gardens:v109Gardens.length,visible:{...v109Audit},treeCount:v108TreeHomes.length,metroClear:v109Gardens.every(g=>g.end<stretchX(7060)||g.start>stretchX(8030))});
@@ -6255,25 +6298,25 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     ground:groundAt(baby.x),clearance:(groundAt(baby.x)??baby.y)-(baby.y+27),
     vy:baby.vy,grounded:baby.grounded,landedAt:baby.landedAt,restAt:baby.restAt,
     pose:thrownBabyPose()}:null;
-  window.BEARLY_V131_QA=()=>({pose:thrownBabyPose(),loaded:v131CrashCels.filter(k=>!!images[k]?.naturalWidth).length,
+  window.BEARLY_V131_QA=()=>({pose:thrownBabyPose(),loaded:v131CrashCels.filter(k=>!!imageRecords[k]?.naturalWidth).length,
     originalTerrainEmbedded:false,lastMetroOverlapRemoved:true});
   window.BEARLY_V125_QA_CRASH=()=>{if(state!=='playing')reset(true);bike.vx=390;crash('debug crash test');return {state,crashAt:motion.crashAt,baby:!!baby};};
   window.BEARLY_V125_QA_STEP=(dt=1)=>{for(let k=0;k<Math.ceil(dt*120);k++)update(1/120);return {time,age:time-motion.crashAt,baby: baby?{x:baby.x,y:baby.y,vx:baby.vx,vy:baby.vy,phase:baby.crashPhase,landedAt:baby.landedAt,restAt:baby.restAt,peeBorn:baby.peeBorn,clearance:(groundAt(baby.x)??baby.y)-(baby.y+27),pose:thrownBabyPose()}:null,overlay:!$('overlay').hidden, state};};
-  window.BEARLY_DEBUG=()=>({artDirector:'V110 planted residential courtyards + metro grove and flower borders; V108 layered planted city / courtyard trees / far railings / near kerb flowerbeds + V107 uniform natural-proportion close vegetation and hillside-following rear curb; V106 validated terrain anchors and approved C metro base; V105 composed opaque biome clusters and natural full-frame foreground without screen bands; V104 substantial depth rebuild: painted cropped shrub forms on both sides of road, truly lens-close blooms, world-anchored tree canopy; V103 terrain anchored, staged near-side flora, no road haze; V102 actual near-lens layered flowerbeds and soft passing branches; terrain-locked foreground that does not follow bicycle jumps, larger curated verge flowerbeds, no screen-space masks; removed orphan railings; approved metro option C; V98 airy skyline + smaller clustered props + edge-cleaned illustrations; V97 Gard scene with authored connected shop row and shared sloped pavement; V96 grounded prop feet and rear-curb supports, restored raised metro lighting, four local public street scenes with ambient civilians; V95 scene-appropriate authored props, scaled-down benches, park stone details, no fake logs/road-sign rocks; V94 continuous foreground parallax; V93 edge-integrated preserved prop models; V92 coherent illustrated depth: non-repeating neighborhood panoramas, camera-side world-parallax near verge, rare clipped canopy framing, no placeholders in road; V89 gameplay retained',sceneryPanelCount:neighborhoodPanels.length,backgroundParallax:NEIGHBORHOOD_PARALLAX,backgroundPanelWidth:BACKGROUND_PANEL_WIDTH,roadProps:integratedProps.length,publicPlaces:v96PublicSites.map(s=>s.name),civilianCount:9,sceneryRhythmBeats:propRhythm.length,foregroundParallax:2.18,nearVergeObjects:v105Verge.length,veryNearObjects:v105Close.length,foregroundAnchorMode:window.BEARLY_FOREGROUND_WORLD_LOCKED?'terrain':'pending',passingTrees:0,drawnForeground:window.BEARLY_FRONT_DEPTH_COUNT||0,closeForeground:window.BEARLY_CLOSE_FOREGROUND_COUNT||0,visualSaturation:.65,transitionSpan:BACKGROUND_TRANSITION,metroArtLoaded:!!images.v89_metro_station?.naturalWidth,crashBikeArtLoaded:!!images.v89_bike_crashed?.naturalWidth,roadsideClusters:propClusters.length,animatedHazards:hazards.filter(h=>h.type==='firebin').length,enemyAnimations:true,npcPatrols:true,crewReactions:reactionCount,encounterHeat:Number(encounterHeat.toFixed(2)),activeWarning:currentEncounter()?.c.phase||null,impactCues:impactCues.length,lastHitKind,maxSpeed:MAX_SPEED,peakSpeed,pukeExposure:Number(pukeExposure.toFixed(3)),pukeDamageTotal:Number(pukeDamageTotal.toFixed(2)),pizzaHealingTotal:Number(pizzaHealingTotal.toFixed(2)),panicEvents,panicHighTime:Number(panicHighTime.toFixed(2)),panicReliefUntil,panicEpisodeType,panicEpisodeUntil,pukeWheelSlipUntil,pukeDrops:pukeDrops.length,pukeSplatters:pukeSplatters.length,pukeWaves:pukeWaveCount,pukeWaveActive:time<pukeWaveEnd,cryingTears:cryingTears.length,cryTearsEmitted,babyPeeDrops:babyPeeDrops.length,babyPeeMarks:babyPeeMarks.length,crying:!!baby && baby.grounded && baby.bounces>0,ramps:ramps.length,flags:setPieces.filter(p=>p.kind==='flag').length,safeFinishSpeed:SAFE_FINISH_SPEED,brakeZone:BRAKE_ZONE,gangCrews:gangCrews.length,district:districtAt(bike.x).name,districtCount:districts.length,projectiles:projectiles.map(p=>({x:Math.round(p.x),y:Math.round(p.y),kind:p.kind})),thrownCount,dodgedCount,hitCount,landmarks:landmarks.length,distanceToFinish:Math.max(0,FINISH-bike.x),demo:{active:demo.active,stage:demo.stage,age:demo.active?time-demo.startAt:0},tricks:{wheelieSeconds:tricks.wheelieSeconds,wheelieMeters:tricks.wheelieMeters,combo:tricks.combo,bestCombo:tricks.bestCombo,total:tricks.total,lastTrickAt:tricks.lastTrickAt,title:tricks.title,visible:time<tricks.showUntil||tricks.lastWheelie},motion:{...motion},cameraX,cameraY,bearPose:mountedBearPose(),bearFaceStage:bearSpeedFaceStage(),referenceSheetPose:selectedSheetPose(),referenceMode:referenceStyle,bearCelLoaded:!!images["bear_pose_"+mountedBearPose()]?.naturalWidth, visiblePedalFrame:mountedBearPose()==='pedal'?Math.floor((((bike.cycle*.44)%(Math.PI*2)+Math.PI*2)%(Math.PI*2))/(Math.PI/2))%4:null,bearPoseForced:previewBearPose,babyPose:mountedBabyAnim().pose,babyPoseReason:mountedBabyAnim().reason,hazardBraceRemaining:Math.max(0,hazardReactUntil-time),health,lostParts:[...lostParts],babyVisibleOnBike:!baby||(demo.active&&demo.stage==='RECOVER'),babySeated:!baby||(demo.active&&demo.stage==='RECOVER'),babyEjected:!!baby&&!(demo.active&&demo.stage==='RECOVER'),seatEjected:!!seatThrown&&!(demo.active&&demo.stage==='RECOVER'),bearEjected:!!bearThrown&&!(demo.active&&demo.stage==='RECOVER'),lastPartHit:recentHitPart,bloodParticles:blood.length,artScale:ART_SCALE,spin:Number(bike.cycle.toFixed(2)),barks:barkCount,state,x:Math.round(bike.x),y:Math.round(bike.y),speed:Math.round(bike.vx),angle:Number(bike.a.toFixed(2)),contact:bike.contact,panic:Math.round(panic),score,checkpoint,deathReason,expression:bike.expression});
+  window.BEARLY_DEBUG=()=>({artDirector:'V110 planted residential courtyards + metro grove and flower borders; V108 layered planted city / courtyard trees / far railings / near kerb flowerbeds + V107 uniform natural-proportion close vegetation and hillside-following rear curb; V106 validated terrain anchors and approved C metro base; V105 composed opaque biome clusters and natural full-frame foreground without screen bands; V104 substantial depth rebuild: painted cropped shrub forms on both sides of road, truly lens-close blooms, world-anchored tree canopy; V103 terrain anchored, staged near-side flora, no road haze; V102 actual near-lens layered flowerbeds and soft passing branches; terrain-locked foreground that does not follow bicycle jumps, larger curated verge flowerbeds, no screen-space masks; removed orphan railings; approved metro option C; V98 airy skyline + smaller clustered props + edge-cleaned illustrations; V97 Gard scene with authored connected shop row and shared sloped pavement; V96 grounded prop feet and rear-curb supports, restored raised metro lighting, four local public street scenes with ambient civilians; V95 scene-appropriate authored props, scaled-down benches, park stone details, no fake logs/road-sign rocks; V94 continuous foreground parallax; V93 edge-integrated preserved prop models; V92 coherent illustrated depth: non-repeating neighborhood panoramas, camera-side world-parallax near verge, rare clipped canopy framing, no placeholders in road; V89 gameplay retained',sceneryPanelCount:neighborhoodPanels.length,backgroundParallax:NEIGHBORHOOD_PARALLAX,backgroundPanelWidth:BACKGROUND_PANEL_WIDTH,roadProps:integratedProps.length,publicPlaces:v96PublicSites.map(s=>s.name),civilianCount:9,sceneryRhythmBeats:propRhythm.length,foregroundParallax:2.18,nearVergeObjects:v105Verge.length,veryNearObjects:v105Close.length,foregroundAnchorMode:window.BEARLY_FOREGROUND_WORLD_LOCKED?'terrain':'pending',passingTrees:0,drawnForeground:window.BEARLY_FRONT_DEPTH_COUNT||0,closeForeground:window.BEARLY_CLOSE_FOREGROUND_COUNT||0,visualSaturation:.65,transitionSpan:BACKGROUND_TRANSITION,metroArtLoaded:!!imageRecords.v89_metro_station?.naturalWidth,crashBikeArtLoaded:!!imageRecords.v89_bike_crashed?.naturalWidth,roadsideClusters:propClusters.length,animatedHazards:hazards.filter(h=>h.type==='firebin').length,enemyAnimations:true,npcPatrols:true,crewReactions:reactionCount,encounterHeat:Number(encounterHeat.toFixed(2)),activeWarning:currentEncounter()?.c.phase||null,impactCues:impactCues.length,lastHitKind,maxSpeed:MAX_SPEED,peakSpeed,pukeExposure:Number(pukeExposure.toFixed(3)),pukeDamageTotal:Number(pukeDamageTotal.toFixed(2)),pizzaHealingTotal:Number(pizzaHealingTotal.toFixed(2)),panicEvents,panicHighTime:Number(panicHighTime.toFixed(2)),panicReliefUntil,panicEpisodeType,panicEpisodeUntil,pukeWheelSlipUntil,pukeDrops:pukeDrops.length,pukeSplatters:pukeSplatters.length,pukeWaves:pukeWaveCount,pukeWaveActive:time<pukeWaveEnd,cryingTears:cryingTears.length,cryTearsEmitted,babyPeeDrops:babyPeeDrops.length,babyPeeMarks:babyPeeMarks.length,crying:!!baby && baby.grounded && baby.bounces>0,ramps:ramps.length,flags:setPieces.filter(p=>p.kind==='flag').length,safeFinishSpeed:SAFE_FINISH_SPEED,brakeZone:BRAKE_ZONE,gangCrews:gangCrews.length,district:districtAt(bike.x).name,districtCount:districts.length,projectiles:projectiles.map(p=>({x:Math.round(p.x),y:Math.round(p.y),kind:p.kind})),thrownCount,dodgedCount,hitCount,landmarks:landmarks.length,distanceToFinish:Math.max(0,FINISH-bike.x),demo:{active:demo.active,stage:demo.stage,age:demo.active?time-demo.startAt:0},tricks:{wheelieSeconds:tricks.wheelieSeconds,wheelieMeters:tricks.wheelieMeters,combo:tricks.combo,bestCombo:tricks.bestCombo,total:tricks.total,lastTrickAt:tricks.lastTrickAt,title:tricks.title,visible:time<tricks.showUntil||tricks.lastWheelie},motion:{...motion},cameraX,cameraY,bearPose:mountedBearPose(),bearFaceStage:bearSpeedFaceStage(),referenceSheetPose:selectedSheetPose(),referenceMode:referenceStyle,bearCelLoaded:!!imageRecords["bear_pose_"+mountedBearPose()]?.naturalWidth, visiblePedalFrame:mountedBearPose()==='pedal'?Math.floor((((bike.cycle*.44)%(Math.PI*2)+Math.PI*2)%(Math.PI*2))/(Math.PI/2))%4:null,bearPoseForced:previewBearPose,babyPose:mountedBabyAnim().pose,babyPoseReason:mountedBabyAnim().reason,hazardBraceRemaining:Math.max(0,hazardReactUntil-time),health,lostParts:[...lostParts],babyVisibleOnBike:!baby||(demo.active&&demo.stage==='RECOVER'),babySeated:!baby||(demo.active&&demo.stage==='RECOVER'),babyEjected:!!baby&&!(demo.active&&demo.stage==='RECOVER'),seatEjected:!!seatThrown&&!(demo.active&&demo.stage==='RECOVER'),bearEjected:!!bearThrown&&!(demo.active&&demo.stage==='RECOVER'),lastPartHit:recentHitPart,bloodParticles:blood.length,artScale:ART_SCALE,spin:Number(bike.cycle.toFixed(2)),barks:barkCount,state,x:Math.round(bike.x),y:Math.round(bike.y),speed:Math.round(bike.vx),angle:Number(bike.a.toFixed(2)),contact:bike.contact,panic:Math.round(panic),score,checkpoint,deathReason,expression:bike.expression});
   window.BEARLY_REFERENCE={set(v){referenceStyle=false;},get(){return false;},pose(){return null;}};
   window.BEARLY_BEAR_POSES={set(name){previewBearPose=bearPoseNames.includes(name)?name:null;},current(){return mountedBearPose();},all:()=>bearPoseNames.slice()};
   window.BEARLY_POSES={set(name){previewPose=babyFrameNames.includes(name)?name:null;}, current(){return previewPose||mountedBabyAnim().pose;}, all:()=>babyFrameNames.slice()};
   window.BEARLY_V150_TEST=()=>({emotion:v149Emotion(),mountedPose:mountedBabyAnim().pose,
     mountedCel:mountedBabyCelName(mountedBabyAnim().pose),mountedStyle:'original_v148',
-    airtimeLoaded:!!images.v149_airtime?.naturalWidth,
+    airtimeLoaded:!!imageRecords.v149_airtime?.naturalWidth,
     fatalAirOnly:!!baby&&(state==='dead'||state==='dead_end')&&baby.landedAt<0&&thrownBabyPose()==='airtime',
     crashPose:baby?thrownBabyPose():null,onBike:!baby});
   window.BEARLY_V151_TEST=()=>({emotion:v149Emotion(),portrait:window.BEARLY_V151_PORTRAIT,
     riding:window.BEARLY_FRAME_STATS?.f,mountAnchor:window.BEARLY_FRAME_STATS?.anchor,
     crashPose:baby?thrownBabyPose():null, fatalAir:!!baby&&(state==='dead'||state==='dead_end')&&baby.landedAt<0,
-    v151ExcitedLoaded:!!images.v151_baby_pose_excited?.naturalWidth,
-    v151SickLoaded:!!images.v151_baby_pose_sick?.naturalWidth});
-  window.BEARLY_V158_QA=()=>({build:window.BEARLY_BUILD_ID,crews:gangCrews.map(c=>({x:c.x,item:c.item,props:Array.from({length:c.count},(_,i)=>carriedPropFor(c,i))})),portrait:$('babyReaction').dataset.face,faceWidth:Math.round($('babyReaction').getBoundingClientRect().width),cam:cameraX,viewWidth:W,crewGround:gangCrews.map(c=>[c.x,groundAt(c.x)]),propAssetsReady:['hoodie','video','toll','scooter'].flatMap(k=>Array.from({length:6},(_,j)=>[0,3].map(f=>`v158_firecracker_${k}_${j}_${f}`))).flat().filter(k=>images[k]?.naturalWidth).length,sampleAsset:{present:!!window.BEARLY_ASSETS['v158_firecracker_toll_0_0'],imagePresent:!!images['v158_firecracker_toll_0_0'],complete:images['v158_firecracker_toll_0_0']?.complete,url:images['v158_firecracker_toll_0_0']?.src?.slice(0,32),naturalWidth:images['v158_firecracker_toll_0_0']?.naturalWidth},origImage:images['v72_toll_0_0']?.naturalWidth});
+    v151ExcitedLoaded:!!imageRecords.v151_baby_pose_excited?.naturalWidth,
+    v151SickLoaded:!!imageRecords.v151_baby_pose_sick?.naturalWidth});
+  window.BEARLY_V158_QA=()=>({build:window.BEARLY_BUILD_ID,crews:gangCrews.map(c=>({x:c.x,item:c.item,props:Array.from({length:c.count},(_,i)=>carriedPropFor(c,i))})),portrait:$('babyReaction').dataset.face,faceWidth:Math.round($('babyReaction').getBoundingClientRect().width),cam:cameraX,viewWidth:W,crewGround:gangCrews.map(c=>[c.x,groundAt(c.x)]),propAssetsReady:['hoodie','video','toll','scooter'].flatMap(k=>Array.from({length:6},(_,j)=>[0,3].map(f=>`v158_firecracker_${k}_${j}_${f}`))).flat().filter(k=>imageRecords[k]?.naturalWidth).length,sampleAsset:{present:!!window.BEARLY_ASSETS['v158_firecracker_toll_0_0'],imagePresent:!!imageRecords['v158_firecracker_toll_0_0'],complete:imageRecords['v158_firecracker_toll_0_0']?.complete,url:imageRecords['v158_firecracker_toll_0_0']?.src?.slice(0,32),naturalWidth:imageRecords['v158_firecracker_toll_0_0']?.naturalWidth},origImage:imageRecords['v72_toll_0_0']?.naturalWidth});
   window.BEARLY_CREW_DETAILS=()=>gangCrews.map(crew=>{const c=crewState.get(crew.x);return {x:crew.x,wardrobe:Array.from({length:crew.count},(_,i)=>window.BearlyKids.outfit(carriedPropFor(crew,i))),members:(c?.members||[]).map(m=>({phase:m.phase,shots:m.throwCount}))};});
   window.BEARLY_TEST={
     award(label='TEST STUNT',points=40){awardTrick(label,points);return {score,combo:tricks.combo,total:tricks.total};},
@@ -6304,7 +6347,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
   window.BEARLY_V163_QA=()=>({
     newAssets:Object.fromEntries([...Array.from({length:6},(_,i)=>'v162_firebin_'+i),
       ...['bottle','rock','firecracker'].map(n=>'v162_projectile_'+n)].map(n=>
-      [n,!!images[n]?.naturalWidth])),
+      [n,!!imageRecords[n]?.naturalWidth])),
     hazards:hazards.filter(h=>h.type==='firebin').map(h=>({type:h.type,x:h.x,w:h.w})),
     projectileTypes:['bottle','rock','firecracker'],
     projectileCount:projectiles.length,
@@ -6312,5 +6355,10 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
   });
   debugInit();
   reset(false);$('overlay').hidden=true;
-  Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded,window.BearlyAtlas.loaded]).then(()=>{requestAnimationFrame(loop);});
+  Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded,window.BearlyNpcMotion.loaded,window.BearlyAtlas.loaded,window.BearlyWorld.loaded,window.BearlyWorld.prepareFor?.(210)]).then(async()=>{
+    await window.BearlyWorld.warmupScene?.(illustratedState());
+    startup.ready=true;startup.readyAt=performance.now();last=performance.now();acc=0;
+    if(startup.requested)enterReadyRide();
+    requestAnimationFrame(now=>{loop(now);startup.firstFrameAt=performance.now();requestAnimationFrame(()=>{prepareRideReactions();});});
+  });
 })();

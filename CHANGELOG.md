@@ -1,5 +1,15 @@
 # Autumn Ride — standalone updates
 
+## V19 — Responsive startup
+
+- Replace large sprite-sheet ownership scans and first-draw scene/material filters with lossless renderer caches generated from the approved V18 pixels.
+- Remove the eager 576-pose walking bake; decode each visible character’s prepared walking pack on demand, within the existing memory bound.
+- Load essential riding artwork first. Request archive sprites, combat, on-foot rigs and room textures when needed; keep early title taps responsive while the ride finishes loading.
+- Resize title animation work to the displayed device size, and defer distant scenery without changing its artwork or progression.
+- Remove unused startup tree generation and reuse bounded static street chunks; adapt the backing buffer on persistently slow touch devices while preserving logical coordinates and controls.
+- Add navigation-to-first-input regression checks, including throttled phone and no-worker paths, plus exact pixel comparisons and reproducible cache compilers.
+- Preserve bear/baby likeness, gait geometry, cycling, encounters, quests, hearts and V18 weapon damage. Original BQ remains untouched.
+
 ## V18 — Street scale, encounters and movement
 
 - Align street character scale across standing, pursuit and combat; paint older-teen hangout, running, throwing and complete screen-impact poses. Enlarge usable building entrances and keep the castle as a distant landmark with a human-scale foreground gate.

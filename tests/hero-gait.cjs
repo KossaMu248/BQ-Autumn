@@ -15,6 +15,7 @@ const window={},sandbox={window,Image:class{naturalWidth=2400;naturalHeight=2400
   document:{createElement:()=>({width:0,height:0,dataset:{},getContext:()=>canvasContext()})}};
 for(const name of ['locomotion','baby-passenger','hero-rig'])vm.runInNewContext(fs.readFileSync('js/'+name+'.js','utf8'),sandbox);
 const gait=window.BearlyLocomotion,rig=window.BearlyHeroRig;
+rig.preload(); // This lab explicitly requests optional on-foot art.
 const close=(actual,expected,tolerance=1e-7)=>assert.ok(Math.abs(actual-expected)<tolerance,`${actual} differs from ${expected}`);
 
 for(const height of [90,145,225,300]){
@@ -92,3 +93,18 @@ for(const phase of [.0,.23,.51,.79]){
   }
 }
 console.log(JSON.stringify({result:'passed',rigCases:cases,streetCycle:gait.cycleLength(145),cyclesPerSecond:120/gait.cycleLength(145),cacheBytes:cache.bytes}));
+
+// Busy devices may invoke idle callbacks with zero remaining budget forever.
+// One requested visit must still finish its seven bounded preparation jobs.
+(async()=>{
+ await rig.preload();
+ const jobs=[];window.requestIdleCallback=callback=>jobs.push(callback);
+ const prepared=rig.warmupSources();await Promise.resolve();
+ for(let index=0;index<7;index++){
+  assert.equal(jobs.length,1,'one source task is scheduled at a time');
+  jobs.shift()({didTimeout:false,timeRemaining:()=>0});
+  assert.equal(rig.cacheStats().sourceWarmup.prepared,index+1,'tiny idle budgets cannot starve a visit');
+ }
+ await prepared;assert.equal(jobs.length,0);assert.equal(rig.cacheStats().sourceWarmup.complete,true);
+ console.log('Zero-budget idle preparation completes all seven source pieces.');
+})().catch(error=>{console.error(error);process.exitCode=1;});

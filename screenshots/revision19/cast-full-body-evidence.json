@@ -1,0 +1,162 @@
+{
+  "entry": "autumn-v19.html",
+  "result": "passed",
+  "samples": 2520,
+  "drawCount": 2520,
+  "damagedSamples": 720,
+  "minCoverage": 1,
+  "maxNeighborPixels": 0,
+  "teenScreenFrames": [
+    {
+      "kind": "firecracker",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        1075,
+        3,
+        459,
+        501
+      ],
+      "core": [
+        1076,
+        4,
+        457,
+        499
+      ],
+      "anchor": [
+        1278.100540921919,
+        502
+      ],
+      "stature": 498
+    },
+    {
+      "kind": "firecracker",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        1075,
+        512,
+        459,
+        500
+      ],
+      "core": [
+        1076,
+        513,
+        457,
+        498
+      ],
+      "anchor": [
+        1279.1177305523795,
+        1010
+      ],
+      "stature": 497
+    },
+    {
+      "kind": "bottle",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        15,
+        8,
+        460,
+        498
+      ],
+      "core": [
+        15,
+        8,
+        459,
+        497
+      ],
+      "anchor": [
+        254.29454938772358,
+        504
+      ],
+      "stature": 496
+    },
+    {
+      "kind": "bottle",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        15,
+        516,
+        464,
+        499
+      ],
+      "core": [
+        15,
+        517,
+        463,
+        497
+      ],
+      "anchor": [
+        255.1877163295131,
+        1013
+      ],
+      "stature": 496
+    },
+    {
+      "kind": "rock",
+      "pose": "screen",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        554,
+        4,
+        462,
+        508
+      ],
+      "core": [
+        555,
+        5,
+        461,
+        506
+      ],
+      "anchor": [
+        759.2156017392587,
+        510
+      ],
+      "stature": 505
+    },
+    {
+      "kind": "rock",
+      "pose": "screenDamaged",
+      "source": "assets/art/teen-screen-v18.png",
+      "rect": [
+        554,
+        512,
+        463,
+        507
+      ],
+      "core": [
+        555,
+        512,
+        461,
+        507
+      ],
+      "anchor": [
+        759.2635132655682,
+        1018
+      ],
+      "stature": 506
+    }
+  ],
+  "faults": [],
+  "faultCount": 0,
+  "pageErrors": [],
+  "httpFailures": [],
+  "sourceSHA256": {
+    "autumn-v19.html": "a7dd21b4dc97aa8a5a387d6d3e178f35910ccbe12913edc3a71ce5a61b27a4ff",
+    "js/brawler-art.js": "042627f4a89564bce96c26a7a8499ce06d1e691c6ca168e8c7dfa37950b930ee",
+    "js/npc-motion.js": "ddc5a88e1cd653243bdd98c44fc5bf2bd97f70ada2f81c8bf7cce88d5174d766",
+    "js/illustrated-kids.js": "ae3a7dd4d5409ae8562f427bc655c494f8a46ef2c1862ea2bb640449a0f03444",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/teen-screen-v18.png": "52bf853e147af2a59eed11ba35d43265434c768b2d95fa70bd0a0e8aae8f84dd",
+    "assets/art/teen-molotov-poses-v18.png": "a80ad917dc7870ec815db8ec4693837adafa83efba210d61438770613f864f40",
+    "assets/art/teen-rock-poses-v18.png": "b55f898712109ac277e9abf751c1738457f4119e8b1236a03f6146c2b032ed06",
+    "assets/art/teen-firecracker-poses-v18.png": "c04d540631cb2a6cfe18880d5e9a1cb376cb0df8297e7671ac41a69418273c79",
+    "assets/art/teen-run-opposites-v18.png": "e9cf93edbceb49410291301a2585069ef6b5090df47ba95ef8a19cefd45b2943"
+  }
+}

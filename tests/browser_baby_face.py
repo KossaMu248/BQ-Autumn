@@ -4,6 +4,7 @@ This checks real draw calls, uniform transforms and rendered opaque face pixels
 against the unchanged source WebPs. Pose boards support visual anchor review;
 the assertions do not claim to judge the artwork subjectively.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import hashlib
@@ -15,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-SHOTS = ROOT / "screenshots" / "revision18"
-ENTRY = "autumn-v18.html"
+SHOTS = ROOT / "screenshots" / "revision19"
+ENTRY = "autumn-v19.html"
 ORIGINALS = {
     "baby_pose_idle.webp": "a27d4ea977d35d89ac927ca371eb66c5e366b096b1eb057e8552853f14578823",
     "baby_pose_laugh.webp": "4decc347ee84105fb22f47ad945d8cfa0612672360fdbd0ce879661981d6793e",
@@ -220,7 +221,7 @@ def load(context, base, errors, failures):
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.on("response", lambda r: failures.append((r.status, r.url)) if r.status >= 400 else None)
     page.goto(f"{base}/{ENTRY}")
-    page.wait_for_function("BearlyHeroRig.ready() && BearlyBabyPassenger.ready() && BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0", timeout=60000)
+    page.wait_for_function(prepared_ready("BearlyHeroRig.ready() && BearlyBabyPassenger.ready() && BearlyVisits.audit().artReady && BearlyAtlas.ready() && window.BEARLY_DEBUG_MENU?.stats().frames>0"), timeout=60000)
     page.evaluate("__prepareReferences", SOURCE_FRAMES)
     page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
     return page

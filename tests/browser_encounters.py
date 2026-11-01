@@ -4,6 +4,7 @@ Debug warps select real route locations. Tests never spawn projectiles, replace
 NPCs, force aggression or assign health. Separate renderer probes may use
 synthetic poses, but all integration cases use the actual controls and actors.
 """
+from browser_fixture import prepared_ready
 import argparse
 import functools
 import hashlib
@@ -15,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v18.html'
-SHOTS=ROOT/'screenshots'/'revision18'
+ENTRY='autumn-v19.html'
+SHOTS=ROOT/'screenshots'/'revision19'
 DAMAGE={'rock':10,'bottle':30,'firecracker':20}
 
 AUDIT=r"""(() => {
@@ -112,7 +113,7 @@ def source_hashes():
 def start(browser,base,errors,failures,position=3800,protected=False,size=(1440,1000),touch=False):
     context=browser.new_context(viewport={'width':size[0],'height':size[1]},is_mobile=touch,has_touch=touch);page=context.new_page();page._qa_touch=touch;page.clock.install();page.add_init_script(AUDIT)
     page.on('pageerror',lambda e:errors.append(str(e)));page.on('response',lambda r:failures.append([r.status,r.url]) if r.status>=400 else None)
-    page.goto(f'{base}/{ENTRY}');page.wait_for_function('BearlyVisits.audit().artReady&&BearlyKids.ready()&&window.BearlyWeapons&&window.BearlyWeaponEffects&&BEARLY_DEBUG_MENU.stats().frames>0',timeout=120000)
+    page.goto(f'{base}/{ENTRY}');page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady&&BearlyKids.ready()&&window.BearlyWeapons&&window.BearlyWeaponEffects&&BEARLY_DEBUG_MENU.stats().frames>0'),timeout=120000)
     page.clock.pause_at(page.evaluate('Date.now()+1000')/1000)
     if touch:page.locator('#introStart').tap()
     else:page.locator('#introStart').click()
@@ -285,7 +286,7 @@ def cycling_dismount_projectile_case(browser,base,errors,failures,kind='bottle')
 
 def scene_and_frame_case(browser,base,errors,failures):
     context,page=start(browser,base,errors,failures,position=2500,protected=True)
-    page.wait_for_function('Object.values(BearlyWorld.ready()).every(Boolean)',timeout=60000)
+    page.wait_for_function(prepared_ready('Object.values(BearlyWorld.ready()).every(Boolean)'),timeout=60000)
     samples=[]
     for x in [2500,10000,16000,23500,27500,32000]:
         page.evaluate('(x)=>BEARLY_DEBUG_MENU.warp(x/1.5)',x);page.clock.run_for(160)

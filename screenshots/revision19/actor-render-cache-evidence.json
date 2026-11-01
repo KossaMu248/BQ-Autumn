@@ -1,0 +1,303 @@
+{
+  "sourceCases": 144,
+  "walkCases": 576,
+  "uniqueWalkFrames": 576,
+  "faults": [],
+  "stats": {
+    "preparationMode": "compiled",
+    "cacheFailure": null,
+    "onDemand": true,
+    "visibleComplete": true,
+    "requestedVariants": [
+      0,
+      9,
+      11,
+      10,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "phaseCount": 48,
+    "canonicalHeight": 144,
+    "frameCount": 576,
+    "capacity": 576,
+    "bytes": 45702144,
+    "limitBytes": 50331648,
+    "hits": 0,
+    "misses": 0,
+    "bakes": 576,
+    "buildMs": 6008.900000020862,
+    "maxBuildMs": 16.5,
+    "mainBuildMs": 0,
+    "maxMainBuildMs": 0,
+    "mode": "compiled",
+    "warmupMs": 6170,
+    "complete": true,
+    "variants": [
+      {
+        "variant": 0,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 9,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 11,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 10,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 1,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 2,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 3,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 4,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 5,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 6,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 7,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 8,
+        "frames": 48,
+        "width": 116,
+        "height": 171,
+        "bytes": 3808512,
+        "hits": 0,
+        "misses": 0
+      }
+    ]
+  },
+  "teenMode": "compiled",
+  "result": "passed",
+  "coldCache": {
+    "preparationMode": "compiled",
+    "cacheFailure": null,
+    "onDemand": true,
+    "visibleComplete": true,
+    "requestedVariants": [],
+    "phaseCount": 48,
+    "canonicalHeight": 144,
+    "frameCount": 0,
+    "capacity": 576,
+    "bytes": 0,
+    "limitBytes": 50331648,
+    "hits": 0,
+    "misses": 0,
+    "bakes": 0,
+    "buildMs": 0,
+    "maxBuildMs": 0,
+    "mainBuildMs": 0,
+    "maxMainBuildMs": 0,
+    "mode": "compiled",
+    "warmupMs": 5.5,
+    "complete": false,
+    "variants": [
+      {
+        "variant": 0,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 9,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 11,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 10,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 1,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 2,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 3,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 4,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 5,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 6,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 7,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      },
+      {
+        "variant": 8,
+        "frames": 0,
+        "width": 116,
+        "height": 171,
+        "bytes": 0,
+        "hits": 0,
+        "misses": 0
+      }
+    ]
+  },
+  "pageErrors": [],
+  "httpFailures": [],
+  "sourceSHA256": {
+    "assets/art/civilian-motion-v16.png": "68a233b1bc0ee4b9167fde8aad97c32c623540bf26d7efc09c99ad6b984f8568",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/civilian-rest-v16.png": "a3caa1e0c152048fac759773c903bddaa2e5ab47c6efd7484597af56befffb6c",
+    "assets/art/civilian-standing-v16.png": "cf7ea6884f1e716901377ee68a91f045075b7687d97533d7e650f09d69bf92d1",
+    "assets/art/npc-motion-a-v16.png": "78ac5e1cb0a47d6df857622976ee95845da3bcf161dab138f559869cc950546b",
+    "assets/art/npc-motion-b-v16.png": "5aeba4c9e8b1c82648384743d28b52e0b8ad5b9f2f88d92681a53e2b15c68528",
+    "assets/art/npc-motion-c-v16.png": "8d0307d2e42346626e2c4ee5c20c0cf5266f197970aa678c3e1896244f6387d6",
+    "assets/art/teen-firecracker-poses-v18.png": "c04d540631cb2a6cfe18880d5e9a1cb376cb0df8297e7671ac41a69418273c79",
+    "assets/art/teen-molotov-poses-v18.png": "a80ad917dc7870ec815db8ec4693837adafa83efba210d61438770613f864f40",
+    "assets/art/teen-rock-poses-v18.png": "b55f898712109ac277e9abf751c1738457f4119e8b1236a03f6146c2b032ed06",
+    "assets/art/teen-run-opposites-v18.png": "e9cf93edbceb49410291301a2585069ef6b5090df47ba95ef8a19cefd45b2943",
+    "assets/art/teen-screen-v18.png": "52bf853e147af2a59eed11ba35d43265434c768b2d95fa70bd0a0e8aae8f84dd"
+  }
+}

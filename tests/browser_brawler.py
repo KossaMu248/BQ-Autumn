@@ -1,18 +1,19 @@
 """Play the brawler loop through keyboard/touch controls."""
+from browser_fixture import prepared_ready
 import functools
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision18';SHOTS.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision19';SHOTS.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v18.html';errors=[];failures=[]
+base=f'http://127.0.0.1:{server.server_port}/autumn-v19.html';errors=[];failures=[]
 def read(p):return p.evaluate('BearlyVisits.audit()')
 def ready(p):
  p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
- p.goto(base);p.wait_for_function('BearlyVisits.audit().artReady&&BearlyAtlas.ready()&&window.BEARLY_DEBUG_MENU?.stats().frames>0');p.click('#introStart');p.evaluate('BEARLY_DEBUG_MENU.warp(2500/1.5);BearlyVisits.practice()');p.clock.run_for(2900);assert read(p)['mode']=='street'
+ p.goto(base);p.wait_for_function(prepared_ready('BearlyVisits.audit().artReady&&BearlyAtlas.ready()&&window.BEARLY_DEBUG_MENU?.stats().frames>0'));p.click('#introStart');p.evaluate('BEARLY_DEBUG_MENU.warp(2500/1.5);BearlyVisits.practice()');p.clock.run_for(2900);assert read(p)['mode']=='street'
 def axis(p,key,ms):p.keyboard.down(key);p.clock.run_for(ms);p.keyboard.up(key);p.clock.run_for(180)
 def approach(p,target):
  for _ in range(8):

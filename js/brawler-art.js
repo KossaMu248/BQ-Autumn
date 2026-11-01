@@ -3,9 +3,9 @@
   'use strict';
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),images={},sourceImages={};
   const files={
-    adultsA:'assets/art/adult-wardrobe-a-v13.png',reactionsA:'assets/art/wardrobe-reactions-a-v13.png',screenA:'assets/art/wardrobe-screen-a-v13.png',
-    adultsB:'assets/art/adult-wardrobe-b-v13.png',reactionsB:'assets/art/wardrobe-reactions-b-v13.png',screenB:'assets/art/wardrobe-screen-b-v13.png',
-    adultsCasual:'assets/art/adult-npcs-v9.png',reactionsCasual:'assets/art/npc-reactions-v10.png',screenCasual:'assets/art/npc-screen-full-v10-1.png',
+    adultsA:'assets/art/adult-cast-a-v14.png',reactionsA:'assets/art/cast-reactions-a-v14.png',screenA:'assets/art/cast-screen-a-v14.png',
+    adultsB:'assets/art/adult-cast-b-v14.png',reactionsB:'assets/art/cast-reactions-b-v14.png',screenB:'assets/art/cast-screen-b-v14.png',
+    adultsC:'assets/art/adult-cast-c-v14.png',reactionsC:'assets/art/cast-reactions-c-v14.png',screenC:'assets/art/cast-screen-c-v14.png',
     gangReactions:'assets/art/gang-reactions-v10.png',gangScreenFull:'assets/art/gang-screen-full-v10-1.png',
     bottle:'assets/v162_projectile_bottle.png',rock:'assets/v162_projectile_rock.png',firecracker:'assets/v162_projectile_firecracker.png'
   };
@@ -13,33 +13,46 @@
   // Each wardrobe carries its own measured source geometry. Clothing selection
   // never changes with aggression, damage, transport or the screen-throw state.
   const wardrobes=[];
-  function addWardrobe(label,pack,standing,reactions,screen){
-    wardrobes.push({variant:wardrobes.length,label,standing:{image:files['adults'+pack],rect:standing,face:wardrobes.length%3===0?-1:1,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
+  function addWardrobe(label,pack,standing,reactions,screen,age,sourceFace){
+    wardrobes.push({variant:wardrobes.length,label,character:{ageGroup:pack==='C'?'older-adult':'young-adult',age},standing:{image:files['adults'+pack],rect:standing,face:sourceFace,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
       reactions:{image:files['reactions'+pack],...reactions},screen:{image:files['screen'+pack],frames:screen}});
   }
   const frame=(rect,anchor,outline)=>({rect,anchor,...(outline?{outline}:{})});
-  // Retain the entire soft silhouette as well as opaque anatomy. The cream
-  // beanie's faint edge shares a rectangular crop with the gray figure's shoes,
-  // so two measured outlines separate them without clipping either body.
+  // Fresh V14 anatomy is measured from each authored cast sheet. No frame
+  // geometry is shared with the earlier faces or bodies.
   const newReactionsA=[
-    {stature:331,frames:[frame([77,19,329,355],[243,358]),frame([525,44,411,300],[731,331]),frame([1060,186,434,174],[1278,353])]},
-    {stature:282,frames:[frame([90,378,346,300],[263,667],[[90,378],[436,378],[436,678],[345,678],[345,649],[220,649],[220,678],[90,678]]),frame([553,380,400,284],[752,654]),frame([1063,503,446,161],[1284.5,656])]},
-    {stature:325,frames:[frame([61,650,359,360],[241.5,996],[[225,650],[340,650],[340,676],[420,676],[420,1010],[61,1010],[61,676],[225,676]]),frame([525,689,441,294],[746,976]),frame([1082,810,426,183],[1293.5,982])]}
+    {stature:400,frames:[frame([26,4,365,421],[208.5,416]),frame([395,74,434,317],[612,379],[[395,74],[829,74],[829,330],[750,330],[750,391],[395,391]]),frame([784,275,451,163],[1009.5,426],[[832,275],[1235,275],[1235,438],[784,438],[784,330],[832,330]])]},
+    {stature:395,frames:[frame([19,425,375,405],[211.5,829]),frame([394,474,449,329],[613.5,791],[[394,474],[843,474],[843,750],[760,750],[760,803],[394,803]]),frame([810,690,425,163],[1022.5,841],[[848,690],[1235,690],[1235,853],[810,853],[810,750],[848,750]])]},
+    {stature:399,frames:[frame([25,830,376,413],[218,1231]),frame([401,865,434,336],[612.5,1189],[[401,865],[835,865],[835,1150],[750,1150],[750,1201],[401,1201]]),frame([785,1092,446,161],[1008,1241],[[840,1092],[1231,1092],[1231,1253],[785,1253],[785,1150],[840,1150]])]}
   ];
   const newReactionsB=[
-    {stature:303,frames:[frame([93,75,284,331],[239,391]),frame([457,160,325,231],[621,383]),frame([835,237,360,153],[1016,374])]},
-    {stature:324,frames:[frame([90,461,306,348],[245,795]),frame([447,556,361,242],[630,789]),frame([831,624,369,172],[1015.5,783])]},
-    {stature:319,frames:[frame([95,842,310,338],[251.5,1169]),frame([457,921,337,245],[624.5,1157]),frame([815,996,395,184],[1011.5,1164])]}
+    {stature:301,frames:[frame([125,28,299,320],[275.5,340]),frame([579,105,375,233],[768.5,330]),frame([1083,175,391,167],[1277,329])]},
+    {stature:287,frames:[frame([121,362,324,310],[288.5,667]),frame([573,413,392,249],[777,650]),frame([1058,488,418,178],[1270,654])]},
+    {stature:311,frames:[frame([117,672,334,328],[284.5,987]),frame([573,706,408,266],[775,964]),frame([1064,795,412,189],[1271,977])]}
+  ];
+  const newReactionsC=[
+    {stature:295,frames:[frame([109,64,251,326],[237.5,375]),frame([495,120,287,236],[639.5,344]),frame([881,236,298,140],[1032.5,368])]},
+    {stature:299,frames:[frame([107,458,285,320],[252,767]),frame([509,495,276,235],[647,722]),frame([881,608,312,155],[1037.5,756])]},
+    {stature:301,frames:[frame([109,838,303,324],[261,1150]),frame([511,873,285,250],[656.5,1113]),frame([879,992,302,170],[1029.5,1148])]}
   ];
   const newScreenA=[
-    [{rect:[8,131,351,621]},{rect:[7,854,351,624]}],
-    [{rect:[378,140,299,616]},{rect:[377,857,303,621]}],
-    [{rect:[685,125,339,629]},{rect:[691,845,333,633]}]
+    [{rect:[51,5,458,518]},{rect:[52,523,467,495]}],
+    [{rect:[585,30,402,497]},{rect:[589,529,398,483]}],
+    [{rect:[1068,16,411,512]},{rect:[1071,528,419,489]}]
   ];
   const newScreenB=[
-    [{rect:[5,119,372,643]},{rect:[0,814,378,622]}],
-    [{rect:[384,142,333,621]},{rect:[385,834,330,602]}],
-    [{rect:[742,115,344,647]},{rect:[741,814,345,624]}]
+    [{rect:[74,14,400,472]},{rect:[71,518,404,478]}],
+    [{rect:[584,15,380,481]},{rect:[586,521,379,466]}],
+    [{rect:[1085,14,379,487]},{rect:[1085,523,378,473]}]
+  ];
+  // The woman's outer boot reaches into the next nominal column, while the
+  // neighboring dad's palm reaches left. Follow their actual separate contours.
+  const newScreenC=[
+    [{rect:[13,84,363,675]},{rect:[11,813,364,667]}],
+    [{rect:[377,97,333,664],outline:[[377,97],[686,97],[686,600],[710,600],[710,761],[377,761]]},
+      {rect:[375,827,339,663],outline:[[375,827],[686,827],[686,1330],[714,1330],[714,1490],[375,1490]]}],
+    [{rect:[683,88,329,672],outline:[[683,88],[1012,88],[1012,760],[714,760],[714,600],[683,600]]},
+      {rect:[683,817,329,673],outline:[[683,817],[1012,817],[1012,1490],[714,1490],[714,1330],[683,1330]]}]
   ];
   const namesA=[
     'Burgundy premium puffer · black hoodie and loose nylon trousers · black/gray performance runners · low cap · patterned brown sling',
@@ -51,22 +64,16 @@
     'Teal/charcoal nylon windbreaker set · loose nylon joggers · white/silver runners · white cap · dark athletic sling',
     'Long black premium down parka · plum hoodie · relaxed charcoal denim · cream luxury runners · burgundy beanie · patterned brown sling'
   ];
-  const standingA=[[23,8,609,814],[700,36,531,790],[1313,0,551,826]],standingB=[[12,6,609,820],[691,27,554,799],[1332,0,541,826]];
-  for(let i=0;i<3;i++)addWardrobe(namesA[i],'A',standingA[i],newReactionsA[i],newScreenA[i]);
-  for(let i=0;i<3;i++)addWardrobe(namesB[i],'B',standingB[i],newReactionsB[i],newScreenB[i]);
+  const standingA=[[13,3,649,823],[698,27,552,801],[1313,0,562,831]],standingB=[[0,0,632,824],[674,25,586,799],[1324,0,558,828]];
+  for(let i=0;i<3;i++)addWardrobe(namesA[i],'A',standingA[i],newReactionsA[i],newScreenA[i],[20,21,22][i],[-1,1,1][i]);
+  for(let i=0;i<3;i++)addWardrobe(namesB[i],'B',standingB[i],newReactionsB[i],newScreenB[i],[21,20,20][i],[-1,1,1][i]);
   const casualNames=[
     'Olive work jacket · cream knit · relaxed blue denim · brown boots · burgundy beanie',
     'Navy autumn jacket · rust scarf · charcoal trousers · brown boots · tied hair',
     'Mustard jacket · gray scarf · olive trousers · gray trainers · gray beanie'
   ];
-  const casualStanding=[[47,13,584,798],[718,44,503,772],[1298,1,530,811]];
-  const casualReactions=[
-    {stature:344,frames:[frame([26,6,261,352],[181,354]),frame([379,47,363,309],[543,352],[[379,47],[742,47],[742,292],[724,292],[724,356],[379,356]]),frame([731,199,355,151],[905,346],[[751,199],[1086,199],[1086,350],[731,350],[731,280],[751,280]])]},
-    {stature:330,frames:[frame([34,366,251,338],[181,700]),frame([376,386,347,318],[543,700]),frame([731,556,350,136],[905,688])]},
-    {stature:345,frames:[frame([21,705,284,353],[181,1054]),frame([372,710,342,340],[543,1046]),frame([734,889,354,157],[905,1042])]}
-  ];
-  const casualScreen=[[7,36,363,692],[389,50,332,678],[733,52,349,675],[7,730,367,681],[386,744,335,670],[730,751,350,661]];
-  for(let i=0;i<3;i++)addWardrobe(casualNames[i],'Casual',casualStanding[i],casualReactions[i],[{rect:casualScreen[i]},{rect:casualScreen[i+3]}]);
+  const standingC=[[15,108,494,810],[575,127,452,792],[1053,110,474,806]];
+  for(let i=0;i<3;i++)addWardrobe(casualNames[i],'C',standingC[i],newReactionsC[i],newScreenC[i],[52,42,55][i],[1,1,1][i]);
   function wardrobe(n){const variant=Number.isFinite(n.variant)?Math.trunc(n.variant):0;return wardrobes[(variant%wardrobes.length+wardrobes.length)%wardrobes.length];}
   function reaction(c,n,col,h){
     const profile=wardrobe(n).reactions,im=sourceImages[profile.image],f=profile.frames[col],sc=h/profile.stature;

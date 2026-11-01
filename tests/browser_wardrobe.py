@@ -1,10 +1,11 @@
-"""V13 wardrobe source coverage, real population continuity and phone controls.
+"""V14 cast source coverage, real population continuity and phone controls.
 
 Production draw calls are observed. Independent opaque connected components
 check each standing/reaction crop and clip, including adjacent portrait cells.
 """
 import argparse
 import functools
+import hashlib
 import json
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -14,12 +15,23 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v13.html"
-SHOTS = ROOT / "screenshots" / "revision13"
+ENTRY = "autumn-v14.html"
+SHOTS = ROOT / "screenshots" / "revision14"
+
+
+def source_hashes():
+    paths = [ROOT / "js" / "brawler-art.js"]
+    for group in "abc":
+        paths.extend(ROOT / "assets" / "art" / name for name in [
+            f"adult-cast-{group}-v14.png",
+            f"cast-reactions-{group}-v14.png",
+            f"cast-screen-{group}-v14.png",
+        ])
+    return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 AUDIT = r"""(() => {
   const native=CanvasRenderingContext2D.prototype.drawImage;
-  const assets=/^(?:adult-(?:wardrobe-[ab]-v13|npcs-v9)|wardrobe-(?:reactions|screen)-[ab]-v13|npc-(?:reactions-v10|screen-full-v10-1))\.png$/;
+  const assets=/^(?:adult-cast-[abc]-v14|cast-(?:reactions|screen)-[abc]-v14)\.png$/;
   window.__wardrobeCalls=[];window.__wardrobeActor=null;
   CanvasRenderingContext2D.prototype.drawImage=function(im,...args){
     const source=(im.src||'').split('/').pop().split('?')[0];
@@ -80,7 +92,7 @@ PROBES = r"""() => {
       }
       if(tail>10000)bodies.push({pixels:queue.slice(0,tail),count:tail,x:sumX/tail,y:sumY/tail});
     }
-    const name=im.src.split('/').pop(),reaction=/reactions/.test(name),columns=name==='npc-reactions-v10.png'?4:3,rows=reaction?3:1;
+    const name=im.src.split('/').pop(),reaction=/reactions/.test(name),columns=3,rows=reaction?3:1;
     if(bodies.length!==columns*rows)throw Error('Unexpected separate opaque bodies '+name+': '+bodies.map(b=>b.count));
     bodies.sort((a,b)=>a.y-b.y);
     const ordered=[];for(let row=0;row<rows;row++)ordered.push(...bodies.slice(row*columns,(row+1)*columns).sort((a,b)=>a.x-b.x));
@@ -112,8 +124,8 @@ PROBES = r"""() => {
     BearlyBrawlArt.adult(c,{id:'probe-'+variant,kind:'resident',variant,state:'idle',age:0,face:heading,mood:'calm',hp:60,...patch},400,400,height);
     const label={variant,name,heading,height};
     if(!calls.length){faults.push({...label,issue:'No painted source draw'});continue;}
-    const group=variant<3?'a':variant<6?'b':null;
-    const expected=pose<0?(group?'adult-wardrobe-'+group+'-v13.png':'adult-npcs-v9.png'):(group?'wardrobe-reactions-'+group+'-v13.png':'npc-reactions-v10.png');
+    const group=['a','b','c'][Math.floor(variant/3)];
+    const expected=pose<0?'adult-cast-'+group+'-v14.png':'cast-reactions-'+group+'-v14.png';
     if(calls.some(d=>!d.im.src.split('?')[0].endsWith('/'+expected)))faults.push({...label,issue:'Wrong outfit source',expected,actual:calls.map(d=>d.im.src)});
     const coverage=sourceCoverage(calls,variant,pose);
     if(coverage.coverage!==1||coverage.neighborPixels!==0||coverage.unsupported)faults.push({...label,...coverage});
@@ -174,7 +186,7 @@ class Quiet(SimpleHTTPRequestHandler):
 
 
 def expected_standing(variant):
-    return "adult-wardrobe-a-v13.png" if variant < 3 else "adult-wardrobe-b-v13.png" if variant < 6 else "adult-npcs-v9.png"
+    return "adult-cast-" + "abc"[variant // 3] + "-v14.png"
 
 
 def verify_actual_calls(page):
@@ -214,7 +226,7 @@ def controls(browser, base, errors, failures, width, height):
             here = verify_actual_calls(page)
             assert any(n["variant"] == variant for n in here.values()), {"requested": variant, "seen": here}
             seen.update(here)
-            page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"wardrobe-street-{variant}.png"))
+            page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"cast-street-{variant}.png"))
         assert {n["variant"] for n in seen.values()} == set(range(9)), seen
     anchor = min((n for n in page.evaluate("BearlyVisits.residents()") if n.get("kind") != "gangster" and n["variant"] == 3), key=lambda n: abs(n.get("depth", 0)))
     page.evaluate("x=>{BEARLY_DEBUG_MENU.warp(x/1.5);__wardrobeCalls=[]}", anchor["x"])
@@ -230,9 +242,9 @@ def controls(browser, base, errors, failures, width, height):
     assert shared
     assert all(riding_seen[k] == foot_seen[k] for k in shared)
     assert page.locator(".foot-heart").count() == 5
-    page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"wardrobe-foot-{width}.png"))
+    page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"cast-foot-{width}.png"))
     if width in [1440, 390]:
-        page.locator(".canvas-wrap").screenshot(path=str(SHOTS / ("wardrobe-street-game.png" if width == 1440 else "wardrobe-street-phone.png")))
+        page.locator(".canvas-wrap").screenshot(path=str(SHOTS / ("cast-street-game.png" if width == 1440 else "cast-street-phone.png")))
     page.locator(".area-exit").tap() if mobile else page.keyboard.press("q")
     page.clock.run_for(2800)
     assert not page.evaluate("BearlyVisits.audit().mode")
@@ -262,11 +274,11 @@ def controls(browser, base, errors, failures, width, height):
     page.clock.run_for(850)
     target = page.evaluate("id=>BearlyVisits.audit().combat.npcs.find(n=>n.id===id)", held)
     assert target["state"] == "screen" and target["hp"] == 28 and target["lastDamage"] == 32, target
-    screen_calls = page.evaluate("__wardrobeCalls.filter(c=>/wardrobe-screen|npc-screen/.test(c.source))")
-    assert screen_calls and all(c["source"] == "wardrobe-screen-a-v13.png" for c in screen_calls), screen_calls
-    page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"wardrobe-impact-{width}.png"))
+    screen_calls = page.evaluate("__wardrobeCalls.filter(c=>/cast-screen/.test(c.source))")
+    assert screen_calls and all(c["source"] == "cast-screen-a-v14.png" for c in screen_calls), screen_calls
+    page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"cast-impact-{width}.png"))
     if not mobile:
-        page.locator(".canvas-wrap").screenshot(path=str(SHOTS / "wardrobe-screen-impact.png"))
+        page.locator(".canvas-wrap").screenshot(path=str(SHOTS / "cast-screen-impact.png"))
     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
     if mobile:
         for selector in [".area-grab", ".area-maul", ".area-exit"]:
@@ -288,7 +300,7 @@ def main():
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
     errors, failures = [], []
-    evidence = {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V13"}
+    evidence = {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V14"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -300,11 +312,18 @@ def main():
             page.goto(f"{base}/{ENTRY}")
             page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready()")
             page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
-            assert page.evaluate("BEARLY_BUILD_ID") == "AUTUMN_RIDE_ART_V13"
+            assert page.evaluate("BEARLY_BUILD_ID") == "AUTUMN_RIDE_ART_V14"
             catalog = page.evaluate("BearlyBrawlArt.wardrobe()")
             assert page.evaluate("BearlyBrawlArt.wardrobeCount") == 9
             assert len(catalog) == 9 and len({n["label"] for n in catalog}) == 9
+            characters = [n.get("character") for n in catalog]
+            assert all(characters), "Each cast entry needs its intended age design metadata"
+            assert [n["ageGroup"] for n in characters] == ["young-adult"] * 6 + ["older-adult"] * 3, characters
+            assert all(18 <= n["age"] <= 24 for n in characters[:6]), characters
+            assert all(n["age"] >= 35 for n in characters[6:]), characters
+            evidence["ageGroups"] = {"youngAdult": 6, "olderAdult": 3}
             evidence["catalog"] = catalog
+            evidence["sourceSHA256"] = source_hashes()
             if not options.controls_only:
                 evidence["sourceCoverage"] = page.evaluate(PROBES)
                 assert evidence["sourceCoverage"]["cases"] == 324, evidence["sourceCoverage"]
@@ -312,7 +331,7 @@ def main():
                 evidence["walkingConnectivity"] = page.evaluate(WALK_CONNECTIVITY)
                 assert evidence["walkingConnectivity"]["cases"] == 288, evidence["walkingConnectivity"]
                 assert evidence["walkingConnectivity"]["faultCount"] == 0, evidence["walkingConnectivity"]
-                (SHOTS / "wardrobe-source-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
+                (SHOTS / "cast-source-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
             page.close()
             if not options.renderer_only:
                 for width, height in [(1440, 1000), (390, 844), (844, 390)]:
@@ -321,7 +340,7 @@ def main():
         assert not errors, errors
         assert not failures, failures
         evidence.update({"result": "passed", "pageErrors": errors, "httpFailures": failures})
-        filename = "wardrobe-source-evidence.json" if options.renderer_only else "wardrobe-controls-evidence.json" if options.controls_only else "wardrobe-evidence.json"
+        filename = "cast-source-evidence.json" if options.renderer_only else "cast-controls-evidence.json" if options.controls_only else "cast-evidence.json"
         (SHOTS / filename).write_text(json.dumps(evidence, indent=2) + "\n")
         print(json.dumps({"result": "passed", "outfits": len(catalog), "sourceCoverage": evidence.get("sourceCoverage"), "walkingConnectivity": evidence.get("walkingConnectivity"), "viewports": [k for k in ["1440", "390", "844"] if k in evidence]}))
     finally:

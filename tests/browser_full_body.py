@@ -7,6 +7,7 @@ are checked in source coordinates rather than assuming fixed sheet cells.
 It does not write screenshots or mutate the game state.
 """
 import functools
+import hashlib
 import json
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -16,8 +17,8 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v13.html"
-ASSETS = ("wardrobe-screen-a-v13.png", "wardrobe-screen-b-v13.png", "npc-screen-full-v10-1.png", "gang-screen-full-v10-1.png")
+ENTRY = "autumn-v14.html"
+ASSETS = ("cast-screen-a-v14.png", "cast-screen-b-v14.png", "cast-screen-c-v14.png", "gang-screen-full-v10-1.png")
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -75,7 +76,7 @@ def main():
                   ctx.fillText=function(value,...args){texts.push(String(value));return actualText(value,...args);};
                   // Observe the real destination corners after all renderer transforms.
                   ctx.drawImage=function(im,...args){
-                    if(/(?:wardrobe-screen-[ab]-v13|(?:npc|gang)-screen-full-v10-1)\.png(?:\?|$)/.test(im.src||'') && this.globalAlpha>.01){
+                    if(/(?:cast-screen-[abc]-v14|gang-screen-full-v10-1)\.png(?:\?|$)/.test(im.src||'') && this.globalAlpha>.01){
                       let sx=0,sy=0,sw=im.naturalWidth,sh=im.naturalHeight,dx,dy,dw,dh;
                       if(args.length===8)[sx,sy,sw,sh,dx,dy,dw,dh]=args;
                       else if(args.length===4)[dx,dy,dw,dh]=args;
@@ -176,7 +177,7 @@ def main():
                         const xs=draw.points.map(p=>p.x),ys=draw.points.map(p=>p.y),bounds={left:Math.min(...xs),right:Math.max(...xs),top:Math.min(...ys),bottom:Math.max(...ys)};
                         if(bounds.left<profile.left-.5||bounds.right>profile.left+profile.width+.5||bounds.top<-.5||bounds.bottom>H+.5)faults.push({...label,issue:'full body outside visible view',bounds});
                         const source=componentCoverage(draw,actor.variant%3);
-                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':actor.variant<3?'wardrobe-screen-a-v13.png':actor.variant<6?'wardrobe-screen-b-v13.png':'npc-screen-full-v10-1.png';
+                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':'cast-screen-'+['a','b','c'][Math.floor(actor.variant/3)]+'-v14.png';
                         if(!draw.im.src.split('?')[0].endsWith('/'+expectedFile))faults.push({...label,issue:'wrong wardrobe pack',source:draw.im.src,expectedFile});
                         minCoverage=Math.min(minCoverage,source.coverage);maxNeighborPixels=Math.max(maxNeighborPixels,source.otherBodyPixels);
                         if(source.coverage<1)faults.push({...label,issue:'source crop or observed clip omits opaque body pixels',coverage:source.coverage});
@@ -200,6 +201,13 @@ def main():
         assert not failed_assets, failed_assets
         assert result["samples"] == 2016, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
+        directory = ROOT / "screenshots" / "revision14"
+        directory.mkdir(exist_ok=True)
+        paths = [ROOT / "js" / "brawler-art.js", *(ROOT / "assets" / "art" / name for name in ASSETS)]
+        evidence = {"entry": ENTRY, "result": "passed", **result,
+                    "pageErrors": errors, "httpFailures": failed_assets,
+                    "sourceSHA256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}}
+        (directory / "cast-full-body-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
         print(
             f"Full-body renderer checks passed: {result['samples']} flight/impact samples, "
             "all twelve actors (nine adults and three crews), both motion preferences, complete opaque body components, "

@@ -1,0 +1,1167 @@
+{
+  "entry": "autumn-v14.html",
+  "build": "AUTUMN_RIDE_ART_V14",
+  "ageGroups": {
+    "youngAdult": 6,
+    "olderAdult": 3
+  },
+  "catalog": [
+    {
+      "variant": 0,
+      "label": "Burgundy premium puffer \u00b7 black hoodie and loose nylon trousers \u00b7 black/gray performance runners \u00b7 low cap \u00b7 patterned brown sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v14.png",
+        "rect": [
+          13,
+          3,
+          649,
+          823
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v14.png",
+        "stature": 400,
+        "frames": [
+          {
+            "rect": [
+              26,
+              4,
+              365,
+              421
+            ],
+            "anchor": [
+              208.5,
+              416
+            ]
+          },
+          {
+            "rect": [
+              395,
+              74,
+              434,
+              317
+            ],
+            "anchor": [
+              612,
+              379
+            ],
+            "outline": [
+              [
+                395,
+                74
+              ],
+              [
+                829,
+                74
+              ],
+              [
+                829,
+                330
+              ],
+              [
+                750,
+                330
+              ],
+              [
+                750,
+                391
+              ],
+              [
+                395,
+                391
+              ]
+            ]
+          },
+          {
+            "rect": [
+              784,
+              275,
+              451,
+              163
+            ],
+            "anchor": [
+              1009.5,
+              426
+            ],
+            "outline": [
+              [
+                832,
+                275
+              ],
+              [
+                1235,
+                275
+              ],
+              [
+                1235,
+                438
+              ],
+              [
+                784,
+                438
+              ],
+              [
+                784,
+                330
+              ],
+              [
+                832,
+                330
+              ]
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v14.png",
+        "frames": [
+          {
+            "rect": [
+              51,
+              5,
+              458,
+              518
+            ]
+          },
+          {
+            "rect": [
+              52,
+              523,
+              467,
+              495
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 1,
+      "label": "Dove-gray technical fleece set \u00b7 tapered joggers \u00b7 white leather low-top trainers \u00b7 navy cap \u00b7 black athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v14.png",
+        "rect": [
+          698,
+          27,
+          552,
+          801
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v14.png",
+        "stature": 395,
+        "frames": [
+          {
+            "rect": [
+              19,
+              425,
+              375,
+              405
+            ],
+            "anchor": [
+              211.5,
+              829
+            ]
+          },
+          {
+            "rect": [
+              394,
+              474,
+              449,
+              329
+            ],
+            "anchor": [
+              613.5,
+              791
+            ],
+            "outline": [
+              [
+                394,
+                474
+              ],
+              [
+                843,
+                474
+              ],
+              [
+                843,
+                750
+              ],
+              [
+                760,
+                750
+              ],
+              [
+                760,
+                803
+              ],
+              [
+                394,
+                803
+              ]
+            ]
+          },
+          {
+            "rect": [
+              810,
+              690,
+              425,
+              163
+            ],
+            "anchor": [
+              1022.5,
+              841
+            ],
+            "outline": [
+              [
+                848,
+                690
+              ],
+              [
+                1235,
+                690
+              ],
+              [
+                1235,
+                853
+              ],
+              [
+                810,
+                853
+              ],
+              [
+                810,
+                750
+              ],
+              [
+                848,
+                750
+              ]
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v14.png",
+        "frames": [
+          {
+            "rect": [
+              585,
+              30,
+              402,
+              497
+            ]
+          },
+          {
+            "rect": [
+              589,
+              529,
+              398,
+              483
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 2,
+      "label": "Oversized cream graphic hoodie \u00b7 relaxed blue denim \u00b7 white/gray luxury runners \u00b7 tan beanie \u00b7 brown sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 22
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v14.png",
+        "rect": [
+          1313,
+          0,
+          562,
+          831
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v14.png",
+        "stature": 399,
+        "frames": [
+          {
+            "rect": [
+              25,
+              830,
+              376,
+              413
+            ],
+            "anchor": [
+              218,
+              1231
+            ]
+          },
+          {
+            "rect": [
+              401,
+              865,
+              434,
+              336
+            ],
+            "anchor": [
+              612.5,
+              1189
+            ],
+            "outline": [
+              [
+                401,
+                865
+              ],
+              [
+                835,
+                865
+              ],
+              [
+                835,
+                1150
+              ],
+              [
+                750,
+                1150
+              ],
+              [
+                750,
+                1201
+              ],
+              [
+                401,
+                1201
+              ]
+            ]
+          },
+          {
+            "rect": [
+              785,
+              1092,
+              446,
+              161
+            ],
+            "anchor": [
+              1008,
+              1241
+            ],
+            "outline": [
+              [
+                840,
+                1092
+              ],
+              [
+                1231,
+                1092
+              ],
+              [
+                1231,
+                1253
+              ],
+              [
+                785,
+                1253
+              ],
+              [
+                785,
+                1150
+              ],
+              [
+                840,
+                1150
+              ]
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v14.png",
+        "frames": [
+          {
+            "rect": [
+              1068,
+              16,
+              411,
+              512
+            ]
+          },
+          {
+            "rect": [
+              1071,
+              528,
+              419,
+              489
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 3,
+      "label": "Silver quilted vest \u00b7 black heavyweight hoodie \u00b7 brown tactical cargos \u00b7 black/white performance runners \u00b7 black beanie and sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v14.png",
+        "rect": [
+          0,
+          0,
+          632,
+          824
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v14.png",
+        "stature": 301,
+        "frames": [
+          {
+            "rect": [
+              125,
+              28,
+              299,
+              320
+            ],
+            "anchor": [
+              275.5,
+              340
+            ]
+          },
+          {
+            "rect": [
+              579,
+              105,
+              375,
+              233
+            ],
+            "anchor": [
+              768.5,
+              330
+            ]
+          },
+          {
+            "rect": [
+              1083,
+              175,
+              391,
+              167
+            ],
+            "anchor": [
+              1277,
+              329
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v14.png",
+        "frames": [
+          {
+            "rect": [
+              74,
+              14,
+              400,
+              472
+            ]
+          },
+          {
+            "rect": [
+              71,
+              518,
+              404,
+              478
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 4,
+      "label": "Teal/charcoal nylon windbreaker set \u00b7 loose nylon joggers \u00b7 white/silver runners \u00b7 white cap \u00b7 dark athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v14.png",
+        "rect": [
+          674,
+          25,
+          586,
+          799
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v14.png",
+        "stature": 287,
+        "frames": [
+          {
+            "rect": [
+              121,
+              362,
+              324,
+              310
+            ],
+            "anchor": [
+              288.5,
+              667
+            ]
+          },
+          {
+            "rect": [
+              573,
+              413,
+              392,
+              249
+            ],
+            "anchor": [
+              777,
+              650
+            ]
+          },
+          {
+            "rect": [
+              1058,
+              488,
+              418,
+              178
+            ],
+            "anchor": [
+              1270,
+              654
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v14.png",
+        "frames": [
+          {
+            "rect": [
+              584,
+              15,
+              380,
+              481
+            ]
+          },
+          {
+            "rect": [
+              586,
+              521,
+              379,
+              466
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 5,
+      "label": "Long black premium down parka \u00b7 plum hoodie \u00b7 relaxed charcoal denim \u00b7 cream luxury runners \u00b7 burgundy beanie \u00b7 patterned brown sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v14.png",
+        "rect": [
+          1324,
+          0,
+          558,
+          828
+        ],
+        "face": 1,
+        "split": 0.76
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v14.png",
+        "stature": 311,
+        "frames": [
+          {
+            "rect": [
+              117,
+              672,
+              334,
+              328
+            ],
+            "anchor": [
+              284.5,
+              987
+            ]
+          },
+          {
+            "rect": [
+              573,
+              706,
+              408,
+              266
+            ],
+            "anchor": [
+              775,
+              964
+            ]
+          },
+          {
+            "rect": [
+              1064,
+              795,
+              412,
+              189
+            ],
+            "anchor": [
+              1271,
+              977
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v14.png",
+        "frames": [
+          {
+            "rect": [
+              1085,
+              14,
+              379,
+              487
+            ]
+          },
+          {
+            "rect": [
+              1085,
+              523,
+              378,
+              473
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 6,
+      "label": "Olive work jacket \u00b7 cream knit \u00b7 relaxed blue denim \u00b7 brown boots \u00b7 burgundy beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 52
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v14.png",
+        "rect": [
+          15,
+          108,
+          494,
+          810
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v14.png",
+        "stature": 295,
+        "frames": [
+          {
+            "rect": [
+              109,
+              64,
+              251,
+              326
+            ],
+            "anchor": [
+              237.5,
+              375
+            ]
+          },
+          {
+            "rect": [
+              495,
+              120,
+              287,
+              236
+            ],
+            "anchor": [
+              639.5,
+              344
+            ]
+          },
+          {
+            "rect": [
+              881,
+              236,
+              298,
+              140
+            ],
+            "anchor": [
+              1032.5,
+              368
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v14.png",
+        "frames": [
+          {
+            "rect": [
+              13,
+              84,
+              363,
+              675
+            ]
+          },
+          {
+            "rect": [
+              11,
+              813,
+              364,
+              667
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 7,
+      "label": "Navy autumn jacket \u00b7 rust scarf \u00b7 charcoal trousers \u00b7 brown boots \u00b7 tied hair",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 42
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v14.png",
+        "rect": [
+          575,
+          127,
+          452,
+          792
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v14.png",
+        "stature": 299,
+        "frames": [
+          {
+            "rect": [
+              107,
+              458,
+              285,
+              320
+            ],
+            "anchor": [
+              252,
+              767
+            ]
+          },
+          {
+            "rect": [
+              509,
+              495,
+              276,
+              235
+            ],
+            "anchor": [
+              647,
+              722
+            ]
+          },
+          {
+            "rect": [
+              881,
+              608,
+              312,
+              155
+            ],
+            "anchor": [
+              1037.5,
+              756
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v14.png",
+        "frames": [
+          {
+            "rect": [
+              377,
+              97,
+              333,
+              664
+            ],
+            "outline": [
+              [
+                377,
+                97
+              ],
+              [
+                686,
+                97
+              ],
+              [
+                686,
+                600
+              ],
+              [
+                710,
+                600
+              ],
+              [
+                710,
+                761
+              ],
+              [
+                377,
+                761
+              ]
+            ]
+          },
+          {
+            "rect": [
+              375,
+              827,
+              339,
+              663
+            ],
+            "outline": [
+              [
+                375,
+                827
+              ],
+              [
+                686,
+                827
+              ],
+              [
+                686,
+                1330
+              ],
+              [
+                714,
+                1330
+              ],
+              [
+                714,
+                1490
+              ],
+              [
+                375,
+                1490
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 8,
+      "label": "Mustard jacket \u00b7 gray scarf \u00b7 olive trousers \u00b7 gray trainers \u00b7 gray beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 55
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v14.png",
+        "rect": [
+          1053,
+          110,
+          474,
+          806
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v14.png",
+        "stature": 301,
+        "frames": [
+          {
+            "rect": [
+              109,
+              838,
+              303,
+              324
+            ],
+            "anchor": [
+              261,
+              1150
+            ]
+          },
+          {
+            "rect": [
+              511,
+              873,
+              285,
+              250
+            ],
+            "anchor": [
+              656.5,
+              1113
+            ]
+          },
+          {
+            "rect": [
+              879,
+              992,
+              302,
+              170
+            ],
+            "anchor": [
+              1029.5,
+              1148
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v14.png",
+        "frames": [
+          {
+            "rect": [
+              683,
+              88,
+              329,
+              672
+            ],
+            "outline": [
+              [
+                683,
+                88
+              ],
+              [
+                1012,
+                88
+              ],
+              [
+                1012,
+                760
+              ],
+              [
+                714,
+                760
+              ],
+              [
+                714,
+                600
+              ],
+              [
+                683,
+                600
+              ]
+            ]
+          },
+          {
+            "rect": [
+              683,
+              817,
+              329,
+              673
+            ],
+            "outline": [
+              [
+                683,
+                817
+              ],
+              [
+                1012,
+                817
+              ],
+              [
+                1012,
+                1490
+              ],
+              [
+                714,
+                1490
+              ],
+              [
+                714,
+                1330
+              ],
+              [
+                683,
+                1330
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceSHA256": {
+    "js/brawler-art.js": "968a3e0795b9c5c7631cb02d33d45e2c690fed96efb5b9f4300f5f07f90218e5",
+    "assets/art/adult-cast-a-v14.png": "8d8e98f4356fb2e4345f07f4b6574acbd7a7992f2049499c2d0c20e1f957d18d",
+    "assets/art/cast-reactions-a-v14.png": "efed69799720f06cdcc24e73cf1b024b7dedb5a47dd12034e8f71d9e2db7a7e4",
+    "assets/art/cast-screen-a-v14.png": "4888b06b97970c7aea54a2696139e4a2a235488e4f59c5fae8155eaa9846a2cc",
+    "assets/art/adult-cast-b-v14.png": "a6f672534875609e32b4a535ac8d6a35a1596b5618a1c3ab9de11adc598be7f3",
+    "assets/art/cast-reactions-b-v14.png": "09968f82d3ebc6f15d45fb726e074ae85335be632ceef1fc7d6d494cf78bc6f4",
+    "assets/art/cast-screen-b-v14.png": "5133b235c3f462834b670f665a304276b1859a00110393300aa82b11489a815f",
+    "assets/art/adult-cast-c-v14.png": "69871d9990e63583e8af4fa5c6dada0a1092145142cd12b919fb156350534dde",
+    "assets/art/cast-reactions-c-v14.png": "b9a395dbba5a06e92b32a85f4b8121b2509ceeec9a5a5318cafab0711bebbf4d",
+    "assets/art/cast-screen-c-v14.png": "c3926feedbed7d8b298e36c81139ef709d4716ce79d5dafa809d6fcf5d8af4d7"
+  },
+  "1440": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "population": 54,
+    "outfits": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "actualAdultsObserved": {
+      "walker-2": {
+        "variant": 4,
+        "source": "adult-cast-b-v14.png"
+      },
+      "walker-5": {
+        "variant": 8,
+        "source": "adult-cast-c-v14.png"
+      },
+      "resident-workshop": {
+        "variant": 0,
+        "source": "adult-cast-a-v14.png"
+      },
+      "walker-6": {
+        "variant": 1,
+        "source": "adult-cast-a-v14.png"
+      },
+      "walker-0": {
+        "variant": 1,
+        "source": "adult-cast-a-v14.png"
+      },
+      "resident-apartment": {
+        "variant": 2,
+        "source": "adult-cast-a-v14.png"
+      },
+      "walker-1": {
+        "variant": 3,
+        "source": "adult-cast-b-v14.png"
+      },
+      "walker-3": {
+        "variant": 5,
+        "source": "adult-cast-b-v14.png"
+      },
+      "resident-courtyard": {
+        "variant": 6,
+        "source": "adult-cast-c-v14.png"
+      },
+      "walker-4": {
+        "variant": 7,
+        "source": "adult-cast-c-v14.png"
+      }
+    },
+    "sameBikeFootActors": [
+      "resident-apartment",
+      "walker-1",
+      "walker-2"
+    ],
+    "roomHostVariant": 8,
+    "actualThrow": {
+      "variant": 0,
+      "damage": 32,
+      "hp": 28,
+      "source": "cast-screen-a-v14.png"
+    }
+  },
+  "390": {
+    "viewport": [
+      390,
+      844
+    ],
+    "population": 54,
+    "outfits": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "actualAdultsObserved": {
+      "walker-2": {
+        "variant": 4,
+        "source": "adult-cast-b-v14.png"
+      }
+    },
+    "sameBikeFootActors": [
+      "resident-apartment",
+      "walker-1",
+      "walker-2"
+    ],
+    "roomHostVariant": 8,
+    "actualThrow": {
+      "variant": 0,
+      "damage": 32,
+      "hp": 28,
+      "source": "cast-screen-a-v14.png"
+    }
+  },
+  "844": {
+    "viewport": [
+      844,
+      390
+    ],
+    "population": 54,
+    "outfits": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "actualAdultsObserved": {
+      "walker-2": {
+        "variant": 4,
+        "source": "adult-cast-b-v14.png"
+      }
+    },
+    "sameBikeFootActors": [
+      "resident-apartment",
+      "walker-1",
+      "walker-2"
+    ],
+    "roomHostVariant": 8,
+    "actualThrow": {
+      "variant": 0,
+      "damage": 32,
+      "hp": 28,
+      "source": "cast-screen-a-v14.png"
+    }
+  },
+  "result": "passed",
+  "pageErrors": [],
+  "httpFailures": []
+}

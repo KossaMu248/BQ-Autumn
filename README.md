@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v13.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v14.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -74,6 +74,8 @@ Successful grabs, throws and mauls fill **Apex Primal**. At 35 points the bear e
 Architecture is a stylized Hässelby-inspired interpretation. The manor uses the existing castle artwork as its silhouette reference. These are not measured replicas of real centre buildings; reference websites were inaccessible during this pass.
 
 A shared adult population stays visible while cycling, dismounting and walking. Adult NPCs have nine outfits, including six Stockholm suburb streetwear designs: a wine down puffer with black nylon trousers; a grey technical fleece set with white trainers; a cream oversized hoodie with loose blue denim; a silver puffer vest with brown tactical cargos; a teal nylon windbreaker set; and a long black down parka with charcoal denim. Caps, fitted beanies, performance/luxury-style runners and small athletic or patterned crossbody bags complete the looks. Three ordinary autumn jackets/workwear outfits keep the neighbourhood varied, and shopkeepers retain those casual clothes. Adult outfits are separate from the three existing gangster-kid outfits.
+
+The six streetwear characters are drawn as young adults around 18–24, with distinct faces, complexions, hair textures and hairstyles. Three older neighbours include two Middle Eastern-inspired dad characters and a middle-aged woman. Their faces, hair, skin tones and outfits stay consistent through walking, reactions, defeat and full-body screen impacts. The cast keeps the cosy illustrated style; appearance and age do not change NPC behaviour.
 
 Each NPC keeps the same clothes through walking, aggression, damage, defeat and full-body screen throws, as well as cycling/dismounting and return visits. Neighbouring spawn points cycle through the full wardrobe rather than repeating three styles. Residents retain their longer walking routes and original endpoint pauses; clothing does not change their patrol speed. Attacking a resident makes that person aggressive and alerts nearby witnesses; distant residents remain calm. Positions, health and reactions persist when returning to the street. Suburb crews stay hostile, with the original attacks while cycling and aimed thrown items while on foot. Defeated crew members stop attacking until they recover. Scattering birds, bakery steam and waterside ripples add quiet life behind the road.
 

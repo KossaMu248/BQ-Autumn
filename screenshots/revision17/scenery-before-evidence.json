@@ -1,0 +1,41 @@
+{
+  "errors": [],
+  "spots": [
+    [
+      "promenade",
+      2500
+    ],
+    [
+      "workshop",
+      5850
+    ],
+    [
+      "metro",
+      11600
+    ],
+    [
+      "pizzeria",
+      16000
+    ],
+    [
+      "library",
+      18000
+    ],
+    [
+      "castle",
+      21700
+    ],
+    [
+      "greenhouse",
+      24650
+    ],
+    [
+      "boathouse",
+      32050
+    ],
+    [
+      "bakery",
+      35450
+    ]
+  ]
+}

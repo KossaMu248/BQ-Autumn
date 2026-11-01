@@ -4,11 +4,11 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision16';SHOTS.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision17';SHOTS.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v16.html';errors=[];failures=[]
+base=f'http://127.0.0.1:{server.server_port}/autumn-v17.html';errors=[];failures=[]
 def read(p):return p.evaluate('BearlyVisits.audit()')
 def ready(p):
  p.clock.install();p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:failures.append(r.url) if r.status>=400 else None)
@@ -23,7 +23,7 @@ def move(p,target):
  for _ in range(4):
   delta=target-read(p)['x']
   if abs(delta)<8:return
-  key='ArrowRight' if delta>0 else 'ArrowLeft';p.keyboard.down(key);p.clock.run_for(round(abs(delta)/155*1000));p.keyboard.up(key);p.clock.run_for(250)
+  key='ArrowRight' if delta>0 else 'ArrowLeft';p.keyboard.down(key);p.clock.run_for(round(abs(delta)/120*1000));p.keyboard.up(key);p.clock.run_for(250)
  assert abs(target-read(p)['x'])<14
 try:
  with sync_playwright() as pw:
@@ -55,7 +55,7 @@ try:
    ctx=b.new_context(viewport={'width':w,'height':h},is_mobile=True,has_touch=True);p=ctx.new_page();ready(p);warp(p,2500)
    p.locator('.dismount-button').tap();p.clock.run_for(2700);assert read(p)['mode']=='street'
    control=p.locator('[data-direction="1"]').bounding_box();cdp=ctx.new_cdp_session(p);before=read(p)['x']
-   cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':control['x']+control['width']/2,'y':control['y']+control['height']/2}]});p.clock.run_for(650);cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});p.clock.run_for(250)
+   cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':control['x']+control['width']/2,'y':control['y']+control['height']/2}]});p.clock.run_for(850);cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});p.clock.run_for(250)
    assert read(p)['x']>before+85;p.screenshot(path=str(SHOTS/f'free-walking-{w}.png'))
    assert p.evaluate('document.documentElement.scrollWidth<=innerWidth')
    p.locator('.area-exit').tap();finish(p);ctx.close()

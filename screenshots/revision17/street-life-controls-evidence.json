@@ -1,0 +1,2889 @@
+{
+  "entry": "autumn-v17.html",
+  "result": "passed",
+  "controls": {
+    "crossMode": {
+      "shortcut": {
+        "settings": "#debugOpenBtn",
+        "action": "#debugLifeBtn",
+        "initialMode": null,
+        "observedTransition": "dismount",
+        "finalMode": "street",
+        "finalX": 2529,
+        "debugClosed": true
+      },
+      "ridingActors": [
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-workshop",
+          "variant": 11,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "walker-workshop",
+          "variant": 2,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "neighbour-workshop",
+          "variant": 6,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-arcade",
+          "variant": 9,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "walker-arcade",
+          "variant": 3,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-metro",
+          "variant": 10,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "walker-metro",
+          "variant": 4,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-civic-hall",
+          "variant": 11,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "walker-civic-hall",
+          "variant": 5,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "civilian-pizzeria",
+          "variant": 9,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "walker-pizzeria",
+          "variant": 0,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "neighbour-pizzeria",
+          "variant": 7,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "civilian-library",
+          "variant": 10,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "walker-library",
+          "variant": 1,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "civilian-castle",
+          "variant": 11,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "walker-castle",
+          "variant": 2,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "civilian-greenhouse",
+          "variant": 9,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "walker-greenhouse",
+          "variant": 3,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "civilian-boathouse",
+          "variant": 10,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "walker-boathouse",
+          "variant": 4,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "neighbour-boathouse",
+          "variant": 8,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "civilian-cafe",
+          "variant": 11,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "walker-cafe",
+          "variant": 5,
+          "active": false,
+          "visible": false,
+          "hp": 60
+        },
+        {
+          "id": "gang-4080-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-4080-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-7545-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-7545-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-7545-2",
+          "variant": 2,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-11730-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-11730-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-18600-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-18600-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-18600-2",
+          "variant": 2,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-24000-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-24000-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-28350-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-28350-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-28350-2",
+          "variant": 2,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-36450-0",
+          "variant": 0,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        },
+        {
+          "id": "gang-36450-1",
+          "variant": 1,
+          "active": true,
+          "visible": true,
+          "hp": 60
+        }
+      ],
+      "ridingDraws": [
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "source": "civilian-rest-v16.png",
+          "pose": "read",
+          "activity": "read"
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "source": "civilian-rest-v16.png",
+          "pose": "sit",
+          "activity": "sit"
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "source": "civilian-rest-v16.png",
+          "pose": "smoke",
+          "activity": "smoke"
+        },
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "source": "npc-motion-a-v16.png",
+          "pose": "idle",
+          "activity": "idle"
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "source": "civilian-rest-v16.png",
+          "pose": "read",
+          "activity": "read"
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "source": "civilian-rest-v16.png",
+          "pose": "sit",
+          "activity": "sit"
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "source": "civilian-rest-v16.png",
+          "pose": "smoke",
+          "activity": "smoke"
+        },
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "source": "npc-motion-a-v16.png",
+          "pose": "idle",
+          "activity": "idle"
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "source": "civilian-rest-v16.png",
+          "pose": "read",
+          "activity": "read"
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "source": "civilian-rest-v16.png",
+          "pose": "sit",
+          "activity": "sit"
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "source": "civilian-rest-v16.png",
+          "pose": "smoke",
+          "activity": "smoke"
+        },
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "source": "npc-motion-a-v16.png",
+          "pose": "idle",
+          "activity": "idle"
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "source": "civilian-rest-v16.png",
+          "pose": "read",
+          "activity": "read"
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "source": "civilian-rest-v16.png",
+          "pose": "sit",
+          "activity": "sit"
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "source": "civilian-rest-v16.png",
+          "pose": "smoke",
+          "activity": "smoke"
+        },
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "source": "npc-motion-a-v16.png",
+          "pose": "idle",
+          "activity": "idle"
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "source": "civilian-rest-v16.png",
+          "pose": "read",
+          "activity": "read"
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "source": "civilian-rest-v16.png",
+          "pose": "sit",
+          "activity": "sit"
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "source": "civilian-rest-v16.png",
+          "pose": "smoke",
+          "activity": "smoke"
+        },
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "source": "npc-motion-a-v16.png",
+          "pose": "idle",
+          "activity": "idle"
+        }
+      ],
+      "footActors": [
+        {
+          "id": "promenade-walker",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -64
+        },
+        {
+          "id": "civilian-reader",
+          "variant": 9,
+          "activity": "read",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "civilian-smoker",
+          "variant": 10,
+          "activity": "smoke",
+          "active": true,
+          "visible": true,
+          "depth": -82
+        },
+        {
+          "id": "civilian-bench",
+          "variant": 11,
+          "activity": "sit",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "civilian-workshop",
+          "variant": 11,
+          "activity": "sit",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "walker-workshop",
+          "variant": 2,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -64
+        },
+        {
+          "id": "neighbour-workshop",
+          "variant": 6,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -64
+        },
+        {
+          "id": "civilian-arcade",
+          "variant": 9,
+          "activity": "read",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "walker-arcade",
+          "variant": 3,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -68
+        },
+        {
+          "id": "civilian-metro",
+          "variant": 10,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -84
+        },
+        {
+          "id": "walker-metro",
+          "variant": 4,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -64
+        },
+        {
+          "id": "civilian-civic-hall",
+          "variant": 11,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -84
+        },
+        {
+          "id": "walker-civic-hall",
+          "variant": 5,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -68
+        },
+        {
+          "id": "civilian-pizzeria",
+          "variant": 9,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -84
+        },
+        {
+          "id": "walker-pizzeria",
+          "variant": 0,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -64
+        },
+        {
+          "id": "neighbour-pizzeria",
+          "variant": 7,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -64
+        },
+        {
+          "id": "civilian-library",
+          "variant": 10,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -84
+        },
+        {
+          "id": "walker-library",
+          "variant": 1,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -68
+        },
+        {
+          "id": "civilian-castle",
+          "variant": 11,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -84
+        },
+        {
+          "id": "walker-castle",
+          "variant": 2,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -64
+        },
+        {
+          "id": "civilian-greenhouse",
+          "variant": 9,
+          "activity": "read",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "walker-greenhouse",
+          "variant": 3,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -68
+        },
+        {
+          "id": "civilian-boathouse",
+          "variant": 10,
+          "activity": "sit",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "walker-boathouse",
+          "variant": 4,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -64
+        },
+        {
+          "id": "neighbour-boathouse",
+          "variant": 8,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -64
+        },
+        {
+          "id": "civilian-cafe",
+          "variant": 11,
+          "activity": "read",
+          "active": true,
+          "visible": true,
+          "depth": -84
+        },
+        {
+          "id": "walker-cafe",
+          "variant": 5,
+          "activity": "offstage",
+          "active": false,
+          "visible": false,
+          "depth": -68
+        },
+        {
+          "id": "gang-4080-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-4080-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-7545-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-7545-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-7545-2",
+          "variant": 2,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-11730-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-11730-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-18600-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-18600-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-18600-2",
+          "variant": 2,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-24000-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-24000-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-28350-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-28350-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-28350-2",
+          "variant": 2,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-36450-0",
+          "variant": 0,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        },
+        {
+          "id": "gang-36450-1",
+          "variant": 1,
+          "activity": "idle",
+          "active": true,
+          "visible": true,
+          "depth": -102
+        }
+      ]
+    },
+    "population": {
+      "total": 44,
+      "active": 31,
+      "offstage": 13,
+      "civilian": 16,
+      "fleeing": 0,
+      "hiding": 0,
+      "resting": 8
+    },
+    "streetAudit": {
+      "localSlots": 27,
+      "civilianSlots": 16,
+      "coverSource": {
+        "image": "assets/art/autumn-verge.png",
+        "rect": [
+          8,
+          34,
+          2164,
+          659
+        ],
+        "width": 248,
+        "foot": 688
+      },
+      "props": [
+        {
+          "id": "promenade-bench-west",
+          "kind": "bench",
+          "x": 2220,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "promenade-bench-east",
+          "kind": "bench",
+          "x": 2680,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "promenade-smoke",
+          "kind": "bin",
+          "x": 2930,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "promenade-bush-west",
+          "kind": "bush",
+          "x": 1980,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "promenade-bush-east",
+          "kind": "bush",
+          "x": 3190,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "workshop-life-bench",
+          "kind": "bench",
+          "x": 5897.5,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "workshop-life-bin",
+          "kind": "bin",
+          "x": 6067.5,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "workshop-life-bush-left",
+          "kind": "bush",
+          "x": 4900,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "workshop-life-bush-right",
+          "kind": "bush",
+          "x": 6450,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "arcade-life-bench",
+          "kind": "bench",
+          "x": 8075,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "arcade-life-bin",
+          "kind": "bin",
+          "x": 8245,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "arcade-life-bush-left",
+          "kind": "bush",
+          "x": 7000,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "arcade-life-bush-right",
+          "kind": "bush",
+          "x": 8550,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "metro-life-bench",
+          "kind": "bench",
+          "x": 11645,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "metro-life-bin",
+          "kind": "bin",
+          "x": 11815,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "metro-life-bush-left",
+          "kind": "bush",
+          "x": 10625,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "metro-life-bush-right",
+          "kind": "bush",
+          "x": 12175,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "civic-hall-life-bench",
+          "kind": "bench",
+          "x": 14055,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "civic-hall-life-bin",
+          "kind": "bin",
+          "x": 14225,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "civic-hall-life-bush-left",
+          "kind": "bush",
+          "x": 13050,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "civic-hall-life-bush-right",
+          "kind": "bush",
+          "x": 14600,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "pizzeria-life-bench",
+          "kind": "bench",
+          "x": 16007.5,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "pizzeria-life-bin",
+          "kind": "bin",
+          "x": 16177.5,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "pizzeria-life-bush-left",
+          "kind": "bush",
+          "x": 15000,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "pizzeria-life-bush-right",
+          "kind": "bush",
+          "x": 16550,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "library-life-bench",
+          "kind": "bench",
+          "x": 18055,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "library-life-bin",
+          "kind": "bin",
+          "x": 18225,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "library-life-bush-left",
+          "kind": "bush",
+          "x": 17000,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "library-life-bush-right",
+          "kind": "bush",
+          "x": 18550,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "castle-life-bench",
+          "kind": "bench",
+          "x": 21700,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "castle-life-bin",
+          "kind": "bin",
+          "x": 21870,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "castle-life-bush-left",
+          "kind": "bush",
+          "x": 20700,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "castle-life-bush-right",
+          "kind": "bush",
+          "x": 22250,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "greenhouse-life-bench",
+          "kind": "bench",
+          "x": 24665,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "greenhouse-life-bin",
+          "kind": "bin",
+          "x": 24835,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "greenhouse-life-bush-left",
+          "kind": "bush",
+          "x": 23700,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "greenhouse-life-bush-right",
+          "kind": "bush",
+          "x": 25250,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "boathouse-life-bench",
+          "kind": "bench",
+          "x": 32050,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "boathouse-life-bin",
+          "kind": "bin",
+          "x": 32220,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "boathouse-life-bush-left",
+          "kind": "bush",
+          "x": 31050,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "boathouse-life-bush-right",
+          "kind": "bush",
+          "x": 32600,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "cafe-life-bench",
+          "kind": "bench",
+          "x": 35467.5,
+          "depth": -84,
+          "seatHeight": 38
+        },
+        {
+          "id": "cafe-life-bin",
+          "kind": "bin",
+          "x": 35637.5,
+          "depth": -82,
+          "seatHeight": 38
+        },
+        {
+          "id": "cafe-life-bush-left",
+          "kind": "bush",
+          "x": 34500,
+          "depth": -80,
+          "seatHeight": 38
+        },
+        {
+          "id": "cafe-life-bush-right",
+          "kind": "bush",
+          "x": 36050,
+          "depth": -80,
+          "seatHeight": 38
+        }
+      ],
+      "drawnProps": [
+        {
+          "id": "promenade-bench-west",
+          "kind": "bench",
+          "x": 2220,
+          "depth": -84,
+          "seatHeight": 38,
+          "foot": 487.4,
+          "seatY": 449.4
+        },
+        {
+          "id": "promenade-bench-east",
+          "kind": "bench",
+          "x": 2680,
+          "depth": -84,
+          "seatHeight": 38,
+          "foot": 519.7111111111111,
+          "seatY": 481.7111111111111
+        },
+        {
+          "id": "promenade-smoke",
+          "kind": "bin",
+          "x": 2930,
+          "depth": -82,
+          "seatHeight": 38,
+          "foot": 529.4888888888889,
+          "seatY": 491.48888888888894
+        },
+        {
+          "id": "promenade-bush-west",
+          "kind": "bush",
+          "x": 1980,
+          "depth": -80,
+          "seatHeight": 38,
+          "foot": 473.26666666666665,
+          "seatY": 435.26666666666665
+        },
+        {
+          "id": "promenade-bush-east",
+          "kind": "bush",
+          "x": 3190,
+          "depth": -80,
+          "seatHeight": 38,
+          "foot": 539.5777777777778,
+          "seatY": 501.5777777777778
+        }
+      ],
+      "audioRequests": 0
+    },
+    "passiveWalking": {
+      "sampleCount": 138,
+      "distance": 122.7520000000001,
+      "opposingFootLeadRange": [
+        -38.04949677419357,
+        31.92469677419355
+      ],
+      "laneDepth": -64,
+      "relaxedSource": "npc-motion-a-v16.png"
+    },
+    "desktop": {
+      "initial": {
+        "promenade-walker": {
+          "x": 2460,
+          "depth": -64,
+          "hp": 60,
+          "activity": "idle"
+        },
+        "civilian-reader": {
+          "x": 2680,
+          "depth": -84,
+          "hp": 60,
+          "activity": "read"
+        },
+        "civilian-bench": {
+          "x": 2220,
+          "depth": -84,
+          "hp": 60,
+          "activity": "sit"
+        }
+      },
+      "screams": 2,
+      "screamText": [
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        }
+      ],
+      "audioRequests": 1,
+      "chaseDistanceBefore": 95.20800000000008,
+      "chaseDistanceAfter": 49.0,
+      "runningSpeed": 270,
+      "hidden": [
+        {
+          "id": "civilian-reader",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3184,
+          "depth": -84
+        },
+        {
+          "id": "civilian-smoker",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3186,
+          "depth": -84
+        },
+        {
+          "id": "civilian-bench",
+          "target": {
+            "id": "promenade-bush-west",
+            "kind": "bush",
+            "x": 1980,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 1984,
+          "depth": -84
+        }
+      ],
+      "occlusion": [
+        {
+          "id": "civilian-smoker",
+          "prop": "promenade-bush-east",
+          "drawnBodyPixels": 7176,
+          "coveredBodyPixels": 4245,
+          "coveredRatio": 0.5915551839464883
+        }
+      ],
+      "peaceSamples": [
+        {
+          "time": 5.238000000000004,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.526000000000004,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.8300000000000045,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 6.134000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        }
+      ]
+    },
+    "returnToCalm": {
+      "civilian-reader": {
+        "id": "civilian-reader",
+        "activity": "idle",
+        "fear": false,
+        "hiding": false,
+        "hp": 60,
+        "variant": 9
+      },
+      "civilian-bench": {
+        "id": "civilian-bench",
+        "activity": "sit",
+        "fear": false,
+        "hiding": false,
+        "hp": 60,
+        "variant": 11
+      }
+    },
+    "directHit": {
+      "id": "civilian-reader",
+      "hp": 38,
+      "fear": true,
+      "screaming": true,
+      "activity": "cower",
+      "angryUntil": 0,
+      "punching": false
+    },
+    "390": {
+      "initial": {
+        "promenade-walker": {
+          "x": 2460,
+          "depth": -64,
+          "hp": 60,
+          "activity": "idle"
+        },
+        "civilian-reader": {
+          "x": 2680,
+          "depth": -84,
+          "hp": 60,
+          "activity": "read"
+        },
+        "civilian-bench": {
+          "x": 2220,
+          "depth": -84,
+          "hp": 60,
+          "activity": "sit"
+        }
+      },
+      "screams": 2,
+      "screamText": [
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        }
+      ],
+      "audioRequests": 1,
+      "chaseDistanceBefore": 88.14879999999994,
+      "chaseDistanceAfter": 49.0,
+      "runningSpeed": 270,
+      "hidden": [
+        {
+          "id": "civilian-reader",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3184,
+          "depth": -84
+        },
+        {
+          "id": "civilian-smoker",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3186,
+          "depth": -84
+        },
+        {
+          "id": "civilian-bench",
+          "target": {
+            "id": "promenade-bush-west",
+            "kind": "bush",
+            "x": 1980,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 1984,
+          "depth": -84
+        }
+      ],
+      "occlusion": [
+        {
+          "id": "civilian-smoker",
+          "prop": "promenade-bush-east",
+          "drawnBodyPixels": 7145,
+          "coveredBodyPixels": 4225,
+          "coveredRatio": 0.5913226032190343
+        }
+      ],
+      "peaceSamples": [
+        {
+          "time": 5.234000000000004,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.538000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.842000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 6.146000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        }
+      ]
+    },
+    "844": {
+      "initial": {
+        "promenade-walker": {
+          "x": 2460,
+          "depth": -64,
+          "hp": 60,
+          "activity": "idle"
+        },
+        "civilian-reader": {
+          "x": 2680,
+          "depth": -84,
+          "hp": 60,
+          "activity": "read"
+        },
+        "civilian-bench": {
+          "x": 2220,
+          "depth": -84,
+          "hp": 60,
+          "activity": "sit"
+        }
+      },
+      "screams": 2,
+      "screamText": [
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        },
+        {
+          "value": "AAH!",
+          "color": "#ffffff"
+        }
+      ],
+      "audioRequests": 1,
+      "chaseDistanceBefore": 90.06880000000001,
+      "chaseDistanceAfter": 49.0,
+      "runningSpeed": 270,
+      "hidden": [
+        {
+          "id": "civilian-reader",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3184,
+          "depth": -84
+        },
+        {
+          "id": "civilian-smoker",
+          "target": {
+            "id": "promenade-bush-east",
+            "kind": "bush",
+            "x": 3190,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 3186,
+          "depth": -84
+        },
+        {
+          "id": "civilian-bench",
+          "target": {
+            "id": "promenade-bush-west",
+            "kind": "bush",
+            "x": 1980,
+            "depth": -84,
+            "duration": 10
+          },
+          "x": 1984,
+          "depth": -84
+        }
+      ],
+      "occlusion": [
+        {
+          "id": "civilian-smoker",
+          "prop": "promenade-bush-east",
+          "drawnBodyPixels": 7146,
+          "coveredBodyPixels": 4213,
+          "coveredRatio": 0.5895605933389308
+        }
+      ],
+      "peaceSamples": [
+        {
+          "time": 5.242000000000004,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.546000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 5.850000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        },
+        {
+          "time": 6.138000000000005,
+          "civilians": [
+            {
+              "id": "civilian-reader",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-smoker",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-bench",
+              "activity": "hide",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": true
+            },
+            {
+              "id": "civilian-workshop",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-arcade",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-metro",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-civic-hall",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-pizzeria",
+              "activity": "offstage",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-library",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-castle",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-greenhouse",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-boathouse",
+              "activity": "sit",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            },
+            {
+              "id": "civilian-cafe",
+              "activity": "read",
+              "hp": 60,
+              "angryUntil": 0,
+              "punching": false,
+              "hiding": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sourceSHA256": {
+    "autumn-v17.html": "0b9f686c2f1773c083a4394177592c7e369499125b543d02c75753fb0d24bd0f",
+    "js/game.js": "26cafeca4884295c35053803d61145a9c2a67950fa752a7f454ccb0dc0b18070",
+    "js/brawler-art.js": "87e279bf05dd20757170cfa854cb7b2aad57bfef61f61b37ec9a7b3760064bb1",
+    "js/npc-motion.js": "cdb4337d66b77b83871e2bdb75c2a6315f8e8f74553f25439a6a7cfb2e784029",
+    "js/brawler.js": "486656e7a47fb52017916a186cc6d0ec123592ab3fca331f60b2e43e5182541f",
+    "js/hero-rig.js": "92252aba50f1d088bf718f48dfee71f8b7017b2ca9acce1e72d29ad39fdbff59",
+    "js/locomotion.js": "0e3ee582f7cc6b1a49eb9a86727b3413a1a44cfa05dde37f5552930049886eb6",
+    "js/illustrated-visits.js": "145a6661e2a9aed4ac80d83566d0a88d1c08b957895c04387b4cb57b90303bdf",
+    "js/street-life.js": "e029d4176bd86063c707fdd60a4ba95591094763a994ae6b9359580b878a3c4e",
+    "assets/art/npc-motion-a-v16.png": "78ac5e1cb0a47d6df857622976ee95845da3bcf161dab138f559869cc950546b",
+    "assets/art/npc-motion-b-v16.png": "5aeba4c9e8b1c82648384743d28b52e0b8ad5b9f2f88d92681a53e2b15c68528",
+    "assets/art/npc-motion-c-v16.png": "8d0307d2e42346626e2c4ee5c20c0cf5266f197970aa678c3e1896244f6387d6",
+    "assets/art/civilian-standing-v16.png": "cf7ea6884f1e716901377ee68a91f045075b7687d97533d7e650f09d69bf92d1",
+    "assets/art/civilian-motion-v16.png": "68a233b1bc0ee4b9167fde8aad97c32c623540bf26d7efc09c99ad6b984f8568",
+    "assets/art/civilian-rest-v16.png": "a3caa1e0c152048fac759773c903bddaa2e5ab47c6efd7484597af56befffb6c",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/cast-reactions-a-v15.png": "6bab2a5b59eda35cd04e40ecd0770e4cbe51ae7dc0f482703ce169d57c82f7c5",
+    "assets/art/cast-reactions-b-v15.png": "cdddd35cf4a4eaa7d0372475dda754e223887616c5ae82c406c74c7f7f4fef2b",
+    "assets/art/cast-reactions-c-v15.png": "77fc73768131ba53654461732634a645fa59408f2d485cb4483e57c1e739a227",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

@@ -1,4 +1,4 @@
-"""V16 authored NPC-frame coverage and runtime walking/running checks.
+"""V17 authored NPC-frame coverage and runtime walking/running checks.
 
 Whole authored frames retain every opaque body/prop component and exclude other
 cells. Runtime rigs are checked independently for connected bodies and visible
@@ -16,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v16.html"
-SHOTS = ROOT / "screenshots" / "revision16"
+ENTRY = "autumn-v17.html"
+SHOTS = ROOT / "screenshots" / "revision17"
 
 
 def source_hashes():
@@ -180,7 +180,8 @@ PROBES = r"""async () => {
 
 RUNTIME = r"""() => {
   const canvas=document.createElement('canvas');canvas.width=360;canvas.height=300;
-  const c=canvas.getContext('2d',{willReadFrequently:true});
+  const c=canvas.getContext('2d',{willReadFrequently:true}),nativeDraw=c.drawImage.bind(c),observedCache=new Set(),observedPhases=new Map();
+  c.drawImage=(im,...args)=>{if(im.dataset?.sourceTransform==='walk-cache'){observedCache.add(im);const variant=+im.dataset.sourceVariant;if(!observedPhases.has(variant))observedPhases.set(variant,new Set());observedPhases.get(variant).add(Math.round(+im.dataset.sourcePhase*48)%48);}return nativeDraw(im,...args);};
   function pixels(){return c.getImageData(0,0,360,300).data;}
   function measure(data,height){
     const w=360,h=300,seen=new Uint8Array(w*h),queue=new Int32Array(w*h),parts=[];let total=0;
@@ -197,9 +198,9 @@ RUNTIME = r"""() => {
   const cases=[],faults=[];let negatives=0;
   for(let variant=0;variant<12;variant++)for(const height of [145,90])for(const heading of [1,-1])for(const activity of ['walk','run']){
     let baseline=null,maxFootChange=0,maxArmChange=0;
-    for(let phase=0;phase<16;phase++){
+    for(let phase=0;phase<48;phase++){
       c.resetTransform();c.clearRect(0,0,360,300);
-      BearlyBrawlArt.adult(c,{id:'gait-'+variant,kind:'resident',variant,civilian:variant>=6,state:'idle',age:phase*.1,activity,moving:true,running:activity==='run',speed:activity==='run'?260:55,distance:phase*height*.08,face:heading,mood:activity==='run'&&variant<6?'aggressive':'calm',hp:60},180,260,height);
+      BearlyBrawlArt.adult(c,{id:'gait-'+variant,kind:'resident',variant,civilian:variant>=6,state:'idle',age:phase*.1,activity,moving:true,running:activity==='run',speed:activity==='run'?260:55,distance:phase/48*height*(variant===9?1.05:variant===11?.84:1)*(activity==='walk'?.72:1.05),face:heading,mood:activity==='run'&&variant<6?'aggressive':'calm',hp:60},180,260,height);
       const data=pixels(),body=measure(data,height);
       if(!baseline)baseline=data;
       let feet=0,arms=0;
@@ -219,7 +220,7 @@ RUNTIME = r"""() => {
       if(broken.majorComponents===1&&broken.mainRatio>=.99)throw Error('Detached-leg runtime negative control failed');negatives++;
     }
   }
-  return{cases:cases.length,minMainBodyRatio:Math.min(...cases.map(v=>v.mainRatio)),negativeControls:negatives,faultCount:faults.length,faults:faults.slice(0,30)};
+  return{cases:cases.length,cachedFrameCount:observedCache.size,cacheRGBABytes:[...observedCache].reduce((sum,im)=>sum+im.width*im.height*4,0),cachedPhases:Object.fromEntries([...observedPhases].map(([v,phases])=>[v,[...phases].sort((a,b)=>a-b)])),minMainBodyRatio:Math.min(...cases.map(v=>v.mainRatio)),negativeControls:negatives,faultCount:faults.length,faults:faults.slice(0,30)};
 }"""
 
 
@@ -237,7 +238,7 @@ def main():
     SHOTS.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
-    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V16"}
+    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V17"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -247,7 +248,7 @@ def main():
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 page.on("response", lambda r: failures.append([r.status, r.url]) if r.status >= 400 else None)
                 page.goto(f"http://127.0.0.1:{server.server_port}/{ENTRY}")
-                page.wait_for_function("BearlyVisits.audit().artReady && BearlyNpcMotion.ready()", timeout=120000)
+                page.wait_for_function("BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)", timeout=180000)
                 page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
                 catalog = page.evaluate("BearlyBrawlArt.wardrobe()")
                 assert len(catalog) == 12 and len({n['label'] for n in catalog}) == 12
@@ -259,7 +260,21 @@ def main():
                 evidence['sourceCoverage'] = page.evaluate(PROBES)
                 (SHOTS / 'street-life-source-evidence.json').write_text(json.dumps({**evidence,'result':'checking','sourceSHA256':source_hashes()},indent=2)+'\n')
                 assert evidence['sourceCoverage']['faultCount'] == 0, evidence['sourceCoverage']
+                cache_before = page.evaluate('BearlyNpcMotion.cacheStats?.() || null')
                 evidence['runtimeMotion'] = page.evaluate(RUNTIME)
+                cache_after = page.evaluate('BearlyNpcMotion.cacheStats?.() || null')
+                if cache_after:
+                    assert evidence['runtimeMotion']['cachedFrameCount'] == cache_after['frameCount'], evidence['runtimeMotion']
+                    assert evidence['runtimeMotion']['cacheRGBABytes'] == cache_after['bytes'], evidence['runtimeMotion']
+                    assert all(phases == list(range(48)) for phases in evidence['runtimeMotion']['cachedPhases'].values()), evidence['runtimeMotion']
+                    assert cache_after['complete'] and cache_after['frameCount'] == cache_after['capacity'] == 576, cache_after
+                    assert cache_after['bytes'] <= cache_after['limitBytes'] == 48*1024*1024, cache_after
+                    assert sum(v['bytes'] for v in cache_after['variants']) == cache_after['bytes'], cache_after
+                    assert all(v['frames'] == cache_after['phaseCount'] == 48 for v in cache_after['variants']), cache_after
+                    assert cache_after['frameCount'] == cache_before['frameCount'] and cache_after['bytes'] == cache_before['bytes'], 'Different sizes/headings must reuse the bounded cache'
+                    assert cache_after['hits']-cache_before['hits'] >= 2304, cache_after
+                    evidence['boundedWalkCache'] = {'before':cache_before,'after':cache_after,'variedHeightAndHeadingCases':2304,'unchangedBytes':True,'unchangedFrameCount':True}
+
                 (SHOTS / 'street-life-source-evidence.json').write_text(json.dumps({**evidence,'result':'checking','sourceSHA256':source_hashes()},indent=2)+'\n')
                 assert evidence['runtimeMotion']['faultCount'] == 0, evidence['runtimeMotion']
                 page.close()

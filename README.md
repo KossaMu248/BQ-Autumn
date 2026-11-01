@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v16.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v17.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -67,7 +67,7 @@ The baby now uses the original bicycle artwork as one continuous head, chin, nec
 
 ### Everyday street life
 
-V16 uses a slower bear walk with longer alternating steps, heel/toe movement and gentle pelvis, torso and carrier motion. The baby keeps the original continuous bicycle face and clothing; the whole carrier follows the bear together.
+V17 uses a calm 120-pixel/second bear walk with alternating steps that fit its short legs. The original shorts and fur move as one opaque surface, with complete shoes, coordinated hips, torso, sleeves and carrier motion through starts and stops. The baby keeps the original continuous bicycle face and clothing; the whole carrier follows the bear together.
 
 Residents follow long sidewalk routes, pause and come and go on staggered schedules. Three new peaceful neighbours—a student, a stocky middle-aged man and an older woman—wear ordinary clothes and have distinct faces and body proportions. Benches, newspapers, cigarettes and idle breathing give them activities between walks. Existing older neighbours and shopkeepers are peaceful too: they never retaliate. A nearby fight or a direct hit makes civilians scream, flee and sometimes crouch behind a real bush or street bin, then resume their routine after calming down. Streetwear alone does not make an NPC hostile; the existing hostile crews retain their behaviour.
 
@@ -177,4 +177,6 @@ Run `python3 tests/browser_hero.py` to capture front/back carriers, both walking
 
 Run `python3 tests/browser_baby_face.py` for the original head-file hash, source eye/nose/mouth/chin pixels, removed chair/cloth pixels and final chin visibility after all collar/body layers. Focused 8× probes cover both headings and character sizes; negative controls reject an erased jaw or a collar drawn across it.
 
-Run `node tests/npc-life.cjs` for civilian safety, routes, rests, pursuit and schedules; `node tests/hero-gait.cjs` measures the longer gait and source-sized limbs. `python3 tests/browser_street_life.py` exercises real street controls and furniture on desktop and both phone orientations. `python3 tests/browser_wardrobe.py --renderer-only` checks the complete cast and continuous neutral walking rig. V16 evidence is in `screenshots/revision16/`.
+Run `node tests/npc-life.cjs` for civilian safety, routes, rests, pursuit and schedules; `node tests/hero-gait.cjs` measures the longer gait and source-sized limbs. `python3 tests/browser_street_life.py` exercises real street controls and furniture on desktop and both phone orientations. `python3 tests/browser_wardrobe.py --renderer-only` checks the complete cast and continuous neutral walking rig. V17 evidence is in `screenshots/revision17/`.
+
+NPC walking phases are baked into a bounded sprite cache and reused during play. Supporting browsers bake them off the main thread; older browsers use cooperative background slices. Settings shows animation-cache counts and memory. Hiding foliage uses a complete painted silhouette, and overlapping half-size sidewalk furniture is removed.

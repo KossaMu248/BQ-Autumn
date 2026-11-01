@@ -1,7 +1,18 @@
 /* Sidewalk routes and real street furniture shared by ambient NPC routines. */
 (() => {
   'use strict';
-  const bush=new Image();bush.src='assets/v118_close_bush_0.png';
+  // The old scrolling hedge is cut at its left edge. This complete planted
+  // verge has natural alpha edges and the same useful cover height.
+  const cover={x:8,y:34,w:2164,h:659,foot:688,width:248},bush=new Image();
+  let coverTile=null;
+  bush.onload=()=>{
+    const tile=document.createElement('canvas'),scale=cover.width*2/cover.w;
+    tile.width=cover.width*2;tile.height=Math.ceil(cover.h*scale);
+    tile.dataset.sourceAsset='autumn-verge.png';tile.dataset.sourceRect=[cover.x,cover.y,cover.w,cover.h].join(',');
+    tile.getContext('2d').drawImage(bush,cover.x,cover.y,cover.w,cover.h,0,0,tile.width,cover.h*scale);
+    coverTile=tile;
+  };
+  bush.src='assets/art/autumn-verge.png';
   let cacheKey='',locals=[],furniture=[];
   const painted=new Map(),heard=new Set();let audioRequests=0,lastSoundAt=-99;
   function prepare(scenes,finish,count){
@@ -55,6 +66,9 @@
     });
   }
   function seeds(scenes,finish,count,gangs=[]){prepare(scenes,finish,count);return [...locals,...gangs];}
+  function overlaps(x,halfWidth=0){
+    return furniture.some(p=>Math.abs(p.x-x)<halfWidth+(p.kind==='bench'?108:p.kind==='bin'?45:124));
+  }
   function propsNear(cameraX,width=1160){return furniture.filter(p=>p.x>cameraX-260&&p.x<cameraX+width+260);}
   function beginFrame(){painted.clear();}
   function drawProp(c,p,groundAt,time=0){
@@ -62,9 +76,10 @@
     const y=g+p.depth;
     if(p.kind==='bench')window.BearlyStreetProps.draw(c,'bench',p.x,y,196,time);
     else if(p.kind==='bin')window.BearlyStreetProps.draw(c,'bin',p.x,y,68,time);
-    else if(p.kind==='bush'&&bush.naturalWidth){
+    else if(p.kind==='bush'&&coverTile){
       c.save();c.fillStyle='#19372835';c.beginPath();c.ellipse(p.x,y+1,105,7,0,0,Math.PI*2);c.fill();
-      c.drawImage(bush,0,254,1224,356,p.x-124,y-72,248,72);c.restore();
+      const scale=cover.width/cover.w;
+      c.drawImage(coverTile,p.x-cover.width*.5,y+(cover.y-cover.foot)*scale,cover.width,coverTile.height*.5);c.restore();
     }
     painted.set(p.id,{...p,foot:y,seatY:y-p.seatHeight});
   }
@@ -83,6 +98,6 @@
     }
     if(heard.size>500){const values=[...heard];heard.clear();values.slice(-200).forEach(id=>heard.add(id));}
   }
-  function audit(){return {localSlots:locals.length,civilianSlots:locals.filter(n=>n.civilian).length,props:furniture.map(p=>({...p})),drawnProps:[...painted.values()],audioRequests};}
-  window.BearlyStreetLife={seeds,propsNear,beginFrame,drawProp,caption,react,audit,ready:()=>!!bush.naturalWidth&&!!window.BearlyStreetProps?.ready()};
+  function audit(){return {localSlots:locals.length,civilianSlots:locals.filter(n=>n.civilian).length,coverSource:{image:'assets/art/autumn-verge.png',rect:[cover.x,cover.y,cover.w,cover.h],width:cover.width,foot:cover.foot},props:furniture.map(p=>({...p})),drawnProps:[...painted.values()],audioRequests};}
+  window.BearlyStreetLife={seeds,overlaps,propsNear,beginFrame,drawProp,caption,react,audit,ready:()=>!!coverTile&&!!window.BearlyStreetProps?.ready()};
 })();

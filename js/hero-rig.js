@@ -1,4 +1,4 @@
-/* One on-foot model: authored carrier torsos/actions and source-calibrated leg geometry. */
+/* One opaque on-foot figure: original cloth/fur, rigid authored shoes and native passenger. */
 (() => {
   'use strict';
   const images={},clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -129,7 +129,7 @@
   function prepareParts(){
     if(parts)return parts;
     function tile(rect){const [x,y,w,h]=rect,c=document.createElement('canvas');c.width=w;c.height=h;c.dataset.sourceAsset='matched-legs-v11.png';c.getContext('2d').drawImage(images.parts,x,y,w,h,0,0,w,h);return c;}
-    parts={pants:(()=>{const c=document.createElement('canvas');c.width=99;c.height=32;c.dataset.sourceAsset='front-carrier-v7.png';c.getContext('2d').drawImage(images.front,92,344,99,32,0,0,99,32);return c;})(),near:{fur:tile([180,129,515,293]),boot:tile([160,370,712,433])},far:{fur:tile([1110,160,385,267]),boot:tile([1077,372,642,421])}};return parts;
+    parts={near:{boot:tile([160,370,712,433])},far:{boot:tile([1077,372,642,421])}};return parts;
   }
   function fullPose(c,name,h,options={}){
     const f=actions[name],[sx,sy,sw,sh]=f.rect,s=h/f.stature;
@@ -140,77 +140,90 @@
     if(outline){c.beginPath();for(const [i,[x,y]] of outline.entries())i?c.lineTo((x-f.origin[0])*s,(y-f.origin[1])*s):c.moveTo((x-f.origin[0])*s,(y-f.origin[1])*s);c.closePath();c.clip();}
     const likeness=drawCarrier(c,images[f.image],f.rect,f.origin,s,name==='backIdle'?'back':name,options);c.restore();return likeness;
   }
-  function draw(c,px,py,h,face,options={}){
-    if(!ready())return false;
-    const state=options.state||{},back=!!state.baby,profile=profiles[back?'back':'front'],s=h/profile.stature;
-    const gait=window.BearlyLocomotion.pose(options.distance||0,h,options.weight||0),jump=options.jump||0;
-    c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
-    let pose=state.hp===0?(state.defeatAge<.55?'collapse':'defeated'):state.hurt?(back?'backHurt':'frontHurt'):state.attack?'maul':state.held?'grab':null;
-    if(pose){const babyFace=fullPose(c,pose,h,options);lastAudit={pose,carrier:pose==='frontHurt'?'front':'back',integratedCarrier:true,babyFace,height:h,source:actions[pose].image};c.restore();return true;}
-    const texture=prepareParts(),weight=clamp(options.weight||0,0,1),blend=clamp(weight/.4,0,1),ox=profile.origin[0],oy=profile.origin[1],landmarks={};
-    // The standing painting has one boot permanently ahead. Ease both feet onto
-    // a shared walking track so either leg can lead by the same useful distance.
-    const track=(profile.near.sole[0]+profile.far.sole[0])*.5;
-    const pelvisTrack=(profile.near.hip[0]+profile.far.hip[0])*.5;
-    const pivot={x:(pelvisTrack-ox)*s,y:(profile.pelvisY-oy)*s+gait.bob};
-    const bodyPoint=(x,y)=>({x:pivot.x+gait.sway+(x-pivot.x)*Math.cos(gait.roll)-(y-pivot.y)*Math.sin(gait.roll),y:pivot.y+(x-pivot.x)*Math.sin(gait.roll)+(y-pivot.y)*Math.cos(gait.roll)});
-    const bodyTransform=()=>{c.translate(pivot.x+gait.sway,pivot.y);c.rotate(gait.roll);c.translate(-pivot.x,-pivot.y);};
-    const headName=back?'back':'front';let babyFace;
-    if(blend<1){c.save();bodyTransform();c.globalAlpha*=1-blend;const [sx,sy,sw,sh]=profile.torso,fullH=profile.image==='front'?489:516;paintCarrierBody(c,images[profile.image],[sx,sy,sw,fullH],profile.origin,s,headName,gait.bob);c.restore();}
-    c.save();c.globalAlpha*=blend;
-    for(const name of ['far','near']){
-      const leg=profile[name],f=gait[name];
-      // Pelvic yaw advances the supporting hip underneath the intact shorts.
-      // Wide boot travel therefore does not lengthen the bear's short legs.
-      const hip=bodyPoint((leg.hip[0]-ox)*s*(1-.70*weight)+pivot.x*.70*weight+f.x*.50,pivot.y);
-      const sole={x:(track-ox+(leg.sole[0]-track)*(1-.85*weight))*s+f.x,y:(leg.sole[1]-oy)*s+f.y-h*.035*Math.min(1,jump/35)};
-      let angle=f.angle;
-      if(options.groundAt){
-        const wx=px+face*sole.x,base=options.groundAt(px),at=options.groundAt(wx);
-        if(base!=null&&at!=null)sole.y+=at-base;
-        const a=options.groundAt(wx-4),b=options.groundAt(wx+4);if(f.stance&&a!=null&&b!=null)angle+=Math.atan2(b-a,8)*face;
-      }
-      const ax=(leg.cuff[0]-leg.sole[0])*s,ay=(leg.cuff[1]-leg.sole[1])*s,cs=Math.cos(angle),sn=Math.sin(angle);
-      const cuff={x:sole.x+ax*cs-ay*sn,y:sole.y+ax*sn+ay*cs};
-      const thighLength=(leg.hip[1]-profile.pelvisY+8)*s,shinLength=(leg.cuff[1]-leg.hip[1]+18)*s,reach=thighLength+shinLength-.01;
-      const nominalHip={...hip};
-      // Weight transfer stays within the painted pelvis. On changing terrain,
-      // settle the attachment before solving IK; never stretch either limb.
-      hip.y=cuff.y-clamp(cuff.y-hip.y,-reach*.98,reach*.98);
-      const horizontalReach=Math.sqrt(Math.max(0,reach*reach-(cuff.y-hip.y)*(cuff.y-hip.y)));
-      hip.x=clamp(hip.x,cuff.x-horizontalReach,cuff.x+horizontalReach);
-      const joint=window.BearlyLocomotion.knee(hip,cuff,thighLength,shinLength);
-      function link(im,a,b,width,padding){const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(dy,dx)-Math.PI/2);c.drawImage(im,-width*.5,-padding,width,len+padding*2);c.restore();}
-      const thigh=Math.hypot(joint.x-hip.x,joint.y-hip.y),turn=clamp(Math.atan2(joint.x-hip.x,joint.y-hip.y)*.90,-.78,.78);
-      const panelLength=thigh*.94,panelWidth=(name==='near'?104:80)*s,pa={x:Math.sin(turn),y:Math.cos(turn)},pn={x:Math.cos(turn),y:-Math.sin(turn)};
-      const hem={x:hip.x+pa.x*panelLength,y:hip.y+pa.y*panelLength};
-      const shinAxis={x:(cuff.x-joint.x)/shinLength,y:(cuff.y-joint.y)/shinLength},shinNormal={x:shinAxis.y,y:-shinAxis.x};
-      // The source fur has a flat upper extraction edge. Keep it behind the
-      // actual moving cloth opening rather than exposing a rectangular patch.
-      const cap={x:hem.x-pa.x*3*s,y:hem.y-pa.y*3*s},lower={x:cuff.x+shinAxis.x*9*s,y:cuff.y+shinAxis.y*9*s};
-      c.save();c.beginPath();
-      c.moveTo(cap.x-pn.x*leg.furWidth*s*.5,cap.y-pn.y*leg.furWidth*s*.5);
-      c.lineTo(cap.x+pn.x*leg.furWidth*s*.5,cap.y+pn.y*leg.furWidth*s*.5);
-      c.lineTo(lower.x+shinNormal.x*leg.furWidth*s*.6,lower.y+shinNormal.y*leg.furWidth*s*.6);
-      c.lineTo(lower.x-shinNormal.x*leg.furWidth*s*.6,lower.y-shinNormal.y*leg.furWidth*s*.6);c.closePath();c.clip();
-      link(texture[name].fur,joint,cuff,leg.furWidth*s,18*s);c.restore();
-      const [bx,by,bw,bh]=leg.boot;c.save();c.translate(sole.x,sole.y);c.rotate(angle);c.drawImage(texture[name].boot,(bx-leg.sole[0])*s,(by-leg.sole[1])*s,bw*s,bh*s);c.restore();
-      // Cloth-only texture and an explicit hem conceal the upper fur cap. The
-      // original pelvis stays intact above both articulated panels.
-      c.save();c.translate(hip.x,hip.y);c.rotate(-turn);c.drawImage(texture.pants,-panelWidth*.5,-8*s,panelWidth,panelLength+8*s);
-      c.strokeStyle='#1d1b19';c.lineWidth=1.8*s;c.beginPath();c.moveTo(-panelWidth*.48,panelLength);c.lineTo(panelWidth*.48,panelLength);c.stroke();c.restore();
-      landmarks[name]={hip,nominalHip,opening:hem,knee:joint,sole,cuff,thighLength,shinLength,bootWidth:bw*s,bootHeight:bh*s};
-    }
-    const [sx,sy,sw,sh]=profile.torso;c.save();bodyTransform();c.beginPath();c.rect((sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,(profile.waist+12-sy)*s);
-    if(!back){for(const [i,[x,y]] of [[242,322],[285,322],[292,352],[270,363],[242,348]].entries())i?c.lineTo((x-ox)*s,(y-oy)*s+gait.bob):c.moveTo((x-ox)*s,(y-oy)*s+gait.bob);c.closePath();}
-    c.clip();paintCarrierBody(c,images[profile.image],profile.torso,profile.origin,s,headName,gait.bob);c.restore();c.restore();
-    c.save();bodyTransform();babyFace=paintPassenger(c,images[profile.image],profile.torso,profile.origin,s,headName,options,gait.bob);c.restore();
-    lastAudit={pose:'walking',carrier:back?'back':'front',integratedCarrier:true,babyFace,height:h,source:profile.image,stature:profile.stature,landmarks,gait,body:{pivot,sway:gait.sway,roll:gait.roll}};c.restore();return true;
+  const BODY_HEIGHT=280,BODY_PHASES=48,bodyFrames=new Map(),bodyScratch=new Map();
+  const BODY_CACHE_LIMIT=32*1024*1024;let bodyCacheHits=0,bodyCacheMisses=0,bodyCacheBytes=0,bodyBuildMs=0,maxBodyBuildMs=0,transientBuilds=0,bodyBitmaps=0,bitmapFailures=0;const bodyNow=()=>typeof performance==='object'?performance.now():Date.now();
+  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+  function bodySource(profile,name){
+    const [x,y,w]=profile.torso,rect=[x,y,w,profile.origin[1]+3-y];
+    return {rect,tile:carrierBody(images[profile.image],rect,name)};
   }
+  function surfacePose(profile,h,gait,weight){
+    const s=h/profile.stature,ox=profile.origin[0],oy=profile.origin[1],pivot={x:((profile.near.hip[0]+profile.far.hip[0])*.5-ox)*s,y:(profile.pelvisY-oy)*s};
+    const angle=gait.roll,cs=Math.cos(angle),sn=Math.sin(angle),shift={x:gait.sway,y:gait.bob};
+    const bodyPoint=(x,y)=>({x:pivot.x+(x-pivot.x)*cs-(y-pivot.y)*sn+shift.x,y:pivot.y+(x-pivot.x)*sn+(y-pivot.y)*cs+shift.y});
+    const transform=c=>{c.translate(pivot.x+shift.x,pivot.y+shift.y);c.rotate(angle);c.translate(-pivot.x,-pivot.y);};
+    const track=(profile.near.sole[0]+profile.far.sole[0])*.5,legs={};
+    for(const name of ['near','far']){
+      const leg=profile[name],f=gait[name],sole={x:(track-ox+(leg.sole[0]-track)*(1-.10*weight))*s+f.x,y:(leg.sole[1]-oy)*s+f.y},ca=Math.cos(f.angle),sa=Math.sin(f.angle);
+      const rigid=(x,y)=>{const xx=(x-leg.sole[0])*s,yy=(y-leg.sole[1])*s;return{x:sole.x+xx*ca-yy*sa,y:sole.y+xx*sa+yy*ca};};
+      legs[name]={sole,angle:f.angle,stance:f.stance,rigid,cuff:rigid(...leg.cuff)};
+    }
+    return {s,ox,oy,pivot,angle,shift,bodyPoint,transform,legs};
+  }
+  function sourceSplit(profile,y){
+    const points=profile.image==='front'?[[13,190],[330,190],[365,195],[383,192],[398,183],[418,178],[440,179],[468,202],[490,213],[503,213]]:[[4,440],[345,440],[380,440],[395,420],[405,409],[420,407],[433,410],[463,440],[492,441],[519,441]];
+    for(let i=1;i<points.length;i++)if(y<=points[i][0]){const [a,x]=points[i-1],[b,z]=points[i];return x+(z-x)*clamp((y-a)/(b-a),0,1);}return points.at(-1)[1];
+  }
+  function surfacePoint(profile,pose,gait,weight,x,y,side){
+    const s=pose.s,base=pose.bodyPoint((x-pose.ox)*s,(y-pose.oy)*s),leg=profile[side],target=pose.legs[side].rigid(x,y);
+    // One original cloth/fur surface flows from the pelvis to each rigid shoe.
+    // Adjacent crotch vertices share their upper attachment; the split follows
+    // the painted overlap between the boots instead of cutting through a toe.
+    const kneeY=leg.hip[1]-4,clothWeight=side==='near'?.50:.35;let t=y<=kneeY?clothWeight*smooth((y-(profile.pelvisY-9))/(kneeY-(profile.pelvisY-9))):clothWeight+(1-clothWeight)*smooth((y-kneeY)/(leg.cuff[1]-kneeY));
+    const crotch=profile.image==='front'?391:405,branch=smooth((y-(crotch-8))/18),edge=smooth(Math.abs(x-sourceSplit(profile,y))/18);
+    t*=branch+(1-branch)*edge;
+    const result={x:base.x+(target.x-base.x)*t,y:base.y+(target.y-base.y)*t};
+    // The front arms continue supporting the pouch. The back-carrier hands
+    // counter-swing a little more, with the continuous sleeve bending above.
+    const arm=profile.image==='front'?{x:132,y:278,rx:59,ry:77,amount:.010}:{x:367,y:291,rx:74,ry:91,amount:.024};
+    const sleeve=Math.exp(-(((x-arm.x)/arm.rx)**4)-((y-arm.y)/arm.ry)**4)*smooth((y-180)/85)*(1-smooth((y-(profile.pelvisY-15))/42));
+    const phase=gait.phase*Math.PI*2;result.x+=Math.cos(phase)*gait.cycleLength*arm.amount*sleeve*weight;result.y+=Math.sin(phase)*gait.cycleLength*.007*sleeve*weight;
+    return result;
+  }
+  function surfaceTriangle(c,image,source,destination){
+    const [a,b,d]=source,[p,q,r]=destination,den=a.x*(b.y-d.y)+b.x*(d.y-a.y)+d.x*(a.y-b.y);if(Math.abs(den)<.0001)return;
+    const A=(p.x*(b.y-d.y)+q.x*(d.y-a.y)+r.x*(a.y-b.y))/den,B=(p.y*(b.y-d.y)+q.y*(d.y-a.y)+r.y*(a.y-b.y))/den,C=(p.x*(d.x-b.x)+q.x*(a.x-d.x)+r.x*(b.x-a.x))/den,D=(p.y*(d.x-b.x)+q.y*(a.x-d.x)+r.y*(b.x-a.x))/den,E=(p.x*(b.x*d.y-d.x*b.y)+q.x*(d.x*a.y-a.x*d.y)+r.x*(a.x*b.y-b.x*a.y))/den,F=(p.y*(b.x*d.y-d.x*b.y)+q.y*(d.x*a.y-a.x*d.y)+r.y*(a.x*b.y-b.x*a.y))/den;
+    const center={x:(p.x+q.x+r.x)/3,y:(p.y+q.y+r.y)/3};c.save();c.beginPath();destination.forEach((v,i)=>{const dx=v.x-center.x,dy=v.y-center.y,length=Math.hypot(dx,dy)||1,x=v.x+dx/length*.6,y=v.y+dy/length*.6;i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();c.clip();c.transform(A,B,C,D,E,F);c.drawImage(image,0,0);c.restore();
+  }
+  function bakeBody(profile,name,gait,weight,scratch=false){
+    const buildStart=bodyNow();if(scratch)transientBuilds++;const source=bodySource(profile,name),[sx,sy,sw,sh]=source.rect,pose=surfacePose(profile,BODY_HEIGHT,gait,weight),rows=[sy,sy+100,sy+200,profile.pelvisY-35,profile.pelvisY-9,profile.pelvisY+13,profile.pelvisY+30,profile.pelvisY+49,profile.near.cuff[1],profile.near.boot[1]-4].filter((y,i,a)=>!i||y>a[i-1]),triangles=[],points=[];
+    for(const side of [1,0])for(let row=0;row<rows.length-1;row++)for(let col=0;col<4;col++){
+      const y0=rows[row],y1=Math.min(rows[row+1],profile[side?'far':'near'].boot[1]-4),split0=sourceSplit(profile,y0),split1=sourceSplit(profile,y1),left0=side?split0:sx,right0=side?sx+sw:split0,left1=side?split1:sx,right1=side?sx+sw:split1;if(y1<=y0)continue;
+      const vertices=[[left0+(right0-left0)*col/4,y0],[left0+(right0-left0)*(col+1)/4,y0],[left1+(right1-left1)*(col+1)/4,y1],[left1+(right1-left1)*col/4,y1]].map(([x,y])=>({source:{x:x-sx,y:y-sy},destination:surfacePoint(profile,pose,gait,weight,x,y,side?'far':'near')}));
+      for(const order of [[0,1,2],[0,2,3]]){const v=order.map(i=>vertices[i]);triangles.push(v);for(const p of v)points.push(p.destination);}
+    }
+    for(const side of ['far','near']){const leg=profile[side],f=pose.legs[side],[x,y,w,h]=leg.boot;for(const [xx,yy]of [[x,y],[x+w,y],[x+w,y+h],[x,y+h]])points.push(f.rigid(xx,yy));}const left=Math.floor(Math.min(...points.map(p=>p.x)))-2,top=Math.floor(Math.min(...points.map(p=>p.y)))-2,right=Math.ceil(Math.max(...points.map(p=>p.x)))+2,bottom=Math.ceil(Math.max(...points.map(p=>p.y)))+2;
+    const canvas=scratch?(bodyScratch.get(name)||document.createElement('canvas')):document.createElement('canvas');if(scratch)bodyScratch.set(name,canvas);canvas.width=right-left;canvas.height=bottom-top;canvas.dataset.sourceAsset=profile.image==='front'?'front-carrier-v7.png':'back-carrier-v11.png';canvas.dataset.sourceRect=source.rect.join(',');canvas.dataset.sourcePose=name;canvas.dataset.sourceTransform='continuous-surface';canvas.dataset.sourceAssets=JSON.stringify([canvas.dataset.sourceAsset,'matched-legs-v11.png']);
+    const c=canvas.getContext('2d');c.translate(-left,-top);const textures=prepareParts();for(const side of ['far','near']){const leg=profile[side],f=pose.legs[side],[x,y,w,h]=leg.boot;c.save();c.translate(f.sole.x,f.sole.y);c.rotate(f.angle);const shoe=textures[side].boot;/* Fur underlap hides the removed old collar without changing the rigid shoe. */c.drawImage(shoe,0,0,shoe.width,shoe.height*.16,(x-leg.sole[0])*pose.s,(y-leg.sole[1]-8)*pose.s,w*pose.s,(h*.16+8)*pose.s);c.drawImage(shoe,(x-leg.sole[0])*pose.s,(y-leg.sole[1])*pose.s,w*pose.s,h*pose.s);c.restore();}for(const t of triangles)surfaceTriangle(c,source.tile,t.map(v=>v.source),t.map(v=>v.destination));
+    // Flatten the recorded mesh into pixels once. Reusing a canvas whose display
+    // list still contains every clipped triangle can replay that work on draw.
+    const pixels=c.getImageData(0,0,canvas.width,canvas.height);c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,canvas.width,canvas.height);c.putImageData(pixels,0,0);
+    const frame={canvas,image:canvas,width:canvas.width,height:canvas.height,left,top,gait,weight,triangles:triangles.length,rect:source.rect,disposed:false,pending:false,bitmap:false};
+    if(!scratch&&window.createImageBitmap){frame.pending=true;const attribution={...canvas.dataset};window.createImageBitmap(canvas).then(bitmap=>{frame.pending=false;if(frame.disposed){bitmap.close();return;}bitmap.dataset=attribution;frame.image=bitmap;frame.bitmap=true;bodyBitmaps++;canvas.width=1;canvas.height=1;frame.canvas=null;}).catch(()=>{frame.pending=false;bitmapFailures++;});}
+    const buildMs=bodyNow()-buildStart;bodyBuildMs+=buildMs;maxBodyBuildMs=Math.max(maxBodyBuildMs,buildMs);return frame;
+  }
+  function bodyFrame(profile,name,distance,h,weight){
+    const phase=((distance/window.BearlyLocomotion.cycleLength(h))%1+1)%1,index=Math.round(phase*BODY_PHASES)%BODY_PHASES,steady=weight>=.999,idle=weight<=.0001,key=name+':'+(idle?'idle':index);
+    if((steady||idle)&&bodyFrames.has(key)){bodyCacheHits++;const frame=bodyFrames.get(key);bodyFrames.delete(key);bodyFrames.set(key,frame);return frame;}
+    const effectivePhase=steady?index/BODY_PHASES:phase,gait=window.BearlyLocomotion.pose(window.BearlyLocomotion.cycleLength(BODY_HEIGHT)*effectivePhase,BODY_HEIGHT,weight),frame=bakeBody(profile,name,gait,weight,!steady&&!idle);bodyCacheMisses++;
+    if(steady||idle){bodyFrames.set(key,frame);bodyCacheBytes+=frame.width*frame.height*4;while(bodyCacheBytes>BODY_CACHE_LIMIT||bodyFrames.size>98){const oldest=bodyFrames.keys().next().value,evicted=bodyFrames.get(oldest);bodyCacheBytes-=evicted.width*evicted.height*4;evicted.disposed=true;if(evicted.bitmap){evicted.image.close();bodyBitmaps--;}if(evicted.canvas){evicted.canvas.width=1;evicted.canvas.height=1;}bodyFrames.delete(oldest);}}return frame;
+  }
+  function draw(c,px,py,h,face,options={}){
+    if(!ready())return false;const state=options.state||{},back=!!state.baby,name=back?'back':'front',profile=profiles[name],s=h/profile.stature,weight=clamp(options.weight||0,0,1);
+    c.save();c.translate(px,py);if(face<0)c.scale(-1,1);
+    const action=state.hp===0?(state.defeatAge<.55?'collapse':'defeated'):state.hurt?(back?'backHurt':'frontHurt'):state.attack?'maul':state.held?'grab':null;
+    if(action){const babyFace=fullPose(c,action,h,options);lastAudit={pose:action,carrier:action==='frontHurt'?'front':'back',integratedCarrier:true,babyFace,height:h,source:actions[action].image};c.restore();return true;}
+    let slope=0;if(options.groundAt){const a=options.groundAt(px-18),b=options.groundAt(px+18);if(a!=null&&b!=null)slope=Math.atan2(b-a,36)*face;}c.rotate(slope);
+    const frame=bodyFrame(profile,name,options.distance||0,h,weight),scale=h/BODY_HEIGHT;c.drawImage(frame.image,frame.left*scale,frame.top*scale,frame.width*scale,frame.height*scale);
+    const gait=window.BearlyLocomotion.pose(frame.gait.phase*window.BearlyLocomotion.cycleLength(h),h,weight),pose=surfacePose(profile,h,gait,weight);c.save();pose.transform(c);const babyFace=paintPassenger(c,images[profile.image],profile.torso,profile.origin,s,name,options);c.restore();
+    const landmarks={};for(const side of ['near','far']){const leg=profile[side],f=pose.legs[side];landmarks[side]={sole:f.sole,cuff:f.cuff,angle:f.angle,stance:f.stance,bootWidth:leg.boot[2]*s,bootHeight:leg.boot[3]*s,sourceSole:leg.sole,rigidShoe:true};}
+    lastAudit={pose:'walking',carrier:name,integratedCarrier:true,babyFace,height:h,source:profile.image,sourceRect:frame.rect,stature:profile.stature,landmarks,gait,body:{pivot:pose.pivot,sway:pose.shift.x,bob:pose.shift.y,roll:pose.angle,slope,opaque:true,surfaces:1,continuous:true,triangles:frame.triangles,canonicalHeight:BODY_HEIGHT,cachePhase:frame.gait.phase},cache:{frames:bodyFrames.size,hits:bodyCacheHits,misses:bodyCacheMisses}};c.restore();return true;
+  }
+  function cacheStats(){return {frames:bodyFrames.size,bytes:bodyCacheBytes,limitBytes:BODY_CACHE_LIMIT,frameLimit:98,phases:BODY_PHASES,canonicalHeight:BODY_HEIGHT,hits:bodyCacheHits,misses:bodyCacheMisses,transientBuilds,bitmapFrames:bodyBitmaps,bitmapFailures,mode:window.createImageBitmap?'bitmap':'raster-canvas',pendingBitmaps:[...bodyFrames.values()].filter(f=>f.pending).length,buildMs:bodyBuildMs,maxBuildMs:maxBodyBuildMs,scratchBytes:[...bodyScratch.values()].reduce((n,c)=>n+c.width*c.height*4,0)};}
   function drawAuthored(c,image,rect,origin,scale,pose,options={}){
     if(!ready()||!heads[pose])return false;
     const babyFace=drawCarrier(c,image,rect,origin,scale,pose,options);
     lastAudit={pose,carrier:'front',integratedCarrier:true,babyFace};return true;
   }
-  window.BearlyHeroRig={ready,draw,drawAuthored,babyMood,layout:()=>JSON.parse(JSON.stringify(upperBodies)),audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
+  window.BearlyHeroRig={ready,draw,drawAuthored,babyMood,cacheStats,layout:()=>JSON.parse(JSON.stringify(upperBodies)),audit:()=>JSON.parse(JSON.stringify(lastAudit)),profiles:()=>JSON.parse(JSON.stringify(profiles))};
 })();

@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 17 — smoother rendering and intact walking silhouettes
+
+- Reuse bounded rendered NPC walking phases instead of submitting hundreds of textured triangles for each walker every frame. Build poses in an OffscreenCanvas worker where available, with a cooperative fallback, and expose cache diagnostics in settings.
+- Replace the bear's separate rectangular shorts/fur assembly and body crossfade with one opaque moving cloth/fur surface and complete rigid shoes. Coordinate pelvis, torso, sleeves and carrier motion. Keep the original continuous baby face and contextual expressions.
+- Match normal foot speed 120 to a stride that fits the bear's short legs; preserve fast Apex/Madness movement and cycling physics.
+- Replace the chopped scrolling hedge used for hiding with complete existing foliage. Remove overlapping furniture and match the scale of benches/bins on the same sidewalk plane, preserving seated anchors and cover behavior.
+- Add V17 entry/cache keys, twenty compatible HTML entries and sustained performance/opacity/scenery evidence. Keep the original BQ repository untouched.
+
 ## Revision 16 — longer strides and everyday street life
 
 - Fix the Neighbourhood life shortcut to wait for the resumed play context after closing settings; keep a compact Settings gear beside Dismount while cycling in phone landscape, and refresh the affected script/style caches across all entry pages.

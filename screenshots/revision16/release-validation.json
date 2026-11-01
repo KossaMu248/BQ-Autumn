@@ -1,0 +1,347 @@
+{
+  "node": [
+    "tests/building-visits.cjs",
+    "tests/brawler.cjs",
+    "tests/npc-life.cjs",
+    "tests/hero-gait.cjs"
+  ],
+  "browserMovement": {
+    "result": "passed",
+    "logSHA256": "3ae84c26a645295f89c302dc027bec456640cc5f1d52cbe7dfdec0e62659eb3d"
+  },
+  "browserHero": {
+    "result": "passed",
+    "evidence": {
+      "desktop": {
+        "screenshots": [
+          "hero-front-idle.png",
+          "hero-walk-right-a.png",
+          "hero-walk-right-b.png",
+          "hero-walk-left-b.png",
+          "hero-walk-left-a.png",
+          "hero-front-jump.png",
+          "hero-front-shop-idle.png",
+          "hero-front-shop-talk.png",
+          "hero-back-maul.png",
+          "hero-back-grab.png",
+          "hero-back-idle.png",
+          "hero-back-walk.png",
+          "hero-front-hurt.png",
+          "hero-back-collapse.png",
+          "hero-back-defeated.png",
+          "hero-front-recovered.png"
+        ],
+        "rig_audit": {
+          "pose": "walking",
+          "carrier": "front",
+          "integratedCarrier": true,
+          "babyFace": {
+            "mood": "idle",
+            "source": "assets/baby_pose_idle.webp",
+            "continuousUpperBody": true,
+            "originalCollar": true,
+            "headOnly": false,
+            "uniformScale": 0.4140352055898952,
+            "angle": -0.13863973713415806,
+            "flip": 1,
+            "alpha": 1,
+            "pivot": [
+              52,
+              94
+            ],
+            "anatomicalWaist": [
+              48,
+              104
+            ],
+            "waist": {
+              "x": 14.70799180327869,
+              "y": -59.74497695752022
+            },
+            "headHeight": 25.670182746573502,
+            "referenceHeadHeight": 61,
+            "sourceRect": [
+              0,
+              0,
+              82,
+              95
+            ],
+            "sourceBounds": [
+              0,
+              0,
+              82,
+              146
+            ],
+            "seamY": 94,
+            "occludeFrom": 90,
+            "seam": {
+              "start": {
+                "x": 10.6073668585798,
+                "y": -59.17279673267852
+              },
+              "end": {
+                "x": 18.80861674797758,
+                "y": -60.317157182361925
+              },
+              "occludeFrom": {
+                "x": 14.479119713342007,
+                "y": -61.38522693539978
+              }
+            },
+            "head": [
+              15,
+              9,
+              57,
+              62
+            ],
+            "chin": [
+              {
+                "x": 17.034858050968293,
+                "y": -73.02909451092849
+              },
+              {
+                "x": 16.271951084512686,
+                "y": -72.50459597149026
+              },
+              {
+                "x": 15.156199646071359,
+                "y": -71.51281691509797
+              },
+              {
+                "x": 13.983230185145862,
+                "y": -70.93110035317557
+              },
+              {
+                "x": 12.810260724220367,
+                "y": -70.34938379125316
+              }
+            ],
+            "neck": [
+              {
+                "x": 11.63729126329487,
+                "y": -69.76766722933077
+              },
+              {
+                "x": 11.694509285779041,
+                "y": -69.35760473486087
+              }
+            ],
+            "collar": [
+              {
+                "x": 6.888195397108712,
+                "y": -67.85086347611104
+              },
+              {
+                "x": 10.044722970818789,
+                "y": -66.20107716115079
+              },
+              {
+                "x": 14.145347915517679,
+                "y": -66.77325738599251
+              }
+            ],
+            "pose": "front",
+            "pouch": {
+              "lip": [
+                [
+                  198,
+                  288
+                ],
+                [
+                  226,
+                  293
+                ],
+                [
+                  264,
+                  285
+                ]
+              ],
+              "depth": 32,
+              "seam": [
+                228.5,
+                298.9272499636561
+              ],
+              "origin": [
+                179,
+                500
+              ],
+              "scale": 0.29713114754098363,
+              "bob": 0,
+              "source": "frontBackground",
+              "textureMap": null,
+              "padding": 9.177249963656097
+            }
+          },
+          "height": 145,
+          "source": "front",
+          "stature": 488,
+          "landmarks": {
+            "far": {
+              "hip": {
+                "x": 8.319672131147541,
+                "y": -49.0266393442623
+              },
+              "nominalHip": {
+                "x": 8.319672131147541,
+                "y": -49.0266393442623
+              },
+              "opening": {
+                "x": 16.798793454679675,
+                "y": -35.552217794920914
+              },
+              "knee": {
+                "x": 18.21645358029715,
+                "y": -35.282625510751
+              },
+              "sole": {
+                "x": 12.182377049180328,
+                "y": -2.295173041894272
+              },
+              "cuff": {
+                "x": 7.5110943674558,
+                "y": -24.141570234667515
+              },
+              "thighLength": 16.936475409836067,
+              "shinLength": 15.450819672131148,
+              "bootWidth": 32.09016393442623,
+              "bootHeight": 23.176229508196723
+            },
+            "near": {
+              "hip": {
+                "x": -12.479508196721312,
+                "y": -49.0266393442623
+              },
+              "nominalHip": {
+                "x": -12.479508196721312,
+                "y": -49.0266393442623
+              },
+              "opening": {
+                "x": -3.724325654892107,
+                "y": -35.06595498594479
+              },
+              "knee": {
+                "x": -2.2597866822036945,
+                "y": -34.782901890758716
+              },
+              "sole": {
+                "x": -7.131147540983607,
+                "y": -0.22185792349716849
+              },
+              "cuff": {
+                "x": -13.519677684964057,
+                "y": -24.202604959827564
+              },
+              "thighLength": 17.530737704918035,
+              "shinLength": 15.450819672131148,
+              "bootWidth": 37.141393442622956,
+              "bootHeight": 24.959016393442624
+            }
+          },
+          "gait": {
+            "far": {
+              "x": 0,
+              "y": 0,
+              "angle": 0,
+              "stance": true
+            },
+            "near": {
+              "x": 0,
+              "y": 0,
+              "angle": 0,
+              "stance": true
+            },
+            "phase": 0,
+            "cycleLength": 112.25806451612902,
+            "bob": 0,
+            "sway": 0,
+            "roll": 0
+          },
+          "body": {
+            "pivot": {
+              "x": -2.0799180327868854,
+              "y": -49.0266393442623
+            },
+            "sway": 0,
+            "roll": 0
+          }
+        }
+      },
+      "phones": {
+        "390": [
+          "hero-phone-front-390.png",
+          "hero-phone-back-maul-390.png",
+          "hero-phone-back-grab-390.png"
+        ],
+        "844": [
+          "hero-phone-front-844.png",
+          "hero-phone-back-maul-844.png",
+          "hero-phone-back-grab-844.png"
+        ]
+      }
+    },
+    "checks": [
+      "real movement/jump/combat controls",
+      "integrated carrier poses",
+      "no separate on-foot bicycle-seat baby cutout",
+      "no page or HTTP errors"
+    ]
+  },
+  "originalPassengerRenderer": {
+    "result": "passed",
+    "native": 40,
+    "rig": 64,
+    "authored": 20,
+    "evidence": "original-passenger-renderer-evidence.json"
+  },
+  "static": {
+    "javascriptSyntax": "passed",
+    "pythonSyntax": "passed",
+    "htmlEntries": 19,
+    "entryCacheScriptOrderLocalLinks": "passed",
+    "cyclingUpdateUnchanged": true,
+    "originalArtworkAndBabySceneryQuestsUnchanged": true
+  },
+  "nodeResult": "passed",
+  "baseCommit": "d48fb9260c29413dd3751fc4f86e6f37dfc152ad",
+  "sourceSHA256": {
+    "js/assets.js": "44e8a9560ef6b0c846c133f19516ca8ba9ecc38180cc0643569875cacaaf1540",
+    "js/autumn-quests.js": "25d69f43660aea787a48ed3cdb3edcbf2e1dc0dbf1ea807f510a07496cbebcd6",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/brawler-art.js": "87e279bf05dd20757170cfa854cb7b2aad57bfef61f61b37ec9a7b3760064bb1",
+    "js/brawler.js": "486656e7a47fb52017916a186cc6d0ec123592ab3fca331f60b2e43e5182541f",
+    "js/fullscreen.js": "64fe9efa93c0f24c7f0217db284a2b717dc64c56061bcdf36c24f22b25b9dee0",
+    "js/game.js": "152f4ef2093afa47a155ef1e96611f6dcc374d2f6a5fc6b5c3cbb4ddd3a3f4f0",
+    "js/hero-rig.js": "5060036ee05aa9e40b24d73e6ab2e9ef8542d53cfaaf82b6b4456d20065d6290",
+    "js/illustrated-atlas.js": "19dabed15e1c2c964df4bd53fdd80486f32f8d8258ecf88a928a7181da12f438",
+    "js/illustrated-hero.js": "d8eca39f1ab358f6a5e0a63612009a5972f54924e0831c440704ec39523b2c53",
+    "js/illustrated-kids.js": "fef1238764e5311ee93c9591cdf1f5a3e1d137d247e418add4f961f0ad5d4fe2",
+    "js/illustrated-neighbourhood.js": "76025975e37a44d4ebf3dc6bc275bd10778c4d5b9db362e9b5aadfd96bb2ee39",
+    "js/illustrated-props.js": "cf2340578f9f0c7b92b59330488ec456414adfd5be5e3796e6e191ba4bd9f456",
+    "js/illustrated-visits.js": "f3ef453508ff9d30960f8078ab6e821dae7bb7efd5b61ce6d8875afdf8634908",
+    "js/illustrated-world.js": "22bab293812edfbc5f54aeaa31eaf6e550b93bb56b3dbdaec9507bfbd0e160a4",
+    "js/locomotion.js": "0d86a58ec8942a69679c5772629aa0687289f9fccba3cacf23be16b6d7b16154",
+    "js/npc-motion.js": "7247e55e30fb84fa825666d4efb7105a12f78102b605fe5a4ef7df6d59ca3943",
+    "js/street-life.js": "d96f63ab2e280c89b74986b20116abb03285ee1fd9d645fe162b431a8311901a"
+  },
+  "htmlSHA256": {
+    "autumn-v10-1.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v10.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v11-1.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v11-2.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v11.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v12.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v13.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "autumn-v14.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "autumn-v15.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "autumn-v16.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "autumn-v3.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v4.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v5.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v6.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v7.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v8.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v9-1.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "autumn-v9.html": "97f82d20e3612474fbebb52eb9fb92f6f5b6460f9668868aa31d79ee89488dd6",
+    "index.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af"
+  },
+  "result": "passed"
+}

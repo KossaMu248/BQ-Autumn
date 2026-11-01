@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v16.html"
+ENTRY = "autumn-v17.html"
 ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "civilian-reactions-v16.png", "gang-screen-full-v10-1.png")
 
 
@@ -213,7 +213,7 @@ def main():
         assert not failed_assets, failed_assets
         assert result["samples"] == 2520, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
-        directory = ROOT / "screenshots" / "revision16"
+        directory = ROOT / "screenshots" / "revision17"
         directory.mkdir(exist_ok=True)
         paths = [ROOT / ENTRY, ROOT / "js" / "brawler-art.js", ROOT / "js" / "npc-motion.js", *(ROOT / "assets" / "art" / name for name in ASSETS)]
         evidence = {"entry": ENTRY, "result": "passed", **result,

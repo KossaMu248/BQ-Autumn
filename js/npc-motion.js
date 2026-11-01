@@ -4,6 +4,10 @@
   'use strict';
   const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),atlases={},profiles=Array.from({length:12},(_,variant)=>({variant,poses:{},heightScale:variant===9?1.05:variant===11?.84:1}));
   let lastAudit=null;
+  const WALK_PHASES=48,CACHE_LIMIT=48*1024*1024,walkBanks=new Map();
+  let cacheWorker=null,cacheWorkerURL=null,workerJob=null;
+  const cacheState={height:144,started:false,scheduled:false,complete:false,mode:'idle',startedAt:0,completedMs:0,bytes:0,hits:0,misses:0,bakes:0,buildMs:0,maxBuildMs:0,mainBuildMs:0,maxMainBuildMs:0};
+  const phaseOrder=[0,24,12,36,6,30,18,42,3,27,15,39,9,33,21,45,...Array.from({length:48},(_,i)=>i).filter(i=>i%3)];
   const specifications=[
     ...['a','b','c'].map((pack,index)=>({file:`npc-motion-${pack}-v16.png`,rows:3,cols:5,variants:[index*3,index*3+1,index*3+2],poses:['idle','walkA','walkB','runA','runB']})),
     {file:'civilian-standing-v16.png',rows:1,cols:3,variants:[9,10,11],poses:['idle'],standing:true},
@@ -87,7 +91,7 @@
     }
   }
   for(const spec of specifications){const image=new Image(),entry={image,ready:false,error:null};atlases[spec.file]=entry;
-    image.onload=()=>{try{prepare(spec,image);finalize();entry.ready=true;entry.error=null;}catch(e){entry.error=String(e);}};image.onerror=()=>entry.error='Missing '+spec.file;image.src='assets/art/'+spec.file;
+    image.onload=()=>{try{prepare(spec,image);finalize();entry.ready=true;entry.error=null;if(ready())startWalkCache();}catch(e){entry.error=String(e);}};image.onerror=()=>entry.error='Missing '+spec.file;image.src='assets/art/'+spec.file;
   }
   function ready(){return Object.values(atlases).every(a=>a.ready)&&profiles.every(p=>p.poses.idle);}
   function publicFrame(frame){const {tile,feet,legSplit,...data}=frame;return JSON.parse(JSON.stringify({...data,heightScale:profiles[frame.variant].heightScale}));}
@@ -143,6 +147,77 @@
     }
     c.restore();return{phase,landmarks:{near:{sole:feet[0].sole,stance:feet[0].stance},far:{sole:feet[1].sole,stance:feet[1].stance}},bodyShift:bodyX,bob,sway,halfStride:half,armSwing:h*.046,connectedMesh:true};
   }
+  // Bake the approved deformation once. Gameplay submits one small sprite per
+  // walker, independent of its height, heading or number of times it is drawn.
+  // Work yields between poses, and an unseen phase never tessellates in draw().
+  function startWalkCache(){
+    if(cacheState.started||!ready())return;cacheState.started=true;cacheState.startedAt=performance.now();
+    const layout=height=>profiles.map(profile=>{const f=profile.poses.idle,width=Math.ceil(Math.max(.72,f.core[2]/f.stature+.16)*height)+12,heightPx=Math.ceil(height*1.10)+12;return{variant:profile.variant,width,height:heightPx,x:width/2,y:height+8};});
+    let layouts=layout(cacheState.height);
+    if(layouts.reduce((sum,p)=>sum+p.width*p.height*4*WALK_PHASES,0)>CACHE_LIMIT){cacheState.height=128;layouts=layout(cacheState.height);}
+    const priority=[0,9,11,10,1,2,3,4,5,6,7,8];
+    for(const variant of priority){const geometry=layouts[variant];walkBanks.set(variant,{...geometry,frames:Array(WALK_PHASES).fill(null),cursor:0,built:0,hits:0,misses:0,activeUntil:0,workerReady:false});}
+    startCacheWorker();scheduleWalkCache();
+  }
+  function finishCache(){
+    cacheState.complete=true;cacheState.completedMs=performance.now()-cacheState.startedAt;
+    if(cacheWorker){cacheWorker.terminate();cacheWorker=null;}
+    if(cacheWorkerURL){URL.revokeObjectURL(cacheWorkerURL);cacheWorkerURL=null;}
+  }
+  function acceptPose(bank,index,image,details,elapsed,onMain){
+    const frame=profiles[bank.variant].poses.idle;
+    const attribution={sourceAsset:frame.source.split('/').pop(),sourceRect:frame.rect.join(','),sourcePose:frame.pose,sourceVariant:String(frame.variant),sourceTransform:'walk-cache',sourcePhase:String(index/WALK_PHASES)};
+    // ImageBitmap and Canvas draws carry the same original-source attribution.
+    if(image.dataset)Object.assign(image.dataset,attribution);else image.dataset=attribution;
+    bank.frames[index]={canvas:image,details,index};bank.built++;cacheState.bytes+=bank.width*bank.height*4;cacheState.bakes++;
+    cacheState.buildMs+=elapsed;cacheState.maxBuildMs=Math.max(cacheState.maxBuildMs,elapsed);
+    if(onMain){cacheState.mainBuildMs+=elapsed;cacheState.maxMainBuildMs=Math.max(cacheState.maxMainBuildMs,elapsed);}
+  }
+  function startCacheWorker(){
+    if(!window.Worker||!window.OffscreenCanvas||!window.createImageBitmap)return;
+    try{
+      const source=`'use strict';const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),frames=new Map();let output=null;
+${foot.toString()}
+${triangle.toString()}
+${rig.toString()}
+onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new OffscreenCanvas(m.bitmap.width,m.bitmap.height);tile.getContext('2d',{willReadFrequently:true}).drawImage(m.bitmap,0,0);m.bitmap.close();frames.set(m.variant,{...m.frame,tile});return;}const started=performance.now();if(!output||output.width!==m.width||output.height!==m.height)output=new OffscreenCanvas(m.width,m.height);const g=output.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,m.width,m.height);g.translate(m.x,m.y);const details=rig(g,frames.get(m.variant),m.index/m.phaseCount,m.heightScale,frames.get(m.variant).sourceFace),bitmap=output.transferToImageBitmap();postMessage({variant:m.variant,index:m.index,details,elapsed:performance.now()-started,bitmap},[bitmap]);};`;
+      cacheWorkerURL=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));cacheWorker=new Worker(cacheWorkerURL);cacheState.mode='worker';
+      cacheWorker.onmessage=event=>{const m=event.data,bank=walkBanks.get(m.variant);workerJob=null;acceptPose(bank,m.index,m.bitmap,m.details,m.elapsed,false);scheduleWalkCache();};
+      cacheWorker.onerror=()=>{if(cacheWorker)cacheWorker.terminate();cacheWorker=null;cacheState.mode='idle';if(workerJob){workerJob.bank.cursor--;workerJob=null;}scheduleWalkCache();};
+      for(const bank of walkBanks.values()){const frame=profiles[bank.variant].poses.idle;createImageBitmap(frame.tile).then(bitmap=>{if(!cacheWorker){bitmap.close();return;}cacheWorker.postMessage({type:'source',variant:bank.variant,frame:publicFrame(frame),bitmap},[bitmap]);bank.workerReady=true;scheduleWalkCache();}).catch(()=>{cacheWorker?.terminate();cacheWorker=null;cacheState.mode='idle';if(workerJob){workerJob.bank.cursor--;workerJob=null;}scheduleWalkCache();});}
+    }catch{cacheWorker=null;cacheState.mode='idle';}
+  }
+  function scheduleWalkCache(){
+    if(cacheState.scheduled||cacheState.complete||workerJob)return;
+    const pending=[...walkBanks.values()].filter(bank=>bank.built<WALK_PHASES);
+    if(!pending.length){finishCache();return;}
+    const now=performance.now(),eligible=cacheWorker?pending.filter(b=>b.workerReady):pending;
+    if(!eligible.length)return;
+    const bank=eligible.find(b=>b.activeUntil>now)||eligible[0],index=phaseOrder[bank.cursor++];
+    if(cacheWorker){workerJob={bank,index};cacheWorker.postMessage({type:'bake',variant:bank.variant,index,phaseCount:WALK_PHASES,heightScale:cacheState.height,width:bank.width,height:bank.height,x:bank.x,y:bank.y});return;}
+    cacheState.scheduled=true;
+    const next=()=>{cacheState.scheduled=false;const frame=profiles[bank.variant].poses.idle,canvas=make(bank.width,bank.height),g=canvas.getContext('2d'),started=performance.now();
+      g.translate(bank.x,bank.y);const details=rig(g,frame,index/WALK_PHASES,cacheState.height,frame.sourceFace);
+      g.getImageData(0,0,bank.width,bank.height);acceptPose(bank,index,canvas,details,performance.now()-started,true);scheduleWalkCache();
+    };
+    if(window.requestIdleCallback)requestIdleCallback(next,{timeout:80});else setTimeout(next,0);
+  }
+  function cachedWalk(c,frame,phase,h,face){
+    startWalkCache();const bank=walkBanks.get(frame.variant),normalized=((phase%1)+1)%1,index=Math.round(normalized*WALK_PHASES)%WALK_PHASES;
+    bank.activeUntil=performance.now()+2500;let entry=bank.frames[index];
+    if(entry){cacheState.hits++;bank.hits++;}else{
+      cacheState.misses++;bank.misses++;let distance=WALK_PHASES;
+      for(let i=0;i<WALK_PHASES;i++)if(bank.frames[i]){const gap=Math.min(Math.abs(i-index),WALK_PHASES-Math.abs(i-index));if(gap<distance){entry=bank.frames[i];distance=gap;}}
+    }
+    if(!entry){raw(c,frame,0,0,h,face);return null;}
+    const scale=h/cacheState.height,flip=face*frame.sourceFace<0?-1:1;c.save();c.scale(flip,1);c.drawImage(entry.canvas,-bank.x*scale,-bank.y*scale,bank.width*scale,bank.height*scale);c.restore();return{cacheEntry:entry,scale};
+  }
+  function motionAudit(){
+    if(!lastAudit)return null;let details=lastAudit.details;
+    if(details?.cacheEntry){const {cacheEntry,scale}=details,d=cacheEntry.details,point=p=>({x:p.x*scale,y:p.y*scale});details={...d,landmarks:Object.fromEntries(Object.entries(d.landmarks).map(([key,foot])=>[key,{...foot,sole:point(foot.sole)}])),bodyShift:d.bodyShift*scale,bob:d.bob*scale,halfStride:d.halfStride*scale,armSwing:d.armSwing*scale,cached:true,phaseIndex:cacheEntry.index,phaseCount:WALK_PHASES};}
+    return JSON.parse(JSON.stringify({...lastAudit,details}));
+  }
+  function cacheStats(){return{phaseCount:WALK_PHASES,canonicalHeight:cacheState.height,frameCount:cacheState.bakes,capacity:profiles.length*WALK_PHASES,bytes:cacheState.bytes,limitBytes:CACHE_LIMIT,hits:cacheState.hits,misses:cacheState.misses,bakes:cacheState.bakes,buildMs:cacheState.buildMs,maxBuildMs:cacheState.maxBuildMs,mainBuildMs:cacheState.mainBuildMs,maxMainBuildMs:cacheState.maxMainBuildMs,mode:cacheState.mode,warmupMs:cacheState.completedMs||performance.now()-cacheState.startedAt,complete:cacheState.complete,variants:[...walkBanks.values()].map(b=>({variant:b.variant,frames:b.built,width:b.width,height:b.height,bytes:b.built*b.width*b.height*4,hits:b.hits,misses:b.misses}))};}
   function seated(c,frame,x,y,h,face,seatHeight,t=0,reading=false){
     const s=h/frame.stature,flip=face*frame.sourceFace<0?-1:1,[px,py]=frame.seatPivot||frame.anchor,[sx,sy]=frame.rect;
     c.save();c.translate(x,y-seatHeight);c.rotate(Math.sin(t*.75+frame.variant)* (reading?.0035:.0018));c.scale(flip,1+.0025*Math.sin(t*1.6+frame.variant));c.drawImage(frame.tile,(sx-px)*s,(sy-py)*s,frame.tile.width*s,frame.tile.height*s);c.restore();
@@ -162,7 +237,7 @@
     else if(aggressive&&variant<9)return false;
     const frame=get(variant,pose);if(!frame)return false;
     c.save();c.translate(x,y);c.scale(scale,scale);
-    if(mode==='walk'&&!reaction){details=rig(c,frame,phase,h,face);}
+    if(mode==='walk'&&!reaction){details=cachedWalk(c,frame,phase,h,face);}
     else if(!reaction&&(['run','flee'].includes(activity)||n.running)){
       const flight=-(Math.sin(((phase%1)+1)%1*Math.PI*2)**2)*h*.035,lean=(face>0?1:-1)*.055;
       c.save();c.translate(0,flight);c.rotate(lean);raw(c,frame,0,0,h,face);c.restore();
@@ -178,5 +253,5 @@
     if(n.state==='held'){/* Supporting hands/throw motion is provided by the bear rig. */}
     c.restore();lastAudit={variant,activity,pose,phase,source:frame.source,sourceRect:frame.rect,height:h,heightScale:profile.heightScale,civilian:n.civilian===true,details};return true;
   }
-  window.BearlyNpcMotion={ready,frames,frame:(variant,pose)=>{const f=get(variant,pose);return f?publicFrame(f):null;},source,drawPose,draw,audit:()=>lastAudit?JSON.parse(JSON.stringify(lastAudit)):null,diagnostics:()=>Object.fromEntries(Object.entries(atlases).map(([k,v])=>[k,{ready:v.ready,error:v.error}]))};
+  window.BearlyNpcMotion={ready,frames,frame:(variant,pose)=>{const f=get(variant,pose);return f?publicFrame(f):null;},source,drawPose,draw,audit:motionAudit,cacheStats,diagnostics:()=>Object.fromEntries(Object.entries(atlases).map(([k,v])=>[k,{ready:v.ready,error:v.error}]))};
 })();

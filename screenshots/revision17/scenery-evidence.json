@@ -1,0 +1,550 @@
+{
+  "result": "passed",
+  "errors": [],
+  "source": {
+    "image": "assets/art/autumn-verge.png",
+    "rect": [
+      8,
+      34,
+      2164,
+      659
+    ],
+    "width": 248,
+    "foot": 688
+  },
+  "scenes": [
+    {
+      "name": "workshop",
+      "props": [
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5897.5,
+          "y": 724.0466666666666,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 6067.5,
+          "y": 745.54,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5897.5,
+          "y": 724.0466666666666,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 6067.5,
+          "y": 745.54,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5897.5,
+          "y": 724.0466666666666,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 6067.5,
+          "y": 745.54,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5897.5,
+          "y": 724.0466666666666,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 6067.5,
+          "y": 745.54,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5897.5,
+          "y": 724.0466666666666,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 6067.5,
+          "y": 745.54,
+          "width": 68,
+          "occupied": true
+        }
+      ],
+      "nonlife": [
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 5210,
+          "y": 645.2133333333334,
+          "width": 196,
+          "occupied": false
+        }
+      ]
+    },
+    {
+      "name": "metro",
+      "props": [
+        {
+          "key": "bin",
+          "x": 12580,
+          "y": 1232.5,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 11645,
+          "y": 1178.5066666666667,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 11815,
+          "y": 1195.0133333333333,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 12580,
+          "y": 1232.5,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 11645,
+          "y": 1178.5066666666667,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 11815,
+          "y": 1195.0133333333333,
+          "width": 68,
+          "occupied": true
+        }
+      ],
+      "nonlife": [
+        {
+          "key": "bin",
+          "x": 12580,
+          "y": 1232.5,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 12580,
+          "y": 1232.5,
+          "width": 68,
+          "occupied": false
+        }
+      ]
+    },
+    {
+      "name": "pizzeria",
+      "props": [
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 16007.5,
+          "y": 1420.789972899729,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 16177.5,
+          "y": 1427.8577235772357,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 16007.5,
+          "y": 1420.789972899729,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 16177.5,
+          "y": 1427.8577235772357,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 16007.5,
+          "y": 1420.789972899729,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 16177.5,
+          "y": 1427.8577235772357,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 16007.5,
+          "y": 1420.789972899729,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 16177.5,
+          "y": 1427.8577235772357,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 16007.5,
+          "y": 1420.789972899729,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 16177.5,
+          "y": 1427.8577235772357,
+          "width": 68,
+          "occupied": true
+        }
+      ],
+      "nonlife": [
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 15260,
+          "y": 1398.5067750677506,
+          "width": 196,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 17270,
+          "y": 1489.5454545454545,
+          "width": 196,
+          "occupied": false
+        }
+      ]
+    },
+    {
+      "name": "bakery",
+      "props": [
+        {
+          "key": "bin",
+          "x": 34690,
+          "y": 2654.737777777778,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 36700,
+          "y": 2792.311111111111,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 35467.5,
+          "y": 2707.9533333333334,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 35637.5,
+          "y": 2721.588888888889,
+          "width": 68,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 34690,
+          "y": 2654.737777777778,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 36700,
+          "y": 2792.311111111111,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bench",
+          "x": 35467.5,
+          "y": 2707.9533333333334,
+          "width": 196,
+          "occupied": true
+        },
+        {
+          "key": "bin",
+          "x": 35637.5,
+          "y": 2721.588888888889,
+          "width": 68,
+          "occupied": true
+        }
+      ],
+      "nonlife": [
+        {
+          "key": "bin",
+          "x": 34690,
+          "y": 2654.737777777778,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 36700,
+          "y": 2792.311111111111,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 34690,
+          "y": 2654.737777777778,
+          "width": 68,
+          "occupied": false
+        },
+        {
+          "key": "bin",
+          "x": 36700,
+          "y": 2792.311111111111,
+          "width": 68,
+          "occupied": false
+        }
+      ]
+    }
+  ],
+  "actualCoverOcclusion": [
+    {
+      "id": "civilian-smoker",
+      "target": "promenade-bush-east",
+      "bodyPixels": 7612,
+      "coveredPixels": 4474,
+      "ratio": 0.5877561744613767
+    }
+  ],
+  "sourceSHA256": {
+    "js/street-life.js": "e029d4176bd86063c707fdd60a4ba95591094763a994ae6b9359580b878a3c4e",
+    "js/illustrated-world.js": "72ab6e76ad9c5ea186b3198f309c5b6112991255fd872dbdda9d4e165a347d1a",
+    "js/illustrated-neighbourhood.js": "e4fe70255ddc2f3e851fe8b8673d57cb76854a32475e588f7ad636b92ee1528c",
+    "assets/art/autumn-verge.png": "452416ba6cd6486ae378ab2348f1c8a55438c3122cd9afbcc87509660c712659"
+  }
+}

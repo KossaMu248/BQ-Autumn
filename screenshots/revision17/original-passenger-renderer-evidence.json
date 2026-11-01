@@ -1,0 +1,6982 @@
+{
+  "nativeMoods": [
+    {
+      "name": "idle",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 312,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      }
+    },
+    {
+      "name": "idle",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 312,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      }
+    },
+    {
+      "name": "idle",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 143,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      }
+    },
+    {
+      "name": "idle",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 142,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      }
+    },
+    {
+      "name": "laugh",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 363,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "laugh",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 363,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "laugh",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 143,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "laugh",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 143,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "brace",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 311,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "brace",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 311,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "brace",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 137,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "brace",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 137,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "terror",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 356,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "terror",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 356,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "terror",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 145,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "terror",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 145,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      }
+    },
+    {
+      "name": "leanBack",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "leanBack",
+        "source": "baby_pose_leanBack.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 258,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanBack",
+          "source": "baby_pose_leanBack.webp",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanBack",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "leanBack",
+        "source": "baby_pose_leanBack.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 258,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanBack",
+          "source": "baby_pose_leanBack.webp",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanBack",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "leanBack",
+        "source": "baby_pose_leanBack.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanBack",
+          "source": "baby_pose_leanBack.webp",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanBack",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "leanBack",
+        "source": "baby_pose_leanBack.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanBack",
+          "source": "baby_pose_leanBack.webp",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanForward",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "leanForward",
+        "source": "baby_pose_leanForward.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 275,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanForward",
+          "source": "baby_pose_leanForward.webp",
+          "compared": 85,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanForward",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "leanForward",
+        "source": "baby_pose_leanForward.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 275,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanForward",
+          "source": "baby_pose_leanForward.webp",
+          "compared": 85,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanForward",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "leanForward",
+        "source": "baby_pose_leanForward.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 110,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanForward",
+          "source": "baby_pose_leanForward.webp",
+          "compared": 85,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "leanForward",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "leanForward",
+        "source": "baby_pose_leanForward.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 110,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "leanForward",
+          "source": "baby_pose_leanForward.webp",
+          "compared": 85,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "point",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 285,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "point",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 285,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "point",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 129,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "point",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 129,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sick",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "sick",
+        "source": "v151_baby_pose_sick.png",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 269,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sick",
+          "source": "v151_baby_pose_sick.png",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sick",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "sick",
+        "source": "v151_baby_pose_sick.png",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 270,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sick",
+          "source": "v151_baby_pose_sick.png",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sick",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "sick",
+        "source": "v151_baby_pose_sick.png",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 119,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sick",
+          "source": "v151_baby_pose_sick.png",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sick",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "sick",
+        "source": "v151_baby_pose_sick.png",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 119,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sick",
+          "source": "v151_baby_pose_sick.png",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "excited",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 258,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "excited",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 258,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "excited",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "excited",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 98,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sickLegacy",
+      "scale": 1.08,
+      "flip": 1,
+      "pixels": {
+        "mood": "sickLegacy",
+        "source": "baby_pose_sick.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": false,
+        "compared": 269,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sickLegacy",
+          "source": "baby_pose_sick.webp",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sickLegacy",
+      "scale": 1.08,
+      "flip": -1,
+      "pixels": {
+        "mood": "sickLegacy",
+        "source": "baby_pose_sick.webp",
+        "uniformScale": 1.0800000429153442,
+        "mirrored": true,
+        "compared": 270,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sickLegacy",
+          "source": "baby_pose_sick.webp",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sickLegacy",
+      "scale": 0.7,
+      "flip": 1,
+      "pixels": {
+        "mood": "sickLegacy",
+        "source": "baby_pose_sick.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": false,
+        "compared": 119,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sickLegacy",
+          "source": "baby_pose_sick.webp",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    },
+    {
+      "name": "sickLegacy",
+      "scale": 0.7,
+      "flip": -1,
+      "pixels": {
+        "mood": "sickLegacy",
+        "source": "baby_pose_sick.webp",
+        "uniformScale": 0.699999988079071,
+        "mirrored": true,
+        "compared": 119,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "sickLegacy",
+          "source": "baby_pose_sick.webp",
+          "compared": 82,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      }
+    }
+  ],
+  "moodRules": [
+    {
+      "name": "recent throw",
+      "expected": "terror",
+      "actual": "terror"
+    },
+    {
+      "name": "throw expires",
+      "expected": "idle",
+      "actual": "idle"
+    },
+    {
+      "name": "recent impact",
+      "expected": "terror",
+      "actual": "terror"
+    },
+    {
+      "name": "impact expires",
+      "expected": "idle",
+      "actual": "idle"
+    },
+    {
+      "name": "startle precedes held",
+      "expected": "terror",
+      "actual": "terror"
+    },
+    {
+      "name": "expired startle resumes held",
+      "expected": "brace",
+      "actual": "brace"
+    },
+    {
+      "name": "expired startle resumes talk",
+      "expected": "point",
+      "actual": "point"
+    }
+  ],
+  "renderer": [
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": false,
+        "compared": 50,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": false,
+          "compared": 1193,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 89,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 89,
+          "matchedImage": 89,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": true
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": true,
+        "compared": 50,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": true,
+          "compared": 1193,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 89,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 89,
+          "matchedImage": 89,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": false,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": false,
+          "compared": 927,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 84,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": true,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": true,
+          "compared": 927,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 84,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": false,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": false,
+          "compared": 927,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 84,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": true,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": true,
+          "compared": 927,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 84,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3722677528858185,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.978142023086548,
+          "mirrored": false,
+          "compared": 714,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 94,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 94,
+          "matchedImage": 94,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3722677528858185,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.978142023086548,
+          "mirrored": true,
+          "compared": 714,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 94,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 94,
+          "matchedImage": 94,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 37,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 925,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 75,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 75,
+          "matchedImage": 75,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 37,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 925,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 75,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 75,
+          "matchedImage": 75,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 717,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 65,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 65,
+          "matchedImage": 65,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 717,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 65,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 65,
+          "matchedImage": 65,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 717,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 65,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 65,
+          "matchedImage": 65,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 38,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 717,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 65,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 65,
+          "matchedImage": 65,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 40,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 685,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 87,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 87,
+          "matchedImage": 87,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 40,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 685,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 87,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 87,
+          "matchedImage": 87,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3844537138938903,
+        "mirrored": false,
+        "compared": 40,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.0756297111511226,
+          "mirrored": false,
+          "compared": 694,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 76,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 76,
+          "matchedImage": 76,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3844537138938903,
+        "mirrored": true,
+        "compared": 40,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.0756297111511226,
+          "mirrored": true,
+          "compared": 694,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 76,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 76,
+          "matchedImage": 76,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.37507680058479304,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.0006144046783443,
+          "mirrored": false,
+          "compared": 721,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 93,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 93,
+          "matchedImage": 93,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.37507680058479304,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.0006144046783443,
+          "mirrored": true,
+          "compared": 721,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 93,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 93,
+          "matchedImage": 93,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.39617487788200373,
+        "mirrored": false,
+        "compared": 47,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.16939902305603,
+          "mirrored": false,
+          "compared": 801,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 104,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 104,
+          "matchedImage": 104,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.39617487788200373,
+        "mirrored": true,
+        "compared": 47,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.16939902305603,
+          "mirrored": true,
+          "compared": 801,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 104,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 104,
+          "matchedImage": 104,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.37909835577011103,
+        "mirrored": false,
+        "compared": 41,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.0327868461608882,
+          "mirrored": false,
+          "compared": 737,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 98,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 98,
+          "matchedImage": 98,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.37909835577011103,
+        "mirrored": true,
+        "compared": 41,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.0327868461608882,
+          "mirrored": true,
+          "compared": 737,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 98,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 98,
+          "matchedImage": 98,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "jump",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": false,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": false,
+          "compared": 871,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 114,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 114,
+          "matchedImage": 114,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "jump",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": true,
+        "compared": 53,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": true,
+          "compared": 871,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 114,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 114,
+          "matchedImage": 114,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "talk",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": false,
+          "compared": 787,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "point",
+            "source": "baby_pose_point.webp",
+            "compared": 84,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 150,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 150,
+          "matchedImage": 150,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 27
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "talk",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": true,
+          "compared": 787,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "point",
+            "source": "baby_pose_point.webp",
+            "compared": 84,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 150,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 150,
+          "matchedImage": 150,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 27
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back jump",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 693,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back jump",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 693,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "madness",
+      "height": 145,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": false,
+          "compared": 693,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "madness",
+      "height": 145,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.3656998872756958,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.9255990982055664,
+          "mirrored": true,
+          "compared": 693,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 20,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 455,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 35,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 35,
+          "matchedImage": 35,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 20,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 455,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 35,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 35,
+          "matchedImage": 35,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 21,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 353,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 31,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 21,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 353,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 31,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 21,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 353,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 31,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 21,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 353,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 31,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23106274008750916,
+        "mirrored": false,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8485019207000732,
+          "mirrored": false,
+          "compared": 283,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 34,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 34,
+          "matchedImage": 34,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "front hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23106274008750916,
+        "mirrored": true,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8485019207000732,
+          "mirrored": true,
+          "compared": 283,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 34,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 34,
+          "matchedImage": 34,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": false,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": false,
+          "compared": 359,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 29,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 29,
+          "matchedImage": 29,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back idle",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "idle",
+        "source": "baby_pose_idle.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": true,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "compared": 170,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 9,
+            "neck": 2,
+            "collar": 3,
+            "torso": 2
+          },
+          "chairSamplesCleared": 6
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "idle",
+          "source": "baby_pose_idle.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": true,
+          "compared": 359,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "idle",
+            "source": "baby_pose_idle.webp",
+            "compared": 170,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 9,
+              "neck": 2,
+              "collar": 3,
+              "torso": 2
+            },
+            "chairSamplesCleared": 6
+          }
+        },
+        "waist": {
+          "compared": 29,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 29,
+          "matchedImage": 29,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 20
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.22698612511157992,
+        "mirrored": false,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 1.8158890008926394,
+          "mirrored": false,
+          "compared": 281,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 25,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 25,
+          "matchedImage": 24,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back near lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.22698612511157992,
+        "mirrored": true,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 1.8158890008926394,
+          "mirrored": true,
+          "compared": 281,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 25,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 25,
+          "matchedImage": 24,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.22698612511157992,
+        "mirrored": false,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 1.8158890008926394,
+          "mirrored": false,
+          "compared": 281,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 25,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 25,
+          "matchedImage": 24,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back far lead",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "laugh",
+        "source": "baby_pose_laugh.webp",
+        "uniformScale": 0.22698612511157992,
+        "mirrored": true,
+        "compared": 13,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "compared": 130,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 3,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "laugh",
+          "source": "baby_pose_laugh.webp",
+          "uniformScale": 1.8158890008926394,
+          "mirrored": true,
+          "compared": 281,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "laugh",
+            "source": "baby_pose_laugh.webp",
+            "compared": 130,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 3,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 25,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 25,
+          "matchedImage": 24,
+          "matchedRim": 1,
+          "nativeColorMatches": 0,
+          "nativeSamples": 21
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": false,
+        "compared": 17,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": false,
+          "compared": 262,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 34,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 34,
+          "matchedImage": 34,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back hurt",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": true,
+        "compared": 17,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": true,
+          "compared": 262,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 34,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 34,
+          "matchedImage": 34,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.23862645030021665,
+        "mirrored": false,
+        "compared": 19,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.9090116024017332,
+          "mirrored": false,
+          "compared": 265,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 32,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "grab",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.23862645030021665,
+        "mirrored": true,
+        "compared": 19,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.9090116024017332,
+          "mirrored": true,
+          "compared": 265,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 32,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23280628025531766,
+        "mirrored": false,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8624502420425413,
+          "mirrored": false,
+          "compared": 278,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 38,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 38,
+          "matchedImage": 38,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "maul",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23280628025531766,
+        "mirrored": true,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8624502420425413,
+          "mirrored": true,
+          "compared": 278,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 38,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 38,
+          "matchedImage": 38,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.24590164422988894,
+        "mirrored": false,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.9672131538391116,
+          "mirrored": false,
+          "compared": 312,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 40,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 40,
+          "matchedImage": 40,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "collapse",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.24590164422988894,
+        "mirrored": true,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.9672131538391116,
+          "mirrored": true,
+          "compared": 312,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 40,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 40,
+          "matchedImage": 40,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23530243337154388,
+        "mirrored": false,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.882419466972351,
+          "mirrored": false,
+          "compared": 283,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 39,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 39,
+          "matchedImage": 39,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "defeated",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.23530243337154388,
+        "mirrored": true,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.882419466972351,
+          "mirrored": true,
+          "compared": 283,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 39,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 39,
+          "matchedImage": 39,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "jump",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 20,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 343,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 40,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 40,
+          "matchedImage": 40,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "jump",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 20,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 343,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 40,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 40,
+          "matchedImage": 40,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "talk",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 17,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 304,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "point",
+            "source": "baby_pose_point.webp",
+            "compared": 84,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 58,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 58,
+          "matchedImage": 58,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 27
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "talk",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "point",
+        "source": "baby_pose_point.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 17,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "compared": 84,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "point",
+          "source": "baby_pose_point.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 304,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "point",
+            "source": "baby_pose_point.webp",
+            "compared": 84,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 58,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 58,
+          "matchedImage": 58,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 27
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back jump",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": false,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": false,
+          "compared": 269,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 37,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 37,
+          "matchedImage": 37,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "back jump",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": true,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": true,
+          "compared": 269,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 37,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 37,
+          "matchedImage": 37,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "madness",
+      "height": 90,
+      "heading": 1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": false,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": false,
+          "compared": 269,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 37,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 37,
+          "matchedImage": 37,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "madness",
+      "height": 90,
+      "heading": -1,
+      "pixels": {
+        "mood": "terror",
+        "source": "baby_pose_terror.webp",
+        "uniformScale": 0.2269861251115799,
+        "mirrored": true,
+        "compared": 14,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "compared": 132,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "terror",
+          "source": "baby_pose_terror.webp",
+          "uniformScale": 1.8158890008926392,
+          "mirrored": true,
+          "compared": 269,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "terror",
+            "source": "baby_pose_terror.webp",
+            "compared": 132,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 37,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 37,
+          "matchedImage": 37,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 25
+        },
+        "negativeControls": false
+      }
+    }
+  ],
+  "authoredRenderer": [
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.34505552053451544,
+        "mirrored": false,
+        "compared": 22,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "uniformScale": 2.7604441642761235,
+          "mirrored": false,
+          "compared": 501,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "excited",
+            "source": "v151_baby_pose_excited.png",
+            "compared": 96,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 203,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 203,
+          "matchedImage": 203,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 43
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.1063049853372434,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.34505552053451544,
+        "mirrored": true,
+        "compared": 22,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "uniformScale": 2.7604441642761235,
+          "mirrored": true,
+          "compared": 501,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "excited",
+            "source": "v151_baby_pose_excited.png",
+            "compared": 96,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 203,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 203,
+          "matchedImage": 203,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 43
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": true,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": true,
+          "compared": 804,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.4140352010726928,
+        "mirrored": false,
+        "compared": 45,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.3122816085815425,
+          "mirrored": false,
+          "compared": 804,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3994221985340118,
+        "mirrored": true,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 3,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.1953775882720943,
+          "mirrored": true,
+          "compared": 749,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 85,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3994221985340118,
+        "mirrored": false,
+        "compared": 44,
+        "mismatches": 0,
+        "maxError": 3,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.1953775882720943,
+          "mirrored": false,
+          "compared": 749,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 85,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 85,
+          "matchedImage": 85,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3994221985340119,
+        "mirrored": false,
+        "compared": 46,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.195377588272095,
+          "mirrored": false,
+          "compared": 752,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 81,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 81,
+          "matchedImage": 81,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.3994221985340119,
+        "mirrored": true,
+        "compared": 46,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.195377588272095,
+          "mirrored": true,
+          "compared": 752,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 81,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 81,
+          "matchedImage": 81,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": false,
+        "compared": 48,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": false,
+          "compared": 804,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 145,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.29713114754098363,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.41403520107269287,
+        "mirrored": true,
+        "compared": 48,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 3.312281608581543,
+          "mirrored": true,
+          "compared": 804,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 91,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 91,
+          "matchedImage": 91,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.2141723930835724,
+        "mirrored": false,
+        "compared": 11,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "uniformScale": 1.713379144668579,
+          "mirrored": false,
+          "compared": 196,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "excited",
+            "source": "v151_baby_pose_excited.png",
+            "compared": 96,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 80,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 80,
+          "matchedImage": 80,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 43
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "boat",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        108,
+        64,
+        872,
+        1364
+      ],
+      "origin": [
+        350,
+        1000
+      ],
+      "scale": 0.06598240469208211,
+      "pixels": {
+        "mood": "excited",
+        "source": "v151_baby_pose_excited.png",
+        "uniformScale": 0.2141723930835724,
+        "mirrored": true,
+        "compared": 11,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "compared": 96,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 2,
+            "chin": 1,
+            "neck": 1,
+            "collar": 1,
+            "torso": 1
+          },
+          "chairSamplesCleared": 3
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "excited",
+          "source": "v151_baby_pose_excited.png",
+          "uniformScale": 1.713379144668579,
+          "mirrored": true,
+          "compared": 196,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "excited",
+            "source": "v151_baby_pose_excited.png",
+            "compared": 96,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 2,
+              "chin": 1,
+              "neck": 1,
+              "collar": 1,
+              "torso": 1
+            },
+            "chairSamplesCleared": 3
+          }
+        },
+        "waist": {
+          "compared": 80,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 80,
+          "matchedImage": 80,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 43
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.2569873631000518,
+        "mirrored": true,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 2,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 2.0558989048004146,
+          "mirrored": true,
+          "compared": 312,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 35,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 35,
+          "matchedImage": 35,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer2",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1121,
+        8,
+        304,
+        494
+      ],
+      "origin": [
+        1258,
+        500
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.2569873631000518,
+        "mirrored": false,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 1,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 2.0558989048004146,
+          "mirrored": false,
+          "compared": 312,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 35,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 35,
+          "matchedImage": 35,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.24791721999645225,
+        "mirrored": true,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.983337759971618,
+          "mirrored": true,
+          "compared": 293,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 36,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 36,
+          "matchedImage": 36,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer3",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        110,
+        516,
+        347,
+        493
+      ],
+      "origin": [
+        258,
+        1007
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.24791721999645225,
+        "mirrored": false,
+        "compared": 16,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.983337759971618,
+          "mirrored": false,
+          "compared": 293,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 36,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 36,
+          "matchedImage": 36,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.24791721999645233,
+        "mirrored": false,
+        "compared": 18,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.9833377599716187,
+          "mirrored": false,
+          "compared": 289,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 29,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 29,
+          "matchedImage": 29,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer4",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        604,
+        515,
+        340,
+        495
+      ],
+      "origin": [
+        772,
+        1008
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.24791721999645233,
+        "mirrored": true,
+        "compared": 18,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 1.9833377599716187,
+          "mirrored": true,
+          "compared": 289,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 29,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 29,
+          "matchedImage": 29,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": 1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": false,
+        "compared": 18,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": false,
+          "compared": 313,
+          "mismatches": 0,
+          "maxError": 0,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 32,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    },
+    {
+      "name": "transfer5",
+      "height": 90,
+      "heading": -1,
+      "rect": [
+        1112,
+        517,
+        287,
+        495
+      ],
+      "origin": [
+        1259,
+        1010
+      ],
+      "scale": 0.18442622950819673,
+      "pixels": {
+        "mood": "brace",
+        "source": "baby_pose_brace.webp",
+        "uniformScale": 0.2569873631000519,
+        "mirrored": true,
+        "compared": 18,
+        "mismatches": 0,
+        "maxError": 0,
+        "sourceProof": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "compared": 118,
+          "maxRGB": 0,
+          "maxAlpha": 0,
+          "byGroup": {
+            "face": 4,
+            "chin": 3,
+            "neck": 1,
+            "collar": 2,
+            "torso": 1
+          },
+          "chairSamplesCleared": 4
+        }
+      },
+      "chin": {
+        "zoom": 8,
+        "pixels": {
+          "mood": "brace",
+          "source": "baby_pose_brace.webp",
+          "uniformScale": 2.055898904800415,
+          "mirrored": true,
+          "compared": 313,
+          "mismatches": 0,
+          "maxError": 1,
+          "sourceProof": {
+            "mood": "brace",
+            "source": "baby_pose_brace.webp",
+            "compared": 118,
+            "maxRGB": 0,
+            "maxAlpha": 0,
+            "byGroup": {
+              "face": 4,
+              "chin": 3,
+              "neck": 1,
+              "collar": 2,
+              "torso": 1
+            },
+            "chairSamplesCleared": 4
+          }
+        },
+        "waist": {
+          "compared": 32,
+          "visibleNative": 0,
+          "matchedAuthoredPouch": 32,
+          "matchedImage": 32,
+          "matchedRim": 0,
+          "nativeColorMatches": 0,
+          "nativeSamples": 19
+        },
+        "negativeControls": false
+      }
+    }
+  ],
+  "originalSHA256": {
+    "baby_pose_idle.webp": "a27d4ea977d35d89ac927ca371eb66c5e366b096b1eb057e8552853f14578823",
+    "baby_pose_laugh.webp": "4decc347ee84105fb22f47ad945d8cfa0612672360fdbd0ce879661981d6793e",
+    "baby_pose_terror.webp": "ad1faf6677a2fcb674887c42feaa4498af724b97ed2a848bb6e3df046a5ac9ea",
+    "baby_pose_brace.webp": "e0a172d980ca27bae9bf82d37d8ab97935f78bc5862c12c250e29c2604329478",
+    "baby_pose_leanBack.webp": "a0dd21135d421463620860444ebee2c862e2d659b1e19be6031ebbde88c53360",
+    "baby_pose_leanForward.webp": "4cfba1def3c14c567751d598a04a653c4f1e81159317341d3e0b68be6e79b92b",
+    "baby_pose_point.webp": "4dc3514feaf2dd70e002a25a34ef7c0707e725e6580ab61cc94e68a5b6ed2a2c",
+    "baby_pose_sick.webp": "2e1f1c4bd3c51b6919638f1135a33bea36a0cf0c886ac71478340ed910b6c22f",
+    "v151_baby_pose_excited.png": "90b655b42abd70a1e3ec7dd9f758988c4a1d26aaa91b2565ceeb58ca723e3e0b",
+    "v151_baby_pose_sick.png": "32dc7d3bbd707101c0ff82cf6ef6e359702bc6adec0de91132b59514e2caf426"
+  },
+  "entry": "autumn-v17.html"
+}

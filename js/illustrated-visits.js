@@ -224,7 +224,7 @@
       velocity+=(dir*260-velocity)*Math.min(1,dt*3);x=clamp(x+velocity*dt,110,4550);stride+=Math.abs(velocity)*dt;
       buoys.forEach((bx,i)=>{if(Math.abs(x-bx)<85&&!quests.snapshot().buoys.includes(i)){quests.act('buoy',i);setMessage(`BUOY ${i+1} CHECKED · ${quests.snapshot().buoys.length===3?'All three! Return left to the dock.':'Keep exploring the lake.'}`);}});
     }else {
-      const speed=combatState.phase==='madness'?300:combatState.phase==='apex'?235:155;
+      const speed=combatState.phase==='madness'?300:combatState.phase==='apex'?235:120;
       const horizontal=dir,diagonal=horizontal&&vertical?Math.SQRT1_2:1;
       const target=fade>0||combatState.hp===0?0:horizontal*speed*diagonal,rate=horizontal?1200:1600;
       velocity+=clamp(target-velocity,-rate*dt,rate*dt);

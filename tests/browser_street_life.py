@@ -1,4 +1,4 @@
-"""Actual V16 street routines, civilian panic and keyboard/touch integration.
+"""Actual V17 street routines, civilian panic and keyboard/touch integration.
 
 Game actors are never replaced or assigned test states. Debug warps only choose a
 real starting location; all interactions and movement use keyboard/touch inputs.
@@ -83,7 +83,7 @@ def start(page, base, errors, failures, touch=False):
     page.on('pageerror', lambda error: errors.append(str(error)))
     page.on('response', lambda response: failures.append([response.status,response.url]) if response.status >=400 else None)
     page.goto(f'{base}/{ENTRY}')
-    page.wait_for_function('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready()', timeout=120000)
+    page.wait_for_function('BearlyVisits.audit().artReady && BearlyNpcMotion.ready() && BearlyStreetLife.ready() && (!BearlyNpcMotion.cacheStats || BearlyNpcMotion.cacheStats().complete)', timeout=180000)
     page.clock.pause_at(page.evaluate('Date.now()+1000')/1000)
     page.evaluate('__installWardrobeActorAudit();__installLifeAudit()')
     if touch: page.locator('#introStart').tap()
@@ -123,8 +123,8 @@ def approach(page, ident, touch=False):
     # used; source actors, HP, time, routes and civilian flags remain untouched.
     for _ in range(18):
         state=read(page);n=actor(state,ident);dx=n['x']+65-state['x'];dy=n['depth']-state['depth']
-        if abs(dy)>9: hold(page,'ArrowDown' if dy>0 else 'ArrowUp', max(30,min(260,round(abs(dy)/145*1000))),touch)
-        elif abs(dx)>13: hold(page,'ArrowRight' if dx>0 else 'ArrowLeft', max(30,min(260,round(abs(dx)/155*1000))),touch)
+        if abs(dy)>9: hold(page,'ArrowDown' if dy>0 else 'ArrowUp', max(30,min(260,round(abs(dy)/118*1000))),touch)
+        elif abs(dx)>13: hold(page,'ArrowRight' if dx>0 else 'ArrowLeft', max(30,min(260,round(abs(dx)/120*1000))),touch)
         else:
             hold(page,'ArrowLeft',25,touch)
             state=read(page);n=actor(state,ident)
@@ -159,15 +159,16 @@ def witness_flow(page, touch=False, label='desktop'):
     shot(page,label+'-scream')
     # Let the real stagger finish while the bear opens a lead, then prove the
     # pursuing adult runs faster and closes the measured world-space distance.
-    hold(page,'ArrowRight',550,touch)
+    hold(page,'ArrowRight',350,touch)
     first=read(page);distance1=abs(actor(first,'promenade-walker')['x']-first['x'])
     hold(page,'ArrowRight',650,touch)
     chased=read(page);peace_only(chased);distance2=abs(actor(chased,'promenade-walker')['x']-chased['x'])
     runner=actor(first,'promenade-walker')
     assert distance2<distance1-10,{'first':distance1,'second':distance2,'runner':runner}
-    assert runner['running'] and runner['speed']>155,runner
+    assert runner['running'] and runner['speed']>=269,runner
     assert all(abs(actor(chased,i)['x']-initial['promenade-walker']['x'])>abs(initial[i]['x']-initial['promenade-walker']['x']) for i in ['civilian-reader','civilian-bench'])
     shot(page,label+'-run-and-flee')
+    hold(page,'ArrowRight',600,touch)
     page.clock.run_for(1400)
     hiding=read(page);peace_only(hiding)
     hidden=[n for n in hiding['combat']['npcs'] if n.get('civilian') and n['hiding']]
@@ -268,7 +269,7 @@ def run_video(browser,base,errors,failures):
             for _ in range(20):
                 state=read(page);n=actor(state,'promenade-walker');dx=n['x']+65-state['x'];dy=n['depth']-state['depth']
                 if abs(dy)>9:key='ArrowDown' if dy>0 else 'ArrowUp';duration=min(220,max(35,round(abs(dy)/140*1000)))
-                elif abs(dx)>15:key='ArrowRight' if dx>0 else 'ArrowLeft';duration=min(220,max(35,round(abs(dx)/155*1000)))
+                elif abs(dx)>15:key='ArrowRight' if dx>0 else 'ArrowLeft';duration=min(220,max(35,round(abs(dx)/120*1000)))
                 else:break
                 page.keyboard.down(key);page.wait_for_timeout(duration);page.keyboard.up(key);page.wait_for_timeout(60)
             page.keyboard.down('ArrowLeft');page.wait_for_timeout(25);page.keyboard.up('ArrowLeft');page.wait_for_timeout(80)

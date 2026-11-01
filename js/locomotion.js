@@ -1,7 +1,7 @@
 /* Continuous two-leg locomotion. A planted sole moves back at ground speed. */
 (() => {
   'use strict';
-  const TAU=Math.PI*2,DUTY=.62,EXCURSION=.24,clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+  const TAU=Math.PI*2,DUTY=.62,EXCURSION=.18,clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
   const ease=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const cycleLength=(height=225)=>height*EXCURSION*2/DUTY;
   function foot(phase,height=225,weight=1){
@@ -20,7 +20,7 @@
     const cycle=cycleLength(height),phase=distance/cycle;
     const far=foot(phase+.5,height,weight),near=foot(phase,height,weight);
     return {far,near,phase:((phase%1)+1)%1,cycleLength:cycle,
-      bob:height*.008*Math.cos(phase*TAU*2)*weight,
+      bob:height*.016*Math.cos(phase*TAU*2)*weight,
       sway:height*.010*Math.sin(phase*TAU)*weight,
       roll:(.010-.014*Math.sin(phase*TAU))*weight};
   }

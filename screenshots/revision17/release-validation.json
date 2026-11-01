@@ -1,0 +1,49 @@
+{
+  "result": "passed",
+  "baseCommit": "f2b4ac66c3588362a9a7b7bc347e8590c4cc7819",
+  "unitSuites": [
+    "building-visits.cjs",
+    "brawler.cjs",
+    "npc-life.cjs",
+    "hero-gait.cjs"
+  ],
+  "gaitCases": 1152,
+  "legacyBrowser": {
+    "hero": "passed",
+    "movement": "passed",
+    "babyRenderer": {
+      "result": "passed",
+      "nativeCases": 40,
+      "rigCases": 64,
+      "authoredCases": 20
+    }
+  },
+  "htmlEntries": 20,
+  "cyclingUpdateUnchanged": true,
+  "originalArtworkFilesUnchanged": true,
+  "sourceSHA256": {
+    "js/assets.js": "44e8a9560ef6b0c846c133f19516ca8ba9ecc38180cc0643569875cacaaf1540",
+    "js/autumn-quests.js": "25d69f43660aea787a48ed3cdb3edcbf2e1dc0dbf1ea807f510a07496cbebcd6",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/brawler-art.js": "87e279bf05dd20757170cfa854cb7b2aad57bfef61f61b37ec9a7b3760064bb1",
+    "js/brawler.js": "486656e7a47fb52017916a186cc6d0ec123592ab3fca331f60b2e43e5182541f",
+    "js/fullscreen.js": "64fe9efa93c0f24c7f0217db284a2b717dc64c56061bcdf36c24f22b25b9dee0",
+    "js/game.js": "26cafeca4884295c35053803d61145a9c2a67950fa752a7f454ccb0dc0b18070",
+    "js/hero-rig.js": "92252aba50f1d088bf718f48dfee71f8b7017b2ca9acce1e72d29ad39fdbff59",
+    "js/illustrated-atlas.js": "19dabed15e1c2c964df4bd53fdd80486f32f8d8258ecf88a928a7181da12f438",
+    "js/illustrated-hero.js": "d8eca39f1ab358f6a5e0a63612009a5972f54924e0831c440704ec39523b2c53",
+    "js/illustrated-kids.js": "fef1238764e5311ee93c9591cdf1f5a3e1d137d247e418add4f961f0ad5d4fe2",
+    "js/illustrated-neighbourhood.js": "e4fe70255ddc2f3e851fe8b8673d57cb76854a32475e588f7ad636b92ee1528c",
+    "js/illustrated-props.js": "cf2340578f9f0c7b92b59330488ec456414adfd5be5e3796e6e191ba4bd9f456",
+    "js/illustrated-visits.js": "145a6661e2a9aed4ac80d83566d0a88d1c08b957895c04387b4cb57b90303bdf",
+    "js/illustrated-world.js": "72ab6e76ad9c5ea186b3198f309c5b6112991255fd872dbdda9d4e165a347d1a",
+    "js/locomotion.js": "0e3ee582f7cc6b1a49eb9a86727b3413a1a44cfa05dde37f5552930049886eb6",
+    "js/npc-motion.js": "cdb4337d66b77b83871e2bdb75c2a6315f8e8f74553f25439a6a7cfb2e784029",
+    "js/street-life.js": "e029d4176bd86063c707fdd60a4ba95591094763a994ae6b9359580b878a3c4e"
+  },
+  "logSHA256": {
+    "v17-hero.log": "52d03c2eab20f817c254429bbc3563eead3ca9eee3c641d90121bf28cf8a5585",
+    "v17-movement.log": "3ae84c26a645295f89c302dc027bec456640cc5f1d52cbe7dfdec0e62659eb3d",
+    "v17-baby-renderer.log": "291260c3fcfc256cddd9fa1fc87fa1e2304d3a4aabeb65484c6c63d33200a757"
+  }
+}

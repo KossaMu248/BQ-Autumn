@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V16';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V17';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -5968,16 +5968,18 @@ function babyFigure(expr, thrown=false, pose='idle'){
       $('debugFps').textContent=debugPerf.fps?String(debugPerf.fps):'--';
       $('debugMs').textContent=debugPerf.drawMs?debugPerf.drawMs.toFixed(1):'--';
       $('debugSim').textContent=String(debugPerf.steps);
-      const area=window.BearlyVisits?.audit(),q=area?.quest;
+      const area=window.BearlyVisits?.audit(),q=area?.quest,walkCache=window.BearlyNpcMotion?.cacheStats?.(),heroCache=window.BearlyHeroRig?.cacheStats?.();
       $('debugReadout').textContent=`BUILD       ${window.BEARLY_BUILD_ID}
 AREA        ${area?.mode||'cycling'}${area?.place?' · '+area.place:''}
 TRANSITION  ${area?.transition||'none'}${area?.phase!=null?' '+Math.round(area.phase*100)+'%':''}
 LOCAL X   ${area?.mode?Math.round(area.x):'—'}
 DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
 HERO        ${area?.mode&&area.mode!=='water'?(area.hero?.pose||'ready')+' · '+(area.hero?.carrier||'front')+' carrier':'—'}
+HERO DRAW   ${heroCache?`${heroCache.frames} cached poses · ${(heroCache.bytes/1048576).toFixed(1)} MB`:'preparing'}
 BABY FACE   ${area?.mode&&area.hero?.babyFace?.source?'original · '+area.hero.babyFace.source.split('/').pop().replace('.webp',''):'original riding art'}
 BABY MOOD   ${area?.mode?(area.hero?.babyFace?.mood||'idle'):'bike expressions'}
 NPC STYLE   ${window.BearlyBrawlArt.wardrobeCount} outfits · streetwear / civilian
+NPC DRAW    ${walkCache?`${walkCache.frameCount}/${walkCache.capacity} cached poses · ${(walkCache.bytes/1048576).toFixed(1)} MB`:'preparing'}
 NPC LIFE    ${area?.combat?.population?.active??0} active · ${area?.combat?.population?.offstage??0} offstage
 CIVILIANS   ${area?.combat?.population?.civilian??0} peaceful · ${area?.combat?.population?.fleeing??0} fleeing · ${area?.combat?.population?.hiding??0} hiding
 ROUTINES    ${area?.combat?.population?.resting??0} sitting / reading / smoking

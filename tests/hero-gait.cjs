@@ -2,8 +2,9 @@
 const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 
 function canvasContext(){
-  const state={globalAlpha:1},stack=[];
+  const state={globalAlpha:1,draws:[]},stack=[];
   return new Proxy(state,{get(object,key){
+    if(key==='drawImage')return(image,...args)=>object.draws.push({image,args,alpha:object.globalAlpha});
     if(key==='save')return()=>stack.push({...object});
     if(key==='restore')return()=>Object.assign(object,stack.pop());
     return key in object?object[key]:()=>{};
@@ -18,8 +19,8 @@ const close=(actual,expected,tolerance=1e-7)=>assert.ok(Math.abs(actual-expected
 
 for(const height of [90,145,225,300]){
   const cycle=gait.cycleLength(height);
-  assert.ok(cycle/height>.70&&cycle/height<.85,'a complete cycle travels most of a body height');
-  const cadence=155/cycle;
+  assert.ok(cycle/height>.55&&cycle/height<.65,'cycle distance fits the original short-legged anatomy');
+  const cadence=120/cycle;
   if(height===145)assert.ok(cadence>1.1&&cadence<1.55,'street walking avoids rapid foot tapping');
   const first=gait.pose(0,height,1),half=gait.pose(cycle/2,height,1);
   assert.ok(first.near.x>first.far.x&&half.far.x>half.near.x,'each foot takes its turn in front');
@@ -33,7 +34,7 @@ for(const height of [90,145,225,300]){
       close(foot.x,q[side].x);close(foot.y,q[side].y);close(foot.angle,q[side].angle);
       if(foot.stance&&next.stance)close(distance+foot.x,distance+.00001+next.x);
     }
-    assert.ok((front-back)/height>.46,'foot travel is visibly longer than the old short shuffle');
+    assert.ok((front-back)/height>.34,'foot travel remains substantially longer than the pre-V16 shuffle');
     assert.ok(highest/height<-.06&&highest/height>-.10,'swing clears the ground without marching');
   }
   // Heel strike and toe-off stay continuous in position and velocity.
@@ -48,23 +49,33 @@ for(const height of [90,145,225,300]){
   }
 }
 
-let cases=0,maxHipAdjustment=0;
-for(const height of [90,145,225,300])for(const carrier of ['front','back'])for(const face of [-1,1])for(let phase=0;phase<128;phase++){
-  rig.draw(canvasContext(),0,0,height,face,{state:{hp:100,...(carrier==='back'?{baby:{}}:{})},weight:1,distance:gait.cycleLength(height)*phase/128});
-  const audit=rig.audit();
+let cases=0;
+for(const height of [90,145,225,300])for(const carrier of ['front','back'])for(const face of [-1,1])for(const weight of [0,.05,.1,.2,.3,.4,.6,.8,1])for(let phase=0;phase<8;phase++){
+  const context=canvasContext();
+  rig.draw(context,0,0,height,face,{state:{hp:100,...(carrier==='back'?{baby:{}}:{})},weight,distance:gait.cycleLength(height)*phase/8});
+  const audit=rig.audit(),profile=rig.profiles()[carrier];
   assert.equal(audit.carrier,carrier);assert.equal(audit.integratedCarrier,true);
   assert.equal(audit.babyFace.continuousUpperBody,true);assert.equal(audit.babyFace.headOnly,false);
-  assert.ok(Math.abs(audit.body.roll)<.03&&Math.abs(audit.body.sway)<height*.011,'whole-body motion stays small');
-  for(const leg of Object.values(audit.landmarks)){
-    close(Math.hypot(leg.knee.x-leg.hip.x,leg.knee.y-leg.hip.y),leg.thighLength);
-    close(Math.hypot(leg.cuff.x-leg.knee.x,leg.cuff.y-leg.knee.y),leg.shinLength);
-    assert.ok(Math.abs(leg.hip.x-audit.body.pivot.x)<height*.17,'attachments stay under the painted shorts');
-    const adjustment=Math.hypot(leg.hip.x-leg.nominalHip.x,leg.hip.y-leg.nominalHip.y)/height;
-    maxHipAdjustment=Math.max(maxHipAdjustment,adjustment);
-    assert.ok(adjustment<.025,'pelvic transfer accommodates reach without rubber limbs');
+  const bodies=context.draws.filter(d=>d.image.dataset?.sourceTransform==='continuous-surface');
+  assert.equal(bodies.length,1,'idle, transitions and steady walking paint exactly one body');
+  assert.equal(bodies[0].alpha,1,'intermediate weights never fade the torso or produce ghost boots');
+  assert.equal(audit.body.surfaces,1);assert.equal(audit.body.continuous,true);
+  assert.ok(Math.abs(audit.body.roll)<.03&&Math.abs(audit.body.sway)<height*.011,'the native face remains on a gently moving rigid torso');
+  for(const side of ['near','far']){
+    const leg=audit.landmarks[side],source=profile[side],scale=height/profile.stature;
+    assert.equal(leg.rigidShoe,true);
+    close(leg.bootWidth/leg.bootHeight,source.boot[2]/source.boot[3]);
+    assert.ok(Math.hypot(leg.cuff.x-leg.sole.x,leg.cuff.y-leg.sole.y)<height*.20,'the shoe collar remains attached to its own sole');
+    if(weight===0){close(leg.sole.x,(source.sole[0]-profile.origin[0])*scale);close(leg.sole.y,(source.sole[1]-profile.origin[1])*scale);}
   }
   cases++;
 }
+// A warm steady pose reuses its rendered body; transient poses cannot corrupt it.
+const context=canvasContext(),options={state:{hp:100},weight:1,distance:gait.cycleLength(145)*.25};
+rig.draw(context,0,0,145,1,options);const steady=context.draws.find(d=>d.image.dataset?.sourceTransform==='continuous-surface').image;
+rig.draw(canvasContext(),0,0,145,1,{...options,weight:.2});const repeated=canvasContext();rig.draw(repeated,0,0,145,1,options);
+assert.equal(repeated.draws.find(d=>d.image.dataset?.sourceTransform==='continuous-surface').image,steady);
+const cache=rig.cacheStats();assert.ok(cache.bytes<=cache.limitBytes&&cache.frames<=cache.frameLimit,'both carrier banks remain within the cache budget');
 // Eased starts/stops have no abrupt foot or torso jumps as blend weight changes.
 for(const phase of [.0,.23,.51,.79]){
   let previous=null;
@@ -74,4 +85,4 @@ for(const phase of [.0,.23,.51,.79]){
     previous=p;
   }
 }
-console.log(JSON.stringify({result:'passed',rigCases:cases,streetCycle:gait.cycleLength(145),cyclesPerSecond:155/gait.cycleLength(145),maxHipAdjustment}));
+console.log(JSON.stringify({result:'passed',rigCases:cases,streetCycle:gait.cycleLength(145),cyclesPerSecond:120/gait.cycleLength(145),cacheBytes:cache.bytes}));

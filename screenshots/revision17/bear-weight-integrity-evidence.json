@@ -1,0 +1,438 @@
+{
+  "cases": 432,
+  "minOpaqueRatio": 1,
+  "minMeanAlpha": 253.33577052868392,
+  "negativeControls": 4,
+  "faultCount": 0,
+  "faults": [],
+  "legacy": {
+    "reference": "3863cc1",
+    "weight": 0.2,
+    "pixels": 4529,
+    "opaqueRatio": 0.16537867078825347,
+    "minAlpha": 176,
+    "meanAlpha": 203.80017663943477,
+    "caught": true
+  },
+  "edgeDiagnostics": [
+    {
+      "height": 90,
+      "face": 1,
+      "carrier": "front",
+      "phase": 0,
+      "weight": 0.2,
+      "endpointMask": {
+        "pixels": 639,
+        "opaqueRatio": 0.9812206572769953,
+        "minAlpha": 225,
+        "meanAlpha": 253.31768388106417
+      },
+      "posedCore": {
+        "pixels": 275,
+        "opaqueRatio": 1,
+        "minAlpha": 251,
+        "meanAlpha": 254.66545454545454
+      },
+      "lowEndpointPixels": 12,
+      "matchingReferenceAA": 12,
+      "pixels": [
+        {
+          "x": 187,
+          "y": 236,
+          "actualAlpha": 225,
+          "sourceTemplateAlpha": 225
+        },
+        {
+          "x": 187,
+          "y": 237,
+          "actualAlpha": 225,
+          "sourceTemplateAlpha": 225
+        },
+        {
+          "x": 187,
+          "y": 238,
+          "actualAlpha": 225,
+          "sourceTemplateAlpha": 225
+        },
+        {
+          "x": 187,
+          "y": 239,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        },
+        {
+          "x": 187,
+          "y": 240,
+          "actualAlpha": 227,
+          "sourceTemplateAlpha": 227
+        },
+        {
+          "x": 187,
+          "y": 241,
+          "actualAlpha": 227,
+          "sourceTemplateAlpha": 227
+        },
+        {
+          "x": 187,
+          "y": 242,
+          "actualAlpha": 227,
+          "sourceTemplateAlpha": 227
+        },
+        {
+          "x": 187,
+          "y": 247,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        },
+        {
+          "x": 187,
+          "y": 254,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        },
+        {
+          "x": 187,
+          "y": 255,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        },
+        {
+          "x": 187,
+          "y": 256,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        },
+        {
+          "x": 187,
+          "y": 257,
+          "actualAlpha": 231,
+          "sourceTemplateAlpha": 231
+        }
+      ]
+    },
+    {
+      "height": 90,
+      "face": 1,
+      "carrier": "back",
+      "phase": 0,
+      "weight": 0.2,
+      "endpointMask": {
+        "pixels": 684,
+        "opaqueRatio": 0.9926900584795322,
+        "minAlpha": 239,
+        "meanAlpha": 253.3859649122807
+      },
+      "posedCore": {
+        "pixels": 318,
+        "opaqueRatio": 1,
+        "minAlpha": 250,
+        "meanAlpha": 253.85220125786162
+      },
+      "lowEndpointPixels": 5,
+      "matchingReferenceAA": 5,
+      "pixels": [
+        {
+          "x": 195,
+          "y": 256,
+          "actualAlpha": 239,
+          "sourceTemplateAlpha": 239
+        },
+        {
+          "x": 195,
+          "y": 257,
+          "actualAlpha": 239,
+          "sourceTemplateAlpha": 239
+        },
+        {
+          "x": 185,
+          "y": 284,
+          "actualAlpha": 243,
+          "sourceTemplateAlpha": 243
+        },
+        {
+          "x": 186,
+          "y": 285,
+          "actualAlpha": 244,
+          "sourceTemplateAlpha": 244
+        },
+        {
+          "x": 187,
+          "y": 290,
+          "actualAlpha": 243,
+          "sourceTemplateAlpha": 243
+        }
+      ]
+    }
+  ],
+  "coreRule": "Same pose/source transforms at full draw alpha;2pixel erosion in final display space;unchanged99.5%ofcore\u2265246alpha",
+  "boundedBodyCache": {
+    "initial": {
+      "frames": 10,
+      "bytes": 2126412,
+      "limitBytes": 33554432,
+      "frameLimit": 98,
+      "phases": 48,
+      "canonicalHeight": 280,
+      "hits": 278,
+      "misses": 686,
+      "transientBuilds": 676,
+      "bitmapFrames": 10,
+      "bitmapFailures": 0,
+      "mode": "bitmap",
+      "pendingBitmaps": 0,
+      "buildMs": 3521,
+      "maxBuildMs": 109,
+      "scratchBytes": 440196
+    },
+    "after": {
+      "frames": 98,
+      "bytes": 21169208,
+      "limitBytes": 33554432,
+      "frameLimit": 98,
+      "phases": 48,
+      "canonicalHeight": 280,
+      "hits": 478,
+      "misses": 774,
+      "transientBuilds": 676,
+      "bitmapFrames": 10,
+      "bitmapFailures": 0,
+      "mode": "bitmap",
+      "pendingBitmaps": 88,
+      "buildMs": 4000,
+      "maxBuildMs": 109,
+      "scratchBytes": 440196
+    },
+    "reused": {
+      "frames": 98,
+      "bytes": 21169208,
+      "limitBytes": 33554432,
+      "frameLimit": 98,
+      "phases": 48,
+      "canonicalHeight": 280,
+      "hits": 670,
+      "misses": 774,
+      "transientBuilds": 676,
+      "bitmapFrames": 10,
+      "bitmapFailures": 0,
+      "mode": "bitmap",
+      "pendingBitmaps": 88,
+      "buildMs": 4000,
+      "maxBuildMs": 109,
+      "scratchBytes": 440196
+    },
+    "canonicalStorageReused": true
+  },
+  "actualControls": [
+    {
+      "file": "bear-start-040.png",
+      "inferredWalkWeight": 0.10024995893795409,
+      "gait": {
+        "far": {
+          "x": -1.6960663182001683,
+          "y": 0,
+          "angle": 0.00023502966722223446,
+          "stance": true
+        },
+        "near": {
+          "x": 2.524133566123383,
+          "y": 0,
+          "angle": -0.0058145615974419616,
+          "stance": true
+        },
+        "phase": 0.010946206896551791,
+        "cycleLength": 84.19354838709677,
+        "bob": 0.2303830348317154,
+        "sway": 0.009989719257000327,
+        "roll": 0.0009060471275878137
+      },
+      "body": {
+        "pivot": {
+          "x": -2.0799180327868854,
+          "y": -49.0266393442623
+        },
+        "sway": 0.009989719257000327,
+        "bob": 0.2303830348317154,
+        "roll": 0.0009060471275878137,
+        "slope": 0.07541227280096197,
+        "opaque": true,
+        "surfaces": 1,
+        "continuous": true,
+        "triangles": 128,
+        "canonicalHeight": 280,
+        "cachePhase": 0.010946206896551791
+      },
+      "babyMood": "idle"
+    },
+    {
+      "file": "bear-start-080.png",
+      "inferredWalkWeight": 0.40406871687807483,
+      "gait": {
+        "far": {
+          "x": -8.325744669949568,
+          "y": 0,
+          "angle": 0.017548996642059934,
+          "stance": true
+        },
+        "near": {
+          "x": 8.68424486314358,
+          "y": 0,
+          "angle": -0.010406699355384907,
+          "stance": true
+        },
+        "phase": 0.054731034482758734,
+        "cycleLength": 84.19354838709677,
+        "bob": 0.724325019393133,
+        "sway": 0.19753453205379334,
+        "roll": 0.0021334572041234326
+      },
+      "body": {
+        "pivot": {
+          "x": -2.0799180327868854,
+          "y": -49.0266393442623
+        },
+        "sway": 0.19753453205379334,
+        "bob": 0.724325019393133,
+        "roll": 0.0021334572041234326,
+        "slope": 0.07541227280096512,
+        "opaque": true,
+        "surfaces": 1,
+        "continuous": true,
+        "triangles": 128,
+        "canonicalHeight": 280,
+        "cachePhase": 0.054731034482758734
+      },
+      "babyMood": "laugh"
+    },
+    {
+      "file": "bear-start-160.png",
+      "inferredWalkWeight": 0.8310641491501233,
+      "gait": {
+        "far": {
+          "x": -21.990311476921057,
+          "y": -1.7512776134175188,
+          "angle": 0.015133019165129801,
+          "stance": false
+        },
+        "near": {
+          "x": 9.946840588347985,
+          "y": 0,
+          "angle": 0,
+          "stance": true
+        },
+        "phase": 0.1678418390804599,
+        "cycleLength": 84.19354838709677,
+        "bob": -0.9885867829441762,
+        "sway": 1.048018289506769,
+        "roll": -0.0018081557864951558
+      },
+      "body": {
+        "pivot": {
+          "x": -2.0799180327868854,
+          "y": -49.0266393442623
+        },
+        "sway": 1.048018289506769,
+        "bob": -0.9885867829441762,
+        "roll": -0.0018081557864951558,
+        "slope": 0.07541227280096197,
+        "opaque": true,
+        "surfaces": 1,
+        "continuous": true,
+        "triangles": 128,
+        "canonicalHeight": 280,
+        "cachePhase": 0.1678418390804599
+      },
+      "babyMood": "laugh"
+    },
+    {
+      "file": "bear-stop-140.png",
+      "inferredWalkWeight": 0.19918264782375936,
+      "gait": {
+        "far": {
+          "x": -4.3186779028098785,
+          "y": -1.1393816174829117,
+          "angle": -0.009328001063986915,
+          "stance": false
+        },
+        "near": {
+          "x": 1.670106665472656,
+          "y": 0,
+          "angle": 0,
+          "stance": true
+        },
+        "phase": 0.2104104214559388,
+        "cycleLength": 84.19354838709677,
+        "bob": -0.40608737136829925,
+        "sway": 0.2799254795937012,
+        "roll": -0.0007109022902533142
+      },
+      "body": {
+        "pivot": {
+          "x": -2.0799180327868854,
+          "y": -49.0266393442623
+        },
+        "sway": 0.2799254795937012,
+        "bob": -0.40608737136829925,
+        "roll": -0.0007109022902533142,
+        "slope": 0.07541227280096512,
+        "opaque": true,
+        "surfaces": 1,
+        "continuous": true,
+        "triangles": 128,
+        "canonicalHeight": 280,
+        "cachePhase": 0.2104104214559388
+      },
+      "babyMood": "idle"
+    },
+    {
+      "file": "bear-stop-320.png",
+      "inferredWalkWeight": 0.009227814442715709,
+      "gait": {
+        "far": {
+          "x": -0.20007746036315352,
+          "y": -0.05278573339820539,
+          "angle": -0.00043215141419391406,
+          "stance": false
+        },
+        "near": {
+          "x": 0.0773733785392826,
+          "y": 0,
+          "angle": 0,
+          "stance": true
+        },
+        "phase": 0.2104104214559388,
+        "cycleLength": 84.19354838709677,
+        "bob": -0.018813380339398496,
+        "sway": 0.012968501080297184,
+        "roll": -3.293496945157435e-05
+      },
+      "body": {
+        "pivot": {
+          "x": -2.0799180327868854,
+          "y": -49.0266393442623
+        },
+        "sway": 0.012968501080297184,
+        "bob": -0.018813380339398496,
+        "roll": -3.293496945157435e-05,
+        "slope": 0.07541227280096512,
+        "opaque": true,
+        "surfaces": 1,
+        "continuous": true,
+        "triangles": 128,
+        "canonicalHeight": 280,
+        "cachePhase": 0.2104104214559388
+      },
+      "babyMood": "idle"
+    }
+  ],
+  "entry": "autumn-v17.html",
+  "result": "passed",
+  "sourceSHA256": {
+    "autumn-v17.html": "0b9f686c2f1773c083a4394177592c7e369499125b543d02c75753fb0d24bd0f",
+    "js/hero-rig.js": "92252aba50f1d088bf718f48dfee71f8b7017b2ca9acce1e72d29ad39fdbff59",
+    "js/locomotion.js": "0e3ee582f7cc6b1a49eb9a86727b3413a1a44cfa05dde37f5552930049886eb6",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/npc-motion.js": "cdb4337d66b77b83871e2bdb75c2a6315f8e8f74553f25439a6a7cfb2e784029"
+  },
+  "pageErrors": [],
+  "httpFailures": []
+}

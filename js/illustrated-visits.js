@@ -4,7 +4,7 @@
   const host=document.querySelector('.canvas-wrap');
   const quests=window.BearlyQuests.game,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const rideTools=document.createElement('div');rideTools.className='ride-utilities';rideTools.hidden=true;
-  rideTools.innerHTML='<button type="button" class="dismount-button">DISMOUNT · Q</button>';
+  rideTools.innerHTML='<button type="button" class="dismount-button">DISMOUNT · Q</button><button type="button" class="ride-settings" aria-label="Settings" aria-controls="debugPanel" aria-expanded="false">⚙</button>';
   host.append(rideTools);
   const dismountButton=rideTools.querySelector('button');
   const prompt=document.createElement('button');prompt.className='visit-prompt';prompt.type='button';prompt.hidden=true;host.append(prompt);
@@ -257,6 +257,7 @@
   for(const event of ['pointerup','pointercancel','lostpointercapture'])maulButton.addEventListener(event,()=>held.delete('maul'));
   panel.querySelector('.area-fullscreen').addEventListener('click',()=>window.BearlyFullscreen.toggle());panel.querySelector('.area-settings').addEventListener('click',()=>window.BEARLY_DEBUG_MENU.toggle(true));
   dismountButton.addEventListener('click',stepOff);
+  rideTools.querySelector('.ride-settings').addEventListener('click',()=>window.BEARLY_DEBUG_MENU.toggle(true));
   prompt.addEventListener('click',enter);actionButton.addEventListener('click',act);panel.querySelector('.area-exit').addEventListener('click',leave);
   window.addEventListener('keydown',e=>{
     if(e.code==='F3'||window.BEARLY_DEBUG_MENU?.isOpen())return;

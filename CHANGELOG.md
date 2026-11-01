@@ -2,6 +2,8 @@
 
 ## Revision 16 — longer strides and everyday street life
 
+- Fix the Neighbourhood life shortcut to wait for the resumed play context after closing settings; keep a compact Settings gear beside Dismount while cycling in phone landscape, and refresh the affected script/style caches across all entry pages.
+
 - Slow normal walking to 155 world pixels/second and lengthen the bear's planted stride. Add eased heel/toe movement, pelvic yaw and subtle whole-body sway while preserving the measured shorts, calves, boots and original baby carrier.
 - Add relaxed passive walking and running artwork for all nine existing adults, plus three new peaceful civilians with distinct ages, faces, builds and everyday clothes. Give them sitting, newspaper, smoking, hiding, damage and full-body screen-impact poses.
 - Replace the crowded 54-adult street list with 27 local slots and staggered schedules, long sidewalk routes and pauses. Keep stable IDs, outfits and health across bike/foot modes; original hostile crews remain.

@@ -185,8 +185,8 @@ kbd{font:800 10px var(--game-text);color:#ecebd7;min-width:19px;padding:4px;bord
 .game-shell.is-expanded .portrait-hint{display:none!important}.game-shell.is-expanded .game-hud{padding-top:55px!important}
 @media(max-width:700px){.fullscreen-label{display:none}#fullscreenBtn{padding:8px!important;font-size:17px!important}.fullscreen-tools button{padding:8px;font-size:10px}}
 
-.ride-utilities{position:absolute;right:14px;bottom:14px;z-index:8;padding:0;background:none;pointer-events:none}.ride-utilities[hidden],.autumn-exploring .ride-utilities{display:none!important}
-.dismount-button{pointer-events:auto;min-height:36px;padding:7px 12px;border:1px solid #ffffff60;border-radius:4px;background:#10181735;color:#fff;text-shadow:0 1px 3px #000;font:500 11px Arial,sans-serif;cursor:pointer}.dismount-button:disabled{opacity:.6}
+.ride-utilities{position:absolute;right:14px;bottom:14px;z-index:8;display:flex;align-items:center;gap:6px;padding:0;background:none;pointer-events:none}.ride-utilities[hidden],.autumn-exploring .ride-utilities{display:none!important}
+.dismount-button,.ride-settings{pointer-events:auto;min-height:36px;padding:7px 12px;border:1px solid #ffffff60;border-radius:4px;background:#10181735;color:#fff;text-shadow:0 1px 3px #000;font:500 11px Arial,sans-serif;cursor:pointer}.dismount-button:disabled{opacity:.6}.ride-settings{min-width:36px;font-size:17px}
 @media(hover:none) and (pointer:coarse) and (orientation:landscape){.ride-utilities{bottom:76px}.visit-prompt{bottom:76px}.adventure-journal{bottom:120px}}
 /* Light touch controls sit in the lower corners, leaving the character visible. */
 .area-controls{position:absolute;inset:auto 14px 14px;z-index:13;display:flex;justify-content:space-between;align-items:end;gap:12px;padding:0;background:none;pointer-events:none}

@@ -14,8 +14,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v15.html"
-SHOTS = ROOT / "screenshots" / "revision15"
+ENTRY = "autumn-v16.html"
+SHOTS = ROOT / "screenshots" / "revision16"
 
 CHAIR_DRAW_AUDIT = r"""(() => {
   window.__heroLooseChairDraws=[];
@@ -159,7 +159,7 @@ def desktop(browser, base, errors, failures):
     assert read(page)["mode"] == "room" and read(page)["baby"] == "front-carrier"
     shots.append(capture(page, "hero-front-shop-idle"))
     page.keyboard.down("ArrowRight")
-    page.clock.run_for(2850)
+    page.clock.run_for(3700)
     page.keyboard.up("ArrowRight")
     page.clock.run_for(220)
     page.keyboard.press("e")

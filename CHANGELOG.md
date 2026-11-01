@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## Revision 16 — longer strides and everyday street life
+
+- Slow normal walking to 155 world pixels/second and lengthen the bear's planted stride. Add eased heel/toe movement, pelvic yaw and subtle whole-body sway while preserving the measured shorts, calves, boots and original baby carrier.
+- Add relaxed passive walking and running artwork for all nine existing adults, plus three new peaceful civilians with distinct ages, faces, builds and everyday clothes. Give them sitting, newspaper, smoking, hiding, damage and full-body screen-impact poses.
+- Replace the crowded 54-adult street list with 27 local slots and staggered schedules, long sidewalk routes and pauses. Keep stable IDs, outfits and health across bike/foot modes; original hostile crews remain.
+- Add real benches, bins and bushes for resting and cover. Civilians scream and flee nearby violence or direct hits, hide briefly and calm down; they never retaliate. Provoked residents run to close distance before fighting.
+- Add a Neighbourhood life debug shortcut and live population/routine counts, V16 entry/cache keys and browser/source/motion evidence. Preserve cycling, quests, hearts, fullscreen and original bear/baby likeness. Original BQ remains untouched.
+
 ## Revision 15 — dark tactical streetwear
 
 - Shifted all nine adult outfits to black, charcoal, navy-black and very dark olive, replacing the pale/bright coats, trousers and trainers. Keep varied puffer, fleece, field-jacket, utility-vest, technical-shell, parka and civilian-coat silhouettes, with readable fabric highlights and seams.

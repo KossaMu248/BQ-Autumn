@@ -14,7 +14,7 @@
   // never changes with aggression, damage, transport or the screen-throw state.
   const wardrobes=[];
   function addWardrobe(label,pack,standing,reactions,screen,age,sourceFace){
-    wardrobes.push({variant:wardrobes.length,label,character:{ageGroup:pack==='C'?'older-adult':'young-adult',age,faceCovered:[2,5].includes(wardrobes.length)},standing:{image:files['adults'+pack],rect:standing,face:sourceFace,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
+    wardrobes.push({variant:wardrobes.length,label,character:{ageGroup:pack==='C'?'older-adult':'young-adult',age,civilian:wardrobes.length>=6,faceCovered:[2,5].includes(wardrobes.length)},standing:{image:files['adults'+pack],rect:standing,face:sourceFace,split:pack==='B'&&wardrobes.length%3===2?.76:.58},
       reactions:{image:files['reactions'+pack],...reactions},screen:{image:files['screen'+pack],frames:screen}});
   }
   const frame=(rect,anchor,outline)=>({rect,anchor,...(outline?{outline}:{})});
@@ -73,6 +73,19 @@
   ];
   const standingC=[[49,182,417,672],[607,196,388,660],[1081,186,393,680]];
   for(let i=0;i<3;i++)addWardrobe(casualNames[i],'C',standingC[i],newReactionsC[i],newScreenC[i],[52,42,55][i],[1,1,1][i]);
+  for(const [i,label]of ['Peaceful student · navy hoodie · blue jeans · canvas backpack · gray trainers','Peaceful stocky neighbour · tan windbreaker · burgundy knit · dark jeans · brown shoes','Peaceful older neighbour · teal cardigan · plum scarf · charcoal trousers · canvas tote'].entries()){
+    wardrobes.push({variant:9+i,label,character:{ageGroup:i===0?'young-adult':'older-adult',age:[24,46,68][i],civilian:true,faceCovered:false,heightScale:[1.05,1,.84][i]},standing:{image:'assets/art/civilian-standing-v16.png',rect:[0,0,1,1],face:1},reactions:{image:'assets/art/civilian-reactions-v16.png',stature:1,frames:[]},screen:{image:'assets/art/civilian-reactions-v16.png',frames:[]}});
+  }
+  let civilianGeometryReady=false;
+  function syncCivilians(){
+    if(civilianGeometryReady||!window.BearlyNpcMotion?.ready())return;
+    for(let variant=9;variant<12;variant++){
+      const p=wardrobes[variant],idle=window.BearlyNpcMotion.frame(variant,'idle');p.standing.rect=idle.rect;p.standing.stature=idle.stature;
+      p.reactions.frames=['hurt','fall','prone'].map(pose=>{const f=window.BearlyNpcMotion.frame(variant,pose);return{rect:f.rect,anchor:f.anchor};});p.reactions.stature=window.BearlyNpcMotion.frame(variant,'hurt').stature;
+      p.screen.frames=['screen','screenDamaged'].map(pose=>({rect:window.BearlyNpcMotion.frame(variant,pose).rect}));
+    }
+    civilianGeometryReady=true;
+  }
   function wardrobe(n){const variant=Number.isFinite(n.variant)?Math.trunc(n.variant):0;return wardrobes[(variant%wardrobes.length+wardrobes.length)%wardrobes.length];}
   function reaction(c,n,col,h){
     const profile=wardrobe(n).reactions,im=sourceImages[profile.image],f=profile.frames[col],sc=h/profile.stature;
@@ -93,6 +106,13 @@
     window.BearlyKids.draw(c,{kind:n.item||'rock',frame,height:h});
   }
   function adult(c,n,x,y,h=130,scale=1){
+    if(n.active===false||n.visible===false)return;
+    if(n.kind!=='gangster'){
+      if(window.BearlyNpcMotion?.draw(c,n,x,y,h,scale))return;
+      if((n.variant||0)>=9)return;
+      const passive=!n.hostile&&!['aggressive','hostile'].includes(n.mood)&&!['stagger','fall','dead','down','rise','held'].includes(n.state);
+      if(passive&&!window.BearlyNpcMotion?.ready())return;
+    }
     const profile=wardrobe(n),im=sourceImages[profile.standing.image];if(!im.naturalWidth)return;
     if(n.kind==='gangster')h*=.46;
     c.save();c.translate(x,y);c.scale(scale,scale);
@@ -151,6 +171,7 @@
       const col=Math.max(0,['bottle','rock','firecracker'].indexOf(n.item));
       return {image:images.gangScreenFull,rect:gangScreenFrames[col+(damaged?3:0)]};
     }
+    if((n.variant||0)>=9)return window.BearlyNpcMotion.source(n.variant,damaged?'screenDamaged':'screen');
     const profile=wardrobe(n).screen;return {image:sourceImages[profile.image],...profile.frames[damaged?1:0]};
   }
   function screenBody(c,n,w,h,damaged){
@@ -163,7 +184,7 @@
   function overlay(c,state,W,H,project,reduced,view={left:0,width:W}){
     const center=view.left+view.width*.5;
     for(const n of state.npcs.filter(n=>n.state==='screen')){
-      const age=n.age,source=screenSource(n,age>=.74);if(!source.image.naturalWidth)continue;
+      const age=n.age,source=screenSource(n,age>=.74);if(!source?.image||!(source.image.naturalWidth||source.image.width))continue;
       const aspect=source.rect[2]/source.rect[3],arrival=clamp(age/.64,0,1),ease=arrival*arrival*(3-2*arrival),start=project(n.startX,n.startDepth);
       const targetH=Math.min(H*.70,view.width*.78/aspect),initialH=Math.min(targetH,start.height*(n.kind==='gangster'?.46:1));
       const hit=Math.max(0,age-.64),slide=clamp((hit-.42)/.59,0,1),squash=!reduced&&age>=.64&&hit<.14?Math.sin(hit/.14*Math.PI)*.10:0;
@@ -187,7 +208,7 @@
       c.restore();
     }
   }
-  window.BearlyBrawlArt={ready:()=>Object.values(images).every(im=>im.naturalWidth>0)&&wardrobes.every(w=>w.reactions.frames?.length===3&&w.screen.frames?.length===2)&&window.BearlyHeroRig.ready(),adult,projectile,impact,overlay,
+  window.BearlyBrawlArt={ready:()=>{syncCivilians();return Object.values(images).every(im=>im.naturalWidth>0)&&wardrobes.every(w=>w.reactions.frames?.length===3&&w.screen.frames?.length===2)&&window.BearlyHeroRig.ready()&&!!window.BearlyNpcMotion?.ready();},adult,projectile,impact,overlay,
     outfit:n=>n.kind==='gangster'?window.BearlyKids.outfit(n.item||'rock'):wardrobe(n).label,
-    wardrobeCount:wardrobes.length,wardrobe:()=>JSON.parse(JSON.stringify(wardrobes))};
+    wardrobeCount:wardrobes.length,motionReady:()=>!!window.BearlyNpcMotion?.ready(),wardrobe:()=>{syncCivilians();return JSON.parse(JSON.stringify(wardrobes));}};
 })();

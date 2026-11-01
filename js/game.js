@@ -3,7 +3,7 @@
 
 (() => {
   'use strict';
-  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V15';
+  window.BEARLY_BUILD_ID='AUTUMN_RIDE_ART_V16';
   /* v10.58 — original-size, original-clothes actor art; only prop pixels + portraits. */
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_0']='assets/v158_firecracker_hoodie_0_0.webp';
   window.BEARLY_ASSETS['v158_firecracker_hoodie_0_3']='assets/v158_firecracker_hoodie_0_3.webp';
@@ -605,6 +605,13 @@ window.BEARLY_ASSETS['v153_hud_knocked']='assets/v153_hud_knocked_2.png';
           lip.start(at);lip.stop(at+.09);
         }
         return;
+      }
+      if(type==='npc-scream'){
+        const t=audio.currentTime,voice=audio.createOscillator(),formant=audio.createBiquadFilter(),gain=audio.createGain();
+        voice.type='sawtooth';voice.frequency.setValueAtTime(430,t);voice.frequency.exponentialRampToValueAtTime(690,t+.07);voice.frequency.exponentialRampToValueAtTime(205,t+.42);
+        formant.type='bandpass';formant.frequency.setValueAtTime(1450,t);formant.frequency.exponentialRampToValueAtTime(790,t+.42);formant.Q.value=.8;
+        gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.07,t+.035);gain.gain.exponentialRampToValueAtTime(.0001,t+.44);
+        voice.connect(formant);formant.connect(gain);gain.connect(audio.destination);voice.start(t);voice.stop(t+.46);return;
       }
       const osc=audio.createOscillator(),gain=audio.createGain();
       const t=audio.currentTime;
@@ -5969,8 +5976,10 @@ DEPTH/JUMP  ${Math.round(area?.depth||0)} / ${Math.round(area?.jump||0)}
 HERO        ${area?.mode&&area.mode!=='water'?(area.hero?.pose||'ready')+' · '+(area.hero?.carrier||'front')+' carrier':'—'}
 BABY FACE   ${area?.mode&&area.hero?.babyFace?.source?'original · '+area.hero.babyFace.source.split('/').pop().replace('.webp',''):'original riding art'}
 BABY MOOD   ${area?.mode?(area.hero?.babyFace?.mood||'idle'):'bike expressions'}
-NPC STYLE   ${window.BearlyBrawlArt.wardrobeCount} outfits · dark tactical / urban
-NPC CAST    6 young adults · 3 older neighbours
+NPC STYLE   ${window.BearlyBrawlArt.wardrobeCount} outfits · streetwear / civilian
+NPC LIFE    ${area?.combat?.population?.active??0} active · ${area?.combat?.population?.offstage??0} offstage
+CIVILIANS   ${area?.combat?.population?.civilian??0} peaceful · ${area?.combat?.population?.fleeing??0} fleeing · ${area?.combat?.population?.hiding??0} hiding
+ROUTINES    ${area?.combat?.population?.resting??0} sitting / reading / smoking
 MASKS       2 balaclava looks
 APEX PRIMAL ${area?.combat?.phase==='madness'?'Madness Mauling Bear':area?.combat?.phase==='apex'?'Apex Primal':'cute'} ${Math.round(area?.combat?.heat||0)}% · HP ${area?.combat?.hp??100}
 BOAT QUEST  ${q?.boatReady?'ready':q?.started?'in progress':'not started'} · buoys ${q?.buoys.length||0}/3
@@ -6000,6 +6009,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     $('debugEntryBtn').addEventListener('click',()=>{debugWarpTo(15700/WORLD_STRETCH);debugOpenMenu(false);window.BearlyVisits.requestEntry();});
     $('debugBoatBtn').addEventListener('click',()=>{for(const action of ['lunch','deliver','kit','repair'])window.BearlyQuests.game.act(action);debugRefresh(true);});
     $('debugBrawlBtn').addEventListener('click',()=>{debugOpenMenu(false);window.BearlyVisits.practice();});
+    $('debugLifeBtn')?.addEventListener('click',()=>{debugWarpTo(2500/WORLD_STRETCH);debugOpenMenu(false);document.querySelector('.dismount-button')?.click();});
     $('debugFullscreenBtn').addEventListener('click',()=>window.BearlyFullscreen.toggle());
     $('debugWarpBtn').addEventListener('click',()=>debugWarpTo($('debugWarpMeters').value));
     $('debugWarpMeters').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();debugWarpTo(e.currentTarget.value);}});
@@ -6014,7 +6024,7 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
     let iter=0;
     if(!debugOpen&&!window.BearlyVisits?.active()){acc+=dt;while(acc>=1/120&&iter++<6){update(1/120);acc-=1/120;}}
     else acc=0;
-    window.BearlyVisits?.update({dt,debugOpen,godMode:debugSettings.godMode,gangs:gangCrews.flatMap(crew=>Array.from({length:crew.count},(_,i)=>({id:'gang-'+crew.x+'-'+i,x:crew.x+crewMemberLocalX(crew,i),depth:-102,variant:i%3,kind:'gangster',hostile:true,item:carriedPropFor(crew,i)}))),hurtRider:(amount)=>injure(amount,'provoked resident'),road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
+    window.BearlyVisits?.update({dt,debugOpen,playSound:sound,godMode:debugSettings.godMode,gangs:gangCrews.flatMap(crew=>Array.from({length:crew.count},(_,i)=>({id:'gang-'+crew.x+'-'+i,x:crew.x+crewMemberLocalX(crew,i),depth:-102,variant:i%3,kind:'gangster',hostile:true,item:carriedPropFor(crew,i)}))),hurtRider:(amount)=>injure(amount,'provoked resident'),road:{groundAt,finish:FINISH,cameraX,cameraY},brakeToStop:()=>{keys.clear();clearMobileControls();if(!bike.contact)return false;bike.vx*=Math.exp(-dt*9);if(Math.abs(bike.vx)<8){bike.vx=0;return true;}return false;},followFoot:(fx)=>{const gy=groundAt(fx);if(gy!==null){const blend=1-Math.exp(-dt*7);cameraX=lerp(cameraX,Math.max(0,fx-W*.36),blend);cameraY=lerp(cameraY,gy-395,blend);}},x:bike.x,speed:bike.vx,grounded:bike.contact,playing:state==='playing'&&!debugOpen&&!demo.active&&introOverlay.hidden,clearInput:()=>{keys.clear();clearMobileControls();}});
     const t0=performance.now();render();const took=performance.now()-t0;
     debugPerf.drawMs=debugPerf.drawMs?debugPerf.drawMs*.88+took*.12:took;
     debugPerf.steps=iter;

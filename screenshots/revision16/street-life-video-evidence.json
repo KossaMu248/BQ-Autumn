@@ -1,0 +1,345 @@
+{
+  "sourceSHA256": {
+    "autumn-v16.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "js/game.js": "152f4ef2093afa47a155ef1e96611f6dcc374d2f6a5fc6b5c3cbb4ddd3a3f4f0",
+    "js/brawler-art.js": "87e279bf05dd20757170cfa854cb7b2aad57bfef61f61b37ec9a7b3760064bb1",
+    "js/npc-motion.js": "7247e55e30fb84fa825666d4efb7105a12f78102b605fe5a4ef7df6d59ca3943",
+    "js/brawler.js": "486656e7a47fb52017916a186cc6d0ec123592ab3fca331f60b2e43e5182541f",
+    "js/hero-rig.js": "5060036ee05aa9e40b24d73e6ab2e9ef8542d53cfaaf82b6b4456d20065d6290",
+    "js/locomotion.js": "0d86a58ec8942a69679c5772629aa0687289f9fccba3cacf23be16b6d7b16154",
+    "js/illustrated-visits.js": "f3ef453508ff9d30960f8078ab6e821dae7bb7efd5b61ce6d8875afdf8634908",
+    "js/street-life.js": "d96f63ab2e280c89b74986b20116abb03285ee1fd9d645fe162b431a8311901a",
+    "assets/art/npc-motion-a-v16.png": "78ac5e1cb0a47d6df857622976ee95845da3bcf161dab138f559869cc950546b",
+    "assets/art/npc-motion-b-v16.png": "5aeba4c9e8b1c82648384743d28b52e0b8ad5b9f2f88d92681a53e2b15c68528",
+    "assets/art/npc-motion-c-v16.png": "8d0307d2e42346626e2c4ee5c20c0cf5266f197970aa678c3e1896244f6387d6",
+    "assets/art/civilian-standing-v16.png": "cf7ea6884f1e716901377ee68a91f045075b7687d97533d7e650f09d69bf92d1",
+    "assets/art/civilian-motion-v16.png": "68a233b1bc0ee4b9167fde8aad97c32c623540bf26d7efc09c99ad6b984f8568",
+    "assets/art/civilian-rest-v16.png": "a3caa1e0c152048fac759773c903bddaa2e5ab47c6efd7484597af56befffb6c",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/cast-reactions-a-v15.png": "6bab2a5b59eda35cd04e40ecd0770e4cbe51ae7dc0f482703ce169d57c82f7c5",
+    "assets/art/cast-reactions-b-v15.png": "cdddd35cf4a4eaa7d0372475dda754e223887616c5ae82c406c74c7f7f4fef2b",
+    "assets/art/cast-reactions-c-v15.png": "77fc73768131ba53654461732634a645fa59408f2d485cb4483e57c1e739a227",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a"
+  },
+  "capture": {
+    "width": 960,
+    "height": 540
+  },
+  "segments": [
+    {
+      "kind": "bear-walk",
+      "file": "street-life-bear-walk-realtime.webm",
+      "wallClockSeconds": 6.521,
+      "walkSeconds": 4,
+      "walkDistance": 546.3864999999928,
+      "baby": "front-carrier",
+      "hero": {
+        "pose": "walking",
+        "carrier": "front",
+        "integratedCarrier": true,
+        "babyFace": {
+          "mood": "idle",
+          "source": "assets/baby_pose_idle.webp",
+          "continuousUpperBody": true,
+          "originalCollar": true,
+          "headOnly": false,
+          "uniformScale": 0.4140352055898952,
+          "angle": -0.13863973713415806,
+          "flip": 1,
+          "alpha": 1,
+          "pivot": [
+            52,
+            94
+          ],
+          "anatomicalWaist": [
+            48,
+            104
+          ],
+          "waist": {
+            "x": 14.70799180327869,
+            "y": -59.74901920638633
+          },
+          "headHeight": 25.670182746573502,
+          "referenceHeadHeight": 61,
+          "sourceRect": [
+            0,
+            0,
+            82,
+            95
+          ],
+          "sourceBounds": [
+            0,
+            0,
+            82,
+            146
+          ],
+          "seamY": 94,
+          "occludeFrom": 90,
+          "seam": {
+            "start": {
+              "x": 10.6073668585798,
+              "y": -59.17683898154462
+            },
+            "end": {
+              "x": 18.80861674797758,
+              "y": -60.32119943122804
+            },
+            "occludeFrom": {
+              "x": 14.479119713342007,
+              "y": -61.389269184265885
+            }
+          },
+          "head": [
+            15,
+            9,
+            57,
+            62
+          ],
+          "chin": [
+            {
+              "x": 17.034858050968293,
+              "y": -73.0331367597946
+            },
+            {
+              "x": 16.271951084512686,
+              "y": -72.50863822035636
+            },
+            {
+              "x": 15.156199646071359,
+              "y": -71.51685916396407
+            },
+            {
+              "x": 13.983230185145862,
+              "y": -70.93514260204168
+            },
+            {
+              "x": 12.810260724220367,
+              "y": -70.35342604011927
+            }
+          ],
+          "neck": [
+            {
+              "x": 11.63729126329487,
+              "y": -69.77170947819687
+            },
+            {
+              "x": 11.694509285779041,
+              "y": -69.36164698372698
+            }
+          ],
+          "collar": [
+            {
+              "x": 6.888195397108712,
+              "y": -67.85490572497716
+            },
+            {
+              "x": 10.044722970818789,
+              "y": -66.2051194100169
+            },
+            {
+              "x": 14.145347915517679,
+              "y": -66.77729963485861
+            }
+          ],
+          "pose": "front",
+          "pouch": {
+            "lip": [
+              [
+                198,
+                288
+              ],
+              [
+                226,
+                293
+              ],
+              [
+                264,
+                285
+              ]
+            ],
+            "depth": 32,
+            "seam": [
+              228.5,
+              298.9272499636561
+            ],
+            "origin": [
+              179,
+              500
+            ],
+            "scale": 0.29713114754098363,
+            "bob": -0.0040422488661073,
+            "source": "frontBackground",
+            "textureMap": null,
+            "padding": 9.177249963656097
+          }
+        },
+        "height": 145,
+        "source": "front",
+        "stature": 488,
+        "landmarks": {
+          "far": {
+            "hip": {
+              "x": 7.905897922554619,
+              "y": -49.02337668955697
+            },
+            "nominalHip": {
+              "x": 7.905897922554619,
+              "y": -49.02337668955697
+            },
+            "opening": {
+              "x": 16.33972366886882,
+              "y": -35.520557806474066
+            },
+            "knee": {
+              "x": 17.751329311471917,
+              "y": -35.24253201028917
+            },
+            "sole": {
+              "x": 11.658885863731797,
+              "y": -2.311459434330586
+            },
+            "cuff": {
+              "x": 6.987603182007269,
+              "y": -24.15785662710383
+            },
+            "thighLength": 16.936475409836067,
+            "shinLength": 15.450819672131148,
+            "bootWidth": 32.09016393442623,
+            "bootHeight": 23.176229508196723
+          },
+          "near": {
+            "hip": {
+              "x": -11.932500221029823,
+              "y": -49.03783340543695
+            },
+            "nominalHip": {
+              "x": -11.932500221029823,
+              "y": -49.03783340543695
+            },
+            "opening": {
+              "x": -3.412435395489945,
+              "y": -34.932429318282274
+            },
+            "knee": {
+              "x": -1.9796921561691985,
+              "y": -34.60632703559876
+            },
+            "sole": {
+              "x": -6.187493677202995,
+              "y": -0.5141332196520962
+            },
+            "cuff": {
+              "x": -13.44313543932728,
+              "y": -24.246920844386235
+            },
+            "thighLength": 17.530737704918035,
+            "shinLength": 15.450819672131148,
+            "bootWidth": 37.141393442622956,
+            "bootHeight": 24.959016393442624
+          }
+        },
+        "gait": {
+          "far": {
+            "x": -0.22985276045058417,
+            "y": 0,
+            "angle": 0,
+            "stance": true
+          },
+          "near": {
+            "x": 0.6500154387826639,
+            "y": -0.32163341636136655,
+            "angle": -0.00524148806644048,
+            "stance": false
+          },
+          "phase": 0.8672360632183835,
+          "cycleLength": 112.25806451612902,
+          "bob": -0.0040422488661073,
+          "sway": -0.03842375814342145,
+          "roll": 0.0007287238221717736
+        },
+        "body": {
+          "pivot": {
+            "x": -2.0799180327868854,
+            "y": -49.030681593128406
+          },
+          "sway": -0.03842375814342145,
+          "roll": 0.0007287238221717736
+        }
+      }
+    },
+    {
+      "kind": "neighbourhood",
+      "file": "street-life-neighbourhood-realtime.webm",
+      "wallClockSeconds": 16.332,
+      "mauls": 1,
+      "screams": 2,
+      "hides": 2,
+      "baby": "back-carrier",
+      "npcs": [
+        {
+          "id": "promenade-walker",
+          "activity": "fight",
+          "moving": false,
+          "running": false,
+          "speed": 0,
+          "hp": 38,
+          "hiding": false,
+          "civilian": false
+        },
+        {
+          "id": "civilian-reader",
+          "activity": "hide",
+          "moving": false,
+          "running": false,
+          "speed": 0,
+          "hp": 60,
+          "hiding": true,
+          "civilian": true
+        },
+        {
+          "id": "civilian-smoker",
+          "activity": "hide",
+          "moving": false,
+          "running": false,
+          "speed": 0,
+          "hp": 60,
+          "hiding": true,
+          "civilian": true
+        },
+        {
+          "id": "civilian-bench",
+          "activity": "walk",
+          "moving": true,
+          "running": false,
+          "speed": 44,
+          "hp": 60,
+          "hiding": false,
+          "civilian": true
+        }
+      ]
+    }
+  ],
+  "file": "street-life-animation-preview.webm",
+  "result": "passed",
+  "pageErrors": [],
+  "httpFailures": [],
+  "label": "Cropped animation preview; full UI is shown in the accompanying screenshots.",
+  "captureArtifact": "Headless fullscreen screencast captured only the left720pixels of the960pixel export. The gray240pixel right border was removed. This preview is not evidence of full-frame UI fitting.",
+  "requestedViewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "captureRequestedFullscreen": true,
+  "export": {
+    "width": 720,
+    "height": 540,
+    "crop": [
+      0,
+      0,
+      720,
+      540
+    ]
+  }
+}

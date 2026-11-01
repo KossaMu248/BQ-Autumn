@@ -4,11 +4,11 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision15';errors=[];failures=[]
+ROOT=Path(__file__).resolve().parents[1];SHOTS=ROOT/'screenshots'/'revision16';errors=[];failures=[]
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)));Thread(target=server.serve_forever,daemon=True).start()
-base=f'http://127.0.0.1:{server.server_port}/autumn-v15.html'
+base=f'http://127.0.0.1:{server.server_port}/autumn-v16.html'
 def luminance(rgb):
     values=[float(n)/255 for n in rgb.removeprefix('rgb(').removesuffix(')').split(',')]
     vals=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in values]

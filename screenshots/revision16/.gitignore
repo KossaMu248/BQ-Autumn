@@ -1,0 +1,27 @@
+# Curated V16 gameplay and verification; intermediate captures remain local.
+*
+!.gitignore
+!README.md
+!*.json
+!bear-gait-review.png
+!bear-walk-game-front-right.png
+!bear-walk-game-back-right.png
+!bear-walking-continuous-gameplay.mp4
+!street-life-animation-preview.webm
+!street-life-desktop-resting.png
+!street-life-desktop-relaxed-walk.png
+!street-life-desktop-scream.png
+!street-life-desktop-run-and-flee.png
+!street-life-desktop-bush-hide.png
+!street-life-390-run-and-flee.png
+!street-life-844-run-and-flee.png
+!street-life-civilian-hit-flees.png
+!live-v16-street.png
+!live-v16-debug.png
+!npc-motion-review.png
+!npc-civilian-activities.png
+!npc-lineup-v16.png
+bear-walking-gameplay.json
+bear-walking-back-gameplay.json
+street-life-neutral-independent.json
+!street-life-desktop-relaxed-walk-opposite.png

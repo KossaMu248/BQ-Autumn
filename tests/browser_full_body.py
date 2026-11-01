@@ -17,8 +17,8 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v15.html"
-ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "gang-screen-full-v10-1.png")
+ENTRY = "autumn-v16.html"
+ASSETS = ("cast-screen-a-v15.png", "cast-screen-b-v15.png", "cast-screen-c-v15.png", "civilian-reactions-v16.png", "gang-screen-full-v10-1.png")
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -53,7 +53,9 @@ def main():
             page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready()")
             page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
             result = page.evaluate(
-                r"""() => {
+                r"""async () => {
+                  const rawSources=new Map();
+                  for(const name of ['cast-screen-a-v15.png','cast-screen-b-v15.png','cast-screen-c-v15.png','civilian-reactions-v16.png','gang-screen-full-v10-1.png']){const im=new Image();im.src='assets/art/'+name;await im.decode();rawSources.set(name,im);}
                   const W=1160,H=640,canvas=document.createElement('canvas');
                   canvas.width=W;canvas.height=H;
                   const ctx=canvas.getContext('2d'),actualDraw=ctx.drawImage.bind(ctx),actualText=ctx.fillText.bind(ctx);
@@ -76,8 +78,11 @@ def main():
                   ctx.fillText=function(value,...args){texts.push(String(value));return actualText(value,...args);};
                   // Observe the real destination corners after all renderer transforms.
                   ctx.drawImage=function(im,...args){
-                    if(/(?:cast-screen-[abc]-v15|gang-screen-full-v10-1)\.png(?:\?|$)/.test(im.src||'') && this.globalAlpha>.01){
-                      let sx=0,sy=0,sw=im.naturalWidth,sh=im.naturalHeight,dx,dy,dw,dh;
+                    const name=(im.dataset?.sourceAsset||im.src||'').split('/').pop().split('?')[0];
+                    if(rawSources.has(name) && this.globalAlpha>.01){
+                      const iw=im.naturalWidth||im.width,ih=im.naturalHeight||im.height;
+                      const origin=im.dataset?.sourceRect?.split(',').map(Number)||[0,0,iw,ih];
+                      let sx=0,sy=0,sw=iw,sh=ih,dx,dy,dw,dh;
                       if(args.length===8)[sx,sy,sw,sh,dx,dy,dw,dh]=args;
                       else if(args.length===4)[dx,dy,dw,dh]=args;
                       else { [dx,dy]=args;dw=sw;dh=sh; }
@@ -86,9 +91,10 @@ def main():
                       const inverse=matrix.inverse();
                       const clips=activeClips.map(clip=>({...clip,contours:clip.contours.map(contour=>contour.map(p=>{
                         const x=inverse.a*p.x+inverse.c*p.y+inverse.e,y=inverse.b*p.x+inverse.d*p.y+inverse.f;
-                        return {x:sx+(x-dx)*sw/dw,y:sy+(y-dy)*sh/dh};
+                        return {x:origin[0]+(sx+(x-dx)*sw/dw)*origin[2]/iw,y:origin[1]+(sy+(y-dy)*sh/dh)*origin[3]/ih};
                       }))}));
-                      draws.push({im,sx,sy,sw,sh,points,clips,alpha:this.globalAlpha});
+                      const tile=im instanceof HTMLCanvasElement?im.getContext('2d').getImageData(0,0,iw,ih).data:null;
+                      draws.push({im:rawSources.get(name),sx:origin[0]+sx*origin[2]/iw,sy:origin[1]+sy*origin[3]/ih,sw:sw*origin[2]/iw,sh:sh*origin[3]/ih,points,clips,alpha:this.globalAlpha,tile,iw,ih,origin});
                     }
                     return actualDraw(im,...args);
                   };
@@ -110,15 +116,16 @@ def main():
                           seen[next]=1;queue[tail++]=next;
                         }
                       }
-                      if(tail>10000)major.push({pixels:queue.slice(0,tail),count:tail,centerX:sumX/tail,centerY:sumY/tail});
+                      if(tail>1500)major.push({pixels:queue.slice(0,tail),count:tail,centerX:sumX/tail,centerY:sumY/tail});
                     }
-                    if(major.length!==6)throw Error('Expected six separate opaque bodies in '+im.src+'; got '+major.map(c=>c.count).join(','));
-                    // Find the gap between body bands from their mass centers, never a sheet halfway line.
-                    major.sort((a,b)=>a.centerY-b.centerY);let split=1,gap=-1;
-                    for(let i=1;i<major.length;i++){const distance=major[i].centerY-major[i-1].centerY;if(distance>gap){gap=distance;split=i;}}
-                    if(split!==3)throw Error('Expected three distinct bodies in each visual band of '+im.src);
-                    const frames=[major.slice(0,split),major.slice(split)].flatMap((row,rowIndex)=>row.sort((a,b)=>a.centerX-b.centerX).map((body,col)=>({...body,row:rowIndex,col})));
-                    const analysis={frames,width:w,height:h,kind:/gang-screen-full-v10-1/.test(im.src)?'gangster':'resident'};
+                    const civilian=/civilian-reactions-v16/.test(im.src),rows=civilian?3:2,columns=civilian?5:3;
+                    if(major.length!==rows*columns)throw Error('Expected '+rows*columns+' separate opaque bodies in '+im.src+'; got '+major.map(c=>c.count).join(','));
+                    // Independent connected components, ordered by mass centres,
+                    // identify actors even when palms/toes cross nominal cells.
+                    major.sort((a,b)=>a.centerY-b.centerY);
+                    const frames=[];
+                    for(let row=0;row<rows;row++)frames.push(...major.slice(row*columns,(row+1)*columns).sort((a,b)=>a.centerX-b.centerX).map((body,col)=>({...body,row,col})));
+                    const analysis={frames,pixels,width:w,height:h,civilian,kind:/gang-screen-full-v10-1/.test(im.src)?'gangster':'resident'};
                     sourceComponents.set(im,analysis);return analysis;
                   }
                   function insideClip(x,y,clip){
@@ -132,22 +139,27 @@ def main():
                     return clip.rule==='evenodd'?Math.abs(winding)%2===1:winding!==0;
                   }
                   const coverageCache=new Map();
-                  function componentCoverage(draw,col){
-                    const {im,sx,sy,sw,sh,clips}=draw,analysis=bodyComponents(im);
+                  function componentCoverage(draw,actor,damaged){
+                    const {im,sx,sy,sw,sh,clips,tile,iw,ih,origin}=draw,analysis=bodyComponents(im);
+                    const col=analysis.civilian?(damaged?4:3):actor.variant%3;
+                    const row=analysis.civilian?actor.variant-9:(damaged?1:0);
                     const clipKey=clips.map(clip=>[clip.rule,clip.unsupported,clip.contours.map(contour=>contour.map(p=>[p.x.toFixed(3),p.y.toFixed(3)]))]);
-                    const key=JSON.stringify([im.src,sx,sy,sw,sh,col,clipKey]);
+                    const key=JSON.stringify([im.src,sx,sy,sw,sh,row,col,clipKey,!!tile,origin]);
                     if(coverageCache.has(key))return coverageCache.get(key);
                     const counts=analysis.frames.map(body=>{
                       let included=0;
                       for(const index of body.pixels){
                         const x=index%analysis.width+.5,y=Math.floor(index/analysis.width)+.5;
-                        if(x>=sx&&x<sx+sw&&y>=sy&&y<sy+sh&&clips.every(clip=>insideClip(x,y,clip)))included++;
+                        const tx=Math.floor((x-origin[0])*iw/origin[2]),ty=Math.floor((y-origin[1])*ih/origin[3]);
+                        const sourcePresent=!tile||(tx>=0&&ty>=0&&tx<iw&&ty<ih&&tile[(ty*iw+tx)*4+3]>=analysis.pixels[index*4+3]-2);
+                        if(sourcePresent&&x>=sx&&x<sx+sw&&y>=sy&&y<sy+sh&&clips.every(clip=>insideClip(x,y,clip)))included++;
                       }
                       return included;
                     });
-                    const dominant=counts.indexOf(Math.max(...counts)),row=analysis.frames[dominant].row;
+                    const dominant=counts.indexOf(Math.max(...counts)),actual=analysis.frames[dominant];
                     const expectedIndex=analysis.frames.findIndex(body=>body.row===row&&body.col===col),expected=analysis.frames[expectedIndex];
-                    const value={row,kind:analysis.kind,total:expected.count,coverage:counts[expectedIndex]/expected.count,otherBodyPixels:counts.reduce((sum,count,i)=>sum+(i===expectedIndex?0:count),0),unsupportedClip:clips.some(clip=>clip.unsupported)};
+                    if(!expected)throw Error('No independent body for '+JSON.stringify({source:im.src,variant:actor.variant,row,col}));
+                    const value={row:actual.row,col:actual.col,damaged:analysis.civilian?actual.col===4:actual.row===1,kind:analysis.kind,total:expected.count,coverage:counts[expectedIndex]/expected.count,otherBodyPixels:counts.reduce((sum,count,i)=>sum+(i===expectedIndex?0:count),0),unsupportedClip:clips.some(clip=>clip.unsupported)};
                     coverageCache.set(key,value);return value;
                   }
                   const profiles=[
@@ -157,7 +169,7 @@ def main():
                     {name:'portrait right',left:W-296,width:296}
                   ];
                   const actors=[
-                    ...Array.from({length:9},(_,variant)=>({kind:'resident',variant,item:'rock'})),
+                    ...Array.from({length:12},(_,variant)=>({kind:'resident',variant,civilian:variant>=6,item:'rock'})),
                     ...['bottle','rock','firecracker'].map((item,variant)=>({kind:'gangster',variant,item}))
                   ];
                   const faults=[];let samples=0,drawCount=0,damagedSamples=0,minCoverage=1,maxNeighborPixels=0;
@@ -176,14 +188,14 @@ def main():
                         drawCount++;
                         const xs=draw.points.map(p=>p.x),ys=draw.points.map(p=>p.y),bounds={left:Math.min(...xs),right:Math.max(...xs),top:Math.min(...ys),bottom:Math.max(...ys)};
                         if(bounds.left<profile.left-.5||bounds.right>profile.left+profile.width+.5||bounds.top<-.5||bounds.bottom>H+.5)faults.push({...label,issue:'full body outside visible view',bounds});
-                        const source=componentCoverage(draw,actor.variant%3);
-                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':'cast-screen-'+['a','b','c'][Math.floor(actor.variant/3)]+'-v15.png';
+                        const source=componentCoverage(draw,actor,age>=.74);
+                        const expectedFile=actor.kind==='gangster'?'gang-screen-full-v10-1.png':actor.variant>=9?'civilian-reactions-v16.png':'cast-screen-'+['a','b','c'][Math.floor(actor.variant/3)]+'-v15.png';
                         if(!draw.im.src.split('?')[0].endsWith('/'+expectedFile))faults.push({...label,issue:'wrong wardrobe pack',source:draw.im.src,expectedFile});
                         minCoverage=Math.min(minCoverage,source.coverage);maxNeighborPixels=Math.max(maxNeighborPixels,source.otherBodyPixels);
                         if(source.coverage<1)faults.push({...label,issue:'source crop or observed clip omits opaque body pixels',coverage:source.coverage});
                         if(source.otherBodyPixels>0)faults.push({...label,issue:'neighbor body fragment rendered',otherBodyPixels:source.otherBodyPixels});
                         if(source.kind!==actor.kind||source.unsupportedClip)faults.push({...label,issue:'wrong cast or unobserved clip',sourceKind:source.kind,unsupportedClip:source.unsupportedClip});
-                        if(source.row===1&&draw.alpha>.2)hasDamaged=true;
+                        if(source.damaged&&draw.alpha>.2)hasDamaged=true;
                       }
                       if(age>=.85){
                         damagedSamples++;
@@ -199,18 +211,18 @@ def main():
             browser.close()
         assert not errors, errors
         assert not failed_assets, failed_assets
-        assert result["samples"] == 2016, result
+        assert result["samples"] == 2520, result
         assert result["faultCount"] == 0, json.dumps(result, indent=2)
-        directory = ROOT / "screenshots" / "revision15"
+        directory = ROOT / "screenshots" / "revision16"
         directory.mkdir(exist_ok=True)
-        paths = [ROOT / "js" / "brawler-art.js", *(ROOT / "assets" / "art" / name for name in ASSETS)]
+        paths = [ROOT / ENTRY, ROOT / "js" / "brawler-art.js", ROOT / "js" / "npc-motion.js", *(ROOT / "assets" / "art" / name for name in ASSETS)]
         evidence = {"entry": ENTRY, "result": "passed", **result,
                     "pageErrors": errors, "httpFailures": failed_assets,
                     "sourceSHA256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}}
         (directory / "cast-full-body-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
         print(
             f"Full-body renderer checks passed: {result['samples']} flight/impact samples, "
-            "all twelve actors (nine adults and three crews), both motion preferences, complete opaque body components, "
+            "all fifteen actors (twelve adults and three crews), both motion preferences, complete opaque body components, "
             f"portrait-edge framing and damaged cels (opaque coverage {result['minCoverage']:.0%}, neighbor pixels {result['maxNeighborPixels']})."
         )
     finally:

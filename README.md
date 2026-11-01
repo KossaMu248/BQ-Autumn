@@ -8,7 +8,7 @@ This repository contains the complete standalone game at its root. To enable bro
 
 https://kossamu248.github.io/BQ-Autumn/
 
-The current version-specific entry is `autumn-v15.html`. There is no npm build step; `.nojekyll` keeps deployment static.
+The current version-specific entry is `autumn-v16.html`. There is no npm build step; `.nojekyll` keeps deployment static.
 
 ## Play locally
 
@@ -65,6 +65,14 @@ The greenhouse gardener also asks you to find three seed packets along the garde
 
 The baby now uses the original bicycle artwork as one continuous head, chin, neck, collar and upper torso. The lower clothing edge sits inside the carrier pouch, so the join is below the original shirt instead of under the chin. All expressions share the bicycle renderer’s common native scale. The baby laughs while walking, looks startled during jumps, attacks and screen throws, braces during grabs and transfers, points during shop conversations and looks excited while the boat moves. The same source artwork is used in front/back carriers, action poses, transfers and the boat; the bicycle chair is excluded on foot.
 
+### Everyday street life
+
+V16 uses a slower bear walk with longer alternating steps, heel/toe movement and gentle pelvis, torso and carrier motion. The baby keeps the original continuous bicycle face and clothing; the whole carrier follows the bear together.
+
+Residents follow long sidewalk routes, pause and come and go on staggered schedules. Three new peaceful neighbours—a student, a stocky middle-aged man and an older woman—wear ordinary clothes and have distinct faces and body proportions. Benches, newspapers, cigarettes and idle breathing give them activities between walks. Existing older neighbours and shopkeepers are peaceful too: they never retaliate. A nearby fight or a direct hit makes civilians scream, flee and sometimes crouch behind a real bush or street bin, then resume their routine after calming down. Streetwear alone does not make an NPC hostile; the existing hostile crews retain their behaviour.
+
+Neutral NPCs use relaxed walking animation. Provoked residents run to close the gap before fighting; frightened civilians use a faster escape animation. The promenade starts with a small group rather than the entire cast at once. **F3 → Neighbourhood life** opens this ordinary street for testing. Debug shows active/offstage residents, peaceful civilians, resting, fleeing and hiding counts.
+
 ### On-foot brawling
 
 Move into the same lane as an adult NPC. **G** grabs; press **G** again to fling them toward the screen. **J** mauls with a claw-swipe pose, scratch trails, dark red flecks, dust, hit-stop and stagger reactions. Adult NPCs have hit recoil, collapse, defeated and recovery animations. Repeated hits deplete their health; defeated characters recover after twelve seconds so quest areas remain usable. The baby stays attached to the bear: front carrier while exploring, back carrier for grabbing, throwing and mauling, then front again when things settle.
@@ -119,6 +127,8 @@ js/brawler.js               Adult NPC reactions, Apex Primal and timed mauling f
 js/baby-passenger.js        Original continuous baby artwork and contextual expressions
 js/hero-rig.js              Source-matched legs and integrated baby-carrier poses
 js/brawler-art.js           Painted NPC reactions and screen-space throws
+js/npc-motion.js            Relaxed walks, running and civilian activity poses
+js/street-life.js           Sidewalk routes, schedules, street furniture and screams
 assets/                    Independent copies of the existing animation assets
 assets/art/                New illustrated environment artwork
 screenshots/               Screenshots of this edition
@@ -127,7 +137,7 @@ VALIDATION.md              Browser checks performed
 
 ## Development
 
-Edit only this folder to iterate on the illustrated version. The original repository is at `/workspace/BQ` in the cloud workspace; this standalone is at `/workspace/BQ-illustrated`. These paths are informational, not runtime dependencies. This repository is the independent GitHub copy of the standalone. It contains no copied credentials or original repository Git metadata.
+Edit only this repository to iterate on the illustrated version. The current cloud checkout is `/workspace/BQ-Autumn`; the original KossaMu248/BQ repository is independent and must remain untouched. There are no runtime dependencies on another checkout, copied credentials or original repository Git metadata.
 
 To check JavaScript syntax:
 
@@ -161,8 +171,10 @@ Dialogue and information use minimal white text inside the scene. Health keeps i
 
 Screen throws keep the entire NPC visible from head to shoes during flight and screen contact. The full-body impact pose changes to a bruised, scratched and scuffed pose, with a damage number matching the health actually lost, then slides away. Camera framing fits the whole figure in desktop and phone views. Run `python3 tests/browser_npcs.py` for population continuity, witness reactions, gang aggression, carrier alignment, screen impacts and damage/defeat checks on desktop and both phone orientations.
 
-Run `python3 tests/browser_full_body.py` for all six NPC designs across desktop/portrait crops and motion preferences, and `python3 tests/browser_impact.py` for real keyboard/touch throw timing, damage and screenshots.
+Run `python3 tests/browser_full_body.py` for all twelve adult designs and the three original crews across desktop/portrait crops and motion preferences, and `python3 tests/browser_impact.py` for real keyboard/touch throw timing, damage and screenshots.
 
 Run `python3 tests/browser_hero.py` to capture front/back carriers, both walking phases and headings, jumping, shop interaction, real hostile damage, defeat/recovery and phone touch controls. The test also checks that the rendered feet exchange their lead and that no loose bicycle-seat cutout is drawn on foot. Visual anatomy still needs screenshot review and device playtesting.
 
 Run `python3 tests/browser_baby_face.py` for the original head-file hash, source eye/nose/mouth/chin pixels, removed chair/cloth pixels and final chin visibility after all collar/body layers. Focused 8× probes cover both headings and character sizes; negative controls reject an erased jaw or a collar drawn across it.
+
+Run `node tests/npc-life.cjs` for civilian safety, routes, rests, pursuit and schedules; `node tests/hero-gait.cjs` measures the longer gait and source-sized limbs. `python3 tests/browser_street_life.py` exercises real street controls and furniture on desktop and both phone orientations. `python3 tests/browser_wardrobe.py --renderer-only` checks the complete cast and continuous neutral walking rig. V16 evidence is in `screenshots/revision16/`.

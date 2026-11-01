@@ -1,0 +1,57 @@
+{
+  "result": "passed",
+  "entry": "autumn-v16.html",
+  "shots": [
+    {
+      "file": "street-life-desktop-relaxed-walk.png",
+      "actor": {
+        "id": "promenade-walker",
+        "x": 2566.624000000022,
+        "depth": -64,
+        "activity": "walk",
+        "distance": 106.62400000000008,
+        "face": 1,
+        "civilian": false
+      },
+      "phase": 0.16057122953674785
+    },
+    {
+      "file": "street-life-desktop-relaxed-walk-opposite.png",
+      "actor": {
+        "id": "promenade-walker",
+        "x": 2612.3200000000315,
+        "depth": -64,
+        "activity": "walk",
+        "distance": 152.31999999999974,
+        "face": 1,
+        "civilian": false
+      },
+      "phase": 0.6579588993382071
+    }
+  ],
+  "sourceSHA256": {
+    "autumn-v16.html": "18695f3f32895b5ffcc2b297b6708d25d7763069045eb142c868b946c7f5b7af",
+    "js/game.js": "152f4ef2093afa47a155ef1e96611f6dcc374d2f6a5fc6b5c3cbb4ddd3a3f4f0",
+    "js/brawler-art.js": "87e279bf05dd20757170cfa854cb7b2aad57bfef61f61b37ec9a7b3760064bb1",
+    "js/npc-motion.js": "7247e55e30fb84fa825666d4efb7105a12f78102b605fe5a4ef7df6d59ca3943",
+    "js/brawler.js": "486656e7a47fb52017916a186cc6d0ec123592ab3fca331f60b2e43e5182541f",
+    "js/hero-rig.js": "5060036ee05aa9e40b24d73e6ab2e9ef8542d53cfaaf82b6b4456d20065d6290",
+    "js/locomotion.js": "0d86a58ec8942a69679c5772629aa0687289f9fccba3cacf23be16b6d7b16154",
+    "js/illustrated-visits.js": "f3ef453508ff9d30960f8078ab6e821dae7bb7efd5b61ce6d8875afdf8634908",
+    "js/street-life.js": "d96f63ab2e280c89b74986b20116abb03285ee1fd9d645fe162b431a8311901a",
+    "assets/art/npc-motion-a-v16.png": "78ac5e1cb0a47d6df857622976ee95845da3bcf161dab138f559869cc950546b",
+    "assets/art/npc-motion-b-v16.png": "5aeba4c9e8b1c82648384743d28b52e0b8ad5b9f2f88d92681a53e2b15c68528",
+    "assets/art/npc-motion-c-v16.png": "8d0307d2e42346626e2c4ee5c20c0cf5266f197970aa678c3e1896244f6387d6",
+    "assets/art/civilian-standing-v16.png": "cf7ea6884f1e716901377ee68a91f045075b7687d97533d7e650f09d69bf92d1",
+    "assets/art/civilian-motion-v16.png": "68a233b1bc0ee4b9167fde8aad97c32c623540bf26d7efc09c99ad6b984f8568",
+    "assets/art/civilian-rest-v16.png": "a3caa1e0c152048fac759773c903bddaa2e5ab47c6efd7484597af56befffb6c",
+    "assets/art/civilian-reactions-v16.png": "92060dee5aac6889e9f11d7d047553c05a84d55d8ae2b56dd0b70c64bfa50e95",
+    "assets/art/cast-reactions-a-v15.png": "6bab2a5b59eda35cd04e40ecd0770e4cbe51ae7dc0f482703ce169d57c82f7c5",
+    "assets/art/cast-reactions-b-v15.png": "cdddd35cf4a4eaa7d0372475dda754e223887616c5ae82c406c74c7f7f4fef2b",
+    "assets/art/cast-reactions-c-v15.png": "77fc73768131ba53654461732634a645fa59408f2d485cb4483e57c1e739a227",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a"
+  },
+  "pageErrors": []
+}

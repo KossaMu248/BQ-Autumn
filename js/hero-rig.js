@@ -129,7 +129,7 @@
   function prepareParts(){
     if(parts)return parts;
     function tile(rect){const [x,y,w,h]=rect,c=document.createElement('canvas');c.width=w;c.height=h;c.dataset.sourceAsset='matched-legs-v11.png';c.getContext('2d').drawImage(images.parts,x,y,w,h,0,0,w,h);return c;}
-    parts={pants:(()=>{const c=document.createElement('canvas');c.width=105;c.height=68;c.dataset.sourceAsset='front-carrier-v7.png';c.getContext('2d').drawImage(images.front,84,329,105,68,0,0,105,68);return c;})(),near:{fur:tile([180,129,515,293]),boot:tile([160,370,712,433])},far:{fur:tile([1110,160,385,267]),boot:tile([1077,372,642,421])}};return parts;
+    parts={pants:(()=>{const c=document.createElement('canvas');c.width=99;c.height=32;c.dataset.sourceAsset='front-carrier-v7.png';c.getContext('2d').drawImage(images.front,92,344,99,32,0,0,99,32);return c;})(),near:{fur:tile([180,129,515,293]),boot:tile([160,370,712,433])},far:{fur:tile([1110,160,385,267]),boot:tile([1077,372,642,421])}};return parts;
   }
   function fullPose(c,name,h,options={}){
     const f=actions[name],[sx,sy,sw,sh]=f.rect,s=h/f.stature;
@@ -151,11 +151,18 @@
     // The standing painting has one boot permanently ahead. Ease both feet onto
     // a shared walking track so either leg can lead by the same useful distance.
     const track=(profile.near.sole[0]+profile.far.sole[0])*.5;
+    const pelvisTrack=(profile.near.hip[0]+profile.far.hip[0])*.5;
+    const pivot={x:(pelvisTrack-ox)*s,y:(profile.pelvisY-oy)*s+gait.bob};
+    const bodyPoint=(x,y)=>({x:pivot.x+gait.sway+(x-pivot.x)*Math.cos(gait.roll)-(y-pivot.y)*Math.sin(gait.roll),y:pivot.y+(x-pivot.x)*Math.sin(gait.roll)+(y-pivot.y)*Math.cos(gait.roll)});
+    const bodyTransform=()=>{c.translate(pivot.x+gait.sway,pivot.y);c.rotate(gait.roll);c.translate(-pivot.x,-pivot.y);};
     const headName=back?'back':'front';let babyFace;
-    if(blend<1){c.save();c.globalAlpha*=1-blend;const [sx,sy,sw,sh]=profile.torso,fullH=profile.image==='front'?489:516;paintCarrierBody(c,images[profile.image],[sx,sy,sw,fullH],profile.origin,s,headName,gait.bob);c.restore();}
+    if(blend<1){c.save();bodyTransform();c.globalAlpha*=1-blend;const [sx,sy,sw,sh]=profile.torso,fullH=profile.image==='front'?489:516;paintCarrierBody(c,images[profile.image],[sx,sy,sw,fullH],profile.origin,s,headName,gait.bob);c.restore();}
     c.save();c.globalAlpha*=blend;
     for(const name of ['far','near']){
-      const leg=profile[name],f=gait[name],hip={x:(leg.hip[0]-ox)*s,y:(profile.pelvisY-oy)*s+gait.bob};
+      const leg=profile[name],f=gait[name];
+      // Pelvic yaw advances the supporting hip underneath the intact shorts.
+      // Wide boot travel therefore does not lengthen the bear's short legs.
+      const hip=bodyPoint((leg.hip[0]-ox)*s*(1-.70*weight)+pivot.x*.70*weight+f.x*.50,pivot.y);
       const sole={x:(track-ox+(leg.sole[0]-track)*(1-.85*weight))*s+f.x,y:(leg.sole[1]-oy)*s+f.y-h*.035*Math.min(1,jump/35)};
       let angle=f.angle;
       if(options.groundAt){
@@ -165,22 +172,40 @@
       }
       const ax=(leg.cuff[0]-leg.sole[0])*s,ay=(leg.cuff[1]-leg.sole[1])*s,cs=Math.cos(angle),sn=Math.sin(angle);
       const cuff={x:sole.x+ax*cs-ay*sn,y:sole.y+ax*sn+ay*cs};
-      const joint=window.BearlyLocomotion.knee(hip,cuff,(leg.hip[1]-profile.pelvisY+8)*s,(leg.cuff[1]-leg.hip[1]+18)*s);
+      const thighLength=(leg.hip[1]-profile.pelvisY+8)*s,shinLength=(leg.cuff[1]-leg.hip[1]+18)*s,reach=thighLength+shinLength-.01;
+      const nominalHip={...hip};
+      // Weight transfer stays within the painted pelvis. On changing terrain,
+      // settle the attachment before solving IK; never stretch either limb.
+      hip.y=cuff.y-clamp(cuff.y-hip.y,-reach*.98,reach*.98);
+      const horizontalReach=Math.sqrt(Math.max(0,reach*reach-(cuff.y-hip.y)*(cuff.y-hip.y)));
+      hip.x=clamp(hip.x,cuff.x-horizontalReach,cuff.x+horizontalReach);
+      const joint=window.BearlyLocomotion.knee(hip,cuff,thighLength,shinLength);
       function link(im,a,b,width,padding){const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(dy,dx)-Math.PI/2);c.drawImage(im,-width*.5,-padding,width,len+padding*2);c.restore();}
-      link(texture[name].fur,joint,cuff,leg.furWidth*s,8*s);
+      const thigh=Math.hypot(joint.x-hip.x,joint.y-hip.y),turn=clamp(Math.atan2(joint.x-hip.x,joint.y-hip.y)*.90,-.78,.78);
+      const panelLength=thigh*.94,panelWidth=(name==='near'?104:80)*s,pa={x:Math.sin(turn),y:Math.cos(turn)},pn={x:Math.cos(turn),y:-Math.sin(turn)};
+      const hem={x:hip.x+pa.x*panelLength,y:hip.y+pa.y*panelLength};
+      const shinAxis={x:(cuff.x-joint.x)/shinLength,y:(cuff.y-joint.y)/shinLength},shinNormal={x:shinAxis.y,y:-shinAxis.x};
+      // The source fur has a flat upper extraction edge. Keep it behind the
+      // actual moving cloth opening rather than exposing a rectangular patch.
+      const cap={x:hem.x-pa.x*3*s,y:hem.y-pa.y*3*s},lower={x:cuff.x+shinAxis.x*9*s,y:cuff.y+shinAxis.y*9*s};
+      c.save();c.beginPath();
+      c.moveTo(cap.x-pn.x*leg.furWidth*s*.5,cap.y-pn.y*leg.furWidth*s*.5);
+      c.lineTo(cap.x+pn.x*leg.furWidth*s*.5,cap.y+pn.y*leg.furWidth*s*.5);
+      c.lineTo(lower.x+shinNormal.x*leg.furWidth*s*.6,lower.y+shinNormal.y*leg.furWidth*s*.6);
+      c.lineTo(lower.x-shinNormal.x*leg.furWidth*s*.6,lower.y-shinNormal.y*leg.furWidth*s*.6);c.closePath();c.clip();
+      link(texture[name].fur,joint,cuff,leg.furWidth*s,18*s);c.restore();
       const [bx,by,bw,bh]=leg.boot;c.save();c.translate(sole.x,sole.y);c.rotate(angle);c.drawImage(texture[name].boot,(bx-leg.sole[0])*s,(by-leg.sole[1])*s,bw*s,bh*s);c.restore();
-      // Keep the upper shorts/pelvis intact. Fabric cuffs turn less than the
-      // underlying thigh so the two panels do not scissor across the crotch.
-      const thigh=Math.hypot(joint.x-hip.x,joint.y-hip.y),turn=clamp(Math.atan2(joint.x-hip.x,joint.y-hip.y)*.6,-.4,.4);
-      const hem={x:hip.x+Math.sin(turn)*thigh,y:hip.y+Math.cos(turn)*thigh};
-      link(texture.pants,hip,hem,(name==='near'?104:70)*s,9*s);
-      landmarks[name]={hip,opening:{x:(leg.hip[0]-ox)*s,y:(leg.hip[1]-oy)*s},knee:joint,sole,cuff,bootWidth:bw*s,bootHeight:bh*s};
+      // Cloth-only texture and an explicit hem conceal the upper fur cap. The
+      // original pelvis stays intact above both articulated panels.
+      c.save();c.translate(hip.x,hip.y);c.rotate(-turn);c.drawImage(texture.pants,-panelWidth*.5,-8*s,panelWidth,panelLength+8*s);
+      c.strokeStyle='#1d1b19';c.lineWidth=1.8*s;c.beginPath();c.moveTo(-panelWidth*.48,panelLength);c.lineTo(panelWidth*.48,panelLength);c.stroke();c.restore();
+      landmarks[name]={hip,nominalHip,opening:hem,knee:joint,sole,cuff,thighLength,shinLength,bootWidth:bw*s,bootHeight:bh*s};
     }
-    const [sx,sy,sw,sh]=profile.torso;c.save();c.beginPath();c.rect((sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,(profile.waist-sy)*s);
+    const [sx,sy,sw,sh]=profile.torso;c.save();bodyTransform();c.beginPath();c.rect((sx-ox)*s,(sy-oy)*s+gait.bob,sw*s,(profile.waist+12-sy)*s);
     if(!back){for(const [i,[x,y]] of [[242,322],[285,322],[292,352],[270,363],[242,348]].entries())i?c.lineTo((x-ox)*s,(y-oy)*s+gait.bob):c.moveTo((x-ox)*s,(y-oy)*s+gait.bob);c.closePath();}
     c.clip();paintCarrierBody(c,images[profile.image],profile.torso,profile.origin,s,headName,gait.bob);c.restore();c.restore();
-    babyFace=paintPassenger(c,images[profile.image],profile.torso,profile.origin,s,headName,options,gait.bob);
-    lastAudit={pose:'walking',carrier:back?'back':'front',integratedCarrier:true,babyFace,height:h,source:profile.image,stature:profile.stature,landmarks,gait};c.restore();return true;
+    c.save();bodyTransform();babyFace=paintPassenger(c,images[profile.image],profile.torso,profile.origin,s,headName,options,gait.bob);c.restore();
+    lastAudit={pose:'walking',carrier:back?'back':'front',integratedCarrier:true,babyFace,height:h,source:profile.image,stature:profile.stature,landmarks,gait,body:{pivot,sway:gait.sway,roll:gait.roll}};c.restore();return true;
   }
   function drawAuthored(c,image,rect,origin,scale,pose,options={}){
     if(!ready()||!heads[pose])return false;

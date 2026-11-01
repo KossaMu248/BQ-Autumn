@@ -1,0 +1,1014 @@
+{
+  "entry": "autumn-v15.html",
+  "build": "AUTUMN_RIDE_ART_V15",
+  "ageGroups": {
+    "youngAdult": 6,
+    "olderAdult": 3
+  },
+  "faceCoveredVariants": [
+    2,
+    5
+  ],
+  "catalog": [
+    {
+      "variant": 0,
+      "label": "Black quilted puffer \u00b7 black hoodie and loose nylon trousers \u00b7 black performance runners \u00b7 black cap and sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          13,
+          0,
+          649,
+          818
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 378,
+        "frames": [
+          {
+            "rect": [
+              45,
+              50,
+              345,
+              396
+            ],
+            "anchor": [
+              216.5,
+              436
+            ]
+          },
+          {
+            "rect": [
+              415,
+              123,
+              379,
+              305
+            ],
+            "anchor": [
+              606,
+              419
+            ]
+          },
+          {
+            "rect": [
+              816,
+              293,
+              412,
+              147
+            ],
+            "anchor": [
+              1023,
+              430
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              57,
+              11,
+              449,
+              509
+            ]
+          },
+          {
+            "rect": [
+              58,
+              522,
+              460,
+              502
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 1,
+      "label": "Charcoal technical fleece set \u00b7 black tapered joggers \u00b7 black low-top trainers \u00b7 black cap \u00b7 black athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          699,
+          28,
+          563,
+          793
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 367,
+        "frames": [
+          {
+            "rect": [
+              65,
+              459,
+              301,
+              379
+            ],
+            "anchor": [
+              215.5,
+              834
+            ]
+          },
+          {
+            "rect": [
+              413,
+              528,
+              398,
+              294
+            ],
+            "anchor": [
+              616.5,
+              810
+            ]
+          },
+          {
+            "rect": [
+              826,
+              685,
+              416,
+              143
+            ],
+            "anchor": [
+              1033.5,
+              820
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              603,
+              20,
+              395,
+              501
+            ]
+          },
+          {
+            "rect": [
+              602,
+              531,
+              396,
+              493
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 2,
+      "label": "Black tactical field jacket \u00b7 black hoodie and utility chest rig \u00b7 black cargo trousers \u00b7 black runners \u00b7 black balaclava",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 22,
+        "faceCovered": true
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-a-v15.png",
+        "rect": [
+          1328,
+          0,
+          553,
+          825
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-a-v15.png",
+        "stature": 382,
+        "frames": [
+          {
+            "rect": [
+              32,
+              838,
+              348,
+              395
+            ],
+            "anchor": [
+              206,
+              1225
+            ]
+          },
+          {
+            "rect": [
+              419,
+              895,
+              379,
+              313
+            ],
+            "anchor": [
+              610,
+              1195
+            ]
+          },
+          {
+            "rect": [
+              818,
+              1071,
+              411,
+              157
+            ],
+            "anchor": [
+              1025.5,
+              1214
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-a-v15.png",
+        "frames": [
+          {
+            "rect": [
+              1109,
+              1,
+              382,
+              527
+            ],
+            "outline": [
+              [
+                1109,
+                1
+              ],
+              [
+                1491,
+                1
+              ],
+              [
+                1491,
+                528
+              ],
+              [
+                1320,
+                528
+              ],
+              [
+                1320,
+                520
+              ],
+              [
+                1109,
+                520
+              ]
+            ]
+          },
+          {
+            "rect": [
+              1118,
+              520,
+              384,
+              504
+            ],
+            "outline": [
+              [
+                1118,
+                520
+              ],
+              [
+                1320,
+                520
+              ],
+              [
+                1320,
+                528
+              ],
+              [
+                1502,
+                528
+              ],
+              [
+                1502,
+                1024
+              ],
+              [
+                1118,
+                1024
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 3,
+      "label": "Black utility vest \u00b7 black heavyweight hoodie \u00b7 dark tactical cargos \u00b7 dark runners \u00b7 black beanie and sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 21,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          71,
+          93,
+          498,
+          669
+        ],
+        "face": -1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 301,
+        "frames": [
+          {
+            "rect": [
+              98,
+              30,
+              355,
+              326
+            ],
+            "anchor": [
+              277.5,
+              342
+            ]
+          },
+          {
+            "rect": [
+              575,
+              78,
+              408,
+              278
+            ],
+            "anchor": [
+              781,
+              345
+            ]
+          },
+          {
+            "rect": [
+              1039,
+              151,
+              408,
+              207
+            ],
+            "anchor": [
+              1244.5,
+              346
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              81,
+              20,
+              397,
+              504
+            ],
+            "outline": [
+              [
+                81,
+                20
+              ],
+              [
+                478,
+                20
+              ],
+              [
+                478,
+                524
+              ],
+              [
+                380,
+                524
+              ],
+              [
+                380,
+                511
+              ],
+              [
+                200,
+                511
+              ],
+              [
+                200,
+                524
+              ],
+              [
+                81,
+                524
+              ]
+            ]
+          },
+          {
+            "rect": [
+              77,
+              511,
+              403,
+              498
+            ],
+            "outline": [
+              [
+                77,
+                524
+              ],
+              [
+                200,
+                524
+              ],
+              [
+                200,
+                511
+              ],
+              [
+                380,
+                511
+              ],
+              [
+                380,
+                524
+              ],
+              [
+                480,
+                524
+              ],
+              [
+                480,
+                1009
+              ],
+              [
+                77,
+                1009
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 4,
+      "label": "Black technical hooded jacket \u00b7 black nylon joggers \u00b7 dark performance runners \u00b7 black cap \u00b7 black athletic sling",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          739,
+          120,
+          478,
+          643
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 304,
+        "frames": [
+          {
+            "rect": [
+              107,
+              375,
+              387,
+              319
+            ],
+            "anchor": [
+              303.5,
+              687
+            ],
+            "outline": [
+              [
+                107,
+                375
+              ],
+              [
+                494,
+                375
+              ],
+              [
+                494,
+                694
+              ],
+              [
+                400,
+                694
+              ],
+              [
+                400,
+                687
+              ],
+              [
+                107,
+                687
+              ]
+            ]
+          },
+          {
+            "rect": [
+              586,
+              397,
+              411,
+              265
+            ],
+            "anchor": [
+              787,
+              654
+            ]
+          },
+          {
+            "rect": [
+              1053,
+              445,
+              399,
+              247
+            ],
+            "anchor": [
+              1255,
+              677
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              590,
+              37,
+              371,
+              484
+            ]
+          },
+          {
+            "rect": [
+              591,
+              533,
+              374,
+              475
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 5,
+      "label": "Long black technical parka \u00b7 hooded layer \u00b7 charcoal trousers \u00b7 black runners \u00b7 black balaclava",
+      "character": {
+        "ageGroup": "young-adult",
+        "age": 20,
+        "faceCovered": true
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-b-v15.png",
+        "rect": [
+          1372,
+          108,
+          437,
+          662
+        ],
+        "face": 1,
+        "split": 0.76
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-b-v15.png",
+        "stature": 287,
+        "frames": [
+          {
+            "rect": [
+              109,
+              683,
+              394,
+              301
+            ],
+            "anchor": [
+              309.5,
+              978
+            ],
+            "outline": [
+              [
+                109,
+                683
+              ],
+              [
+                400,
+                683
+              ],
+              [
+                400,
+                690
+              ],
+              [
+                503,
+                690
+              ],
+              [
+                503,
+                984
+              ],
+              [
+                109,
+                984
+              ]
+            ]
+          },
+          {
+            "rect": [
+              572,
+              693,
+              413,
+              280
+            ],
+            "anchor": [
+              778.5,
+              964
+            ]
+          },
+          {
+            "rect": [
+              1064,
+              754,
+              388,
+              228
+            ],
+            "anchor": [
+              1257.5,
+              975
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-b-v15.png",
+        "frames": [
+          {
+            "rect": [
+              1103,
+              30,
+              353,
+              497
+            ],
+            "outline": [
+              [
+                1103,
+                30
+              ],
+              [
+                1456,
+                30
+              ],
+              [
+                1456,
+                527
+              ],
+              [
+                1320,
+                527
+              ],
+              [
+                1320,
+                526
+              ],
+              [
+                1103,
+                526
+              ]
+            ]
+          },
+          {
+            "rect": [
+              1101,
+              526,
+              355,
+              482
+            ],
+            "outline": [
+              [
+                1101,
+                526
+              ],
+              [
+                1320,
+                526
+              ],
+              [
+                1320,
+                527
+              ],
+              [
+                1456,
+                527
+              ],
+              [
+                1456,
+                1008
+              ],
+              [
+                1101,
+                1008
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 6,
+      "label": "Black work jacket \u00b7 dark knit \u00b7 charcoal relaxed denim \u00b7 black boots \u00b7 black beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 52,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          49,
+          182,
+          417,
+          672
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 258,
+        "frames": [
+          {
+            "rect": [
+              111,
+              116,
+              254,
+              274
+            ],
+            "anchor": [
+              239.5,
+              382
+            ]
+          },
+          {
+            "rect": [
+              513,
+              151,
+              261,
+              216
+            ],
+            "anchor": [
+              645,
+              358
+            ]
+          },
+          {
+            "rect": [
+              910,
+              251,
+              278,
+              139
+            ],
+            "anchor": [
+              1049,
+              379
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              38,
+              167,
+              320,
+              575
+            ]
+          },
+          {
+            "rect": [
+              38,
+              860,
+              332,
+              572
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 7,
+      "label": "Midnight autumn coat \u00b7 deep-plum scarf \u00b7 black trousers \u00b7 black boots \u00b7 tied hair",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 42,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          607,
+          196,
+          388,
+          660
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 262,
+        "frames": [
+          {
+            "rect": [
+              109,
+              497,
+              271,
+              279
+            ],
+            "anchor": [
+              247.5,
+              767
+            ]
+          },
+          {
+            "rect": [
+              521,
+              527,
+              244,
+              218
+            ],
+            "anchor": [
+              642,
+              737
+            ]
+          },
+          {
+            "rect": [
+              912,
+              612,
+              269,
+              161
+            ],
+            "anchor": [
+              1048.5,
+              765
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              391,
+              171,
+              301,
+              571
+            ]
+          },
+          {
+            "rect": [
+              390,
+              861,
+              302,
+              571
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "variant": 8,
+      "label": "Black quilted bomber \u00b7 dark scarf \u00b7 deep-olive trousers \u00b7 black trainers \u00b7 black beanie",
+      "character": {
+        "ageGroup": "older-adult",
+        "age": 55,
+        "faceCovered": false
+      },
+      "standing": {
+        "image": "assets/art/adult-cast-c-v15.png",
+        "rect": [
+          1081,
+          186,
+          393,
+          680
+        ],
+        "face": 1,
+        "split": 0.58
+      },
+      "reactions": {
+        "image": "assets/art/cast-reactions-c-v15.png",
+        "stature": 263,
+        "frames": [
+          {
+            "rect": [
+              108,
+              873,
+              285,
+              285
+            ],
+            "anchor": [
+              251,
+              1145
+            ]
+          },
+          {
+            "rect": [
+              530,
+              898,
+              249,
+              227
+            ],
+            "anchor": [
+              658.5,
+              1115
+            ]
+          },
+          {
+            "rect": [
+              895,
+              1019,
+              297,
+              145
+            ],
+            "anchor": [
+              1044,
+              1157
+            ]
+          }
+        ]
+      },
+      "screen": {
+        "image": "assets/art/cast-screen-c-v15.png",
+        "frames": [
+          {
+            "rect": [
+              697,
+              171,
+              298,
+              576
+            ]
+          },
+          {
+            "rect": [
+              701,
+              861,
+              293,
+              572
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceSHA256": {
+    "js/brawler-art.js": "b044577cb8aed2b6127ec725299fe7330a0a4a0bc8141a07f56ccc1793be19a2",
+    "assets/art/adult-cast-a-v15.png": "8ac5f7611556880984265351d4800eeff46e76578773fe1137db703a454c91ba",
+    "assets/art/cast-reactions-a-v15.png": "6bab2a5b59eda35cd04e40ecd0770e4cbe51ae7dc0f482703ce169d57c82f7c5",
+    "assets/art/cast-screen-a-v15.png": "cac29fc81ec717fc11154ed101d98665b5e09a9a420c4b929a4ade71bb708877",
+    "assets/art/adult-cast-b-v15.png": "c2e03e070c0d611ec0b16feb169c468a4bb7a3e32d2b02022c2ae7cc618a6d78",
+    "assets/art/cast-reactions-b-v15.png": "cdddd35cf4a4eaa7d0372475dda754e223887616c5ae82c406c74c7f7f4fef2b",
+    "assets/art/cast-screen-b-v15.png": "1c8ff05f1be862b48ec6182a05467e822e9aa9b2ab461349c2a60bcd76038f68",
+    "assets/art/adult-cast-c-v15.png": "8642f41a4cbca3bc698c157978b55bdd659460472e8638ac037a113977f213d0",
+    "assets/art/cast-reactions-c-v15.png": "77fc73768131ba53654461732634a645fa59408f2d485cb4483e57c1e739a227",
+    "assets/art/cast-screen-c-v15.png": "60798dc090c6918a5bb2aad4b74437412fa36d3796b8cd7084a2bdec28a4fe2a"
+  },
+  "sourceCoverage": {
+    "cases": 324,
+    "minCoverage": 1,
+    "maxNeighborPixels": 0,
+    "faults": [],
+    "faultCount": 0
+  },
+  "walkingConnectivity": {
+    "cases": 288,
+    "minMainBodyRatio": 0.9998239436619718,
+    "negativeControls": 2,
+    "faultCount": 0,
+    "faults": []
+  },
+  "result": "passed",
+  "pageErrors": [],
+  "httpFailures": []
+}

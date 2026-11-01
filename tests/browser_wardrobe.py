@@ -1,4 +1,4 @@
-"""V14 cast source coverage, real population continuity and phone controls.
+"""V15 cast source coverage, real population continuity and phone controls.
 
 Production draw calls are observed. Independent opaque connected components
 check each standing/reaction crop and clip, including adjacent portrait cells.
@@ -15,23 +15,23 @@ from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v14.html"
-SHOTS = ROOT / "screenshots" / "revision14"
+ENTRY = "autumn-v15.html"
+SHOTS = ROOT / "screenshots" / "revision15"
 
 
 def source_hashes():
     paths = [ROOT / "js" / "brawler-art.js"]
     for group in "abc":
         paths.extend(ROOT / "assets" / "art" / name for name in [
-            f"adult-cast-{group}-v14.png",
-            f"cast-reactions-{group}-v14.png",
-            f"cast-screen-{group}-v14.png",
+            f"adult-cast-{group}-v15.png",
+            f"cast-reactions-{group}-v15.png",
+            f"cast-screen-{group}-v15.png",
         ])
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 AUDIT = r"""(() => {
   const native=CanvasRenderingContext2D.prototype.drawImage;
-  const assets=/^(?:adult-cast-[abc]-v14|cast-(?:reactions|screen)-[abc]-v14)\.png$/;
+  const assets=/^(?:adult-cast-[abc]-v15|cast-(?:reactions|screen)-[abc]-v15)\.png$/;
   window.__wardrobeCalls=[];window.__wardrobeActor=null;
   CanvasRenderingContext2D.prototype.drawImage=function(im,...args){
     const source=(im.src||'').split('/').pop().split('?')[0];
@@ -125,7 +125,7 @@ PROBES = r"""() => {
     const label={variant,name,heading,height};
     if(!calls.length){faults.push({...label,issue:'No painted source draw'});continue;}
     const group=['a','b','c'][Math.floor(variant/3)];
-    const expected=pose<0?'adult-cast-'+group+'-v14.png':'cast-reactions-'+group+'-v14.png';
+    const expected=pose<0?'adult-cast-'+group+'-v15.png':'cast-reactions-'+group+'-v15.png';
     if(calls.some(d=>!d.im.src.split('?')[0].endsWith('/'+expected)))faults.push({...label,issue:'Wrong outfit source',expected,actual:calls.map(d=>d.im.src)});
     const coverage=sourceCoverage(calls,variant,pose);
     if(coverage.coverage!==1||coverage.neighborPixels!==0||coverage.unsupported)faults.push({...label,...coverage});
@@ -186,7 +186,7 @@ class Quiet(SimpleHTTPRequestHandler):
 
 
 def expected_standing(variant):
-    return "adult-cast-" + "abc"[variant // 3] + "-v14.png"
+    return "adult-cast-" + "abc"[variant // 3] + "-v15.png"
 
 
 def verify_actual_calls(page):
@@ -196,6 +196,39 @@ def verify_actual_calls(page):
     for call in adults:
         assert call["source"] == expected_standing(call["actor"]["variant"]), call
     return {c["actor"]["id"]: {"variant": c["actor"]["variant"], "source": c["source"]} for c in adults}
+
+
+def approach_actor(page, actor_id):
+    """Reach a real patrolling actor with movement keys, without editing its state."""
+    pressed = set()
+    try:
+        for _ in range(100):
+            state = page.evaluate("""id => {
+              const area=BearlyVisits.audit();
+              return{x:area.x,depth:area.depth,npc:area.combat.npcs.find(n=>n.id===id)};
+            }""", actor_id)
+            target = state["npc"]
+            assert target and target["hp"] == 60, state
+            dx, dy = target["x"] - state["x"], target["depth"] - state["depth"]
+            if abs(dx) < 55 and abs(dy) < 14:
+                break
+            wanted = set()
+            if abs(dx) >= 45:
+                wanted.add("ArrowRight" if dx > 0 else "ArrowLeft")
+            if abs(dy) >= 10:
+                wanted.add("ArrowDown" if dy > 0 else "ArrowUp")
+            for key in pressed - wanted:
+                page.keyboard.up(key)
+            for key in wanted - pressed:
+                page.keyboard.down(key)
+            pressed = wanted
+            page.clock.run_for(75)
+        else:
+            raise AssertionError("Could not reach the real masked NPC: " + str(state))
+    finally:
+        for key in pressed:
+            page.keyboard.up(key)
+    page.clock.run_for(80)
 
 
 def controls(browser, base, errors, failures, width, height):
@@ -228,7 +261,7 @@ def controls(browser, base, errors, failures, width, height):
             seen.update(here)
             page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"cast-street-{variant}.png"))
         assert {n["variant"] for n in seen.values()} == set(range(9)), seen
-    anchor = min((n for n in page.evaluate("BearlyVisits.residents()") if n.get("kind") != "gangster" and n["variant"] == 3), key=lambda n: abs(n.get("depth", 0)))
+    anchor = min((n for n in page.evaluate("BearlyVisits.residents()") if n.get("kind") != "gangster" and n["variant"] in [2, 5]), key=lambda n: (abs(n.get("depth", 0)), n["home"]))
     page.evaluate("x=>{BEARLY_DEBUG_MENU.warp(x/1.5);__wardrobeCalls=[]}", anchor["x"])
     page.clock.run_for(100)
     riding_seen = verify_actual_calls(page)
@@ -263,19 +296,27 @@ def controls(browser, base, errors, failures, width, height):
     page.keyboard.press("Escape")
     page.clock.run_for(2800)
     assert not page.evaluate("BearlyVisits.audit().mode")
-    # Exercise real controls and source continuity through screen contact/damage.
-    page.evaluate("BEARLY_DEBUG_MENU.warp(2500/1.5);BearlyVisits.practice();__wardrobeCalls=[]")
+    # Reach an actual masked resident through normal movement, then use the
+    # real grab/throw controls. No synthetic NPC state or practice replacement.
+    masked = page.evaluate("id=>BearlyVisits.residents().find(n=>n.id===id)", anchor["id"])
+    assert masked["variant"] in [2, 5] and masked["hp"] == 60, masked
+    page.evaluate("x=>{BEARLY_DEBUG_MENU.warp(x/1.5);__wardrobeCalls=[]}", masked["x"])
+    page.clock.run_for(100)
+    page.locator(".dismount-button").tap() if mobile else page.keyboard.press("q")
     page.clock.run_for(2700)
+    assert page.evaluate("BearlyVisits.audit().mode") == "street"
+    approach_actor(page, anchor["id"])
     page.locator(".area-grab").tap() if mobile else page.keyboard.press("g")
     page.clock.run_for(100)
     held = page.evaluate("BearlyVisits.audit().combat.held")
-    assert held
+    assert held == anchor["id"], {"wanted": anchor["id"], "held": held}
     page.locator(".area-grab").tap() if mobile else page.keyboard.press("g")
     page.clock.run_for(850)
     target = page.evaluate("id=>BearlyVisits.audit().combat.npcs.find(n=>n.id===id)", held)
     assert target["state"] == "screen" and target["hp"] == 28 and target["lastDamage"] == 32, target
     screen_calls = page.evaluate("__wardrobeCalls.filter(c=>/cast-screen/.test(c.source))")
-    assert screen_calls and all(c["source"] == "cast-screen-a-v14.png" for c in screen_calls), screen_calls
+    expected_screen = "cast-screen-" + "abc"[target["variant"] // 3] + "-v15.png"
+    assert screen_calls and all(c["source"] == expected_screen for c in screen_calls), screen_calls
     page.locator(".canvas-wrap").screenshot(path=str(SHOTS / f"cast-impact-{width}.png"))
     if not mobile:
         page.locator(".canvas-wrap").screenshot(path=str(SHOTS / "cast-screen-impact.png"))
@@ -285,7 +326,7 @@ def controls(browser, base, errors, failures, width, height):
             box = page.locator(selector).bounding_box()
             assert box and box["x"] >= 0 and box["y"] >= 0
             assert box["x"] + box["width"] <= width + 1 and box["y"] + box["height"] <= height + 1
-    evidence.update({"actualAdultsObserved": seen, "sameBikeFootActors": sorted(shared), "roomHostVariant": host["variant"], "actualThrow": {"variant": target["variant"], "damage": target["lastDamage"], "hp": target["hp"], "source": screen_calls[-1]["source"]}})
+    evidence.update({"actualAdultsObserved": seen, "sameBikeFootActors": sorted(shared), "roomHostVariant": host["variant"], "actualThrow": {"id": target["id"], "variant": target["variant"], "faceCovered": target["variant"] in [2, 5], "damage": target["lastDamage"], "hp": target["hp"], "source": screen_calls[-1]["source"]}})
     context.close()
     return evidence
 
@@ -300,7 +341,7 @@ def main():
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
     errors, failures = [], []
-    evidence = {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V14"}
+    evidence = {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V15"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -312,7 +353,7 @@ def main():
             page.goto(f"{base}/{ENTRY}")
             page.wait_for_function("BearlyVisits.audit().artReady && BearlyAtlas.ready()")
             page.clock.pause_at(page.evaluate("Date.now()+1000") / 1000)
-            assert page.evaluate("BEARLY_BUILD_ID") == "AUTUMN_RIDE_ART_V14"
+            assert page.evaluate("BEARLY_BUILD_ID") == "AUTUMN_RIDE_ART_V15"
             catalog = page.evaluate("BearlyBrawlArt.wardrobe()")
             assert page.evaluate("BearlyBrawlArt.wardrobeCount") == 9
             assert len(catalog) == 9 and len({n["label"] for n in catalog}) == 9
@@ -321,7 +362,10 @@ def main():
             assert [n["ageGroup"] for n in characters] == ["young-adult"] * 6 + ["older-adult"] * 3, characters
             assert all(18 <= n["age"] <= 24 for n in characters[:6]), characters
             assert all(n["age"] >= 35 for n in characters[6:]), characters
+            assert [n["age"] for n in characters] == [20, 21, 22, 21, 20, 20, 52, 42, 55], characters
+            assert [n["faceCovered"] for n in characters] == [False, False, True, False, False, True, False, False, False], characters
             evidence["ageGroups"] = {"youngAdult": 6, "olderAdult": 3}
+            evidence["faceCoveredVariants"] = [2, 5]
             evidence["catalog"] = catalog
             evidence["sourceSHA256"] = source_hashes()
             if not options.controls_only:

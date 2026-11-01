@@ -1,0 +1,15 @@
+# Final dark-cast gallery; intermediate browser captures stay local.
+*
+!.gitignore
+!README.md
+!cast-lineup.png
+!cast-portraits.png
+!cast-review.png
+!cast-walk-phases.png
+!cast-street-game.png
+!cast-street-phone.png
+!cast-screen-impact.png
+!cast-source-evidence.json
+!cast-controls-evidence.json
+!cast-full-body-evidence.json
+!cast-evidence.json

@@ -165,10 +165,11 @@
   function surfaceTriangle(c,image,source,destination){
     const [a,b,d]=source,[p,q,r]=destination,den=a.x*(b.y-d.y)+b.x*(d.y-a.y)+d.x*(a.y-b.y);if(Math.abs(den)<.0001)return;
     const A=(p.x*(b.y-d.y)+q.x*(d.y-a.y)+r.x*(a.y-b.y))/den,B=(p.y*(b.y-d.y)+q.y*(d.y-a.y)+r.y*(a.y-b.y))/den,C=(p.x*(d.x-b.x)+q.x*(a.x-d.x)+r.x*(b.x-a.x))/den,D=(p.y*(d.x-b.x)+q.y*(a.x-d.x)+r.y*(b.x-a.x))/den,E=(p.x*(b.x*d.y-d.x*b.y)+q.x*(d.x*a.y-a.x*d.y)+r.x*(a.x*b.y-b.x*a.y))/den,F=(p.y*(b.x*d.y-d.x*b.y)+q.y*(d.x*a.y-a.x*d.y)+r.y*(a.x*b.y-b.x*a.y))/den;
-    const center={x:(p.x+q.x+r.x)/3,y:(p.y+q.y+r.y)/3};c.save();c.beginPath();destination.forEach((v,i)=>{const dx=v.x-center.x,dy=v.y-center.y,length=Math.hypot(dx,dy)||1,x=v.x+dx/length*.6,y=v.y+dy/length*.6;i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();c.clip();c.transform(A,B,C,D,E,F);
+    // A true edge-parallel outset keeps diagonal joins fully covered by ink.
+    const ap=Math.hypot(q.x-r.x,q.y-r.y),aq=Math.hypot(r.x-p.x,r.y-p.y),ar=Math.hypot(p.x-q.x,p.y-q.y),perimeter=ap+aq+ar,center={x:(ap*p.x+aq*q.x+ar*r.x)/perimeter,y:(ap*p.y+aq*q.y+ar*r.y)/perimeter},radius=Math.abs((q.x-p.x)*(r.y-p.y)-(q.y-p.y)*(r.x-p.x))/perimeter,expansion=.7/Math.max(.01,radius);c.save();c.beginPath();destination.forEach((v,i)=>{const dx=v.x-center.x,dy=v.y-center.y,x=v.x+dx*expansion,y=v.y+dy*expansion;i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();c.clip();c.transform(A,B,C,D,E,F);
     // Destination overlap cannot sample remote source pixels if a bent cloth
-    // triangle becomes very thin. Keep a one-source-pixel seam allowance only.
-    const xs=source.map(p=>p.x),ys=source.map(p=>p.y);c.beginPath();c.rect(Math.min(...xs)-1,Math.min(...ys)-1,Math.max(...xs)-Math.min(...xs)+2,Math.max(...ys)-Math.min(...ys)+2);c.clip();c.drawImage(image,0,0);c.restore();
+    // triangle becomes very thin. Keep a bounded two-source-pixel seam allowance only.
+    const xs=source.map(p=>p.x),ys=source.map(p=>p.y);c.beginPath();c.rect(Math.min(...xs)-2,Math.min(...ys)-2,Math.max(...xs)-Math.min(...xs)+4,Math.max(...ys)-Math.min(...ys)+4);c.clip();c.drawImage(image,0,0);c.restore();
   }
   const LOWER_HEIGHT=190,lowerPrepared=new Map(),upperPrepared=new Map();
   // One physical material throughout idle, acceleration, every stride and stop.
@@ -176,8 +177,8 @@
   // partly hidden far thigh owns the left-hand fur/boot. Those were previously
   // assigned to different painted contact keys, changing volume mid-stride.
   const lowerKey={name:'anatomical-idle-material',image:'lowerIdle',rect:[170,94,1021,1085],waist:[650,145],floor:1179,width:590,crotch:[600,595],legs:{
-    far:{hip:[510,210],knee:[455,500],cuff:[405,790],heel:[205,1010],toe:[635,1080],sole:[470,1083]},
-    near:{hip:[690,210],knee:[755,530],cuff:[820,850],heel:[650,1110],toe:[1180,1150],sole:[940,1155]}
+    far:{hip:[510,180],knee:[455,500],cuff:[405,790],heel:[205,1010],toe:[635,1080],sole:[470,1083]},
+    near:{hip:[690,180],knee:[755,530],cuff:[820,850],heel:[650,1110],toe:[1180,1150],sole:[940,1155]}
   }};
   const lowerScale=(LOWER_HEIGHT+10)/(lowerKey.floor-lowerKey.waist[1]);
   const lowerNorm=([x,y])=>({x:(x-lowerKey.waist[0])*lowerScale,y:(y-lowerKey.waist[1])*lowerScale});
@@ -189,7 +190,9 @@
     if(!settledPelves.has(profile.image)){
       let peak=0;const canonical=280;
       for(let phase=0;phase<64;phase++){const gait=window.BearlyLocomotion.pose(window.BearlyLocomotion.cycleLength(canonical)*phase/64,canonical,1);peak=Math.max(peak,surfacePose(profile,canonical,gait,1,false).requiredDrop);}
-      const idle=surfacePose(profile,canonical,window.BearlyLocomotion.pose(0,canonical,0),0,false).requiredDrop;
+      // A stocky bear rests with unlocked knees, rather than the old fully
+      // extended lower-sheet pose that raised its head above nominal stature.
+      const idle=Math.max(canonical*.03,surfacePose(profile,canonical,window.BearlyLocomotion.pose(0,canonical,0),0,false).requiredDrop);
       settledPelves.set(profile.image,{peak:peak+canonical*.002,idle});
     }
     const {peak,idle}=settledPelves.get(profile.image);return(idle+(peak-idle)*weight)*height/280;
@@ -201,7 +204,7 @@
       const source=lowerKey.legs[side],f=gait[side],hip=lowerPoint(profile,pose,source.hip),rest=lowerRest(profile,pose,source.sole),p=lowerNorm(source.sole),a=lowerNorm(source.cuff),k=lowerNorm(source.knee),q=lowerNorm(source.hip),angle=f.angle,cs=Math.cos(angle),sn=Math.sin(angle);
       // A small depth separation remains while walking; neither foot is forced
       // onto the other foot's centre line. The actual sole is the contact point.
-      const sole={x:restCenter+(rest.x-restCenter)*(1-.75*weight)+f.x,y:rest.y+f.y};
+      const sole={x:restCenter+(rest.x-restCenter)*(1-.75*weight)+f.x-pose.s*profile.stature*.01*weight,y:rest.y+f.y};
       const rigid=raw=>{const v=lowerNorm(raw),x=(v.x-p.x)*pose.s,y=(v.y-p.y)*pose.s;return{x:sole.x+x*cs-y*sn,y:sole.y+x*sn+y*cs};};
       const ankle=rigid(source.cuff),thigh=boneLength(q,k)*pose.s,shin=boneLength(k,a)*pose.s,maxReach=(thigh+shin)*.998,dx=ankle.x-hip.x,dy=ankle.y-hip.y,vertical=Math.sqrt(Math.max(.001,maxReach*maxReach-dx*dx));
       drop=Math.max(drop,dy-vertical);

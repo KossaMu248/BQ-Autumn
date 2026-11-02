@@ -145,18 +145,18 @@
   // Each row: near hip/knee/ankle/heel/toe, far equivalents, waist, protected
   // foreground hands/bag rectangles. The masks never split a sleeve into a leg.
   const walkingAnatomy=[
-    {near:[[133,179],[111,233],[80,289],[98,326],[37,304]],far:[[153,188],[174,238],[201,290],[231,312],[169,331]],waist:181,hands:[[35,143,43,58],[196,144,44,68]]},
-    {near:[[130,182],[158,233],[186,282],[169,318],[244,306]],far:[[119,187],[91,232],[67,274],[45,293],[91,318]],waist:177,hands:[[48,159,45,59],[210,135,59,60]]},
-    {near:[[101,186],[128,237],[159,284],[145,325],[224,301]],far:[[98,197],[67,233],[37,276],[9,293],[67,318]],waist:195,hands:[[16,159,47,56],[173,138,57,58]]},
-    {near:[[135,186],[106,237],[84,282],[98,319],[28,299]],far:[[148,193],[174,237],[197,279],[224,287],[169,319]],waist:189,hands:[[16,129,58,61],[184,148,54,67]]},
-    {near:[[92,184],[123,239],[154,291],[146,329],[205,309]],far:[[84,194],[57,235],[32,282],[8,303],[58,325]],waist:188,hands:[[0,164,40,62],[162,144,53,62]]},
+    {near:[[133,179],[128,233],[104,289],[98,326],[37,304]],far:[[153,188],[174,238],[201,290],[231,312],[169,331]],waist:181,clean:[[115,178],[164,178],[169,191],[165,211],[159,232],[147,251],[132,269],[123,286],[120,288],[108,294],[95,292],[83,285],[80,276],[81,266],[94,254],[98,240],[101,222],[112,203],[118,190]],hands:[[35,143,43,58],[196,144,44,68]]},
+    {near:[[130,182],[158,233],[186,282],[169,318],[244,306]],far:[[119,187],[91,232],[67,274],[45,293],[91,318]],waist:177,clean:[[113,174],[164,175],[169,188],[174,201],[181,216],[188,232],[192,247],[195,258],[201,269],[202,277],[200,281],[190,285],[181,289],[172,289],[164,286],[157,281],[151,272],[147,258],[139,242],[131,227],[122,210],[114,194]],hands:[[48,159,45,59],[210,135,59,60]]},
+    {near:[[101,186],[128,237],[159,284],[145,325],[224,301]],far:[[98,197],[67,233],[37,276],[9,293],[67,318]],waist:195,clean:[[73,189],[111,180],[126,184],[133,198],[141,215],[153,234],[161,251],[164,265],[172,273],[176,282],[175,287],[164,296],[152,300],[140,297],[132,291],[124,282],[117,269],[111,250],[104,234],[94,219],[85,203]],hands:[[16,159,47,56],[173,138,57,58]]},
+    {near:[[135,186],[106,237],[84,282],[98,319],[28,299]],far:[[148,193],[174,237],[197,279],[224,287],[169,319]],waist:189,clean:[[104,178],[163,179],[159,192],[150,211],[140,231],[129,252],[120,270],[112,285],[105,291],[95,294],[89,291],[82,287],[72,282],[69,272],[76,262],[81,246],[88,232],[95,216],[102,200],[105,188]],hands:[[16,129,58,61],[184,148,54,67]]},
+    {near:[[92,184],[123,239],[154,291],[146,329],[205,309]],far:[[84,194],[57,235],[32,282],[8,303],[58,325]],waist:188,clean:[[70,178],[126,177],[131,191],[140,211],[148,231],[154,252],[158,264],[164,274],[165,282],[161,284],[155,288],[149,291],[143,293],[140,294],[131,291],[128,286],[123,276],[116,261],[106,247],[97,230],[88,213],[78,197]],hands:[[0,164,40,62],[162,144,53,62]]},
     {near:[[119,195],[146,244],[166,290],[153,330],[226,308]],far:[[111,214],[74,249],[36,283],[11,302],[58,325]],waist:218,clean:[[119,193],[136,194],[149,213],[162,235],[172,255],[182,277],[182,284],[177,292],[159,301],[150,297],[142,287],[136,270],[126,250],[115,237],[108,225],[110,212]],hands:[[6,156,53,66],[171,145,54,62]]},
     {near:[[169,211],[195,252],[214,291],[197,338],[268,314]],far:[[165,217],[134,251],[101,282],[68,311],[127,334]],waist:215,clean:[[152,199],[181,201],[193,216],[206,237],[214,260],[222,275],[225,277],[228,290],[215,296],[202,302],[191,305],[186,293],[178,278],[171,257],[159,239],[147,222]],hands:[[52,168,53,64],[238,133,56,65]]},
     {near:[[174,197],[193,246],[214,290],[199,333],[267,311]],far:[[166,215],[134,251],[108,281],[80,307],[134,332]],waist:212,clean:[[158,183],[188,180],[200,199],[211,221],[215,239],[222,259],[227,270],[232,282],[219,288],[204,294],[193,298],[188,291],[181,273],[174,252],[160,231],[148,216],[145,207]],hands:[[71,159,53,64],[239,130,45,65]]},
     {near:[[170,196],[192,246],[213,289],[199,330],[267,309]],far:[[161,214],[131,247],[104,277],[68,305],[128,330]],waist:210,clean:[[151,190],[180,188],[194,208],[205,232],[216,257],[224,269],[232,279],[219,287],[201,295],[190,299],[184,288],[176,270],[169,250],[157,232],[144,217],[138,205]],hands:[[56,154,56,65],[238,130,51,67]]},
     {near:[[161,224],[214,279],[260,346],[248,391],[327,352]],far:[[148,241],[108,287],[66,337],[30,353],[96,387]],waist:224,clean:[[132,219],[196,216],[206,242],[227,270],[235,296],[250,322],[269,339],[272,342],[264,352],[256,361],[247,365],[239,349],[233,332],[214,313],[206,294],[197,281],[171,264],[154,245],[138,234]],hands:[[72,217,54,62],[252,190,61,66]]},
     {near:[[158,242],[197,294],[237,352],[220,390],[310,368]],far:[[140,253],[99,295],[59,338],[24,350],[92,378]],waist:247,clean:[[132,248],[201,244],[210,253],[228,276],[239,306],[254,335],[263,345],[250,355],[235,364],[222,367],[214,350],[207,330],[193,307],[181,289],[163,274],[142,256]],hands:[[26,210,62,68],[254,192,63,69]]},
-    {near:[[173,196],[205,237],[237,280],[223,311],[303,294]],far:[[153,205],[119,240],[87,278],[52,289],[112,317]],waist:212,clean:[[159,203],[176,198],[206,193],[219,211],[235,238],[247,254],[258,264],[247,273],[232,282],[220,286],[211,270],[203,252],[194,236],[177,223]],hands:[[57,76,118,137],[248,137,53,62]]}
+    {near:[[173,196],[205,237],[237,280],[223,311],[303,294]],far:[[153,205],[119,240],[87,278],[52,289],[112,317]],waist:192,clean:[[159,203],[176,198],[206,193],[219,211],[235,238],[247,254],[258,264],[247,273],[232,282],[220,286],[211,270],[203,252],[194,236],[177,223]],hands:[[57,76,118,137],[238,137,72,86]]}
   ];
   const WALK_DUTY=.60,WALK_EXCURSION=.17;
   function walkExcursion(frame){const [hip,knee,ankle]=walkingAnatomy[frame.variant].near;return clamp((Math.hypot(knee[0]-hip[0],knee[1]-hip[1])+Math.hypot(ankle[0]-knee[0],ankle[1]-knee[1]))/frame.stature*.42,.12,WALK_EXCURSION);}
@@ -172,14 +172,12 @@
   }
   function triangle(c,image,source,destination){
     const [a,b,d]=source,[p,q,r]=destination,den=a.x*(b.y-d.y)+b.x*(d.y-a.y)+d.x*(a.y-b.y);if(Math.abs(den)<.0001)return;
-    const A=(p.x*(b.y-d.y)+q.x*(d.y-a.y)+r.x*(a.y-b.y))/den,B=(p.y*(b.y-d.y)+q.y*(d.y-a.y)+r.y*(a.y-b.y))/den;
-    const C=(p.x*(d.x-b.x)+q.x*(a.x-d.x)+r.x*(b.x-a.x))/den,D=(p.y*(d.x-b.x)+q.y*(a.x-d.x)+r.y*(b.x-a.x))/den;
-    const E=(p.x*(b.x*d.y-d.x*b.y)+q.x*(d.x*a.y-a.x*d.y)+r.x*(a.x*b.y-b.x*a.y))/den,F=(p.y*(b.x*d.y-d.x*b.y)+q.y*(d.x*a.y-a.x*d.y)+r.y*(a.x*b.y-b.x*a.y))/den;
-    const center={x:(p.x+q.x+r.x)/3,y:(p.y+q.y+r.y)/3};
-    c.save();c.beginPath();destination.forEach((v,i)=>{const dx=v.x-center.x,dy=v.y-center.y,length=Math.hypot(dx,dy)||1,x=v.x+dx/length*.65,y=v.y+dy/length*.65;i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();c.clip();c.transform(A,B,C,D,E,F);
-    // A near-collapsed destination triangle must never sample distant source
-    // ink through its antialias overlap (the source of dangling cloth strips).
-    const minX=Math.min(a.x,b.x,d.x),maxX=Math.max(a.x,b.x,d.x),minY=Math.min(a.y,b.y,d.y),maxY=Math.max(a.y,b.y,d.y);c.beginPath();c.rect(minX-1,minY-1,maxX-minX+2,maxY-minY+2);c.clip();c.drawImage(image,0,0);c.restore();
+    const A=(p.x*(b.y-d.y)+q.x*(d.y-a.y)+r.x*(a.y-b.y))/den,B=(p.y*(b.y-d.y)+q.y*(d.y-a.y)+r.y*(a.y-b.y))/den,C=(p.x*(d.x-b.x)+q.x*(a.x-d.x)+r.x*(b.x-a.x))/den,D=(p.y*(d.x-b.x)+q.y*(a.x-d.x)+r.y*(b.x-a.x))/den,E=(p.x*(b.x*d.y-d.x*b.y)+q.x*(d.x*a.y-a.x*d.y)+r.x*(a.x*b.y-b.x*a.y))/den,F=(p.y*(b.x*d.y-d.x*b.y)+q.y*(d.x*a.y-a.x*d.y)+r.y*(a.x*b.y-b.x*a.y))/den;
+    // A true edge-parallel outset keeps diagonal joins fully covered by ink.
+    const ap=Math.hypot(q.x-r.x,q.y-r.y),aq=Math.hypot(r.x-p.x,r.y-p.y),ar=Math.hypot(p.x-q.x,p.y-q.y),perimeter=ap+aq+ar,center={x:(ap*p.x+aq*q.x+ar*r.x)/perimeter,y:(ap*p.y+aq*q.y+ar*r.y)/perimeter},radius=Math.abs((q.x-p.x)*(r.y-p.y)-(q.y-p.y)*(r.x-p.x))/perimeter,expansion=.7/Math.max(.01,radius);c.save();c.beginPath();destination.forEach((v,i)=>{const dx=v.x-center.x,dy=v.y-center.y,x=v.x+dx*expansion,y=v.y+dy*expansion;i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();c.clip();c.transform(A,B,C,D,E,F);
+    // Destination overlap cannot sample remote source pixels if a bent cloth
+    // triangle becomes very thin. Keep a bounded two-source-pixel seam allowance only.
+    const xs=source.map(p=>p.x),ys=source.map(p=>p.y);c.beginPath();c.rect(Math.min(...xs)-2,Math.min(...ys)-2,Math.max(...xs)-Math.min(...xs)+4,Math.max(...ys)-Math.min(...ys)+4);c.clip();c.drawImage(image,0,0);c.restore();
   }
   function prepareWalkingFrame(frame){
     if(frame.walkingParts)return frame.walkingParts;
@@ -194,17 +192,29 @@
     for(let y=0;y<h;y++)for(let x=0;x<w;x++){
       const at=y*w+x;if(!source.data[at*4+3]||y<definition.waist)continue;
       const inHand=definition.hands.some(([a,b,c,d])=>x>=a&&x<a+c&&y>=b&&y<b+d),r=source.data[at*4],g=source.data[at*4+1],b=source.data[at*4+2];
-      if(inHand&&(frame.variant!==9||y<238||r>g*1.14&&r>b*1.3)) {if(frame.variant!==11||x>200||y<188||x<153+(203-y)*1.25)continue;}
+      if(frame.variant===11){
+        // The tote and cardigan overlap the actual waistband. Protect their
+        // warm canvas/teal ink and outline, rather than retaining a rectangle
+        // of the original far trouser thigh as part of the upper body.
+        let garment=false;
+        if(y<218&&x>=55&&x<242)for(let oy=-2;oy<=2&&!garment;oy++)for(let ox=-2;ox<=2;ox++){const xx=x+ox,yy=y+oy;if(xx<0||xx>=w||yy<0||yy>=h)continue;const at=(yy*w+xx)*4,rr=source.data[at],gg=source.data[at+1],bb=source.data[at+2];if(source.data[at+3]>64&&(rr>gg*1.025&&gg>bb*1.12||gg>rr*1.1&&bb>rr*1.1)){garment=true;break;}}
+        if(garment||inHand&&x>230)continue;
+      }else if(inHand&&(frame.variant!==9||y<238||r>g*1.14&&r>b*1.3))continue;
       const p={x,y},score=bone=>Math.min(distance(p,bone.hip,bone.knee),distance(p,bone.knee,bone.ankle),distance(p,bone.heel,bone.toe));
       labels[at]=score(near)<=score(far)?1:2;
     }
-    const measuredHems={5:[[150,297],[159,301],[177,292],[182,284]],6:[[191,305],[202,302],[215,296],[228,290]],7:[[193,298],[204,294],[219,288],[232,282]],8:[[190,299],[201,295],[219,287],[232,279]],9:[[247,365],[256,361],[264,352],[272,342]],10:[[222,367],[235,364],[250,355],[263,345]],11:[[220,286],[232,282],[247,273],[258,264]]};
-    const hem=measuredHems[frame.variant],hemAt=x=>{let a=hem[0],b=hem[1];for(let i=1;i<hem.length;i++){a=hem[i-1];b=hem[i];if(x<=b[0])break;}return a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);};
+    const measuredHems={0:[[83,285],[95,292],[108,294],[120,288],[123,286]],1:[[161,283],[172,289],[181,289],[190,285],[199,281],[201,280]],2:[[139,297],[151,300],[163,297],[174,289],[176,285]],3:[[72,282],[82,287],[89,291],[95,294],[105,291],[112,285]],4:[[131,291],[140,294],[143,293],[149,291],[155,288],[161,284],[165,282]],5:[[150,297],[159,301],[177,292],[182,284]],6:[[191,305],[202,302],[215,296],[228,290]],7:[[193,298],[204,294],[219,288],[232,282]],8:[[190,299],[201,295],[219,287],[232,279]],9:[[247,365],[256,361],[264,352],[272,342]],10:[[222,367],[235,364],[250,355],[263,345]],11:[[220,286],[232,282],[247,273],[258,264]]};
+    const hem=measuredHems[frame.variant],hemAt=x=>{x=Math.max(hem[0][0],Math.min(hem[hem.length-1][0],x));let a=hem[0],b=hem[1];for(let i=1;i<hem.length;i++){a=hem[i-1];b=hem[i];if(x<=b[0])break;}return a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);};
     for(const [name,label]of [['upper',0],['near',1],['far',2],['nearBoot',1],['farBoot',2]]){
       const tile=typeof OffscreenCanvas==='function'?new OffscreenCanvas(w,h):document.createElement('canvas');tile.width=w;tile.height=h;const g=tile.getContext('2d'),pixels=g.createImageData(w,h);
-      for(let at=0;at<w*h;at++)if(labels[at]===label){const y=Math.floor(at/w),x=at%w,leg=label?bones[label===1?'near':'far']:null,boot=name.endsWith('Boot');if(leg){const dx=leg.toe.x-leg.heel.x,dy=leg.toe.y-leg.heel.y,length=Math.hypot(dx,dy),above=((x-leg.ankle.x)*dy-(y-leg.ankle.y)*dx)*frame.sourceFace/length;if(boot?above>15:above < 8)continue;if(name==='nearBoot'&&hem&&y<hemAt(x)-2)continue;}for(let k=0;k<4;k++)pixels.data[at*4+k]=source.data[at*4+k];}
+      for(let at=0;at<w*h;at++)if(labels[at]===label){const y=Math.floor(at/w),x=at%w,leg=label?bones[label===1?'near':'far']:null,boot=name.endsWith('Boot');if(leg){const dx=leg.toe.x-leg.heel.x,dy=leg.toe.y-leg.heel.y,length=Math.hypot(dx,dy),above=((x-leg.ankle.x)*dy-(y-leg.ankle.y)*dx)*frame.sourceFace/length;if(boot?above>15:above < 8)continue;if(name==='nearBoot'&&hem&&y<hemAt(x))continue;}for(let k=0;k<4;k++)pixels.data[at*4+k]=source.data[at*4+k];}
       g.putImageData(pixels,0,0);parts[name]=tile;
     }
+    // Ownership masks can leave a few isolated translucent source specks below
+    // a hand. Keep every substantial body/hand/bag component, discard the dots.
+    const upperG=parts.upper.getContext('2d',{willReadFrequently:true}),upperPixels=upperG.getImageData(0,0,w,h),upperSeen=new Uint8Array(w*h),upperComponents=[];
+    for(let seed=0;seed<w*h;seed++)if(!upperSeen[seed]&&upperPixels.data[seed*4+3]){const queue=[seed];upperSeen[seed]=1;for(let head=0;head<queue.length;head++){const at=queue[head],x=at%w,y=Math.floor(at/w);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const xx=x+dx,yy=y+dy,next=yy*w+xx;if(xx<0||xx>=w||yy<0||yy>=h||upperSeen[next]||!upperPixels.data[next*4+3])continue;upperSeen[next]=1;queue.push(next);}}upperComponents.push(queue);}
+    const upperMinimum=Math.max(24,upperComponents.reduce((max,p)=>Math.max(max,p.length),0)*.002);for(const component of upperComponents)if(component.length<upperMinimum)for(const at of component)upperPixels.data[at*4+3]=0;upperG.putImageData(upperPixels,0,0);
     // Complete near-leg material is shared by both chains. The far source
     // thigh is occluded in the authored step and must not become exposed fins.
     const leg=typeof OffscreenCanvas==='function'?new OffscreenCanvas(w,h):document.createElement('canvas');leg.width=w;leg.height=h;const lg=leg.getContext('2d',{willReadFrequently:true});
@@ -238,19 +248,20 @@
       for(let i=0;i<48;i++)for(const side of ['near','far']){
         const leg=feet[side],index=side==='far'?.5:0,f=foot(i/48+index,h,half),source=leg.source,angle=front*f.angle-Math.atan2((source.toe.y-source.heel.y)*front,(source.toe.x-source.heel.x)*front),offset=rotate({x:(source.ankle.x-source.sole.x)*s*leg.projection,y:(source.ankle.y-source.sole.y)*s*leg.projection},angle),ankle={x:front*(f.x+(side==='near'?1:-1)*h*.035),y:leg.floor+f.y+offset.y},dx=ankle.x-leg.hipOffset.x,reach=(leg.thigh+leg.shin)*.98,vertical=Math.sqrt(Math.max(reach*reach-dx*dx,reach*reach*.15));baseline=Math.max(baseline,ankle.y-vertical-leg.hipOffset.y);
       }
-      parts.pelvisBaseline.set(h,baseline+h*.006);
+      baseline+=h*.006;parts.pelvisBaseline.set(h,baseline);
     }
     const pelvisY=baseline-h*.004*(1-Math.cos(phase*TAU*2)),anchor={x:parts.pelvis.x,y:nearSource.hip.y};
     const bodyPoint=p=>{const a=rotate({x:(p.x-anchor.x)*s,y:(p.y-anchor.y)*s},sway);return{x:a.x+bodyX,y:a.y+pelvisY};};
     const landmarks={};c.save();c.scale(flip,1);
     for(const side of ['far','near']){
       const leg=feet[side],source=nearSource,ss=s*leg.projection,hip={x:leg.hipOffset.x+bodyX,y:pelvisY+leg.hipOffset.y},knee=solveWalkingKnee(hip,leg.ankle,leg.thigh,leg.shin,front),thighAngle=Math.atan2(knee.y-hip.y,knee.x-hip.x)-Math.atan2(source.knee.y-source.hip.y,source.knee.x-source.hip.x),shinAngle=Math.atan2(leg.ankle.y-knee.y,leg.ankle.x-knee.x)-Math.atan2(source.ankle.y-source.knee.y,source.ankle.x-source.knee.x);
-      const paint=(image,pivot,target,angle)=>{c.save();c.translate(target.x,target.y);c.rotate(angle);c.scale(ss,ss);c.translate(-pivot.x,-pivot.y);c.drawImage(image,0,0);c.restore();};
       c.save();c.translate(leg.sole.x,leg.sole.y);c.rotate(leg.angle);c.scale(ss,ss);c.translate(-leg.source.sole.x,-leg.source.sole.y);c.drawImage(parts.nearBoot,0,0);c.restore();
       const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);},down={x:source.ankle.x-source.hip.x,y:source.ankle.y-source.hip.y},dl=Math.hypot(down.x,down.y),map=p=>{const along=((p.x-source.knee.x)*down.x+(p.y-source.knee.y)*down.y)/dl,blend=smooth((along+12)/24),angle=thighAngle+(shinAngle-thighAngle)*blend,a=rotate({x:(p.x-source.knee.x)*ss,y:(p.y-source.knee.y)*ss},angle);return{x:knee.x+a.x,y:knee.y+a.y};};
-      const bounds=walkingAnatomy[frame.variant].clean,xx=bounds?bounds.map(p=>p[0]):[0,frame.tile.width],yy=bounds?bounds.map(p=>p[1]):[parts.waist,source.ankle.y+18],x0=Math.min(...xx),x1=Math.max(...xx),y0=Math.min(...yy),y1=Math.max(...yy),nx=Math.ceil((x1-x0)/6),ny=Math.ceil((y1-y0)/6),grid=Array.from({length:ny+1},(_,row)=>Array.from({length:nx+1},(_,col)=>{const p={x:x0+(x1-x0)*col/nx,y:y0+(y1-y0)*row/ny};return{source:p,target:map(p)};}));
-      for(let row=0;row<ny;row++)for(let col=0;col<nx;col++){const a=grid[row][col],b=grid[row][col+1],d=grid[row+1][col+1],e=grid[row+1][col];triangle(c,parts.leg,[a.source,b.source,d.source],[a.target,b.target,d.target]);triangle(c,parts.leg,[a.source,d.source,e.source],[a.target,d.target,e.target]);}
-      landmarks[side]={hip,knee,ankle:leg.ankle,cuff:leg.ankle,sole:leg.sole,heel:leg.heel,toe:leg.toe,stance:leg.f.stance,thigh:leg.thigh,shin:leg.shin,floor:leg.floor,renderedFromSource:true,source:{image:frame.source,pose:frame.pose,points:source,bootPoints:leg.source,projection:leg.projection},sourcePoints:source};
+      const bounds=walkingAnatomy[frame.variant].clean,xx=[...bounds.map(p=>p[0]),source.hip.x,source.knee.x,source.ankle.x],yy=[...bounds.map(p=>p[1]),source.hip.y,source.knee.y,source.ankle.y],x0=Math.min(...xx),x1=Math.max(...xx),y0=Math.min(...yy),y1=Math.max(...yy),nx=Math.ceil((x1-x0)/6),ny=Math.ceil((y1-y0)/6),cuts=a=>a.sort((a,b)=>a-b).filter((v,i,s)=>!i||v-s[i-1]>1e-7),xs=cuts([...Array.from({length:nx+1},(_,i)=>x0+(x1-x0)*i/nx),source.hip.x,source.knee.x,source.ankle.x]),ys=cuts([...Array.from({length:ny+1},(_,i)=>y0+(y1-y0)*i/ny),source.hip.y,source.knee.y,source.ankle.y]),grid=ys.map(y=>xs.map(x=>{const p={x,y};return{source:p,target:map(p)};}));
+      for(let row=0;row<ys.length-1;row++)for(let col=0;col<xs.length-1;col++){const a=grid[row][col],b=grid[row][col+1],d=grid[row+1][col+1],e=grid[row+1][col];triangle(c,parts.leg,[a.source,b.source,d.source],[a.target,b.target,d.target]);triangle(c,parts.leg,[a.source,d.source,e.source],[a.target,d.target,e.target]);}
+      const vertex=p=>grid[ys.findIndex(y=>Math.abs(y-p.y)<1e-6)][xs.findIndex(x=>Math.abs(x-p.x)<1e-6)].target,painted={hip:vertex(source.hip),knee:vertex(source.knee),ankle:vertex(source.ankle)};
+      for(const [name,point]of Object.entries(painted)){const planned=name==='hip'?hip:name==='knee'?knee:leg.ankle;if(Math.hypot(point.x-planned.x,point.y-planned.y)>1e-5)throw Error('Painted NPC joint misses anatomical chain: '+frame.variant+'/'+side+'/'+name);}
+      landmarks[side]={...painted,cuff:painted.ankle,sole:leg.sole,heel:leg.heel,toe:leg.toe,stance:leg.f.stance,thigh:leg.thigh,shin:leg.shin,floor:leg.floor,renderedFromSource:true,source:{image:frame.source,pose:frame.pose,points:source,bootPoints:leg.source,projection:leg.projection},sourcePoints:source};
     }
     const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
     const upperPoint=p=>{const a=bodyPoint(p),down=smooth((p.y-(parts.waist-h/s*.35))/(h/s*.27)),outer=smooth((Math.abs(p.x-anchor.x)-h/s*.14)/(h/s*.17)),side=Math.sign(p.x-anchor.x)||1,arm=down*outer;return{x:a.x+side*Math.cos(phase*TAU)*h*.030*arm,y:a.y-h*.004*Math.sin(phase*TAU)**2*arm};};
@@ -284,7 +295,7 @@
         if(performance.now()-slice>2){await renderCache.yieldTask();slice=performance.now();}
       }
       if([...walkBanks.values()].every(b=>b.built===WALK_PHASES))finishCache();
-    })().catch(error=>{bank.error=String(error);cacheState.mode='compiled-with-cooperative-fallback';if(!cacheWorker)startCacheWorker();scheduleWalkCache();});
+    })().catch(error=>{bank.error=String(error);bank.fallback=true;cacheState.mode='compiled-with-cooperative-fallback';if(!cacheWorker)startCacheWorker();scheduleWalkCache();});
     return bank.loading;
   }
   function preloadAll(){startWalkCache();return Promise.all([...walkBanks.keys()].map(warmVariant));}
@@ -294,6 +305,7 @@
     if(cacheWorkerURL){URL.revokeObjectURL(cacheWorkerURL);cacheWorkerURL=null;}
   }
   function acceptPose(bank,index,image,details,elapsed,onMain){
+    if(bank.frames[index]){image.close?.();return;}
     const frame=profiles[bank.variant].poses.walkA||profiles[bank.variant].poses.idle;
     const attribution={sourceAsset:frame.source.split('/').pop(),sourceRect:frame.rect.join(','),sourcePose:frame.pose,sourceVariant:String(frame.variant),sourceTransform:'walk-cache',sourcePhase:String(index/WALK_PHASES)};
     // ImageBitmap and Canvas draws carry the same original-source attribution.
@@ -321,7 +333,7 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
   }
   function scheduleWalkCache(){
     if(cacheState.scheduled||cacheState.complete||workerJob)return;
-    const pending=[...walkBanks.values()].filter(bank=>bank.requested&&bank.built<WALK_PHASES);
+    const pending=[...walkBanks.values()].filter(bank=>bank.requested&&bank.built<WALK_PHASES&&(!preparedManifest||bank.fallback));
     if(!pending.length){if([...walkBanks.values()].every(b=>b.built===WALK_PHASES))finishCache();return;}
     const now=performance.now(),eligible=cacheWorker?pending.filter(b=>b.workerReady):pending;
     if(!eligible.length)return;

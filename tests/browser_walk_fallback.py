@@ -3,6 +3,7 @@
 This checks cooperative fallback liveness and bounded output. It is not a
 performance benchmark or a replacement for visual anatomy review.
 """
+import argparse
 import functools
 import hashlib
 import json
@@ -27,6 +28,9 @@ def hashes():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--one', action='store_true', help='only one missing pack; other packs load normally')
+    args = parser.parse_args()
     OUT.mkdir(exist_ok=True)
     frozen = hashes()
     server = ThreadingHTTPServer(('127.0.0.1', 0),
@@ -47,6 +51,9 @@ def main():
             page.on('pageerror', lambda e: errors.append(str(e)))
 
             def block_pack(route):
+                if args.one and '/npc-walk-0-v20.png' not in route.request.url:
+                    route.continue_()
+                    return
                 missing.append(route.request.url)
                 route.fulfill(status=404, body='Intentional missing walking pack')
 
@@ -59,7 +66,7 @@ def main():
             page.evaluate('BearlyNpcMotion.preloadAll()')
             page.wait_for_function('BearlyNpcMotion.cacheStats().complete', timeout=120000)
             cache = page.evaluate('BearlyNpcMotion.cacheStats()')
-            assert len(set(missing)) == 12, missing
+            assert len(set(missing)) == (1 if args.one else 12), missing
             assert cache['frameCount'] == cache['capacity'] == 576, cache
             assert cache['bytes'] <= cache['limitBytes'] == 48 * 1024 * 1024, cache
             assert all(v['frames'] == 48 for v in cache['variants']), cache
@@ -82,11 +89,11 @@ def main():
             assert not unexpected, unexpected
             assert frozen == hashes(), 'Production scripts changed during fallback check'
             result = {'result': 'passed', 'entry': 'autumn-v20.html',
-                      'scenario': 'All walking packs missing; no Worker/OffscreenCanvas; zero idle budget',
+                      'scenario': ('One walking pack missing; others load normally' if args.one else 'All walking packs missing') + '; no Worker/OffscreenCanvas; zero idle budget',
                       'sourceSHA256': frozen, 'missingPacks': sorted(set(missing)),
                       'cache': cache, 'rendered': rendered,
                       'pageErrors': errors, 'unexpectedHttpFailures': unexpected}
-            (OUT / 'walk-fallback-evidence.json').write_text(json.dumps(result, indent=2) + '\n')
+            (OUT / ('walk-fallback-mixed-evidence.json' if args.one else 'walk-fallback-evidence.json')).write_text(json.dumps(result, indent=2) + '\n')
             print(json.dumps({'result': 'passed', 'frames': cache['frameCount'],
                               'bytes': cache['bytes'], 'renderedIdentities': len(rendered)}))
             browser.close()

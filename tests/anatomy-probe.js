@@ -21,6 +21,13 @@ async ({only}) => {
       maxStep:tops.length?Math.max(...tops.slice(1).map((value,index)=>Math.abs(value-tops[index]))):Infinity};
   }
   const excessiveUpperMotion=(rows,h)=>upperMotion(rows).range>h*.055;
+  function opaqueHeight(data,h){
+    const minimum=Math.max(3,Math.floor(h*.025));let first=null,last=null;
+    for(let y=0;y<H;y++){let count=0;for(let x=0;x<W;x++)count+=data[(y*W+x)*4+3]>=160?1:0;
+      if(count>=minimum){if(first===null)first=y;last=y;}}
+    return first===null?0:last-first+1;
+  }
+  const wrongScale=(height,idleHeight)=>height<idleHeight*.9||height>idleHeight*1.1;
   function connected(data,h){
     const seen=new Uint8Array(W*H),queue=new Int32Array(W*H),parts=[];
     for(let start=0;start<W*H;start++){
@@ -90,7 +97,7 @@ async ({only}) => {
     return out;
   }
   let negativeControls=0;
-  function negativeChecks(rows,label,h,cycle,data){
+  function negativeChecks(rows,label,h,cycle,data,idleHeight){
     if(!rows[0]?.legs?.near?.hip)return;
     const copy=()=>JSON.parse(JSON.stringify(rows));
     const stretched=copy();for(let i=0;i<stretched.length;i++)stretched[i].legs.near.knee.y+=Math.sin(i/N*Math.PI*2)*h*.08;
@@ -108,36 +115,46 @@ async ({only}) => {
     }return altered;};
     const pump=Math.ceil(h*.05),pumping=[{upperEdge:upperEdge(shift(-pump),h)},{upperEdge:upperEdge(shift(pump),h)}];
     if(!excessiveUpperMotion(pumping,h))throw Error('Actual painted excessive-body-bob negative control escaped');negativeControls++;
+    const source=document.createElement('canvas');source.width=W;source.height=H;const sg=source.getContext('2d');sg.putImageData(new ImageData(new Uint8ClampedArray(data),W,H),0,0);
+    const small=document.createElement('canvas');small.width=W;small.height=H;const smallContext=small.getContext('2d');smallContext.translate(X,Y);smallContext.scale(.75,.75);smallContext.translate(-X,-Y);smallContext.drawImage(source,0,0);
+    if(!wrongScale(opaqueHeight(smallContext.getImageData(0,0,W,H).data,h),idleHeight))throw Error('Actual painted character-shrink negative control escaped');negativeControls++;
+    if(Math.abs(opaqueHeight(shift(-Math.ceil(h*.05)),h)-opaqueHeight(data,h))>1)throw Error('Height metric wrongly classifies translation as shrinking');
   }
   function clear(){c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.clearRect(0,0,W,H);}
   function normaliseLegs(legs,flip=1){
     if(!legs)return legs;
     return Object.fromEntries(Object.entries(legs).map(([side,leg])=>[side,{...leg,...Object.fromEntries(['hip','knee','ankle','cuff','sole','heel','toe','contact'].filter(key=>finite(leg[key])).map(key=>[key,{x:leg[key].x*flip,y:leg[key].y}]))}]));
   }
-  function finish(rows,label,h,cycle,bodyFailures,jointInkFailures,data){
+  function finish(rows,label,h,cycle,bodyFailures,jointInkFailures,data,idleHeight){
     const result=analyse(rows,label,h,cycle);
     const upper=upperMotion(rows);result.upperSilhouetteRange=upper.range;
     result.maxAdjacentUpperSilhouetteStep=upper.maxStep;
     if(excessiveUpperMotion(rows,h))result.failures.push({issue:'Painted head/torso pumps excessively during a flat walk',range:upper.range,limit:h*.055,maxAdjacentStep:upper.maxStep});
+    const heights=rows.map(row=>row.opaqueHeight);result.rawIdleOpaqueHeight=idleHeight;
+    result.walkOpaqueHeightRange=[Math.min(...heights),Math.max(...heights)];
+    result.walkIdleHeightRatioRange=result.walkOpaqueHeightRange.map(value=>value/idleHeight);
+    if(heights.some(value=>wrongScale(value,idleHeight)))result.failures.push({issue:'Visible walking stature differs from raw idle by more than10%',rawIdleHeight:idleHeight,walkHeightRange:result.walkOpaqueHeightRange,ratioRange:result.walkIdleHeightRatioRange});
     result.bodyFailures=bodyFailures;result.jointInkFailures=jointInkFailures;
     if(bodyFailures)result.failures.push({issue:'Detached or missing painted body',cases:bodyFailures});
     if(jointInkFailures)result.failures.push({issue:'Reported anatomical joint has no painted body nearby',cases:jointInkFailures});
     families.push(result);for(const failure of result.failures)faults.push({label,...failure});
-    negativeChecks(rows,label,h,cycle,data);
+    negativeChecks(rows,label,h,cycle,data,idleHeight);
   }
   if(only!=='npc')for(const back of [false,true])for(const h of [145,225]){
     const rows=[],cycle=BearlyLocomotion.cycleLength(h);let bodyFailures=0,jointInkFailures=0,last;
+    clear();BearlyHeroRig.draw(c,X,Y,h,1,{state:{hp:100,...(back?{baby:{position:'back'}}:{})},distance:0,weight:0});
+    const idleHeight=opaqueHeight(pixels(),h);
     const board=document.createElement('canvas');board.width=1440;board.height=370;const g=board.getContext('2d');
     for(let i=0;i<N*2;i++){
       clear();BearlyHeroRig.draw(c,X,Y,h,1,{state:{hp:100,...(back?{baby:{position:'back'}}:{})},distance:cycle*i/N,weight:1});
       const audit=BearlyHeroRig.audit(),data=pixels(),legs=normaliseLegs(audit.landmarks);
       if(Math.round((audit.body?.cachePhase||0)*N)%N!==i%N)faults.push({label:`bear-${back?'back':'front'}-${h}`,issue:'Reported stride does not select its requested prepared phase',requested:i%N,actual:audit.body?.cachePhase});
-      rows.push({phase:i/N,distance:cycle*i/N,legs,upperEdge:upperEdge(data,h)});last=data;
+      rows.push({phase:i/N,distance:cycle*i/N,legs,upperEdge:upperEdge(data,h),opaqueHeight:opaqueHeight(data,h)});last=data;
       bodyFailures+=bodyFailure(data,h)?1:0;
       if(legs)for(const leg of Object.values(legs))for(const point of ['hip','knee','ankle'])if(finite(point==='ankle'?ankle(leg):leg[point])&&!ink(data,point==='ankle'?ankle(leg):leg[point],h))jointInkFailures++;
       if(h===145&&i<N&&i%8===0){const x=i/8*240;g.fillStyle='#e7e2d7';g.fillRect(x,0,240,370);g.drawImage(canvas,90,0,240,370,x,0,240,370);g.fillStyle='#202520';g.font='14px Arial';g.fillText(`phase ${(i/N).toFixed(3)}`,x+8,20);}
     }
-    finish(rows,`bear-${back?'back':'front'}-${h}`,h,cycle,bodyFailures,jointInkFailures,last);
+    finish(rows,`bear-${back?'back':'front'}-${h}`,h,cycle,bodyFailures,jointInkFailures,last,idleHeight);
     if(h===145)boards.push({name:`bear-${back?'back':'front'}`,png:board.toDataURL('image/png')});
     // The old renderer changed source at walk weight .45 even without moving
     // phase. Source identity must remain stable throughout starts and stops.
@@ -159,6 +176,8 @@ async ({only}) => {
   }
   if(only!=='bear')for(let variant=0;variant<12;variant++){
     const rows=[],h=145*(variant===9?1.05:variant===11?.84:1);let bodyFailures=0,jointInkFailures=0,last,cycle=h*.72;
+    clear();BearlyNpcMotion.drawPose(c,{variant,pose:'idle',x:X,y:Y,height:h,face:1});
+    const idleHeight=opaqueHeight(pixels(),h);
     // Probe phase zero first so the renderer can expose its actual stride.
     clear();BearlyNpcMotion.draw(c,{id:'anatomy-'+variant,variant,state:'idle',hp:100,moving:true,activity:'walk',distance:0,face:1,civilian:variant>=6},X,Y,145);
     const initial=BearlyNpcMotion.audit();cycle=initial?.details?.cycleLength||cycle;
@@ -168,11 +187,11 @@ async ({only}) => {
       if(details.phaseIndex!==i%N)faults.push({label:`npc-${variant}`,issue:'Reported stride does not select its requested prepared phase',requested:i%N,actual:details.phaseIndex});
       const flip=details.landmarkSpace==='display'?1:(details.flip??((audit?.sourceFace||details.sourceFace||1)<0?-1:1));
       const legs=normaliseLegs(details.landmarks,flip);
-      rows.push({phase:i/N,distance:cycle*i/N,legs,upperEdge:upperEdge(data,h)});last=data;
+      rows.push({phase:i/N,distance:cycle*i/N,legs,upperEdge:upperEdge(data,h),opaqueHeight:opaqueHeight(data,h)});last=data;
       bodyFailures+=bodyFailure(data,h)?1:0;
       if(legs)for(const leg of Object.values(legs))for(const point of ['hip','knee','ankle'])if(finite(point==='ankle'?ankle(leg):leg[point])&&!ink(data,point==='ankle'?ankle(leg):leg[point],h))jointInkFailures++;
     }
-    finish(rows,`npc-${variant}`,h,cycle,bodyFailures,jointInkFailures,last);
+    finish(rows,`npc-${variant}`,h,cycle,bodyFailures,jointInkFailures,last,idleHeight);
   }
   return {families,negativeControls,faults,boards};
 }

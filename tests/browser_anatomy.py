@@ -107,7 +107,8 @@ def main():
                            'limits': {'segmentLengthSpan': .05, 'shoeLengthSpan': .02,
                                       'interiorStanceDriftHeights': .04,
                                       'adjacentJointStepHeights': .12,
-                                      'upperSilhouetteRangeHeights': .055},
+                                      'upperSilhouetteRangeHeights': .055,
+                                      'walkingToRawIdleOpaqueHeightRatio': [.9,1.1]},
                            'measurement': 'manually posed native renderer; no performance claim; visual review required'})
             result['result'] = 'expected-regression' if args.baseline and result['faults'] else 'failed' if result['faults'] else 'passed'
             target = OUT / f"{'baseline-' if args.baseline else ''}anatomy-evidence{('-'+args.only) if args.only else ''}.json"

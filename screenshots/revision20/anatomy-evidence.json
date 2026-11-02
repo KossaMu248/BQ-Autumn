@@ -1,0 +1,908 @@
+{
+  "families": [
+    {
+      "label": "bear-front-145",
+      "height": 145,
+      "cycleLength": 83.65384615384615,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 8.682432694458588e-16,
+          "shinSpan": 9.465488958969719e-16,
+          "shoeSpan": 4.652146003726758e-16,
+          "kneeAngleRange": 1.5820992525261863,
+          "maxJointStep": 3.8275098721428047,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 20.459206560092074,
+          "meanShin": 18.76666749177213
+        },
+        "far": {
+          "thighSpan": 7.61536559308933e-16,
+          "shinSpan": 1.470420893278163e-15,
+          "shoeSpan": 5.675635000796169e-16,
+          "kneeAngleRange": 1.9094942314810166,
+          "maxJointStep": 4.176958146795317,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 18.66076492518999,
+          "meanShin": 16.91284166682402
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -35.07394245099162,
+        48.57990370285452
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 146,
+      "walkOpaqueHeightRange": [
+        137,
+        141
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9383561643835616,
+        0.9657534246575342
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-front-225",
+      "height": 225,
+      "cycleLength": 129.8076923076923,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 8.952552822730618e-16,
+          "shinSpan": 1.219996354711649e-15,
+          "shoeSpan": 5.996099293692274e-16,
+          "kneeAngleRange": 1.582099252526186,
+          "maxJointStep": 5.939239456773314,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 31.74704466221189,
+          "meanShin": 29.120690935508563
+        },
+        "far": {
+          "thighSpan": 7.361520073319712e-16,
+          "shinSpan": 1.4890929046213793e-15,
+          "shoeSpan": 5.486447167436284e-16,
+          "kneeAngleRange": 1.9094942314810153,
+          "maxJointStep": 6.48148677950998,
+          "maxInteriorStanceDrift": 8.526512829121202e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 28.956359366674018,
+          "meanShin": 26.24406465541655
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -54.4250831136077,
+        75.38260919408461
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 227,
+      "walkOpaqueHeightRange": [
+        212,
+        219
+      ],
+      "walkIdleHeightRatioRange": [
+        0.933920704845815,
+        0.9647577092511013
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-back-145",
+      "height": 145,
+      "cycleLength": 83.65384615384615,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 7.216382583754903e-16,
+          "shinSpan": 9.83402234056894e-16,
+          "shoeSpan": 4.833274639117766e-16,
+          "kneeAngleRange": 1.6631219678298534,
+          "maxJointStep": 3.9854273670088305,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 19.692490732396376,
+          "meanShin": 18.063380149871417
+        },
+        "far": {
+          "thighSpan": 5.933899112238171e-16,
+          "shinSpan": 1.0911934907670207e-15,
+          "shoeSpan": 7.370765741300351e-16,
+          "kneeAngleRange": 1.9864047264361036,
+          "maxJointStep": 4.4898858706415945,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 17.961446318526004,
+          "meanShin": 16.279027087593928
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -35.32701273085888,
+        48.32683342298727
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        135,
+        140
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9310344827586207,
+        0.9655172413793104
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-back-225",
+      "height": 225,
+      "cycleLength": 129.8076923076923,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 5.81319708135814e-16,
+          "shinSpan": 8.872473489491087e-16,
+          "shoeSpan": 4.672165484480496e-16,
+          "kneeAngleRange": 1.6631219678298537,
+          "maxJointStep": 6.18428384535853,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 30.557313205442526,
+          "meanShin": 28.029382991179787
+        },
+        "far": {
+          "thighSpan": 7.648136633551401e-16,
+          "shinSpan": 9.844990161142464e-16,
+          "shoeSpan": 5.700058839938949e-16,
+          "kneeAngleRange": 1.9864047264361036,
+          "maxJointStep": 6.967064282030062,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 27.87120980460939,
+          "meanShin": 25.26055927385262
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -54.81777837547068,
+        74.98991393222163
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 225,
+      "walkOpaqueHeightRange": [
+        209,
+        216
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9288888888888889,
+        0.96
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-0",
+      "height": 145,
+      "cycleLength": 72.15094437235636,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 5.855307332286795e-16,
+          "shinSpan": 5.211865789097122e-16,
+          "shoeSpan": 4.896820756407661e-16,
+          "kneeAngleRange": 1.230406629114234,
+          "maxJointStep": 4.75411269900591,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 24.27004068060069,
+          "meanShin": 27.266348156796692
+        },
+        "far": {
+          "thighSpan": 5.974803400292646e-16,
+          "shinSpan": 3.9886727977784026e-16,
+          "shoeSpan": 3.7475669054140165e-16,
+          "kneeAngleRange": 1.273403661969449,
+          "maxJointStep": 4.740121384859062,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 23.784639866988687,
+          "meanShin": 26.721021193660803
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -25.744219687581136,
+        46.49954847972511
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        137,
+        142
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9448275862068966,
+        0.9793103448275862
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 140,
+      "walkNeutralHeightRatioRange": [
+        0.9785714285714285,
+        1.0142857142857142
+      ]
+    },
+    {
+      "label": "npc-1",
+      "height": 145,
+      "cycleLength": 74.33597790752968,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 5.272507403770155e-16,
+          "shinSpan": 5.435528990869772e-16,
+          "shoeSpan": 8.077486873926219e-16,
+          "kneeAngleRange": 1.167487534782351,
+          "maxJointStep": 4.830009319148942,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 26.952744921781242,
+          "meanShin": 26.14438215502561
+        },
+        "far": {
+          "thighSpan": 8.070164393525731e-16,
+          "shinSpan": 5.546458153948738e-16,
+          "shoeSpan": 6.181750158617028e-16,
+          "kneeAngleRange": 1.2818130986945142,
+          "maxJointStep": 4.816755413478936,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 26.41369002334567,
+          "meanShin": 25.62149451192514
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -26.91533210728951,
+        47.50130458455925
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        140,
+        144
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9655172413793104,
+        0.993103448275862
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 143,
+      "walkNeutralHeightRatioRange": [
+        0.9790209790209791,
+        1.006993006993007
+      ]
+    },
+    {
+      "label": "npc-2",
+      "height": 145,
+      "cycleLength": 71.87517938164086,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 5.46872332711218e-16,
+          "shinSpan": 2.8025182031690183e-16,
+          "shoeSpan": 5.73327377890955e-16,
+          "kneeAngleRange": 1.1835537892258816,
+          "maxJointStep": 4.71872352935214,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 25.985689648531192,
+          "meanShin": 25.353724195498035
+        },
+        "far": {
+          "thighSpan": 5.580329925624682e-16,
+          "shinSpan": 4.289568678319926e-16,
+          "shoeSpan": 3.900186244156155e-16,
+          "kneeAngleRange": 1.3004695113457436,
+          "maxJointStep": 4.704851456195322,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 25.46597585556053,
+          "meanShin": 24.846649711588075
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -25.688142146155563,
+        46.27443415910065
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        140,
+        145
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9655172413793104,
+        1
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 144,
+      "walkNeutralHeightRatioRange": [
+        0.9722222222222222,
+        1.0069444444444444
+      ]
+    },
+    {
+      "label": "npc-3",
+      "height": 145,
+      "cycleLength": 69.20994164061298,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 6.661123109799227e-16,
+          "shinSpan": 4.681163531525208e-16,
+          "shoeSpan": 4.2944242393206707e-16,
+          "kneeAngleRange": 1.1798958256184306,
+          "maxJointStep": 4.499536646821233,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 26.66752753431383,
+          "meanShin": 22.76814506612395
+        },
+        "far": {
+          "thighSpan": 5.437651518203435e-16,
+          "shinSpan": 6.368929974864214e-16,
+          "shoeSpan": 6.57309832549082e-16,
+          "kneeAngleRange": 1.2373845659942135,
+          "maxJointStep": 4.487193469031069,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 26.134176983627626,
+          "meanShin": 22.312782164801522
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -24.37804666958404,
+        44.9090792801574
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        140,
+        144
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9655172413793104,
+        0.993103448275862
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 143,
+      "walkNeutralHeightRatioRange": [
+        0.9790209790209791,
+        1.006993006993007
+      ]
+    },
+    {
+      "label": "npc-4",
+      "height": 145,
+      "cycleLength": 77.72701562875507,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 7.521030180531349e-16,
+          "shinSpan": 5.228989022159816e-16,
+          "shoeSpan": 6.351742905679798e-16,
+          "kneeAngleRange": 1.116756292717138,
+          "maxJointStep": 4.973957735428536,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 28.342237115311036,
+          "meanShin": 27.177059762371158
+        },
+        "far": {
+          "thighSpan": 7.674520592378941e-16,
+          "shinSpan": 4.0017773128774146e-16,
+          "shoeSpan": 5.185096249534518e-16,
+          "kneeAngleRange": 1.2351257198765608,
+          "maxJointStep": 4.961866475482024,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 27.775392373004767,
+          "meanShin": 26.633518567123705
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -28.650321618748258,
+        49.153258402168376
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        140,
+        145
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9655172413793104,
+        1
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 143,
+      "walkNeutralHeightRatioRange": [
+        0.9790209790209791,
+        1.013986013986014
+      ]
+    },
+    {
+      "label": "npc-5",
+      "height": 145,
+      "cycleLength": 66.48008639186192,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 7.094716592012362e-16,
+          "shinSpan": 4.747917373219908e-16,
+          "shoeSpan": 4.1648277643575885e-16,
+          "kneeAngleRange": 1.2170174640124438,
+          "maxJointStep": 4.386421287286998,
+          "maxInteriorStanceDrift": 1.4210854715202004e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 25.037742048782818,
+          "meanShin": 22.448033945404237
+        },
+        "far": {
+          "thighSpan": 7.23950672654322e-16,
+          "shinSpan": 4.844813646142752e-16,
+          "shoeSpan": 4.2498242493444715e-16,
+          "kneeAngleRange": 1.3403664599356295,
+          "maxJointStep": 4.373230552973321,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 24.536987207807183,
+          "meanShin": 21.999073266496207
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -23.008073140386138,
+        43.559740957293855
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 146,
+      "walkOpaqueHeightRange": [
+        139,
+        143
+      ],
+      "walkIdleHeightRatioRange": [
+        0.952054794520548,
+        0.9794520547945206
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 141,
+      "walkNeutralHeightRatioRange": [
+        0.9858156028368794,
+        1.0141843971631206
+      ]
+    },
+    {
+      "label": "npc-6",
+      "height": 145,
+      "cycleLength": 58.00000000000001,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 6.601158468473472e-16,
+          "shinSpan": 5.540531185929139e-16,
+          "shoeSpan": 6.414148301058588e-16,
+          "kneeAngleRange": 1.2504764257595526,
+          "maxJointStep": 3.9946146714456274,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 21.527819371511445,
+          "meanShin": 19.236677276484183
+        },
+        "far": {
+          "thighSpan": 8.419844985297792e-16,
+          "shinSpan": 5.653603250948119e-16,
+          "shoeSpan": 2.1816830955981597e-16,
+          "kneeAngleRange": 1.4003396545113722,
+          "maxJointStep": 3.9759263852249807,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 21.097262984081226,
+          "meanShin": 18.85194373095444
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -18.849174653090348,
+        39.259754912463094
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 146,
+      "walkOpaqueHeightRange": [
+        140,
+        144
+      ],
+      "walkIdleHeightRatioRange": [
+        0.958904109589041,
+        0.9863013698630136
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 143,
+      "walkNeutralHeightRatioRange": [
+        0.9790209790209791,
+        1.006993006993007
+      ]
+    },
+    {
+      "label": "npc-7",
+      "height": 145,
+      "cycleLength": 64.469503857105,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 8.923234416687355e-16,
+          "shinSpan": 4.809385091688238e-16,
+          "shoeSpan": 4.374389354419776e-16,
+          "kneeAngleRange": 1.1880608890163957,
+          "maxJointStep": 4.28290449299324,
+          "maxInteriorStanceDrift": 1.7763568394002505e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 23.888515169947112,
+          "meanShin": 22.161130442270693
+        },
+        "far": {
+          "thighSpan": 6.070227494345142e-16,
+          "shinSpan": 4.907535807845142e-16,
+          "shoeSpan": 3.347746954913096e-16,
+          "kneeAngleRange": 1.324407251646214,
+          "maxJointStep": 4.26958187289922,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 23.41074486654816,
+          "meanShin": 21.717907833425272
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -22.0595318039494,
+        42.50770893880119
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        138,
+        142
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9517241379310345,
+        0.9793103448275862
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 141,
+      "walkNeutralHeightRatioRange": [
+        0.9787234042553191,
+        1.0070921985815602
+      ]
+    },
+    {
+      "label": "npc-8",
+      "height": 145,
+      "cycleLength": 63.814199248391056,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 7.311060889438799e-16,
+          "shinSpan": 6.676549237214911e-16,
+          "shoeSpan": 3.366986195736614e-16,
+          "kneeAngleRange": 1.211657395210645,
+          "maxJointStep": 4.2192885682904135,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 24.296840995624706,
+          "meanShin": 21.284729896083252
+        },
+        "far": {
+          "thighSpan": 7.460266213713064e-16,
+          "shinSpan": 3.4064026720484227e-16,
+          "shoeSpan": 3.4357001997312324e-16,
+          "kneeAngleRange": 1.344358758438795,
+          "maxJointStep": 4.206530780433765,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 23.8109041757122,
+          "meanShin": 20.859035298161594
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -21.713071800258668,
+        42.19160810490472
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        136,
+        141
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9379310344827586,
+        0.9724137931034482
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 140,
+      "walkNeutralHeightRatioRange": [
+        0.9714285714285714,
+        1.0071428571428571
+      ]
+    },
+    {
+      "label": "npc-9",
+      "height": 152.25,
+      "cycleLength": 86.27500000000002,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 7.002196720632135e-16,
+          "shinSpan": 4.387224416150974e-16,
+          "shoeSpan": 6.070587187002626e-16,
+          "kneeAngleRange": 1.0718985436849555,
+          "maxJointStep": 5.447616434359974,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 30.44227822105324,
+          "meanShin": 32.391446999808494
+        },
+        "far": {
+          "thighSpan": 7.145098694522579e-16,
+          "shinSpan": 5.595949510396653e-16,
+          "shoeSpan": 4.1296511476208234e-16,
+          "kneeAngleRange": 1.1850148224259878,
+          "maxJointStep": 5.435491799611977,
+          "maxInteriorStanceDrift": 5.684341886080802e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 29.83343265663221,
+          "meanShin": 31.74361805981231
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -32.405152677008026,
+        53.93212348834626
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 152,
+      "walkOpaqueHeightRange": [
+        153,
+        156
+      ],
+      "walkIdleHeightRatioRange": [
+        1.006578947368421,
+        1.0263157894736843
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 156,
+      "walkNeutralHeightRatioRange": [
+        0.9807692307692307,
+        1
+      ]
+    },
+    {
+      "label": "npc-10",
+      "height": 145,
+      "cycleLength": 77.24016556879924,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 6.709634321766455e-16,
+          "shinSpan": 4.952064683615613e-16,
+          "shoeSpan": 5.648701165571197e-16,
+          "kneeAngleRange": 1.1718258759378555,
+          "maxJointStep": 4.953291388022528,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 26.47471910112363,
+          "meanShin": 28.696827733732956
+        },
+        "far": {
+          "thighSpan": 5.477252507564458e-16,
+          "shinSpan": 5.053127228179179e-16,
+          "shoeSpan": 3.842653854130064e-16,
+          "kneeAngleRange": 1.2774902105854014,
+          "maxJointStep": 4.940749990312067,
+          "maxInteriorStanceDrift": 4.263256414560601e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 25.94522471910113,
+          "meanShin": 28.1228911790584
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -28.33297592808767,
+        48.97051179347168
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 145,
+      "walkOpaqueHeightRange": [
+        144,
+        149
+      ],
+      "walkIdleHeightRatioRange": [
+        0.993103448275862,
+        1.0275862068965518
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 147,
+      "walkNeutralHeightRatioRange": [
+        0.9795918367346939,
+        1.0136054421768708
+      ]
+    },
+    {
+      "label": "npc-11",
+      "height": 121.8,
+      "cycleLength": 60.43159426330599,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 6.685063555818171e-16,
+          "shinSpan": 3.243331698036838e-16,
+          "shoeSpan": 6.376756540943984e-16,
+          "kneeAngleRange": 1.2328944756009246,
+          "maxJointStep": 3.9254819010118394,
+          "maxInteriorStanceDrift": 1.4210854715202004e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 21.257620958343704,
+          "meanShin": 21.90780351544635
+        },
+        "far": {
+          "thighSpan": 6.821493424304276e-16,
+          "shinSpan": 4.96428321128089e-16,
+          "shoeSpan": 4.3379296196897843e-16,
+          "kneeAngleRange": 1.3356740145966286,
+          "maxJointStep": 3.9145684768605538,
+          "maxInteriorStanceDrift": 2.842170943040401e-14,
+          "maxInteriorStanceRise": 0,
+          "uniqueSourceMappings": 1,
+          "meanThigh": 20.83246853917677,
+          "meanShin": 21.469647445137355
+        }
+      },
+      "failures": [],
+      "leadRange": [
+        -21.548472706841302,
+        38.93884360185672
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "rawIdleOpaqueHeight": 122,
+      "walkOpaqueHeightRange": [
+        120,
+        124
+      ],
+      "walkIdleHeightRatioRange": [
+        0.9836065573770492,
+        1.0163934426229508
+      ],
+      "bodyFailures": 0,
+      "jointInkFailures": 0,
+      "runtimeNeutralOpaqueHeight": 122,
+      "walkNeutralHeightRatioRange": [
+        0.9836065573770492,
+        1.0163934426229508
+      ]
+    }
+  ],
+  "negativeControls": 96,
+  "faults": [],
+  "entry": "autumn-v20.html",
+  "baseline": false,
+  "baselineCommit": null,
+  "sourceSHA256": {
+    "js/locomotion.js": "385f3cd89826a545a4d2bb3827b9d9444bf692af55a70a5fbf18596c8147bcaf",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/hero-rig.js": "151088e709ccd6081fa74f08898e4ad8f4990a450efd86e27c987dbb58bbe5c1",
+    "js/illustrated-kids.js": "ae3a7dd4d5409ae8562f427bc655c494f8a46ef2c1862ea2bb640449a0f03444",
+    "js/npc-motion.js": "e5f38eaa2bfc1fc26e74ca1eda6f771b958cb96ccb7d826f124cc207cd7f4f49",
+    "assets/art/bear-idle-lower-v18.png": "ea49613d5e7954e5be0b8e9d0cb6ead8aa013a371d9c67d0094fa47dad7a7cf9",
+    "assets/art/front-carrier-v7.png": "3ebe5734b486736887c674f4676eb69f24aad260a94c26457b57688676c5ebd6",
+    "assets/art/back-carrier-v11.png": "a4a74fd46d6a138ede03c9dc201e0e78ebc085fc6effcae827f4d7e269099d0b",
+    "assets/cache/npc-walk-7-v20.png": "7a42f0543267e20c101f6eb625c9afe8aa7798ead9125611b51b56a4f2741cd3",
+    "assets/cache/npc-walk-2-v20.png": "4a85c45ba4c466d6a4bf632113b4d657573d2022805c8382544722d329d66413",
+    "assets/cache/npc-walk-v20-manifest.json": "676b2675f4140e434396eefd6d5d3ab1a86b1eb8cb716e3138510ff454486e76",
+    "assets/cache/npc-walk-6-v20.png": "9a36d3bb9f885a449d98d9954a8b7122397a310e4d0df144b83eee8a1ddd27dd",
+    "assets/cache/npc-walk-9-v20.png": "a0e92e9939754a258ce7f75c2fc3e024cb114792b7f17fdcf56449f807314dba",
+    "assets/cache/npc-walk-0-v20.png": "1a029744f1ba845b6dbdf5a74a33f47077dac7bd6a1ba2131080205cfc173fa2",
+    "assets/cache/npc-walk-5-v20.png": "cf91c5c95302c227e29e336dad53698e24eddc77a782f50e4191146d365907fa",
+    "assets/cache/npc-walk-10-v20.png": "ca3f8afdf67a74aeaa5671f65626f17265e2bee23fbfe5a2fedfe3203abe3ab7",
+    "assets/cache/npc-walk-4-v20.png": "58d38a999773ce86b4031f8d5ac22eaf63074837c523f3d6e9a64cf9d569ce9f",
+    "assets/cache/npc-walk-8-v20.png": "5d7219a0a35a255184ec8f19735852ff21b2550cbdf34bec185212e78d7d7b92",
+    "assets/cache/npc-walk-11-v20.png": "0997ce1f6875f6a9ce75b3bc0e6b8a1f37cc419eb81e4baec21973c2d691dda1",
+    "assets/cache/npc-idle-v20.png": "b1cb7256d416c99e234715730e7bf561108645fd6af5b20b846725190454e3f4",
+    "assets/cache/npc-walk-1-v20.png": "271951686baabae4d248b7e4487ef77f5fa92fed8a8daf688c19523a3a7bf1fb",
+    "assets/cache/npc-walk-3-v20.png": "9c1b1e7064383dbd7aa435a3c8d5a541a5d106a8e7afb114bb47a819332150b1"
+  },
+  "pageErrors": [],
+  "httpFailures": [],
+  "limits": {
+    "segmentLengthSpan": 0.05,
+    "shoeLengthSpan": 0.02,
+    "interiorStanceDriftHeights": 0.04,
+    "adjacentJointStepHeights": 0.12,
+    "upperSilhouetteRangeHeights": 0.055,
+    "walkingToRawIdleOpaqueHeightRatio": [
+      0.9,
+      1.1
+    ]
+  },
+  "measurement": "manually posed native renderer; no performance claim; visual review required",
+  "result": "passed"
+}

@@ -14,6 +14,7 @@ from pathlib import Path
 from threading import Thread
 
 from playwright.sync_api import sync_playwright
+from browser_encounters import provoke_existing_gang
 
 ROOT = Path(__file__).resolve().parents[1]
 SHOTS = ROOT / "screenshots" / "revision20"
@@ -478,13 +479,25 @@ def game_controls(browser, base, errors, failures, width, height, mobile=False):
     page.clock.run_for(450)
     assert page.evaluate("BearlyHeroRig.audit().pose") == "grab"
     evidence.append(game_capture(page, f"original-baby-grab-{width}", "brace"))
+    # Keep the genuine held pose while earlier maul dust clears. Its intended
+    # translucent combat layer changes source RGB at the baby's collar; that
+    # cannot serve as an uncovered native-pixel continuity reference. Retain
+    # the early actual throw frame before the flying NPC crosses the carrier.
+    page.clock.run_for(300)
+    assert page.evaluate("!!BearlyVisits.audit().combat.held")
     page.locator(".area-grab").tap() if mobile else page.keyboard.press("g")
     page.clock.run_for(100)
-    assert not page.evaluate("BearlyVisits.audit().combat.held")
-    evidence.append(game_capture(page, f"original-baby-throw-{width}", "terror"))
+    throw_state=page.evaluate("BearlyVisits.audit().combat")
+    assert not throw_state['held'] and any(n['state']=='screen' for n in throw_state['npcs']),throw_state
+    assert all(e['age']>=.85 for e in throw_state['effects'] if e['kind']=='claws'),throw_state['effects']
+    assert any(e['kind']=='throw' and 0<e['age']<.65 for e in throw_state['effects']),throw_state['effects']
+    thrown=game_capture(page, f"original-baby-throw-{width}", "terror")
+    thrown['effectAges']=[{'kind':e['kind'],'age':e['age']} for e in throw_state['effects']]
+    evidence.append(thrown)
     page.clock.run_for(1800)
     assert page.evaluate("BearlyVisits.audit().baby") == "back-carrier"
     evidence.append(game_capture(page, f"original-baby-back-{width}", "idle"))
+    provocation=None
     if not mobile:
         page.evaluate("BEARLY_DEBUG_MENU.warp(BearlyNeighbourhood.entrance(BearlyNeighbourhood.scenes.find(b=>b.key==='pizzeria')).x/1.5)")
         page.clock.run_for(100)
@@ -500,15 +513,19 @@ def game_controls(browser, base, errors, failures, width, height, mobile=False):
         evidence.append(game_capture(page, "original-baby-genuine-shop-talk", "point"))
         page.clock.run_for(3200)
         evidence.append(game_capture(page, "original-baby-talk-ended", "idle"))
-        # The second original hostile crew stands in open light. The first
-        # crew's underpass intentionally shades every rendered face pixel.
+        # Provoke the second real crew with E in open light. Crews now chill
+        # until bothered; waiting at a distance cannot produce a genuine hit.
+        # The first crew's underpass intentionally shades every face pixel.
         page.evaluate("BEARLY_DEBUG_MENU.settings.godMode=false;BEARLY_DEBUG_MENU.warp(7260/1.5)")
         page.clock.run_for(100)
         page.keyboard.press("q")
         page.clock.run_for(2300)
+        provocation=provoke_existing_gang(page)
         saw_hurt = False
         saw_defeat = False
-        for _ in range(160):
+        # Half-heart rocks arrive about2.8s apart at this safe open-light lane.
+        # Allow ten real contacts from100HP; no health or shot is injected.
+        for _ in range(320):
             page.clock.run_for(100)
             combat = page.evaluate("BearlyVisits.audit().combat")
             if not saw_hurt and 0 < combat["hp"] < 100 and combat["hurt"]:
@@ -524,7 +541,9 @@ def game_controls(browser, base, errors, failures, width, height, mobile=False):
                 evidence.append(game_capture(page, "original-baby-real-defeat", "terror"))
                 saw_defeat = True
                 break
-        assert saw_hurt and saw_defeat
+        if not (saw_hurt and saw_defeat):
+            final=page.evaluate("BearlyVisits.audit().combat")
+            raise AssertionError({'sawHurt':saw_hurt,'sawDefeat':saw_defeat,'hp':final['hp'],'stats':final['stats'],'contacts':final['contacts'][-10:]})
     if mobile:
         for selector in [".area-jump", ".area-grab", ".area-maul", ".area-exit"]:
             box = page.locator(selector).bounding_box()
@@ -534,7 +553,7 @@ def game_controls(browser, base, errors, failures, width, height, mobile=False):
         assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
     assert not page.evaluate("window.__looseChair"), "A separate bicycle-seat baby was rendered on foot"
     context.close()
-    return {"bikeSources": bike, "controls": evidence}
+    return {"bikeSources": bike, "controls": evidence, "hostileProvocation":provocation}
 
 
 def main():

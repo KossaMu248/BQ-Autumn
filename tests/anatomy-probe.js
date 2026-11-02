@@ -178,6 +178,9 @@ async ({only}) => {
     const rows=[],h=145*(variant===9?1.05:variant===11?.84:1);let bodyFailures=0,jointInkFailures=0,last,cycle=h*.72;
     clear();BearlyNpcMotion.drawPose(c,{variant,pose:'idle',x:X,y:Y,height:h,face:1});
     const idleHeight=opaqueHeight(pixels(),h);
+    clear();BearlyNpcMotion.draw(c,{id:'neutral-anatomy-'+variant,variant,state:'idle',hp:100,moving:false,activity:'idle',age:0,face:1,civilian:variant>=6},X,Y,145);
+    const neutralHeight=opaqueHeight(pixels(),h),neutralAudit=BearlyNpcMotion.audit();
+    if(!neutralAudit?.details?.neutral||neutralAudit.details.sourcePose!=='walkA')faults.push({label:`npc-${variant}`,issue:'Runtime neutral does not retain walking source material'});
     // Probe phase zero first so the renderer can expose its actual stride.
     clear();BearlyNpcMotion.draw(c,{id:'anatomy-'+variant,variant,state:'idle',hp:100,moving:true,activity:'walk',distance:0,face:1,civilian:variant>=6},X,Y,145);
     const initial=BearlyNpcMotion.audit();cycle=initial?.details?.cycleLength||cycle;
@@ -192,6 +195,9 @@ async ({only}) => {
       if(legs)for(const leg of Object.values(legs))for(const point of ['hip','knee','ankle'])if(finite(point==='ankle'?ankle(leg):leg[point])&&!ink(data,point==='ankle'?ankle(leg):leg[point],h))jointInkFailures++;
     }
     finish(rows,`npc-${variant}`,h,cycle,bodyFailures,jointInkFailures,last,idleHeight);
+    const family=families.at(-1);family.runtimeNeutralOpaqueHeight=neutralHeight;
+    family.walkNeutralHeightRatioRange=family.walkOpaqueHeightRange.map(value=>value/neutralHeight);
+    if(family.walkOpaqueHeightRange.some(value=>wrongScale(value,neutralHeight)))faults.push({label:`npc-${variant}`,issue:'Walking stature differs from runtime neutral by more than10%',ratioRange:family.walkNeutralHeightRatioRange});
   }
   return {families,negativeControls,faults,boards};
 }

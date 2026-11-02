@@ -25,6 +25,7 @@ def source_hashes():
     paths = [ROOT / ENTRY, *[ROOT / "js" / name for name in ["game.js", "brawler-art.js", "npc-motion.js", "brawler.js", "hero-rig.js", "locomotion.js", "illustrated-visits.js", "street-life.js"]]]
     paths.extend(ROOT / "assets" / "art" / f"npc-motion-{g}-v16.png" for g in "abc")
     paths.extend(ROOT / "assets" / "art" / f"civilian-{kind}-v16.png" for kind in ["standing", "motion", "rest", "reactions"])
+    paths.append(ROOT / 'tests' / 'npc-neutral-probe.js')
     paths.extend(ROOT / "assets" / "art" / f"cast-{kind}-{g}-v15.png" for kind in ["reactions", "screen"] for g in "abc")
     paths.extend(ROOT / 'assets' / 'art' / name for name in ['teen-molotov-poses-v18.png','teen-rock-poses-v18.png','teen-firecracker-poses-v18.png','teen-screen-v18.png','teen-run-opposites-v18.png'])
     paths.extend(ROOT / 'js' / name for name in ['illustrated-kids.js','weapon-effects.js'])
@@ -288,14 +289,22 @@ def main():
                 assert evidence['sourceCoverage']['faultCount'] == 0, evidence['sourceCoverage']
                 cache_before = page.evaluate('BearlyNpcMotion.cacheStats?.() || null')
                 evidence['runtimeMotion'] = page.evaluate(RUNTIME)
+                evidence['neutralMotion'] = page.evaluate((ROOT / 'tests' / 'npc-neutral-probe.js').read_text())
+                assert evidence['neutralMotion']['negativeControls']==28,evidence['neutralMotion']
+                legacy_controls=[c for c in evidence['neutralMotion']['controls'] if c['kind']=='legacy-standing-material']
+                assert len(legacy_controls)==4 and all(c['pixelCaught'] for c in legacy_controls),legacy_controls
                 cache_after = page.evaluate('BearlyNpcMotion.cacheStats?.() || null')
                 if cache_after:
                     assert evidence['runtimeMotion']['cachedFrameCount'] == cache_after['frameCount'], evidence['runtimeMotion']
-                    assert evidence['runtimeMotion']['cacheRGBABytes'] == cache_after['bytes'], evidence['runtimeMotion']
+                    assert evidence['runtimeMotion']['cacheRGBABytes'] == cache_after['walkingBytes'], evidence['runtimeMotion']
+                    assert evidence['neutralMotion']['neutralFrameCount'] == cache_after['neutralCount'] == 12, evidence['neutralMotion']
+                    assert evidence['neutralMotion']['neutralRGBABytes'] == cache_after['neutralBytes'], evidence['neutralMotion']
+                    assert cache_after['walkingBytes']+cache_after['neutralBytes'] == cache_after['bytes'],cache_after
                     assert all(phases == list(range(48)) for phases in evidence['runtimeMotion']['cachedPhases'].values()), evidence['runtimeMotion']
                     assert cache_after['complete'] and cache_after['frameCount'] == cache_after['capacity'] == 576, cache_after
                     assert cache_after['bytes'] <= cache_after['limitBytes'] == 48*1024*1024, cache_after
                     assert sum(v['bytes'] for v in cache_after['variants']) == cache_after['bytes'], cache_after
+                    assert sum(v['neutralBytes'] for v in cache_after['variants']) == cache_after['neutralBytes'], cache_after
                     assert all(v['frames'] == cache_after['phaseCount'] == 48 for v in cache_after['variants']), cache_after
                     assert cache_after['frameCount'] == cache_before['frameCount'] and cache_after['bytes'] == cache_before['bytes'], 'Different sizes/headings must reuse the bounded cache'
                     assert cache_after['hits']-cache_before['hits'] >= 2304, cache_after
@@ -303,6 +312,7 @@ def main():
 
                 (SHOTS / 'street-life-source-evidence.json').write_text(json.dumps({**evidence,'result':'checking','sourceSHA256':source_hashes()},indent=2)+'\n')
                 assert evidence['runtimeMotion']['faultCount'] == 0, evidence['runtimeMotion']
+                assert evidence['neutralMotion']['faultCount'] == 0, evidence['neutralMotion']
                 page.close()
                 evidence.update({"result": "passed", "sourceSHA256": source_hashes(), "pageErrors": errors, "httpFailures": failures})
                 (SHOTS / 'street-life-source-evidence.json').write_text(json.dumps(evidence, indent=2) + '\n')

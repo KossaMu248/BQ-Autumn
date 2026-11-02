@@ -1,0 +1,328 @@
+{
+  "rows": [
+    {
+      "variant": 0,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 1,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 2,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 3,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 4,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 5,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 6,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 7,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 8,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 9,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 10,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 11,
+      "phases": 48,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    }
+  ],
+  "neutrals": [
+    {
+      "variant": 0,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 1,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 2,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 3,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 4,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 5,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 6,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 7,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 8,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 9,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 10,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    },
+    {
+      "variant": 11,
+      "differentChannels": 0,
+      "maxError": 0,
+      "edgeInk": 0
+    }
+  ],
+  "cache": {
+    "preparationMode": "compiled",
+    "cacheFailure": null,
+    "onDemand": true,
+    "visibleComplete": true,
+    "requestedVariants": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "phaseCount": 48,
+    "canonicalHeight": 144,
+    "frameCount": 576,
+    "capacity": 576,
+    "bytes": 41980848,
+    "limitBytes": 50331648,
+    "hits": 576,
+    "misses": 0,
+    "bakes": 576,
+    "buildMs": 5651.600000038743,
+    "maxBuildMs": 40,
+    "mainBuildMs": 0,
+    "maxMainBuildMs": 0,
+    "mode": "compiled",
+    "warmupMs": 8004.300000011921,
+    "complete": true,
+    "variants": [
+      {
+        "variant": 0,
+        "frames": 48,
+        "width": 116,
+        "height": 158,
+        "bytes": 3592288,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 73312
+      },
+      {
+        "variant": 1,
+        "frames": 48,
+        "width": 137,
+        "height": 156,
+        "bytes": 4188912,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 85488
+      },
+      {
+        "variant": 2,
+        "frames": 48,
+        "width": 107,
+        "height": 157,
+        "bytes": 3292604,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 67196
+      },
+      {
+        "variant": 3,
+        "frames": 48,
+        "width": 102,
+        "height": 154,
+        "bytes": 3078768,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 62832
+      },
+      {
+        "variant": 4,
+        "frames": 48,
+        "width": 107,
+        "height": 167,
+        "bytes": 3502324,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 71476
+      },
+      {
+        "variant": 5,
+        "frames": 48,
+        "width": 109,
+        "height": 154,
+        "bytes": 3290056,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 67144
+      },
+      {
+        "variant": 6,
+        "frames": 48,
+        "width": 113,
+        "height": 157,
+        "bytes": 3477236,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 70964
+      },
+      {
+        "variant": 7,
+        "frames": 48,
+        "width": 106,
+        "height": 153,
+        "bytes": 3178728,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 64872
+      },
+      {
+        "variant": 8,
+        "frames": 48,
+        "width": 111,
+        "height": 152,
+        "bytes": 3306912,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 67488
+      },
+      {
+        "variant": 9,
+        "frames": 48,
+        "width": 107,
+        "height": 162,
+        "bytes": 3397464,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 69336
+      },
+      {
+        "variant": 10,
+        "frames": 48,
+        "width": 123,
+        "height": 160,
+        "bytes": 3857280,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 78720
+      },
+      {
+        "variant": 11,
+        "frames": 48,
+        "width": 121,
+        "height": 161,
+        "bytes": 3818276,
+        "hits": 48,
+        "misses": 0,
+        "neutralBytes": 77924
+      }
+    ],
+    "walkingBytes": 41124096,
+    "neutralBytes": 856752,
+    "neutralCount": 12
+  },
+  "result": "passed",
+  "rendererSHA256": "e5f38eaa2bfc1fc26e74ca1eda6f771b958cb96ccb7d826f124cc207cd7f4f49",
+  "manifestSHA256": "676b2675f4140e434396eefd6d5d3ab1a86b1eb8cb716e3138510ff454486e76",
+  "pageErrors": [],
+  "httpFailures": []
+}

@@ -20,7 +20,7 @@ const close=(actual,expected,tolerance=1e-7)=>assert.ok(Math.abs(actual-expected
 
 for(const height of [90,145,225,300]){
   const cycle=gait.cycleLength(height);
-  assert.ok(cycle/height>.70&&cycle/height<.75,'cycle distance matches the authored heel-strike and recovery timing');
+  assert.ok(cycle/height>.56&&cycle/height<.60,'cycle matches the fixed-length short bear legs and planted-contact timing');
   const cadence=120/cycle;
   if(height===145)assert.ok(cadence>1.1&&cadence<1.55,'street walking avoids rapid foot tapping');
   const first=gait.pose(0,height,1),half=gait.pose(cycle/2,height,1);
@@ -35,7 +35,7 @@ for(const height of [90,145,225,300]){
       close(foot.x,q[side].x);close(foot.y,q[side].y);close(foot.angle,q[side].angle);
       if(foot.stance&&next.stance)close(distance+foot.x,distance+.00001+next.x);
     }
-    assert.ok((front-back)/height>.34,'foot travel remains substantially longer than the pre-V16 shuffle');
+    assert.ok((front-back)/height>.29,'visible foot travel remains a stride rather than tiny taps');
     assert.ok(highest/height<-.06&&highest/height>-.10,'swing clears the ground without marching');
   }
   // Heel strike and toe-off stay continuous in position and velocity.
@@ -66,7 +66,9 @@ for(const height of [90,145,225,300])for(const carrier of ['front','back'])for(c
     const leg=audit.landmarks[side];
     assert.equal(audit.authoredLowerBody,true);assert.equal(leg.renderedFromSource,true);assert.equal(leg.rigidShoe,true);
     for(const point of ['hip','knee','cuff','heel','toe','sole'])assert.ok(Number.isFinite(leg[point].x)&&Number.isFinite(leg[point].y),'rendered source landmarks stay finite');
-    assert.equal(leg.source.pose,audit.lowerPose);assert.ok(leg.source.image.startsWith('bear-'));
+    assert.equal(leg.source.pose,audit.lowerPose);assert.equal(leg.source.image,'bear-idle-lower-v18.png','every idle/transition/stride phase uses the same physical leg material');
+    close(Math.hypot(leg.hip.x-leg.knee.x,leg.hip.y-leg.knee.y),leg.thighLength,.0001);
+    close(Math.hypot(leg.knee.x-leg.ankle.x,leg.knee.y-leg.ankle.y),leg.shinLength,.0001);
     const area=(a,b,c)=>(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x),source=leg.source;
     const originalArea=area({x:source.heel[0],y:source.heel[1]},{x:source.toe[0],y:source.toe[1]},{x:source.cuff[0],y:source.cuff[1]});
     const renderedArea=area(leg.heel,leg.toe,leg.cuff);

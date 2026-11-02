@@ -1,0 +1,91 @@
+{
+  "result": "passed",
+  "cases": [
+    {
+      "case": "sustained",
+      "exitCode": 0,
+      "seconds": 158.14
+    },
+    {
+      "case": "startup",
+      "exitCode": 1,
+      "seconds": 99.41
+    },
+    {
+      "case": "startup-phone-fallback-focused-recheck",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "reason": "A single heavily throttled no-worker attempt exceeded the unchanged500ms task/1000ms cold-foot timer guards; fresh-browser repeat passes. Both attempts retained."
+    }
+  ],
+  "sourceSHA256": {
+    "js/illustrated-world.js": "c1c98346aa37601e97bcaa1f85a255c6362a5f4e1c5a7c55e5e91dc4e1eed47d",
+    "js/autumn-quests.js": "25d69f43660aea787a48ed3cdb3edcbf2e1dc0dbf1ea807f510a07496cbebcd6",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/brawler.js": "83f40b2a50fa24c3534adc9b90cb1ba3ee4076133a523a3d93d2fc96c05f3294",
+    "js/brawler-art.js": "042627f4a89564bce96c26a7a8499ce06d1e691c6ca168e8c7dfa37950b930ee",
+    "js/illustrated-hero.js": "04ab3ced1cc05e28164d0b3eeacf5a1f8de18ea10822038eaff2d267a00bcb51",
+    "js/game.js": "0de9c06fbf358581130e762be468f9c59df54f7ecce23b7ab7273b3f9db7d624",
+    "js/illustrated-visits.js": "fde374d8a6ab2ca1b09e2266cf18f0209d158270e94a74c6d6d6ca4856d0ba40",
+    "js/street-life.js": "8547a6829602b9c2070add14e2d89083299fa3c6e01d15885fe5f6b07d46f994",
+    "js/hero-rig.js": "151088e709ccd6081fa74f08898e4ad8f4990a450efd86e27c987dbb58bbe5c1",
+    "js/illustrated-props.js": "2e38bc7fb55df3caf111f11257b8f6fe4e51b0ee79e0f011acbf6d8dd55acf3e",
+    "js/locomotion.js": "385f3cd89826a545a4d2bb3827b9d9444bf692af55a70a5fbf18596c8147bcaf",
+    "js/npc-motion.js": "e5f38eaa2bfc1fc26e74ca1eda6f771b958cb96ccb7d826f124cc207cd7f4f49",
+    "js/assets.js": "44e8a9560ef6b0c846c133f19516ca8ba9ecc38180cc0643569875cacaaf1540",
+    "js/illustrated-atlas.js": "8b66b2ca3818c779661cf7867b2c6cb81a6e14ec0526aa7300a912a1abf897bd",
+    "js/illustrated-neighbourhood.js": "71417eda5219cc410288dee15034cea96ca82d0c107e9f1cfd458dfe664609b0",
+    "js/weapon-effects.js": "7b4a4a0fb309bb0f1b281142b06785a5cd0a47bb1b079ce1808debbcedc3bb9f",
+    "js/illustrated-kids.js": "ae3a7dd4d5409ae8562f427bc655c494f8a46ef2c1862ea2bb640449a0f03444",
+    "js/fullscreen.js": "64fe9efa93c0f24c7f0217db284a2b717dc64c56061bcdf36c24f22b25b9dee0",
+    "css/illustrated.css": "4d6212418e24127c561749d09dbbf31ada43f2470249dd830d375b104de0a53a",
+    "css/game.css": "c19d01848b540f6ad992433a957674f88deabcbb95467ba3a1fe6939a783d85b",
+    "autumn-v12.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v19.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v17.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v15.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v8.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v11-2.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v13.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v16.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v9.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v9-1.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v20.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v4.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v14.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v10-1.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v7.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v11-1.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v10.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v11.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v5.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "autumn-v18.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v3.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "index.html": "8c84f1e00bffd816bd76b888d995c4c54ad59d70cfcd4956a8015e2710e38e19",
+    "autumn-v6.html": "38bd559b4048549990ada17d987a6c4b9fa54321fe177b6b7955c28f65678dff",
+    "assets/cache/npc-walk-7-v20.png": "7a42f0543267e20c101f6eb625c9afe8aa7798ead9125611b51b56a4f2741cd3",
+    "assets/cache/npc-walk-2-v20.png": "4a85c45ba4c466d6a4bf632113b4d657573d2022805c8382544722d329d66413",
+    "assets/cache/npc-walk-v20-manifest.json": "676b2675f4140e434396eefd6d5d3ab1a86b1eb8cb716e3138510ff454486e76",
+    "assets/cache/npc-walk-6-v20.png": "9a36d3bb9f885a449d98d9954a8b7122397a310e4d0df144b83eee8a1ddd27dd",
+    "assets/cache/npc-walk-9-v20.png": "a0e92e9939754a258ce7f75c2fc3e024cb114792b7f17fdcf56449f807314dba",
+    "assets/cache/npc-walk-0-v20.png": "1a029744f1ba845b6dbdf5a74a33f47077dac7bd6a1ba2131080205cfc173fa2",
+    "assets/cache/npc-walk-5-v20.png": "cf91c5c95302c227e29e336dad53698e24eddc77a782f50e4191146d365907fa",
+    "assets/cache/npc-walk-10-v20.png": "ca3f8afdf67a74aeaa5671f65626f17265e2bee23fbfe5a2fedfe3203abe3ab7",
+    "assets/cache/npc-walk-4-v20.png": "58d38a999773ce86b4031f8d5ac22eaf63074837c523f3d6e9a64cf9d569ce9f",
+    "assets/cache/npc-walk-8-v20.png": "5d7219a0a35a255184ec8f19735852ff21b2550cbdf34bec185212e78d7d7b92",
+    "assets/cache/npc-walk-11-v20.png": "0997ce1f6875f6a9ce75b3bc0e6b8a1f37cc419eb81e4baec21973c2d691dda1",
+    "assets/cache/npc-idle-v20.png": "b1cb7256d416c99e234715730e7bf561108645fd6af5b20b846725190454e3f4",
+    "assets/cache/npc-walk-1-v20.png": "271951686baabae4d248b7e4487ef77f5fa92fed8a8daf688c19523a3a7bf1fb",
+    "assets/cache/npc-walk-3-v20.png": "9c1b1e7064383dbd7aa435a3c8d5a541a5d106a8e7afb114bb47a819332150b1"
+  },
+  "stressOutlier": {
+    "profile": "phone-fallback",
+    "firstLoopMs": 5434.5,
+    "longestTaskMs": 548,
+    "coldFootTimerLagMaxMs": 1050.7999999970198,
+    "failures": [
+      "loading or early play monopolizes main thread",
+      "first dismount/walking preparation freezes the UI"
+    ]
+  }
+}

@@ -8,7 +8,7 @@ from pathlib import Path
 from threading import Thread
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
-SHOTS=ROOT/'screenshots'/'revision19';SHOTS.mkdir(parents=True,exist_ok=True)
+SHOTS=ROOT/'screenshots'/'revision20';SHOTS.mkdir(parents=True,exist_ok=True)
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(QuietHandler,directory=str(ROOT)))
@@ -18,7 +18,7 @@ errors,failures=[],[]
 def watch(p):
     p.on('pageerror',lambda e:errors.append(str(e)))
     p.on('response',lambda r:failures.append([r.status,r.url]) if r.status>=400 else None)
-def ready(p,entry='autumn-v19.html'):
+def ready(p,entry='autumn-v20.html'):
     p.clock.resume()
     p.goto(f'{base}/{entry}')
     p.wait_for_function(prepared_ready('window.BearlyAtlas?.ready() && BearlyVisits.audit().artReady && window.BEARLY_DEBUG_MENU?.stats().frames>0'),timeout=60000)

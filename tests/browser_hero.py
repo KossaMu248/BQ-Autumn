@@ -16,8 +16,8 @@ from playwright.sync_api import sync_playwright
 from browser_encounters import provoke_existing_gang
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v19.html"
-SHOTS = ROOT / "screenshots" / "revision19"
+ENTRY = "autumn-v20.html"
+SHOTS = ROOT / "screenshots" / "revision20"
 
 CHAIR_DRAW_AUDIT = r"""(() => {
   window.__heroLooseChairDraws=[];

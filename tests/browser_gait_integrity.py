@@ -1,10 +1,13 @@
-"""V18 opaque-body regression and intermediate-weight visual evidence.
+"""V20 opaque-body regression and intermediate-weight visual evidence.
 
 A source-alpha template uses the same pose and draw transforms at full draw
 alpha, then its core is eroded in final display pixels. Starts/stops must retain
 that source opacity. This catches the V16 alpha crossfade that connectivity alone missed.
 Renderer probes do not alter real game actors. Phase boards require visual review
-for anatomy, artwork, carrier placement and boot shape.
+for anatomy, artwork, carrier placement and boot shape. browser_anatomy.py adds
+fixed-source leg-chain and planted-foot checks against the painted joint audit.
+The independent alpha-grid probe also detects seams already baked into sprites,
+which a mask selected from the baked source's opaque pixels would omit.
 """
 from browser_fixture import prepared_ready
 import argparse
@@ -20,8 +23,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v19.html'
-SHOTS=ROOT/'screenshots'/'revision19'
+ENTRY='autumn-v20.html'
+SHOTS=ROOT/'screenshots'/'revision20'
 
 PROBE=r"""async ({legacyCode}) => {
   const W=360,H=360,X=180,Y=320,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
@@ -162,6 +165,7 @@ class Quiet(SimpleHTTPRequestHandler):
 
 def source_hashes():
     paths=[ROOT/ENTRY,*[ROOT/'js'/name for name in ['hero-rig.js','locomotion.js','baby-passenger.js','npc-motion.js']],*[ROOT/'assets'/'art'/name for name in ['bear-near-contact-v18.png','bear-near-support-v18.png','bear-far-poses-v18.png','bear-idle-lower-v18.png']]]
+    paths.extend([ROOT/'tests'/'alpha-grid-probe.js',ROOT/'tests'/'browser_gait_integrity.py'])
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 
@@ -204,13 +208,14 @@ def main():
             page.goto(f'http://127.0.0.1:{server.server_port}/{ENTRY}')
             page.wait_for_function(prepared_ready('BearlyVisits.audit().artReady&&BearlyHeroRig.ready()&&(!BearlyNpcMotion.cacheStats||BearlyNpcMotion.cacheStats().complete)'),timeout=180000)
             result=page.evaluate(PROBE,{'legacyCode':legacy})
+            result['independentAlphaGrid']=page.evaluate((ROOT/'tests'/'alpha-grid-probe.js').read_text())
             for board in result.pop('boards'):
                 name=f"bear-weight-integrity-{board['carrier']}.png";(SHOTS/name).write_bytes(base64.b64decode(board['png'].split(',',1)[1]))
-            if not result['faultCount']:result['actualControls']=actual_front_frames(page)
+            if not result['faultCount'] and not result['independentAlphaGrid']['faultCount']:result['actualControls']=actual_front_frames(page)
             browser.close()
-        result.update({'entry':ENTRY,'result':'passed' if not result['faultCount'] and not result['footSilhouetteFaults'] else 'failed','sourceSHA256':before,'pageErrors':errors,'httpFailures':failures})
+        result.update({'entry':ENTRY,'result':'passed' if not result['faultCount'] and not result['footSilhouetteFaults'] and not result['independentAlphaGrid']['faultCount'] else 'failed','sourceSHA256':before,'pageErrors':errors,'httpFailures':failures})
         (SHOTS/'bear-weight-integrity-evidence.json').write_text(json.dumps(result,indent=2)+'\n')
-        print(json.dumps(result));assert not result['faultCount'],result;assert not result['footSilhouetteFaults'],result['footSilhouetteFaults'];assert not errors,errors;assert not failures,failures;assert before==source_hashes(),'Source changed while probing'
+        print(json.dumps(result));assert not result['faultCount'],result;assert not result['footSilhouetteFaults'],result['footSilhouetteFaults'];assert not result['independentAlphaGrid']['faultCount'],result['independentAlphaGrid']['faults'];assert result['independentAlphaGrid']['negativeControls']==6,result['independentAlphaGrid'];assert not errors,errors;assert not failures,failures;assert before==source_hashes(),'Source changed while probing'
     finally:server.shutdown();server.server_close()
 
 

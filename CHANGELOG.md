@@ -1,5 +1,13 @@
 # Autumn Ride — standalone updates
 
+## V20 — Anatomical walking
+
+- Rebuild the bear’s walk from one consistent original lower-body material, with connected hip, thigh, knee, shin and ankle joints and complete rigid boots. Put the knee bend inside the shorts, settle the pelvis and keep both feet visibly alternating.
+- Give NPC walking a relaxed side-facing source per identity, measured leg joints, separate footwear and coordinated upper-body motion. Match planted foot travel to actual walking distance; use an atlas of twelve neutral idle frames from the same walkA materials for consistent clothes and body size through starts and stops. Preserve the original authored pose catalog.
+- Preserve original bear/baby artwork, front/back carriers, NPC identities, cycling, encounters, hearts and weapon damage. Retain on-demand walking packs and bounded rendering caches.
+- Add full-cycle anatomy and source-ownership checks, negative controls and reviewed normal-speed footage; retain startup and actual keyboard/touch movement regression coverage.
+- Remove diagonal alpha seams with bounded parallel triangle overlap; select the existing phone backing buffer before first paint when synchronous startup work is slow.
+
 ## V19 — Responsive startup
 
 - Replace large sprite-sheet ownership scans and first-draw scene/material filters with lossless renderer caches generated from the approved V18 pixels.

@@ -1,0 +1,1426 @@
+{
+  "families": [
+    {
+      "label": "bear-front-145",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 0.6821727596410929,
+          "shinSpan": 0.6165017978784804,
+          "shoeSpan": 0.7339607425591494,
+          "kneeAngleRange": 0.9627028974635725,
+          "maxJointStep": 21.841194885842192,
+          "maxInteriorStanceDrift": 1.7452621777770005,
+          "maxInteriorStanceRise": 3.186287047424884,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 19.325763978366755,
+          "meanShin": 11.123263677884061
+        },
+        "far": {
+          "thighSpan": 0.35643124430494333,
+          "shinSpan": 0.6350791112480036,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884729,
+          "maxJointStep": 21.846017041695386,
+          "maxInteriorStanceDrift": 5.39954383846711,
+          "maxInteriorStanceRise": 1.8121297613433436,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.70539823278567,
+          "meanShin": 8.717386088830178
+        }
+      },
+      "failures": [
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "near",
+          "thighSpan": 0.6821727596410929,
+          "shinSpan": 0.6165017978784804,
+          "shoeSpan": 0.7339607425591494,
+          "kneeAngleRange": 0.9627028974635725,
+          "maxJointStep": 21.841194885842192,
+          "maxInteriorStanceDrift": 1.7452621777770005,
+          "maxInteriorStanceRise": 3.186287047424884,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 19.325763978366755,
+          "meanShin": 11.123263677884061
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "near",
+          "thighSpan": 0.6821727596410929,
+          "shinSpan": 0.6165017978784804,
+          "shoeSpan": 0.7339607425591494,
+          "kneeAngleRange": 0.9627028974635725,
+          "maxJointStep": 21.841194885842192,
+          "maxInteriorStanceDrift": 1.7452621777770005,
+          "maxInteriorStanceRise": 3.186287047424884,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 19.325763978366755,
+          "meanShin": 11.123263677884061
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "near",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "near",
+          "thighSpan": 0.6821727596410929,
+          "shinSpan": 0.6165017978784804,
+          "shoeSpan": 0.7339607425591494,
+          "kneeAngleRange": 0.9627028974635725,
+          "maxJointStep": 21.841194885842192,
+          "maxInteriorStanceDrift": 1.7452621777770005,
+          "maxInteriorStanceRise": 3.186287047424884,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 19.325763978366755,
+          "meanShin": 11.123263677884061
+        },
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "far",
+          "thighSpan": 0.35643124430494333,
+          "shinSpan": 0.6350791112480036,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884729,
+          "maxJointStep": 21.846017041695386,
+          "maxInteriorStanceDrift": 5.39954383846711,
+          "maxInteriorStanceRise": 1.8121297613433436,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.70539823278567,
+          "meanShin": 8.717386088830178
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "far",
+          "thighSpan": 0.35643124430494333,
+          "shinSpan": 0.6350791112480036,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884729,
+          "maxJointStep": 21.846017041695386,
+          "maxInteriorStanceDrift": 5.39954383846711,
+          "maxInteriorStanceRise": 1.8121297613433436,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.70539823278567,
+          "meanShin": 8.717386088830178
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "far",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "far",
+          "thighSpan": 0.35643124430494333,
+          "shinSpan": 0.6350791112480036,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884729,
+          "maxJointStep": 21.846017041695386,
+          "maxInteriorStanceDrift": 5.39954383846711,
+          "maxInteriorStanceRise": 1.8121297613433436,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.70539823278567,
+          "meanShin": 8.717386088830178
+        }
+      ],
+      "leadRange": [
+        -73.98317633241888,
+        34.176220473405195
+      ],
+      "upperSilhouetteRange": 4,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-front-225",
+      "height": 225,
+      "cycleLength": 162,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 0.6821727596410928,
+          "shinSpan": 0.61650179787848,
+          "shoeSpan": 0.7339607425591499,
+          "kneeAngleRange": 0.962702897463577,
+          "maxJointStep": 33.891509305617184,
+          "maxInteriorStanceDrift": 2.7081654482746558,
+          "maxInteriorStanceRise": 4.9442385218661995,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 29.988254449189814,
+          "meanShin": 17.260236741544237
+        },
+        "far": {
+          "thighSpan": 0.35643124430494294,
+          "shinSpan": 0.6350791112480034,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884733,
+          "maxJointStep": 33.898991961251454,
+          "maxInteriorStanceDrift": 8.378602507966207,
+          "maxInteriorStanceRise": 2.8119254917396708,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 32.12906622328813,
+          "meanShin": 13.52697841370199
+        }
+      },
+      "failures": [
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "near",
+          "thighSpan": 0.6821727596410928,
+          "shinSpan": 0.61650179787848,
+          "shoeSpan": 0.7339607425591499,
+          "kneeAngleRange": 0.962702897463577,
+          "maxJointStep": 33.891509305617184,
+          "maxInteriorStanceDrift": 2.7081654482746558,
+          "maxInteriorStanceRise": 4.9442385218661995,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 29.988254449189814,
+          "meanShin": 17.260236741544237
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "near",
+          "thighSpan": 0.6821727596410928,
+          "shinSpan": 0.61650179787848,
+          "shoeSpan": 0.7339607425591499,
+          "kneeAngleRange": 0.962702897463577,
+          "maxJointStep": 33.891509305617184,
+          "maxInteriorStanceDrift": 2.7081654482746558,
+          "maxInteriorStanceRise": 4.9442385218661995,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 29.988254449189814,
+          "meanShin": 17.260236741544237
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "near",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "near",
+          "thighSpan": 0.6821727596410928,
+          "shinSpan": 0.61650179787848,
+          "shoeSpan": 0.7339607425591499,
+          "kneeAngleRange": 0.962702897463577,
+          "maxJointStep": 33.891509305617184,
+          "maxInteriorStanceDrift": 2.7081654482746558,
+          "maxInteriorStanceRise": 4.9442385218661995,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 29.988254449189814,
+          "meanShin": 17.260236741544237
+        },
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "far",
+          "thighSpan": 0.35643124430494294,
+          "shinSpan": 0.6350791112480034,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884733,
+          "maxJointStep": 33.898991961251454,
+          "maxInteriorStanceDrift": 8.378602507966207,
+          "maxInteriorStanceRise": 2.8119254917396708,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 32.12906622328813,
+          "meanShin": 13.52697841370199
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "far",
+          "thighSpan": 0.35643124430494294,
+          "shinSpan": 0.6350791112480034,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884733,
+          "maxJointStep": 33.898991961251454,
+          "maxInteriorStanceDrift": 8.378602507966207,
+          "maxInteriorStanceRise": 2.8119254917396708,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 32.12906622328813,
+          "meanShin": 13.52697841370199
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "far",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "far",
+          "thighSpan": 0.35643124430494294,
+          "shinSpan": 0.6350791112480034,
+          "shoeSpan": 0.700912329481166,
+          "kneeAngleRange": 0.7312641150884733,
+          "maxJointStep": 33.898991961251454,
+          "maxInteriorStanceDrift": 8.378602507966207,
+          "maxInteriorStanceRise": 2.8119254917396708,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 32.12906622328813,
+          "meanShin": 13.52697841370199
+        }
+      ],
+      "leadRange": [
+        -114.8014805158224,
+        53.032066251835644
+      ],
+      "upperSilhouetteRange": 5,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-back-145",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 0.5931425276633258,
+          "shinSpan": 0.6859125570833312,
+          "shoeSpan": 0.7036281078858493,
+          "kneeAngleRange": 1.0023479909955362,
+          "maxJointStep": 17.96933755059786,
+          "maxInteriorStanceDrift": 3.5385638035678504,
+          "maxInteriorStanceRise": 3.0965431583714382,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 18.667912735956886,
+          "meanShin": 11.104912349116269
+        },
+        "far": {
+          "thighSpan": 0.5803328619707563,
+          "shinSpan": 0.594388232090557,
+          "shoeSpan": 0.6493768186428369,
+          "kneeAngleRange": 0.8735747298562004,
+          "maxJointStep": 27.90997965201745,
+          "maxInteriorStanceDrift": 7.9689313678874925,
+          "maxInteriorStanceRise": 1.725823375217138,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.44765606298436,
+          "meanShin": 8.368421142400084
+        }
+      },
+      "failures": [
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "near",
+          "thighSpan": 0.5931425276633258,
+          "shinSpan": 0.6859125570833312,
+          "shoeSpan": 0.7036281078858493,
+          "kneeAngleRange": 1.0023479909955362,
+          "maxJointStep": 17.96933755059786,
+          "maxInteriorStanceDrift": 3.5385638035678504,
+          "maxInteriorStanceRise": 3.0965431583714382,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 18.667912735956886,
+          "meanShin": 11.104912349116269
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "near",
+          "thighSpan": 0.5931425276633258,
+          "shinSpan": 0.6859125570833312,
+          "shoeSpan": 0.7036281078858493,
+          "kneeAngleRange": 1.0023479909955362,
+          "maxJointStep": 17.96933755059786,
+          "maxInteriorStanceDrift": 3.5385638035678504,
+          "maxInteriorStanceRise": 3.0965431583714382,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 18.667912735956886,
+          "meanShin": 11.104912349116269
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "near",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "near",
+          "thighSpan": 0.5931425276633258,
+          "shinSpan": 0.6859125570833312,
+          "shoeSpan": 0.7036281078858493,
+          "kneeAngleRange": 1.0023479909955362,
+          "maxJointStep": 17.96933755059786,
+          "maxInteriorStanceDrift": 3.5385638035678504,
+          "maxInteriorStanceRise": 3.0965431583714382,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 18.667912735956886,
+          "meanShin": 11.104912349116269
+        },
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "far",
+          "thighSpan": 0.5803328619707563,
+          "shinSpan": 0.594388232090557,
+          "shoeSpan": 0.6493768186428369,
+          "kneeAngleRange": 0.8735747298562004,
+          "maxJointStep": 27.90997965201745,
+          "maxInteriorStanceDrift": 7.9689313678874925,
+          "maxInteriorStanceRise": 1.725823375217138,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.44765606298436,
+          "meanShin": 8.368421142400084
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "far",
+          "thighSpan": 0.5803328619707563,
+          "shinSpan": 0.594388232090557,
+          "shoeSpan": 0.6493768186428369,
+          "kneeAngleRange": 0.8735747298562004,
+          "maxJointStep": 27.90997965201745,
+          "maxInteriorStanceDrift": 7.9689313678874925,
+          "maxInteriorStanceRise": 1.725823375217138,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.44765606298436,
+          "meanShin": 8.368421142400084
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "far",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "far",
+          "thighSpan": 0.5803328619707563,
+          "shinSpan": 0.594388232090557,
+          "shoeSpan": 0.6493768186428369,
+          "kneeAngleRange": 0.8735747298562004,
+          "maxJointStep": 27.90997965201745,
+          "maxInteriorStanceDrift": 7.9689313678874925,
+          "maxInteriorStanceRise": 1.725823375217138,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.44765606298436,
+          "meanShin": 8.368421142400084
+        },
+        {
+          "issue": "Supporting foot slides or bounces relative to the ground",
+          "side": "far",
+          "thighSpan": 0.5803328619707563,
+          "shinSpan": 0.594388232090557,
+          "shoeSpan": 0.6493768186428369,
+          "kneeAngleRange": 0.8735747298562004,
+          "maxJointStep": 27.90997965201745,
+          "maxInteriorStanceDrift": 7.9689313678874925,
+          "maxInteriorStanceRise": 1.725823375217138,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 20.44765606298436,
+          "meanShin": 8.368421142400084
+        }
+      ],
+      "leadRange": [
+        -86.94353899744303,
+        20.667540593854653
+      ],
+      "upperSilhouetteRange": 4,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "bear-back-225",
+      "height": 225,
+      "cycleLength": 162,
+      "frames": 96,
+      "legs": {
+        "near": {
+          "thighSpan": 0.5931425276633259,
+          "shinSpan": 0.6859125570833308,
+          "shoeSpan": 0.7036281078858492,
+          "kneeAngleRange": 1.0023479909955402,
+          "maxJointStep": 27.88345481989323,
+          "maxInteriorStanceDrift": 5.490874867605278,
+          "maxInteriorStanceRise": 4.804980762990162,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 28.96745079717448,
+          "meanShin": 17.231760541732143
+        },
+        "far": {
+          "thighSpan": 0.5803328619707562,
+          "shinSpan": 0.5943882320905568,
+          "shoeSpan": 0.6493768186428371,
+          "kneeAngleRange": 0.8735747298563701,
+          "maxJointStep": 43.3085891151995,
+          "maxInteriorStanceDrift": 12.365583157066794,
+          "maxInteriorStanceRise": 2.6780017891300414,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 31.729121477044686,
+          "meanShin": 12.985481083034612
+        }
+      },
+      "failures": [
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "near",
+          "thighSpan": 0.5931425276633259,
+          "shinSpan": 0.6859125570833308,
+          "shoeSpan": 0.7036281078858492,
+          "kneeAngleRange": 1.0023479909955402,
+          "maxJointStep": 27.88345481989323,
+          "maxInteriorStanceDrift": 5.490874867605278,
+          "maxInteriorStanceRise": 4.804980762990162,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 28.96745079717448,
+          "meanShin": 17.231760541732143
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "near",
+          "thighSpan": 0.5931425276633259,
+          "shinSpan": 0.6859125570833308,
+          "shoeSpan": 0.7036281078858492,
+          "kneeAngleRange": 1.0023479909955402,
+          "maxJointStep": 27.88345481989323,
+          "maxInteriorStanceDrift": 5.490874867605278,
+          "maxInteriorStanceRise": 4.804980762990162,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 28.96745079717448,
+          "meanShin": 17.231760541732143
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "near",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "near",
+          "thighSpan": 0.5931425276633259,
+          "shinSpan": 0.6859125570833308,
+          "shoeSpan": 0.7036281078858492,
+          "kneeAngleRange": 1.0023479909955402,
+          "maxJointStep": 27.88345481989323,
+          "maxInteriorStanceDrift": 5.490874867605278,
+          "maxInteriorStanceRise": 4.804980762990162,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 28.96745079717448,
+          "meanShin": 17.231760541732143
+        },
+        {
+          "issue": "Painted thigh/shin changes length during walking",
+          "side": "far",
+          "thighSpan": 0.5803328619707562,
+          "shinSpan": 0.5943882320905568,
+          "shoeSpan": 0.6493768186428371,
+          "kneeAngleRange": 0.8735747298563701,
+          "maxJointStep": 43.3085891151995,
+          "maxInteriorStanceDrift": 12.365583157066794,
+          "maxInteriorStanceRise": 2.6780017891300414,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 31.729121477044686,
+          "meanShin": 12.985481083034612
+        },
+        {
+          "issue": "Painted shoe stretches during walking",
+          "side": "far",
+          "thighSpan": 0.5803328619707562,
+          "shinSpan": 0.5943882320905568,
+          "shoeSpan": 0.6493768186428371,
+          "kneeAngleRange": 0.8735747298563701,
+          "maxJointStep": 43.3085891151995,
+          "maxInteriorStanceDrift": 12.365583157066794,
+          "maxInteriorStanceRise": 2.6780017891300414,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 31.729121477044686,
+          "meanShin": 12.985481083034612
+        },
+        {
+          "issue": "Authored leg/source ownership switches mid-stride",
+          "side": "far",
+          "sourceMappings": [
+            "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+            "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+            "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+          ]
+        },
+        {
+          "issue": "Painted joint or shoe teleports between neighboring phases",
+          "side": "far",
+          "thighSpan": 0.5803328619707562,
+          "shinSpan": 0.5943882320905568,
+          "shoeSpan": 0.6493768186428371,
+          "kneeAngleRange": 0.8735747298563701,
+          "maxJointStep": 43.3085891151995,
+          "maxInteriorStanceDrift": 12.365583157066794,
+          "maxInteriorStanceRise": 2.6780017891300414,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 31.729121477044686,
+          "meanShin": 12.985481083034612
+        },
+        {
+          "issue": "Supporting foot slides or bounces relative to the ground",
+          "side": "far",
+          "thighSpan": 0.5803328619707562,
+          "shinSpan": 0.5943882320905568,
+          "shoeSpan": 0.6493768186428371,
+          "kneeAngleRange": 0.8735747298563701,
+          "maxJointStep": 43.3085891151995,
+          "maxInteriorStanceDrift": 12.365583157066794,
+          "maxInteriorStanceRise": 2.6780017891300414,
+          "uniqueSourceMappings": 4,
+          "meanThigh": 31.729121477044686,
+          "meanShin": 12.985481083034612
+        }
+      ],
+      "leadRange": [
+        -134.91238809948055,
+        32.070321611153766
+      ],
+      "upperSilhouetteRange": 6,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-0",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-1",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-2",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-3",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-4",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 2,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-5",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-6",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-7",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-8",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-9",
+      "height": 152.25,
+      "cycleLength": 109.61999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-10",
+      "height": 145,
+      "cycleLength": 104.39999999999999,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    },
+    {
+      "label": "npc-11",
+      "height": 121.8,
+      "cycleLength": 87.696,
+      "frames": 96,
+      "legs": {},
+      "failures": [
+        {
+          "issue": "No complete leg chain sampled from the painted source",
+          "phase": 0,
+          "side": "near"
+        }
+      ],
+      "upperSilhouetteRange": 1,
+      "maxAdjacentUpperSilhouetteStep": 1,
+      "bodyFailures": 0,
+      "jointInkFailures": 0
+    }
+  ],
+  "negativeControls": 20,
+  "faults": [
+    {
+      "label": "bear-front-145",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "near",
+      "thighSpan": 0.6821727596410929,
+      "shinSpan": 0.6165017978784804,
+      "shoeSpan": 0.7339607425591494,
+      "kneeAngleRange": 0.9627028974635725,
+      "maxJointStep": 21.841194885842192,
+      "maxInteriorStanceDrift": 1.7452621777770005,
+      "maxInteriorStanceRise": 3.186287047424884,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 19.325763978366755,
+      "meanShin": 11.123263677884061
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Painted shoe stretches during walking",
+      "side": "near",
+      "thighSpan": 0.6821727596410929,
+      "shinSpan": 0.6165017978784804,
+      "shoeSpan": 0.7339607425591494,
+      "kneeAngleRange": 0.9627028974635725,
+      "maxJointStep": 21.841194885842192,
+      "maxInteriorStanceDrift": 1.7452621777770005,
+      "maxInteriorStanceRise": 3.186287047424884,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 19.325763978366755,
+      "meanShin": 11.123263677884061
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "near",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+      ]
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "near",
+      "thighSpan": 0.6821727596410929,
+      "shinSpan": 0.6165017978784804,
+      "shoeSpan": 0.7339607425591494,
+      "kneeAngleRange": 0.9627028974635725,
+      "maxJointStep": 21.841194885842192,
+      "maxInteriorStanceDrift": 1.7452621777770005,
+      "maxInteriorStanceRise": 3.186287047424884,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 19.325763978366755,
+      "meanShin": 11.123263677884061
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "far",
+      "thighSpan": 0.35643124430494333,
+      "shinSpan": 0.6350791112480036,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884729,
+      "maxJointStep": 21.846017041695386,
+      "maxInteriorStanceDrift": 5.39954383846711,
+      "maxInteriorStanceRise": 1.8121297613433436,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.70539823278567,
+      "meanShin": 8.717386088830178
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Painted shoe stretches during walking",
+      "side": "far",
+      "thighSpan": 0.35643124430494333,
+      "shinSpan": 0.6350791112480036,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884729,
+      "maxJointStep": 21.846017041695386,
+      "maxInteriorStanceDrift": 5.39954383846711,
+      "maxInteriorStanceRise": 1.8121297613433436,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.70539823278567,
+      "meanShin": 8.717386088830178
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "far",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+      ]
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "far",
+      "thighSpan": 0.35643124430494333,
+      "shinSpan": 0.6350791112480036,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884729,
+      "maxJointStep": 21.846017041695386,
+      "maxInteriorStanceDrift": 5.39954383846711,
+      "maxInteriorStanceRise": 1.8121297613433436,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.70539823278567,
+      "meanShin": 8.717386088830178
+    },
+    {
+      "label": "bear-front-145",
+      "issue": "Authored leg/source ownership switches during start/stop",
+      "uniqueSourceMappings": 2
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "near",
+      "thighSpan": 0.6821727596410928,
+      "shinSpan": 0.61650179787848,
+      "shoeSpan": 0.7339607425591499,
+      "kneeAngleRange": 0.962702897463577,
+      "maxJointStep": 33.891509305617184,
+      "maxInteriorStanceDrift": 2.7081654482746558,
+      "maxInteriorStanceRise": 4.9442385218661995,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 29.988254449189814,
+      "meanShin": 17.260236741544237
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted shoe stretches during walking",
+      "side": "near",
+      "thighSpan": 0.6821727596410928,
+      "shinSpan": 0.61650179787848,
+      "shoeSpan": 0.7339607425591499,
+      "kneeAngleRange": 0.962702897463577,
+      "maxJointStep": 33.891509305617184,
+      "maxInteriorStanceDrift": 2.7081654482746558,
+      "maxInteriorStanceRise": 4.9442385218661995,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 29.988254449189814,
+      "meanShin": 17.260236741544237
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "near",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+      ]
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "near",
+      "thighSpan": 0.6821727596410928,
+      "shinSpan": 0.61650179787848,
+      "shoeSpan": 0.7339607425591499,
+      "kneeAngleRange": 0.962702897463577,
+      "maxJointStep": 33.891509305617184,
+      "maxInteriorStanceDrift": 2.7081654482746558,
+      "maxInteriorStanceRise": 4.9442385218661995,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 29.988254449189814,
+      "meanShin": 17.260236741544237
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "far",
+      "thighSpan": 0.35643124430494294,
+      "shinSpan": 0.6350791112480034,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884733,
+      "maxJointStep": 33.898991961251454,
+      "maxInteriorStanceDrift": 8.378602507966207,
+      "maxInteriorStanceRise": 2.8119254917396708,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 32.12906622328813,
+      "meanShin": 13.52697841370199
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted shoe stretches during walking",
+      "side": "far",
+      "thighSpan": 0.35643124430494294,
+      "shinSpan": 0.6350791112480034,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884733,
+      "maxJointStep": 33.898991961251454,
+      "maxInteriorStanceDrift": 8.378602507966207,
+      "maxInteriorStanceRise": 2.8119254917396708,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 32.12906622328813,
+      "meanShin": 13.52697841370199
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "far",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+      ]
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "far",
+      "thighSpan": 0.35643124430494294,
+      "shinSpan": 0.6350791112480034,
+      "shoeSpan": 0.700912329481166,
+      "kneeAngleRange": 0.7312641150884733,
+      "maxJointStep": 33.898991961251454,
+      "maxInteriorStanceDrift": 8.378602507966207,
+      "maxInteriorStanceRise": 2.8119254917396708,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 32.12906622328813,
+      "meanShin": 13.52697841370199
+    },
+    {
+      "label": "bear-front-225",
+      "issue": "Authored leg/source ownership switches during start/stop",
+      "uniqueSourceMappings": 2
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "near",
+      "thighSpan": 0.5931425276633258,
+      "shinSpan": 0.6859125570833312,
+      "shoeSpan": 0.7036281078858493,
+      "kneeAngleRange": 1.0023479909955362,
+      "maxJointStep": 17.96933755059786,
+      "maxInteriorStanceDrift": 3.5385638035678504,
+      "maxInteriorStanceRise": 3.0965431583714382,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 18.667912735956886,
+      "meanShin": 11.104912349116269
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted shoe stretches during walking",
+      "side": "near",
+      "thighSpan": 0.5931425276633258,
+      "shinSpan": 0.6859125570833312,
+      "shoeSpan": 0.7036281078858493,
+      "kneeAngleRange": 1.0023479909955362,
+      "maxJointStep": 17.96933755059786,
+      "maxInteriorStanceDrift": 3.5385638035678504,
+      "maxInteriorStanceRise": 3.0965431583714382,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 18.667912735956886,
+      "meanShin": 11.104912349116269
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "near",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+      ]
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "near",
+      "thighSpan": 0.5931425276633258,
+      "shinSpan": 0.6859125570833312,
+      "shoeSpan": 0.7036281078858493,
+      "kneeAngleRange": 1.0023479909955362,
+      "maxJointStep": 17.96933755059786,
+      "maxInteriorStanceDrift": 3.5385638035678504,
+      "maxInteriorStanceRise": 3.0965431583714382,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 18.667912735956886,
+      "meanShin": 11.104912349116269
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "far",
+      "thighSpan": 0.5803328619707563,
+      "shinSpan": 0.594388232090557,
+      "shoeSpan": 0.6493768186428369,
+      "kneeAngleRange": 0.8735747298562004,
+      "maxJointStep": 27.90997965201745,
+      "maxInteriorStanceDrift": 7.9689313678874925,
+      "maxInteriorStanceRise": 1.725823375217138,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.44765606298436,
+      "meanShin": 8.368421142400084
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted shoe stretches during walking",
+      "side": "far",
+      "thighSpan": 0.5803328619707563,
+      "shinSpan": 0.594388232090557,
+      "shoeSpan": 0.6493768186428369,
+      "kneeAngleRange": 0.8735747298562004,
+      "maxJointStep": 27.90997965201745,
+      "maxInteriorStanceDrift": 7.9689313678874925,
+      "maxInteriorStanceRise": 1.725823375217138,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.44765606298436,
+      "meanShin": 8.368421142400084
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "far",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+      ]
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "far",
+      "thighSpan": 0.5803328619707563,
+      "shinSpan": 0.594388232090557,
+      "shoeSpan": 0.6493768186428369,
+      "kneeAngleRange": 0.8735747298562004,
+      "maxJointStep": 27.90997965201745,
+      "maxInteriorStanceDrift": 7.9689313678874925,
+      "maxInteriorStanceRise": 1.725823375217138,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.44765606298436,
+      "meanShin": 8.368421142400084
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Supporting foot slides or bounces relative to the ground",
+      "side": "far",
+      "thighSpan": 0.5803328619707563,
+      "shinSpan": 0.594388232090557,
+      "shoeSpan": 0.6493768186428369,
+      "kneeAngleRange": 0.8735747298562004,
+      "maxJointStep": 27.90997965201745,
+      "maxInteriorStanceDrift": 7.9689313678874925,
+      "maxInteriorStanceRise": 1.725823375217138,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 20.44765606298436,
+      "meanShin": 8.368421142400084
+    },
+    {
+      "label": "bear-back-145",
+      "issue": "Authored leg/source ownership switches during start/stop",
+      "uniqueSourceMappings": 2
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "near",
+      "thighSpan": 0.5931425276633259,
+      "shinSpan": 0.6859125570833308,
+      "shoeSpan": 0.7036281078858492,
+      "kneeAngleRange": 1.0023479909955402,
+      "maxJointStep": 27.88345481989323,
+      "maxInteriorStanceDrift": 5.490874867605278,
+      "maxInteriorStanceRise": 4.804980762990162,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 28.96745079717448,
+      "meanShin": 17.231760541732143
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted shoe stretches during walking",
+      "side": "near",
+      "thighSpan": 0.5931425276633259,
+      "shinSpan": 0.6859125570833308,
+      "shoeSpan": 0.7036281078858492,
+      "kneeAngleRange": 1.0023479909955402,
+      "maxJointStep": 27.88345481989323,
+      "maxInteriorStanceDrift": 5.490874867605278,
+      "maxInteriorStanceRise": 4.804980762990162,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 28.96745079717448,
+      "meanShin": 17.231760541732143
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "near",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[510,285],\"knee\":[790,635],\"cuff\":[862,835],\"heel\":[710,1110],\"toe\":[1240,1155],\"sole\":[970,1160]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1330,230],\"knee\":[1315,369],\"cuff\":[1290,430],\"heel\":[1240,550],\"toe\":[1480,577],\"sole\":[1350,580]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[150,220],\"knee\":[125,300],\"cuff\":[100,340],\"heel\":[30,350],\"toe\":[150,420],\"sole\":[85,423]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[550,215],\"knee\":[515,267],\"cuff\":[480,290],\"heel\":[455,280],\"toe\":[550,380],\"sole\":[510,365]}"
+      ]
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "near",
+      "thighSpan": 0.5931425276633259,
+      "shinSpan": 0.6859125570833308,
+      "shoeSpan": 0.7036281078858492,
+      "kneeAngleRange": 1.0023479909955402,
+      "maxJointStep": 27.88345481989323,
+      "maxInteriorStanceDrift": 5.490874867605278,
+      "maxInteriorStanceRise": 4.804980762990162,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 28.96745079717448,
+      "meanShin": 17.231760541732143
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted thigh/shin changes length during walking",
+      "side": "far",
+      "thighSpan": 0.5803328619707562,
+      "shinSpan": 0.5943882320905568,
+      "shoeSpan": 0.6493768186428371,
+      "kneeAngleRange": 0.8735747298563701,
+      "maxJointStep": 43.3085891151995,
+      "maxInteriorStanceDrift": 12.365583157066794,
+      "maxInteriorStanceRise": 2.6780017891300414,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 31.729121477044686,
+      "meanShin": 12.985481083034612
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted shoe stretches during walking",
+      "side": "far",
+      "thighSpan": 0.5803328619707562,
+      "shinSpan": 0.5943882320905568,
+      "shoeSpan": 0.6493768186428371,
+      "kneeAngleRange": 0.8735747298563701,
+      "maxJointStep": 43.3085891151995,
+      "maxInteriorStanceDrift": 12.365583157066794,
+      "maxInteriorStanceRise": 2.6780017891300414,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 31.729121477044686,
+      "meanShin": 12.985481083034612
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Authored leg/source ownership switches mid-stride",
+      "side": "far",
+      "sourceMappings": [
+        "{\"image\":\"bear-near-contact-v18.png\",\"pose\":\"near-contact\",\"hip\":[780,270],\"knee\":[390,580],\"cuff\":[315,745],\"heel\":[100,820],\"toe\":[550,1030],\"sole\":[360,1035]}",
+        "{\"image\":\"bear-near-support-v18.png\",\"pose\":\"near-support\",\"hip\":[1450,230],\"knee\":[1480,340],\"cuff\":[1460,395],\"heel\":[1410,425],\"toe\":[1530,462],\"sole\":[1470,465]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-contact\",\"hip\":[270,215],\"knee\":[285,310],\"cuff\":[310,350],\"heel\":[275,420],\"toe\":[430,400],\"sole\":[350,430]}",
+        "{\"image\":\"bear-far-poses-v18.png\",\"pose\":\"far-support\",\"hip\":[655,215],\"knee\":[635,320],\"cuff\":[620,355],\"heel\":[580,435],\"toe\":[750,425],\"sole\":[670,440]}"
+      ]
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Painted joint or shoe teleports between neighboring phases",
+      "side": "far",
+      "thighSpan": 0.5803328619707562,
+      "shinSpan": 0.5943882320905568,
+      "shoeSpan": 0.6493768186428371,
+      "kneeAngleRange": 0.8735747298563701,
+      "maxJointStep": 43.3085891151995,
+      "maxInteriorStanceDrift": 12.365583157066794,
+      "maxInteriorStanceRise": 2.6780017891300414,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 31.729121477044686,
+      "meanShin": 12.985481083034612
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Supporting foot slides or bounces relative to the ground",
+      "side": "far",
+      "thighSpan": 0.5803328619707562,
+      "shinSpan": 0.5943882320905568,
+      "shoeSpan": 0.6493768186428371,
+      "kneeAngleRange": 0.8735747298563701,
+      "maxJointStep": 43.3085891151995,
+      "maxInteriorStanceDrift": 12.365583157066794,
+      "maxInteriorStanceRise": 2.6780017891300414,
+      "uniqueSourceMappings": 4,
+      "meanThigh": 31.729121477044686,
+      "meanShin": 12.985481083034612
+    },
+    {
+      "label": "bear-back-225",
+      "issue": "Authored leg/source ownership switches during start/stop",
+      "uniqueSourceMappings": 2
+    },
+    {
+      "label": "npc-0",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-1",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-2",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-3",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-4",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-5",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-6",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-7",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-8",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-9",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-10",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    },
+    {
+      "label": "npc-11",
+      "issue": "No complete leg chain sampled from the painted source",
+      "phase": 0,
+      "side": "near"
+    }
+  ],
+  "entry": "autumn-v19.html",
+  "baseline": true,
+  "baselineCommit": "da109213fdf24947c2ac0b85de900214cc72e44f",
+  "sourceSHA256": {
+    "js/locomotion.js": "1024600c4bb9b3919f957d55a8686b057d4a72132bc7ef9457a5b853eefeaf0d",
+    "js/baby-passenger.js": "baebb60f3ec354eecc03fd41c4a5275bddd7e6d4f33ca53ec82e6e8ca730fb2a",
+    "js/hero-rig.js": "6464f9c8e9d267a01cb7437b64ccab1ac8485d0e65a6c805249b4189d1cdf56c",
+    "js/illustrated-kids.js": "ae3a7dd4d5409ae8562f427bc655c494f8a46ef2c1862ea2bb640449a0f03444",
+    "js/npc-motion.js": "ddc5a88e1cd653243bdd98c44fc5bf2bd97f70ada2f81c8bf7cce88d5174d766"
+  },
+  "pageErrors": [],
+  "httpFailures": [],
+  "limits": {
+    "segmentLengthSpan": 0.05,
+    "shoeLengthSpan": 0.02,
+    "interiorStanceDriftHeights": 0.04,
+    "adjacentJointStepHeights": 0.12,
+    "upperSilhouetteRangeHeights": 0.055
+  },
+  "measurement": "manually posed native renderer; no performance claim; visual review required",
+  "result": "expected-regression"
+}

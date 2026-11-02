@@ -19,9 +19,9 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = 'autumn-v19.html'
+ENTRY = 'autumn-v20.html'
 FOOT_SPEED = 120
-SHOTS = ROOT / 'screenshots' / 'revision19'
+SHOTS = ROOT / 'screenshots' / 'revision20'
 
 INSTRUMENT = r"""(() => {
   const raf=requestAnimationFrame.bind(window),draw=CanvasRenderingContext2D.prototype.drawImage;

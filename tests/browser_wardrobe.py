@@ -1,4 +1,4 @@
-"""V18 authored NPC-frame coverage and runtime walking/running checks.
+"""V20 authored NPC-frame coverage and runtime walking/running checks.
 
 Whole authored frames retain every opaque body/prop component and exclude other
 cells. Runtime rigs are checked independently for connected bodies and visible
@@ -17,8 +17,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY = "autumn-v19.html"
-SHOTS = ROOT / "screenshots" / "revision19"
+ENTRY = "autumn-v20.html"
+SHOTS = ROOT / "screenshots" / "revision20"
 
 
 def source_hashes():
@@ -215,9 +215,18 @@ RUNTIME = r"""() => {
   const cases=[],faults=[];let negatives=0;
   for(let variant=0;variant<12;variant++)for(const height of [145,90])for(const heading of [1,-1])for(const activity of ['walk','run']){
     let baseline=null,maxFootChange=0,maxArmChange=0;
+    const stature=height*(variant===9?1.05:variant===11?.84:1);
+    let cycle=stature*(activity==='walk'?.72:1.05);
+    if(activity==='walk'){
+      // Request every actual prepared phase. The old .72h timing constant
+      // cannot cover all48cache entries after anatomy changes the stride.
+      BearlyBrawlArt.adult(c,{id:'gait-probe-'+variant,kind:'resident',variant,civilian:variant>=6,state:'idle',age:0,activity:'walk',moving:true,speed:55,distance:0,face:heading,mood:'calm',hp:60},180,260,height);
+      cycle=BearlyNpcMotion.audit()?.details?.cycleLength||cycle;
+    }
     for(let phase=0;phase<48;phase++){
       c.resetTransform();c.clearRect(0,0,360,300);
-      BearlyBrawlArt.adult(c,{id:'gait-'+variant,kind:'resident',variant,civilian:variant>=6,state:'idle',age:phase*.1,activity,moving:true,running:activity==='run',speed:activity==='run'?260:55,distance:phase/48*height*(variant===9?1.05:variant===11?.84:1)*(activity==='walk'?.72:1.05),face:heading,mood:activity==='run'&&variant<6?'aggressive':'calm',hp:60},180,260,height);
+      BearlyBrawlArt.adult(c,{id:'gait-'+variant,kind:'resident',variant,civilian:variant>=6,state:'idle',age:phase*.1,activity,moving:true,running:activity==='run',speed:activity==='run'?260:55,distance:phase/48*cycle,face:heading,mood:activity==='run'&&variant<6?'aggressive':'calm',hp:60},180,260,height);
+      if(activity==='walk'&&BearlyNpcMotion.audit()?.details?.phaseIndex!==phase)faults.push({variant,height,heading,activity,phase,issue:'Reported stride does not address the requested prepared phase',actualPhase:BearlyNpcMotion.audit()?.details?.phaseIndex});
       const data=pixels(),body=measure(data,height);
       if(!baseline)baseline=data;
       let feet=0,arms=0;
@@ -255,7 +264,7 @@ def main():
     SHOTS.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
-    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V19"}
+    errors, failures, evidence = [], [], {"entry": ENTRY, "build": "AUTUMN_RIDE_ART_V20"}
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])

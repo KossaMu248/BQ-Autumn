@@ -16,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v19.html'
-SHOTS=ROOT/'screenshots'/'revision19'
+ENTRY='autumn-v20.html'
+SHOTS=ROOT/'screenshots'/'revision20'
 DAMAGE={'rock':10,'bottle':30,'firecracker':20}
 
 AUDIT=r"""(() => {

@@ -21,7 +21,7 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'screenshots' / 'revision19'
+OUT = ROOT / 'screenshots' / 'revision20'
 BASELINE_COMMIT = '67831aef42573527b7a8fc19cebc963df42f6625'
 PROFILES = {
     'desktop': {'size': (1440, 1000), 'cpu': 1, 'fallback': False},

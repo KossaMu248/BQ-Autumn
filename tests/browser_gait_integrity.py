@@ -1,10 +1,11 @@
-"""V18 opaque-body regression and intermediate-weight visual evidence.
+"""V20 opaque-body regression and intermediate-weight visual evidence.
 
 A source-alpha template uses the same pose and draw transforms at full draw
 alpha, then its core is eroded in final display pixels. Starts/stops must retain
 that source opacity. This catches the V16 alpha crossfade that connectivity alone missed.
 Renderer probes do not alter real game actors. Phase boards require visual review
-for anatomy, artwork, carrier placement and boot shape.
+for anatomy, artwork, carrier placement and boot shape. browser_anatomy.py adds
+fixed-source leg-chain and planted-foot checks against the painted joint audit.
 """
 from browser_fixture import prepared_ready
 import argparse
@@ -20,8 +21,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ENTRY='autumn-v19.html'
-SHOTS=ROOT/'screenshots'/'revision19'
+ENTRY='autumn-v20.html'
+SHOTS=ROOT/'screenshots'/'revision20'
 
 PROBE=r"""async ({legacyCode}) => {
   const W=360,H=360,X=180,Y=320,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;

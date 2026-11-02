@@ -16,8 +16,8 @@ from threading import Thread
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-SHOTS = ROOT / "screenshots" / "revision19"
-ENTRY = "autumn-v19.html"
+SHOTS = ROOT / "screenshots" / "revision20"
+ENTRY = "autumn-v20.html"
 ORIGINALS = {
     "baby_pose_idle.webp": "a27d4ea977d35d89ac927ca371eb66c5e366b096b1eb057e8552853f14578823",
     "baby_pose_laugh.webp": "4decc347ee84105fb22f47ad945d8cfa0612672360fdbd0ce879661981d6793e",

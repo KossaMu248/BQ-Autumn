@@ -36,9 +36,9 @@ BUILD = r"""async () => {
         layouts=[];
         for(let variant=0;variant<12;variant++){
             const frame=get(variant,'walkA');let left=512,top=512,right=-1,bottom=-1;
-            for(let index=0;index<phases;index++){
+            for(let index=0;index<=phases;index++){
                 s.setTransform(1,0,0,1,0,0);s.clearRect(0,0,512,512);s.translate(256,420);
-                rig(s,frame,index/phases,height,frame.sourceFace);
+                rig(s,frame,index===phases?0:index/phases,height,frame.sourceFace,index===phases?0:1);
                 const rgba=s.getImageData(0,0,512,512).data;
                 for(let y=0;y<512;y++)for(let x=0;x<512;x++)if(rgba[(y*512+x)*4+3]){
                     left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);
@@ -49,7 +49,7 @@ BUILD = r"""async () => {
             left-=258;right-=254;top-=422;bottom-=418;
             layouts.push({variant,width:right-left+1,height:bottom-top+1,x:-left,y:-top});
         }
-        const bytes=layouts.reduce((sum,b)=>sum+b.width*b.height*4*phases,0);
+        const bytes=layouts.reduce((sum,b)=>sum+b.width*b.height*4*(phases+1),0);
         if(bytes<=limit)break;
         height-=16;if(height<80)throw Error('Walking bounds cannot fit memory limit');
     }
@@ -68,8 +68,17 @@ BUILD = r"""async () => {
         outputs.push({name,data:pack.toDataURL('image/png')});
         walks.push({...layout,file:'assets/cache/'+name,columns:8,frames});
     }
+    const cellW=Math.max(...layouts.map(b=>b.width)),cellH=Math.max(...layouts.map(b=>b.height)),idle=make(cellW*4,cellH*3),ig=idle.getContext('2d'),neutral=[];
+    for(const layout of layouts){
+        const frame=get(layout.variant,'walkA'),tile=make(layout.width,layout.height),g=tile.getContext('2d',{willReadFrequently:true});g.translate(layout.x,layout.y);
+        const details=rig(g,frame,0,height,frame.sourceFace,0),pixels=g.getImageData(0,0,layout.width,layout.height),x=layout.variant%4*cellW,y=Math.floor(layout.variant/4)*cellH;
+        ig.putImageData(pixels,x,y);neutral.push({variant:layout.variant,cacheRect:[x,y,layout.width,layout.height],x:layout.x,y:layout.y,details,pixelSHA256:await hash(pixels.data)});await tick();
+    }
+    outputs.push({name:'npc-idle-v20.png',data:idle.toDataURL('image/png')});
+    const neutralRgbaBytes=layouts.reduce((sum,b)=>sum+b.width*b.height*4,0),walkingRgbaBytes=neutralRgbaBytes*phases;
     return {manifest:{format:1,version:'v20',canonicalHeight:height,phaseCount:phases,
-        limitBytes:limit,rgbaBytes:layouts.reduce((sum,b)=>sum+b.width*b.height*4*phases,0),walks},outputs};
+        limitBytes:limit,rgbaBytes:walkingRgbaBytes+neutralRgbaBytes,walkingRgbaBytes,neutralRgbaBytes,walks,
+        neutral:{file:'assets/cache/npc-idle-v20.png',width:idle.width,height:idle.height,frames:neutral}},outputs};
 }"""
 
 
@@ -97,7 +106,19 @@ VERIFY = r"""async manifest => {
         }
         rows.push({variant:bank.variant,phases:48,differentChannels:changed,maxError,edgeInk});
     }
-    return {rows,cache:BearlyNpcMotion.cacheStats()};
+    const neutrals=[];
+    for(const info of manifest.neutral.frames){
+        const bank=manifest.walks.find(b=>b.variant===info.variant),frame=get(info.variant,'walkA'),direct=make(bank.width,bank.height),cached=make(bank.width,bank.height),a=direct.getContext('2d',{willReadFrequently:true}),b=cached.getContext('2d',{willReadFrequently:true});
+        a.translate(bank.x,bank.y);rig(a,frame,0,h,frame.sourceFace,0);const expected=a.getImageData(0,0,bank.width,bank.height).data;
+        if(await hash(expected)!==info.pixelSHA256)throw Error('Stale neutral '+info.variant);
+        BearlyNpcMotion.draw(b,{variant:info.variant,state:'idle',moving:false,activity:'idle',age:-info.variant/1.8,face:frame.sourceFace},bank.x,bank.y,h/profiles[info.variant].heightScale);
+        const audit=BearlyNpcMotion.audit(),actual=b.getImageData(0,0,bank.width,bank.height).data;
+        if(!audit.details?.cached||!audit.details.neutral||audit.details.sourcePose!=='walkA')throw Error('Wrong neutral '+info.variant);
+        let changed=0,maxError=0,edgeInk=0;for(let p=0;p<actual.length;p++){const e=Math.abs(expected[p]-actual[p]);changed+=e!==0;maxError=Math.max(maxError,e);}
+        for(let y=0;y<bank.height;y++)for(let x=0;x<bank.width;x++)if((x===0||y===0||x===bank.width-1||y===bank.height-1)&&actual[(y*bank.width+x)*4+3])edgeInk++;
+        neutrals.push({variant:info.variant,differentChannels:changed,maxError,edgeInk});
+    }
+    return {rows,neutrals,cache:BearlyNpcMotion.cacheStats()};
 }"""
 
 
@@ -153,8 +174,9 @@ def main():
                            'canonicalHeight': manifest['canonicalHeight'], 'rgbaBytes': manifest['rgbaBytes']}
             else:
                 data = page.evaluate(VERIFY, manifest)
-                assert all(r['differentChannels'] == r['edgeInk'] == 0 for r in data['rows']), data['rows']
-                assert data['cache']['frameCount'] == 576 and data['cache']['bytes'] <= LIMIT, data['cache']
+                assert all(r['differentChannels'] == r['edgeInk'] == 0 for r in data['rows'] + data['neutrals']), data
+                assert data['cache']['frameCount'] == 576 and data['cache']['neutralCount'] == 12 and data['cache']['bytes'] <= LIMIT, data['cache']
+                assert data['cache']['bytes'] == data['cache']['walkingBytes'] + data['cache']['neutralBytes'] == manifest['rgbaBytes']
                 assert frozen == sha(ROOT / 'js/npc-motion.js'), 'Renderer changed during verification'
                 data.update({'result': 'passed', 'rendererSHA256': frozen,
                              'manifestSHA256': sha(MANIFEST), 'pageErrors': errors, 'httpFailures': failures})
@@ -162,7 +184,7 @@ def main():
                 target.parent.mkdir(exist_ok=True)
                 target.write_text(json.dumps(data, indent=2) + '\n')
                 summary = {'result': 'passed', 'frames': 576, 'differentChannels': 0,
-                           'edgeInk': 0, 'rgbaBytes': data['cache']['bytes']}
+                           'edgeInk': 0, 'neutrals': 12, 'rgbaBytes': data['cache']['bytes']}
             assert not errors, errors
             assert not failures, failures
             browser.close()

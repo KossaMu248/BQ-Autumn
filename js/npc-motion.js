@@ -16,6 +16,7 @@
   const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),atlases={},profiles=Array.from({length:12},(_,variant)=>({variant,poses:{},heightScale:variant===9?1.05:variant===11?.84:1}));
   let lastAudit=null;
   const WALK_PHASES=48,CACHE_LIMIT=48*1024*1024,walkBanks=new Map();
+  const neutralFrames=new Map();let neutralBytes=0;
   let cacheWorker=null,cacheWorkerURL=null,workerJob=null;
   const cacheState={height:144,started:false,scheduled:false,complete:false,mode:'idle',startedAt:0,completedMs:0,bytes:0,hits:0,misses:0,bakes:0,buildMs:0,maxBuildMs:0,mainBuildMs:0,maxMainBuildMs:0};
   const phaseOrder=[0,24,12,36,6,30,18,42,3,27,15,39,9,33,21,45,...Array.from({length:48},(_,i)=>i).filter(i=>i%3)];
@@ -121,9 +122,21 @@
     }
     const walks=await walkManifest;
     if(walks&&!walks.error){
-      const bytes=walks.walks?.reduce((sum,b)=>sum+b.width*b.height*4*WALK_PHASES,0);
+      const bytes=walks.walks?.reduce((sum,b)=>sum+b.width*b.height*4*WALK_PHASES,0)+(walks.neutral?.frames?.reduce((sum,f)=>sum+f.cacheRect[2]*f.cacheRect[3]*4,0)||0);
       if(walks.format!==1||walks.version!=='v20'||walks.phaseCount!==WALK_PHASES||walks.walks?.length!==12||!Number.isFinite(bytes)||bytes>CACHE_LIMIT||!Number.isFinite(walks.canonicalHeight)||walks.canonicalHeight<64||walks.canonicalHeight>192||!walks.walks.every(b=>b.frames?.length===WALK_PHASES))cacheFailure='Unsupported walking cache';
-      else{preparedManifest=walks;cacheState.height=walks.canonicalHeight;}
+      else{preparedManifest=walks;cacheState.height=walks.canonicalHeight;
+        if(walks.neutral)try{
+          const image=await renderCache.image(walks.neutral.file);let began=performance.now();
+          for(const info of walks.neutral.frames){const [x,y,w,h]=info.cacheRect;let tile;
+            if(window.createImageBitmap)tile=await createImageBitmap(image,x,y,w,h);
+            else{tile=make(w,h);tile.getContext('2d').drawImage(image,x,y,w,h,0,0,w,h);}
+            const frame=profiles[info.variant].poses.walkA,attribution={sourceAsset:frame.source.split('/').pop(),sourceRect:frame.rect.join(','),sourcePose:'walkA',sourceVariant:String(info.variant),sourceTransform:'neutral-cache'};
+            if(tile.dataset)Object.assign(tile.dataset,attribution);else tile.dataset=attribution;
+            neutralFrames.set(info.variant,{canvas:tile,details:info.details,index:0,width:w,height:h,x:info.x,y:info.y});neutralBytes+=w*h*4;
+            if(performance.now()-began>2){await renderCache.yieldTask();began=performance.now();}
+          }
+        }catch(error){cacheFailure='Neutral cache: '+String(error);}
+      }
     }else if(walks?.error){cacheFailure=walks.error;}
     walkPreparationReady=true;startWalkCache();
   }
@@ -228,14 +241,17 @@
     const dx=ankle.x-hip.x,dy=ankle.y-hip.y,actual=Math.max(.001,Math.hypot(dx,dy)),d=Math.max(Math.abs(thigh-shin)+.001,Math.min(thigh+shin-.001,actual)),along=(thigh*thigh-shin*shin+d*d)/(2*d),out=Math.sqrt(Math.max(0,thigh*thigh-along*along));
     return{x:hip.x+dx/actual*along+front*dy/actual*out,y:hip.y+dy/actual*along-front*dx/actual*out};
   }
-  function rig(c,frame,phase,h,face){
+  function rig(c,frame,phase,h,face,weight=1){
+    weight=clamp(Number.isFinite(weight)?weight:1,0,1);
     const parts=prepareWalkingFrame(frame),s=h/frame.stature,front=frame.sourceFace,flip=face*front<0?-1:1,nearSource=parts.bones.near;
     const half=h*walkExcursion(frame),cycleLength=2*half/WALK_DUTY;
     const rotate=(p,a)=>({x:p.x*Math.cos(a)-p.y*Math.sin(a),y:p.x*Math.sin(a)+p.y*Math.cos(a)}),length=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-    const bodyX=h*.005*Math.sin(phase*TAU),sway=.008*Math.sin(phase*TAU),feet={};
+    const bodyX=h*.005*Math.sin(phase*TAU)*weight,sway=.008*Math.sin(phase*TAU)*weight,feet={};
     for(const [index,side]of ['near','far'].entries()){
-      const source=parts.bones.near,f=foot(phase+index*.5,h,half),baseAngle=Math.atan2((source.toe.y-source.heel.y)*front,(source.toe.x-source.heel.x)*front),angle=front*f.angle-baseAngle,projection=side==='far'?.98:1;
-      const floor=side==='far'?-h*.024:0,ankleOffset=rotate({x:(source.ankle.x-source.sole.x)*s*projection,y:(source.ankle.y-source.sole.y)*s*projection},angle),sole={x:front*(f.x+(side==='near'?1:-1)*h*.035)-ankleOffset.x,y:floor+f.y};
+      const source=parts.bones.near,f=foot(phase+index*.5,h,half);
+      if(weight!==1){const rest=foot(index*.5,h,half);f.x=rest.x+(f.x-rest.x)*weight;f.y*=weight;f.angle*=weight;if(weight===0)f.stance=true;}
+      const baseAngle=Math.atan2((source.toe.y-source.heel.y)*front,(source.toe.x-source.heel.x)*front),angle=front*f.angle-baseAngle,projection=side==='far'?.98:1,track=h*.035;
+      const floor=side==='far'?-h*.024:0,ankleOffset=rotate({x:(source.ankle.x-source.sole.x)*s*projection,y:(source.ankle.y-source.sole.y)*s*projection},angle),sole={x:front*(f.x+(side==='near'?1:-1)*track)-ankleOffset.x,y:floor+f.y};
       const rigid=p=>{const a=rotate({x:(p.x-source.sole.x)*s*projection,y:(p.y-source.sole.y)*s*projection},angle);return{x:sole.x+a.x,y:sole.y+a.y};};
       const ankle=rigid(source.ankle),thigh=length(nearSource.hip,nearSource.knee)*s*projection,shin=length(nearSource.knee,nearSource.ankle)*s*projection;
       feet[side]={source,f,sole,ankle,heel:rigid(source.heel),toe:rigid(source.toe),rigid,thigh,shin,angle,floor,projection,hipOffset:{x:front*(side==='near'?1:-1)*h*.022,y:side==='far'?-h*.016:0}};
@@ -250,7 +266,7 @@
       }
       baseline+=h*.006;parts.pelvisBaseline.set(h,baseline);
     }
-    const pelvisY=baseline-h*.004*(1-Math.cos(phase*TAU*2)),anchor={x:parts.pelvis.x,y:nearSource.hip.y};
+    const pelvisY=baseline-h*.004*(1-Math.cos(phase*TAU*2))*weight,anchor={x:parts.pelvis.x,y:nearSource.hip.y};
     const bodyPoint=p=>{const a=rotate({x:(p.x-anchor.x)*s,y:(p.y-anchor.y)*s},sway);return{x:a.x+bodyX,y:a.y+pelvisY};};
     const landmarks={};c.save();c.scale(flip,1);
     for(const side of ['far','near']){
@@ -264,10 +280,10 @@
       landmarks[side]={...painted,cuff:painted.ankle,sole:leg.sole,heel:leg.heel,toe:leg.toe,stance:leg.f.stance,thigh:leg.thigh,shin:leg.shin,floor:leg.floor,renderedFromSource:true,source:{image:frame.source,pose:frame.pose,points:source,bootPoints:leg.source,projection:leg.projection},sourcePoints:source};
     }
     const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
-    const upperPoint=p=>{const a=bodyPoint(p),down=smooth((p.y-(parts.waist-h/s*.35))/(h/s*.27)),outer=smooth((Math.abs(p.x-anchor.x)-h/s*.14)/(h/s*.17)),side=Math.sign(p.x-anchor.x)||1,arm=down*outer;return{x:a.x+side*Math.cos(phase*TAU)*h*.030*arm,y:a.y-h*.004*Math.sin(phase*TAU)**2*arm};};
+    const upperPoint=p=>{const a=bodyPoint(p),down=smooth((p.y-(parts.waist-h/s*.35))/(h/s*.27)),outer=smooth((Math.abs(p.x-anchor.x)-h/s*.14)/(h/s*.17)),side=Math.sign(p.x-anchor.x)||1,arm=down*outer;return{x:a.x+side*Math.cos(phase*TAU)*h*.030*arm*weight,y:a.y-h*.004*Math.sin(phase*TAU)**2*arm*weight};};
     const nx=12,ny=20,grid=Array.from({length:ny+1},(_,row)=>Array.from({length:nx+1},(_,col)=>{const p={x:frame.tile.width*col/nx,y:frame.tile.height*row/ny};return{source:p,target:upperPoint(p)};}));
     for(let row=0;row<ny;row++)for(let col=0;col<nx;col++){const a=grid[row][col],b=grid[row][col+1],d=grid[row+1][col+1],e=grid[row+1][col];triangle(c,parts.upper,[a.source,b.source,d.source],[a.target,b.target,d.target]);triangle(c,parts.upper,[a.source,d.source,e.source],[a.target,d.target,e.target]);}
-    c.restore();return{phase,cycleLength,stanceDuty:.60,landmarks,landmarkSpace:'source-facing',sourceFace:front,flip,renderedFace:face,bodyShift:bodyX,bob:pelvisY,sway,halfStride:half,armSwing:h*.030,connectedMesh:true,anatomicalChain:true,sourcePose:frame.pose,sourceImage:frame.source};
+    c.restore();return{phase,cycleLength,stanceDuty:.60,landmarks,landmarkSpace:'source-facing',sourceFace:front,flip,renderedFace:face,bodyShift:bodyX,bob:pelvisY,sway,halfStride:half*weight,armSwing:h*.030*weight,connectedMesh:true,anatomicalChain:true,sourcePose:frame.pose,sourceImage:frame.source,...(weight===1?{}:{neutral:weight===0,gaitWeight:weight})};
   }
   // Bake the approved deformation once. Gameplay submits one small sprite per
   // walker, independent of its height, heading or number of times it is drawn.
@@ -359,14 +375,21 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
     if(!entry){const authored=get(frame.variant,normalized<.5?'walkA':'walkB')||frame;raw(c,authored,0,0,h,face);return null;}
     const scale=h/cacheState.height,flip=face*frame.sourceFace<0?-1:1;c.save();c.scale(flip,1);c.drawImage(entry.canvas,-bank.x*scale,-bank.y*scale,bank.width*scale,bank.height*scale);c.restore();return{cacheEntry:entry,scale,flip,face};
   }
+  function cachedNeutral(c,frame,h,face,breathing){
+    const bank=walkBanks.get(frame.variant),neutral=neutralFrames.get(frame.variant),entry=neutral||bank?.frames[0];
+    if(!entry){raw(c,frame,0,0,h,face);return null;}
+    const geometry=neutral||bank,scale=h/cacheState.height,flip=face*frame.sourceFace<0?-1:1;
+    c.save();c.scale(flip,1);c.drawImage(entry.canvas,-geometry.x*scale,-geometry.y*scale,geometry.width*scale,geometry.height*scale);c.restore();
+    return{cacheEntry:entry,scale,flip,face,breathing,neutral:true};
+  }
   function motionAudit(){
     if(!lastAudit)return null;let details=lastAudit.details;
-    if(details?.cacheEntry){const {cacheEntry,scale,flip,face}=details,d=cacheEntry.details,point=p=>({x:p.x*scale*flip,y:p.y*scale}),landmarks={};
+    if(details?.cacheEntry){const {cacheEntry,scale,flip,face,breathing=1,neutral=false}=details,d=cacheEntry.details,point=p=>({x:p.x*scale*flip,y:p.y*scale*breathing}),landmarks={};
       for(const [side,leg]of Object.entries(d.landmarks)){const out={...leg};for(const key of ['hip','knee','ankle','cuff','sole','heel','toe','contact'])if(leg[key])out[key]=point(leg[key]);for(const key of ['thigh','shin','floor'])if(Number.isFinite(leg[key]))out[key]=leg[key]*scale;landmarks[side]=out;}
-      details={...d,landmarks,landmarkSpace:'display',flip,renderedFace:face,cycleLength:d.cycleLength*scale,bodyShift:d.bodyShift*scale*flip,bob:d.bob*scale,halfStride:d.halfStride*scale,armSwing:d.armSwing*scale,cached:true,phaseIndex:cacheEntry.index,phaseCount:WALK_PHASES};}
+      details={...d,landmarks,landmarkSpace:'display',flip,renderedFace:face,cycleLength:d.cycleLength*scale,bodyShift:d.bodyShift*scale*flip,bob:d.bob*scale,halfStride:d.halfStride*scale,armSwing:d.armSwing*scale,cached:true,neutral,phaseIndex:cacheEntry.index,phaseCount:WALK_PHASES};}
     return JSON.parse(JSON.stringify({...lastAudit,details}));
   }
-  function cacheStats(){return{preparationMode,cacheFailure,onDemand:!!preparedManifest,visibleComplete:[...walkBanks.values()].filter(b=>b.requested).every(b=>b.built===WALK_PHASES),requestedVariants:[...walkBanks.values()].filter(b=>b.requested).map(b=>b.variant),phaseCount:WALK_PHASES,canonicalHeight:cacheState.height,frameCount:cacheState.bakes,capacity:profiles.length*WALK_PHASES,bytes:cacheState.bytes,limitBytes:CACHE_LIMIT,hits:cacheState.hits,misses:cacheState.misses,bakes:cacheState.bakes,buildMs:cacheState.buildMs,maxBuildMs:cacheState.maxBuildMs,mainBuildMs:cacheState.mainBuildMs,maxMainBuildMs:cacheState.maxMainBuildMs,mode:cacheState.mode,warmupMs:cacheState.completedMs||performance.now()-cacheState.startedAt,complete:cacheState.complete,variants:[...walkBanks.values()].map(b=>({variant:b.variant,frames:b.built,width:b.width,height:b.height,bytes:b.built*b.width*b.height*4,hits:b.hits,misses:b.misses}))};}
+  function cacheStats(){const stats={preparationMode,cacheFailure,onDemand:!!preparedManifest,visibleComplete:[...walkBanks.values()].filter(b=>b.requested).every(b=>b.built===WALK_PHASES),requestedVariants:[...walkBanks.values()].filter(b=>b.requested).map(b=>b.variant),phaseCount:WALK_PHASES,canonicalHeight:cacheState.height,frameCount:cacheState.bakes,capacity:profiles.length*WALK_PHASES,bytes:cacheState.bytes,limitBytes:CACHE_LIMIT,hits:cacheState.hits,misses:cacheState.misses,bakes:cacheState.bakes,buildMs:cacheState.buildMs,maxBuildMs:cacheState.maxBuildMs,mainBuildMs:cacheState.mainBuildMs,maxMainBuildMs:cacheState.maxMainBuildMs,mode:cacheState.mode,warmupMs:cacheState.completedMs||performance.now()-cacheState.startedAt,complete:cacheState.complete,variants:[...walkBanks.values()].map(b=>({variant:b.variant,frames:b.built,width:b.width,height:b.height,bytes:b.built*b.width*b.height*4,hits:b.hits,misses:b.misses}))};stats.walkingBytes=stats.bytes;stats.neutralBytes=neutralBytes;stats.neutralCount=neutralFrames.size;stats.bytes+=neutralBytes;for(const variant of stats.variants){const frame=neutralFrames.get(variant.variant);variant.neutralBytes=frame?frame.width*frame.height*4:0;variant.bytes+=variant.neutralBytes;}return stats;}
   function seated(c,frame,x,y,h,face,seatHeight,t=0,reading=false){
     const s=h/frame.stature,flip=face*frame.sourceFace<0?-1:1,[px,py]=frame.seatPivot||frame.anchor,[sx,sy]=frame.rect;
     c.save();c.translate(x,y-seatHeight);c.rotate(Math.sin(t*.75+frame.variant)* (reading?.0035:.0018));c.scale(flip,1+.0025*Math.sin(t*1.6+frame.variant));c.drawImage(frame.tile,(sx-px)*s,(sy-py)*s,frame.tile.width*s,frame.tile.height*s);c.restore();
@@ -385,13 +408,14 @@ onmessage=event=>{const m=event.data;if(m.type==='source'){const tile=new Offscr
     else if(['run','flee'].includes(activity)||n.running){phase=(n.distance||0)/(h*1.05);pose=((phase%1)+1)%1<.5?'runA':'runB';}
     else if(moving||activity==='walk'){phase=(n.distance||0)/walkCycle(h,variant);pose='walkA';mode='walk';}
     else if(aggressive&&variant<9)return false;
-    const frame=get(variant,pose);if(!frame)return false;
+    const neutralIdle=pose==='idle'&&!aggressive&&activity==='idle'&&!moving&&!reaction,frame=get(variant,neutralIdle?'walkA':pose);if(!frame)return false;
     c.save();c.translate(x,y);c.scale(scale,scale);
     if(mode==='walk'&&!reaction){details=cachedWalk(c,frame,phase,h,face);}
     else if(!reaction&&(['run','flee'].includes(activity)||n.running)){
       const flight=-(Math.sin(((phase%1)+1)%1*Math.PI*2)**2)*h*.035,lean=(face>0?1:-1)*.055;
       c.save();c.translate(0,flight);c.rotate(lean);raw(c,frame,0,0,h,face);c.restore();
-    }else if(['sit','read'].includes(pose)&&frame.seatPivot){seated(c,frame,0,0,h,face,n.activityProp?.seatHeight??h*.29,t,pose==='read');}
+    }else if(neutralIdle){const breathing=1+.004*Math.sin(t*1.8+variant);c.save();c.scale(1,breathing);details=cachedNeutral(c,frame,h,face,breathing);c.restore();}
+    else if(['sit','read'].includes(pose)&&frame.seatPivot){seated(c,frame,0,0,h,face,n.activityProp?.seatHeight??h*.29,t,pose==='read');}
     else if(activity==='hide'&&variant<9){c.save();c.scale(1,.65);raw(c,frame,0,0,h,face);c.restore();}
     else{const breathing=!reaction&&n.state!=='held'?1+.004*Math.sin(t*1.8+variant):1;c.save();c.scale(1,breathing);raw(c,frame,0,0,h,face);c.restore();}
     if(activity==='smoke'&&!reaction){

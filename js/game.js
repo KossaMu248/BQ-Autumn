@@ -6355,7 +6355,13 @@ STATE       ${state}${debugOpen?' · MENU HOLD':''}\nDISTRICT    ${districtAt(bi
   });
   debugInit();
   reset(false);$('overlay').hidden=true;
-  Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded,window.BearlyNpcMotion.loaded,window.BearlyAtlas.loaded,window.BearlyWorld.loaded,window.BearlyWorld.prepareFor?.(210)]).then(async()=>{
+  const coreAssets=Promise.all([load(),window.BearlyStreetProps.loaded,window.BearlyKids.loaded,window.BearlyNpcMotion.loaded,window.BearlyAtlas.loaded,window.BearlyWorld.loaded,window.BearlyWorld.prepareFor?.(210)]);
+  // Slow synchronous setup predicts an expensive first canvas raster. Select
+  // the existing phone backing scale before that paint, without using network
+  // wait time as a hardware signal. Logical coordinates remain 1160×640.
+  startup.setupCpuMs=performance.now()-startup.beganAt;
+  if(rendering.adaptive&&startup.setupCpuMs>30){rendering.scale=.75;canvas.width=Math.round(W*rendering.scale);canvas.height=Math.round(H*rendering.scale);}
+  coreAssets.then(async()=>{
     await window.BearlyWorld.warmupScene?.(illustratedState());
     startup.ready=true;startup.readyAt=performance.now();last=performance.now();acc=0;
     if(startup.requested)enterReadyRide();
